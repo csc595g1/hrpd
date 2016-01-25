@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Jarvis</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_home">Home</string>
+    <string name="action_rewards">Rewards</string>
+    <string name="action_prevention">Prevention</string>
+    <string name="action_appliances">Appliances</string>
+    <string name="action_profile">Profile</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_welcome">Your home rewards program!</string>
+    <string name="title_activity_prevention">PreventionActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_rewards">RewardsActivity</string>
+    <string name="title_activity_appliances">AppliancesActivity</string>
+    <string name="section_format">Your home rewards section: %1$d</string>
+
+    <string name="nav_group">CSC595 Group1</string>
+    <string name="nav_contact">csc595g1@gmail.com</string>
+
+
+</resources>
