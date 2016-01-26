@@ -3,17 +3,23 @@ package edu.depaul.csc595.jarvis.main;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.content.Intent;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
+import edu.depaul.csc595.jarvis.profile.ProfileActivity;
+import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
+import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -70,7 +76,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+
+            Intent settings = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(settings);
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -83,18 +93,34 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_prevention) {
-
-        } else if (id == R.id.nav_rewards) {
-
-        } else if (id == R.id.nav_appliances) {
-
-        } else if (id == R.id.nav_profile) {
-
-        } else if (id == R.id.nav_settings) {
+            Intent home = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(home);
+            finish();
+        }
+        else if (id == R.id.nav_prevention) {
+            Intent home = new Intent(getApplicationContext(), PreventionActivity.class);
+            startActivity(home);
+            finish();
+        }
+        else if (id == R.id.nav_rewards) {
+            Intent home = new Intent(getApplicationContext(), RewardsActivity.class);
+            startActivity(home);
+            finish();
 
         }
+        else if (id == R.id.nav_appliances) {
+            Intent home = new Intent(getApplicationContext(), AppliancesActivity.class);
+            startActivity(home);
+            finish();
+
+        }
+        else if (id == R.id.nav_profile) {
+            Intent home = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(home);
+            finish();
+
+        }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

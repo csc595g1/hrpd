@@ -33,7 +33,10 @@
         <activity
             android:name=".inventory.AppliancesActivity"
             android:label="@string/title_activity_appliances"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
