@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.main;
+package edu.depaul.csc595.jarvis.prevention;
 
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 
-public class RewardsActivity extends AppCompatActivity {
+public class PreventionActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,7 +41,7 @@ public class RewardsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rewards);
+        setContentView(R.layout.activity_prevention);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,7 +71,7 @@ public class RewardsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rewards, menu);
+        getMenuInflater().inflate(R.menu.menu_prevention, menu);
         return true;
     }
 
@@ -118,7 +118,7 @@ public class RewardsActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_rewards, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_prevention, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
