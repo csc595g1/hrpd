@@ -16,11 +16,42 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_rewards">RewardsActivity</string>
     <string name="title_activity_appliances">AppliancesActivity</string>
-    <string name="section_format">Your home rewards section: %1$d</string>
+    <string name="section_format">Your home section: %1$d</string>
 
     <string name="nav_group">CSC595 Group1</string>
     <string name="nav_contact">csc595g1@gmail.com</string>
     <string name="title_activity_settings">Settings</string>
+
+
+    <!-- BEGIN: Strings related to Rewards -->
+    <string name="rewards_button_account_create">Create</string>
+    <string name="rewards_button_account_update">Update</string>
+    <string name="rewards_button_account_balance">Balance</string>
+    <string name="rewards_button_redeem_points">Redeem</string>
+
+    <string name="rewards_section_text">Your home rewards section: %1$d</string>
+    <string name="rewards_tango_text">Send feedback to Tango rewards</string>
+
+
+    <!-- END: Strings related to Rewards -->
+
+    <!-- BEGIN: Strings related to Profile -->
+
+
+
+    <!-- END: Strings related to Profile -->
+
+    <!-- BEGIN: Strings related to Prevention -->
+
+
+
+    <!-- END: Strings related to Prevention -->
+
+    <!-- BEGIN: Strings related to Inventory -->
+
+
+
+    <!-- END: Strings related to Inventory -->
 
     <!-- Strings related to Settings -->
 
