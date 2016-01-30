@@ -17,7 +17,9 @@ import android.view.MenuItem;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
+import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
+import edu.depaul.csc595.jarvis.profile.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        UserInfo user = UserInfo.getInstance();
 
         if (id == R.id.nav_home) {
             Intent home = new Intent(getApplicationContext(), MainActivity.class);
@@ -116,9 +119,11 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_profile) {
             Intent home = new Intent(getApplicationContext(), ProfileActivity.class);
-            startActivity(home);
-            finish();
-
+            if(user.getIsLoggedIn()) {
+                startActivity(home);
+            }
+            else startActivity(new Intent(getApplicationContext(), LogInActivity.class));
+            //finish();
         }
         else if (id == R.id.nav_settings) {
             Intent home = new Intent(getApplicationContext(), SettingsActivity.class);

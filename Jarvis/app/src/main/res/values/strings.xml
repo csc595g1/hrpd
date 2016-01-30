@@ -36,9 +36,9 @@
     <!-- END: Strings related to Rewards -->
 
     <!-- BEGIN: Strings related to Profile -->
-
-
-
+    <string name="profile_signin">Sign In</string>
+    <string name="profile_signup">Sign Up</string>
+    <string name="profile_create_account">Create Account</string>
     <!-- END: Strings related to Profile -->
 
     <!-- BEGIN: Strings related to Prevention -->
@@ -110,6 +110,10 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_sign_up">SignUp</string>
 
 
 </resources>

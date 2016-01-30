@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".profile.SignUpActivity"
+    android:background="#007ccf">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/signup_first_name"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:layout_gravity="center_horizontal"
+            android:hint="First Name"
+            android:elevation="5dp"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/signup_last_name"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:layout_gravity="center_horizontal"
+            android:hint="Last Name"
+            android:elevation="5dp"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/signup_email"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:layout_gravity="center_horizontal"
+            android:elevation="5dp"
+            android:hint="Email"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/signup_confirm_email"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:layout_gravity="center_horizontal"
+            android:elevation="5dp"
+            android:hint="Confirm Email"
+            android:paddingLeft="15dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/signup_pw"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:layout_gravity="center_horizontal"
+            android:elevation="5dp"
+            android:hint="Password"
+            android:paddingLeft="15dp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_create_account"
+            android:id="@+id/signup_create_acct_btn"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="#1d67b9"
+            android:textColor="@android:color/white"
+            android:elevation="3dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp" />
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/signup_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
+
+</android.support.design.widget.CoordinatorLayout>
