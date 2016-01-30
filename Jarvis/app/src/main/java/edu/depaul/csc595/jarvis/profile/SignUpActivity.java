@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.profile;
 
+import android.content.pm.PackageInstaller;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -7,17 +8,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import edu.depaul.csc595.jarvis.R;
 
 public class SignUpActivity extends AppCompatActivity {
+
+    private String firstName, lastName, password, emailAddr;
+    private FloatingActionButton fab;
+    private EditText fNameInput, lNameInput, emailInput, confirmEmailInput, pwInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.signup_fab);
+        fab = (FloatingActionButton) findViewById(R.id.signup_fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
                                    @Override
@@ -27,6 +34,17 @@ public class SignUpActivity extends AppCompatActivity {
                                    }
                                }
         );
+
+        fNameInput = (EditText) findViewById(R.id.signup_first_name);
+        lNameInput = (EditText) findViewById(R.id.signup_last_name);
+        emailInput = (EditText) findViewById(R.id.signup_email);
+        confirmEmailInput = (EditText) findViewById(R.id.signup_confirm_email);
+        pwInput = (EditText) findViewById(R.id.signup_confirm_email);
+
+    }
+
+    protected void onStart(){
+        super.onStart();
     }
 
     @Override
