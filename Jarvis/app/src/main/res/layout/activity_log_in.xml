@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".profile.LogInActivity"
+    android:background="#007ccf">
+
+    <RelativeLayout
+        android:id="@+id/login_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_signin"
+            android:id="@+id/signup_create_acct_btn"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="#1d67b9"
+            android:textColor="@android:color/white"
+            android:elevation="3dp" />
+
+        <TextView android:id="@+id/login_link_signup"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="No account yet? Create one"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:layout_below="@+id/login_forgot_pw"
+            android:layout_alignStart="@+id/login_pw"
+            android:layout_marginTop="25dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/login_pw"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:editable="true"
+            android:password="true"
+            android:textAlignment="center"
+            android:hint="password"
+            android:layout_above="@+id/signup_create_acct_btn"
+            android:layout_marginBottom="39dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/login_username"
+            android:background="@drawable/profile_rounded_corner_top"
+            android:editable="true"
+            android:hint="email"
+            android:textAlignment="center"
+            android:layout_above="@+id/login_pw"
+            android:layout_alignStart="@+id/login_pw" />
+
+        <TextView android:id="@+id/login_forgot_pw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/signup_create_acct_btn"
+            android:layout_alignStart="@+id/login_link_signup" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/login_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
+
+</android.support.design.widget.CoordinatorLayout>
+
+    <!--android:layout_gravity="center_horizontal"-->
+
+<!--<android.support.design.widget.TabLayout-->
+<!--android:id="@+id/login_tabs"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content" />-->
+
+<!--<android.support.v4.view.ViewPager-->
+<!--android:id="@+id/container"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
