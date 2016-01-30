@@ -7,7 +7,8 @@ public final class UserInfo {
 
     private boolean isLoggedIn = false;
     private String userName;
-
+    private String pw;
+    //Sess
     //private const
     private UserInfo(){}
     private static UserInfo instance = null;
