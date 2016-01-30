@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity
             finish();
         }
         else if (id == R.id.nav_rewards) {
-            Intent home = new Intent(getApplicationContext(), RewardsActivity.class);
+            Intent home = new Intent(this, RewardsActivity.class);
             startActivity(home);
-            finish();
+            //finish();
 
         }
         else if (id == R.id.nav_appliances) {
@@ -116,6 +116,12 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_profile) {
             Intent home = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(home);
+            finish();
+
+        }
+        else if (id == R.id.nav_settings) {
+            Intent home = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(home);
             finish();
 

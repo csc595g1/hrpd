@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.rewards;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
 
@@ -37,6 +39,7 @@ public class RewardsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private int numOfPages = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +63,12 @@ public class RewardsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.rewards_tango_text, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -85,6 +90,19 @@ public class RewardsActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        else if(item.getItemId() == 1){
+            // ( 1 ) add a new item 
+            // ( 2 ) change add to remove
+        }
+        else{
+            // if a the new item is clicked show "Toast" message.
+//            Context context = getApplicationContext();
+//            CharSequence text = "Hello toast!";
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -120,7 +138,8 @@ public class RewardsActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_rewards, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+
             return rootView;
         }
     }
@@ -144,19 +163,24 @@ public class RewardsActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            return numOfPages;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return (CharSequence)getString(R.string.rewards_button_account_create);
+                    //return "SECTION 1";
                 case 1:
-                    return "SECTION 2";
+                    return (CharSequence)getString(R.string.rewards_button_account_balance);
+                    //return "SECTION 2";
                 case 2:
-                    return "SECTION 3";
+                    return (CharSequence)getString(R.string.rewards_button_account_update);
+                //return "SECTION 3";
+                case 3:
+                    return (CharSequence)getString(R.string.rewards_button_redeem_points);
+                //return "SECTION 4";
             }
             return null;
         }
