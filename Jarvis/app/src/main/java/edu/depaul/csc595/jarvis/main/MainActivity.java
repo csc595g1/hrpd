@@ -19,7 +19,7 @@ import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
-import edu.depaul.csc595.jarvis.profile.UserInfo;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 

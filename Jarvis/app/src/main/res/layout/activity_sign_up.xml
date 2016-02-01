@@ -82,7 +82,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@string/profile_create_account"
-            android:id="@+id/signup_create_acct_btn"
+            android:id="@+id/login_login_btn"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:background="#1d67b9"
