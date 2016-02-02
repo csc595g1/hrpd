@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="completed tasks"
+        android:paddingTop="100dp"
+        android:paddingBottom="30dp"
+        style="@style/AppTheme.TextHeading"/>
+
+        <RelativeLayout
+            style="@style/AppTheme.DetailBox">
+             >
+
+            <!-- Top Bar -->
+            <LinearLayout
+                android:id="@+id/top_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    style="@style/AppTheme.CategoryBox.Maintenance">
+
+                    <TextView
+                        android:id="@+id/tv_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Fire"
+                        android:textAllCaps="true"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="70dp"
+                        android:layout_height="3dp"
+                        android:id="@+id/underline"
+                        android:layout_alignBottom="@+id/tv_category"
+                        android:layout_alignStart="@+id/tv_category"
+                        android:layout_marginLeft="10dp"
+                        android:background="@color/white" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="true"
+                        android:text="jan 23"
+                        android:textColor="@color/black"
+                        android:layout_below="@+id/underline"
+                        android:layout_alignStart="@+id/underline"
+                        android:textStyle="bold"
+                        android:paddingTop="2dp"
+                        />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:padding="10dp"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:text="Purchase smoke detectors"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+            <!-- End Top Bar -->
+
+            <Button
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/circled_delete_selector"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+
+</LinearLayout>

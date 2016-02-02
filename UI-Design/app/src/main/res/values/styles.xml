@@ -1,0 +1,113 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/lightBlue</item>
+        <item name="android:colorBackground">@color/lightBlue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/AppTheme.ButtonStyle</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:editTextStyle">@style/AppTheme.EditTextStyle</item>
+    </style>
+
+    <style name="AppTheme.ButtonStyle">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+
+    <style name="AppTheme.TriggersDetail">
+    </style>
+
+
+    <!-- Maintenance & Trigger Box Styles -->
+    <style name="AppTheme.DetailBox">
+        <item name="android:layout_width">@dimen/detail_box_width</item>
+        <item name="android:layout_height">@dimen/detail_box_height</item>
+        <item name="android:background">@color/offwhite</item>
+    </style>
+
+    <!-- Category Box For Maintenance & Trigger Pages-->
+    <style name="AppTheme.CategoryBox">
+        <item name="android:layout_width">@dimen/category_box_width</item>
+        <item name="android:layout_height">@dimen/category_box_height</item>
+    </style>
+
+    <style name="AppTheme.CategoryBox.Triggers">
+        <item name="android:background">@color/red</item>
+    </style>
+
+    <style name="AppTheme.CategoryBox.Maintenance">
+        <item name="android:background">@color/orange</item>
+    </style>
+    <!-- End Category Box Customizations-->
+
+    <!-- Trigger Details Labels: When, For how Long, -->
+    <style name="AppTheme.TriggersDetail.MiddleBodyLabels">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/lightBlue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Trigger Details Responses For: When, For, How Long -->
+    <style name="AppTheme.TriggersDetail.MiddleBodyText">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+
+    <style name="AppTheme.EditTextStyle" parent="@android:style/Widget.Holo.EditText">
+        <item name="android:ems">10</item>
+        <item name="android:textColorHint">@color/light_gray</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <!-- Floating Action Buttons -->
+    <style name="AppTheme.FloatingButton">
+        <item name="colorAccent">@color/darkBlue</item>
+    </style>
+
+    <style name="AppTheme.FloatingButton.Red" >
+        <item name="colorAccent">@color/red</item>
+    </style>
+
+    <style name="AppTheme.FloatingButton.Orange" >
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
+
+    <!-- Text Sizes -->
+
+    <style name="AppTheme.TextHeading">
+        <item name="android:textSize">20dip</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="AppTheme.TextHeading.Small">
+        <item name="android:textSize">10dip</item>
+    </style>
+    <style name="AppTheme.TextHeading.Small.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+
+
+
+
+
+</resources>
