@@ -160,6 +160,9 @@
     <style name="AppTheme.TextHeading.NoCaps.Black">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="AppTheme.TextHeading.NoCaps.Gray">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
 
     <style name="AppTheme.TextHeading.NoCaps.Medium">
         <item name="android:textSize">15dip</item>
@@ -170,6 +173,9 @@
     </style>
     <style name="AppTheme.TextHeading.NoCaps.Medium.Black">
         <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Medium.Gray">
+        <item name="android:textColor">@color/light_gray</item>
     </style>
 
 

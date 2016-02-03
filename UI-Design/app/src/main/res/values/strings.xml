@@ -53,6 +53,10 @@
     <string name="rb_moderate_level">senses smoke of moderate levels</string>
     <string name="rb_high_level">senses smoke of high levels</string>
 
+    <string name="enter_barcode">Enter Barcode</string>
+    <string name="or">or</string>
+    <string name="barcode_number">Barcode Number</string>
+
 
 
 
