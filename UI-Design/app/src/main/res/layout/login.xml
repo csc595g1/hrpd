@@ -22,6 +22,9 @@
         android:background="@android:color/white" >
 
         <include layout="@layout/edit_text_email_address"/>
+
+        <include layout="@layout/border_thin_gray"/>
+
         <include layout="@layout/edit_text_password"/>
 
     </LinearLayout>

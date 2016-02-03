@@ -5,17 +5,18 @@
     android:background="@color/white">
 
     <RadioGroup
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
         android:id="@+id/notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end">
 
+
         <RadioButton
             android:id="@+id/rb_email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="left"
             android:button="@null"
             android:drawableRight="@android:drawable/btn_radio"
@@ -24,10 +25,18 @@
             style="@style/AppTheme.TextHeading.NoCaps.Black"/>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"/>
+
+
         <RadioButton
             android:id="@+id/rb_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="right"
             android:button="@null"
             android:text="@string/rb_notify_me"
@@ -35,17 +44,29 @@
             style="@style/AppTheme.TextHeading.NoCaps.Black"/>
             />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"/>
+
 
         <RadioButton
             android:id="@+id/rb_notification"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:layout_gravity="right"
             android:button="@null"
             android:drawableRight="@android:drawable/btn_radio"
             android:text="@string/rb_text_me"
             style="@style/AppTheme.TextHeading.NoCaps.Black"/>
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"/>
 
     </RadioGroup>
 
