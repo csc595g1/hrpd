@@ -57,6 +57,10 @@
     <string name="or">or</string>
     <string name="barcode_number">Barcode Number</string>
 
+    <string name="add_a_smart_product">Add A Smart Product</string>
+    <string name="add_a_reminder">Add a Reminder</string>
+    <string name="add_triggers">Add Triggers</string>
+
 
 
 
