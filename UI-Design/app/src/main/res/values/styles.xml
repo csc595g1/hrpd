@@ -143,6 +143,9 @@
     <style name="AppTheme.TextHeading.Black">
         <item name="android:textColor">@color/black</item>
     </style>
+    <style name="AppTheme.TextHeading.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
 
 
     <style name="AppTheme.TextHeading.Small">
@@ -165,6 +168,19 @@
     <style name="AppTheme.TextHeading.NoCaps.Gray">
         <item name="android:textColor">@color/light_gray</item>
     </style>
+
+    <style name="AppTheme.TextHeading.Medium">
+        <item name="android:textSize">15dip</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Medium.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Medium.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
     <style name="AppTheme.TextHeading.NoCaps.Medium">
         <item name="android:textSize">15dip</item>

@@ -2,12 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:title="Home" />
+            android:title="@string/drawer_option1" />
         <item
-            android:title="User Profile" />
-
+            android:title="@string/drawer_option2" />
         <item
-            android:title="User Profile" />
+            android:title="@string/drawer_option3" />
+        <item
+            android:title="@string/drawer_option4" />
+        <item
+            android:title="@string/drawer_option5" />
+        <item
+            android:title="@string/drawer_option6" />
 
     </group>
 

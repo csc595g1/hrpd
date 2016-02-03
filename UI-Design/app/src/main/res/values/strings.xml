@@ -27,6 +27,15 @@
     <string name="menu_activity">Activity</string>
     <string name="menu_triggers">Triggers</string>
 
+    <!-- DRAWER-->
+    <string name="drawer_option1">Add Custom To-Do</string>
+    <string name="drawer_option2">Completed Tasks</string>
+    <string name="drawer_option3">Customize Appliances</string>
+    <string name="drawer_option4">Claim Rewards</string>
+    <string name="drawer_option5">User Profile</string>
+    <string name="drawer_option6">Logout</string>
+
+
 
 
     <!-- ACTIVITY HEADINGS-->
@@ -63,10 +72,10 @@
 
 
 
-
-
-
     <!-- String Buttons-->
     <string name="button_next">></string>
+
+
+
 
 </resources>
