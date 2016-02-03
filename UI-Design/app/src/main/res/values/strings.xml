@@ -49,10 +49,9 @@
     <string name="rb_smoke">Smoke Sensor</string>
     <string name="rb_moisture">Moisture Sensor</string>
     <string name="rb_flame">Flame Sensor</string>
-    <string name="rb_any_level">Any Level</string>
-    <string name="rb_moderate_level">Medium Level</string>
-    <string name="rb_high_level">High Level</string>
-
+    <string name="rb_any_level">senses smoke of any levels</string>
+    <string name="rb_moderate_level">senses smoke of moderate levels</string>
+    <string name="rb_high_level">senses smoke of high levels</string>
 
 
 

@@ -13,7 +13,7 @@
         <item name="android:editTextStyle">@style/AppTheme.EditTextStyle</item>
         <item name="android:actionBarStyle">@style/AppTheme.Toolbar</item>
         <item name="android:buttonStyleToggle">@style/AppTheme.ToggleButton</item>
-        <!--<item name="android:radioButtonStyle">@style/RadioButtonAppTheme</item>-->
+        <item name="android:radioButtonStyle">@style/AppTheme.RadioButton</item>
     </style>
 
 
@@ -29,8 +29,12 @@
     </style>
 
     <!-- Radio Button-->
-    <style name="RadioButtonAppTheme" parent="android:Widget.CompoundButton.RadioButton">
+    <style name="AppTheme.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
         <item name="android:button">@drawable/apptheme_btn_radio_holo_light</item>
+    </style>
+
+    <style name="AppTheme.RadioButton.Right">
+        <item name="android:drawableRight">@drawable/apptheme_btn_radio_holo_light</item>
     </style>
 
 
