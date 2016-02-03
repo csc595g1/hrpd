@@ -1,9 +1,13 @@
 package edu.depaul.csc595.jarvis.rewards;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,17 +25,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+
 import edu.depaul.csc595.jarvis.R;
 
 public class RewardsActivity extends AppCompatActivity {
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     * {@link FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -40,6 +54,11 @@ public class RewardsActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
     private int numOfPages = 4;
+//    private Rewards rewards;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +89,11 @@ public class RewardsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//        rewards = new Rewards();
+
+//        rewards.sendGET();
+
+
     }
 
 
@@ -90,12 +114,10 @@ public class RewardsActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if(item.getItemId() == 1){
+        } else if (item.getItemId() == 1) {
             // ( 1 ) add a new item 
             // ( 2 ) change add to remove
-        }
-        else{
+        } else {
             // if a the new item is clicked show "Toast" message.
 //            Context context = getApplicationContext();
 //            CharSequence text = "Hello toast!";
@@ -107,6 +129,7 @@ public class RewardsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -138,7 +161,46 @@ public class RewardsActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_rewards, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+//            textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 1:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+                case 2:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+                case 3:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+                case 4:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+                default:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, 3));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+            }
+
 
             return rootView;
         }
@@ -158,8 +220,10 @@ public class RewardsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+
             return PlaceholderFragment.newInstance(position + 1);
         }
+
 
         @Override
         public int getCount() {
@@ -170,19 +234,33 @@ public class RewardsActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return (CharSequence)getString(R.string.rewards_button_account_create);
-                    //return "SECTION 1";
+                    return (CharSequence) getString(R.string.rewards_button_account_create);
+                //return "SECTION 1";
                 case 1:
-                    return (CharSequence)getString(R.string.rewards_button_account_balance);
-                    //return "SECTION 2";
+                    return (CharSequence) getString(R.string.rewards_button_account_balance);
+                //return "SECTION 2";
                 case 2:
-                    return (CharSequence)getString(R.string.rewards_button_account_update);
+                    return (CharSequence) getString(R.string.rewards_button_account_update);
                 //return "SECTION 3";
                 case 3:
-                    return (CharSequence)getString(R.string.rewards_button_redeem_points);
+                    return (CharSequence) getString(R.string.rewards_button_redeem_points);
                 //return "SECTION 4";
             }
             return null;
         }
     }
+
+    //Get data and return JSONObject
+    private void convertDataToJSON() {
+        String response = "";
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("response", response);
+        }
+        catch (Exception e) {e.printStackTrace(); }
+
+
+    }
+
 }
