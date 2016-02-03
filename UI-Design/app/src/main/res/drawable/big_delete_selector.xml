@@ -3,7 +3,6 @@
     <item
         android:drawable="@drawable/big_delete"
         android:state_enabled="true"/>
-
     <item
         android:drawable="@drawable/big_delete_light_blue"
         android:state_pressed="true"/>

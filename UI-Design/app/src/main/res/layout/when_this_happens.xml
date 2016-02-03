@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme.Light"
+    tools:context="edu.depaul.csc472.jarvis.WhenThisHappens">
+
+    <RadioGroup
+        android:id="@+id/sensors"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <RadioButton
+            android:id="@+id/rb_smoke"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:button="@null"
+            android:drawableRight="@android:drawable/btn_radio"
+            android:text="@string/rb_smoke"
+            android:checked="true"
+            android:textSize="20dip"/>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:paddingBottom="10dp"
+                android:visibility="visible">
+                <RadioButton
+                    android:id="@+id/rb_any_level"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:paddingLeft="10dp"
+                    android:text="@string/rb_any_level"
+                    android:checked="true"
+                    android:textSize="20dip"/>
+                <RadioButton
+                    android:id="@+id/rb_moderate_level"
+                    android:layout_width="fill_parent"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rb_moderate_level"
+                    android:textSize="20dip"/>
+                <RadioButton
+                    android:id="@+id/rb_high_level"
+                    android:layout_width="fill_parent"
+                    android:paddingLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rb_high_level"
+                    android:textSize="20dip"/>
+
+            </RadioGroup>
+
+
+        </FrameLayout>
+        <RadioButton
+            android:id="@+id/rb_moisture"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:button="@null"
+            android:text="@string/rb_moisture"
+            android:drawableRight="@android:drawable/btn_radio"
+            android:textSize="20dip"
+            />
+        <RadioButton
+            android:id="@+id/rb_smart_outlet"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:button="@null"
+            android:drawableRight="@android:drawable/btn_radio"
+            android:text="@string/rb_flame"
+            android:textSize="20dip"
+            />
+    </RadioGroup>
+
+</LinearLayout>
