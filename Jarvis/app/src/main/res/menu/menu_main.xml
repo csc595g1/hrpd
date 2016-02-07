@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/tools"
+    >
+
+    <item android:id="@+id/menu_home"
+        android:icon="@drawable/home_selector"
+        android:title="@string/menu_home"
+        />
+
+    <item android:id="@+id/menu_maintenance"
+        android:icon="@drawable/checklist_selector"
+        android:title="@string/menu_maintenance"
+    />
+
+    <item android:id="@+id/menu_triggers"
+        android:icon="@drawable/triggers_selector"
+        android:title="@string/menu_triggers"
+        />
+
+    <item android:id="@+id/menu_activity"
+        android:icon="@drawable/activity_selector"
+        android:title="@string/menu_activity"
+        />
+
+</menu>

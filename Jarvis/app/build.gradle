@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.res.srcDirs += 'src/main/res/layout/partials'
+        main.res.srcDirs += 'src/main/res/drawable/shapes'
+        main.res.srcDirs += 'src/main/res/drawable/radio'
+        main.res.srcDirs +=  'src/main/res/layout/menus'
+
+
+    }
 }
 
 dependencies {
