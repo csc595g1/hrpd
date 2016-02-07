@@ -21,7 +21,7 @@ android {
         main.res.srcDirs += 'src/main/res/layout/partials'
         main.res.srcDirs += 'src/main/res/drawable/shapes'
         main.res.srcDirs += 'src/main/res/drawable/radio'
-        main.res.srcDirs +=  'src/main/res/layout/menus'
+        main.res.srcDirs += 'src/main/res/layout/menus'
 
 
     }
