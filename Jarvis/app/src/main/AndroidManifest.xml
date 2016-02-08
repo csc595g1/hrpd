@@ -29,14 +29,17 @@
         <activity
             android:name=".profile.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".prevention.PreventionActivity"
             android:label="@string/title_activity_prevention"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".inventory.AppliancesActivity"
             android:label="@string/title_activity_appliances"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".settings.SettingsActivity"
