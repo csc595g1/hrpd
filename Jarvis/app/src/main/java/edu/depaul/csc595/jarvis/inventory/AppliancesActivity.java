@@ -65,6 +65,8 @@ public class AppliancesActivity extends AppCompatActivity {
             }
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 

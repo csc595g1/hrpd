@@ -98,23 +98,19 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             Intent home = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(home);
-            finish();
         }
         else if (id == R.id.nav_prevention) {
             Intent home = new Intent(getApplicationContext(), PreventionActivity.class);
             startActivity(home);
-            finish();
         }
         else if (id == R.id.nav_rewards) {
             Intent home = new Intent(this, RewardsActivity.class);
             startActivity(home);
-            //finish();
 
         }
         else if (id == R.id.nav_appliances) {
             Intent home = new Intent(getApplicationContext(), AppliancesActivity.class);
             startActivity(home);
-            finish();
 
         }
         else if (id == R.id.nav_profile) {
@@ -123,12 +119,10 @@ public class MainActivity extends AppCompatActivity
                 startActivity(home);
             }
             else startActivity(new Intent(getApplicationContext(), LogInActivity.class));
-            //finish();
         }
         else if (id == R.id.nav_settings) {
             Intent home = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(home);
-            finish();
 
         }
 
