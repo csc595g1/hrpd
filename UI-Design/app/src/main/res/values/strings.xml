@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">UIDesign</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+    <string name="create_account">Create Account</string>
+    <string name="update_profile">Update Profile</string>
+
+
+    <string name="triggers_detail_when">When:</string>
+    <string name="triggers_detail_duration">For More Than:</string>
+    <string name="triggers_detail_action">Do This:</string>
+
+
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="email_hint">Email Address</string>
+    <string name="confirm_email_hint">Confirm Email Address</string>
+    <string name="last_name_hint">Last Name</string>
+
+    <!-- MENU-->
+    <string name="menu_home">Home</string>
+    <string name="menu_maintenance">Schedule</string>
+    <string name="menu_activity">Activity</string>
+    <string name="menu_triggers">Triggers</string>
+
+    <!-- DRAWER-->
+    <string name="drawer_option1">Add Custom To-Do</string>
+    <string name="drawer_option2">Completed Tasks</string>
+    <string name="drawer_option3">Customize Appliances</string>
+    <string name="drawer_option4">Claim Rewards</string>
+    <string name="drawer_option5">User Profile</string>
+    <string name="drawer_option6">Logout</string>
+
+
+
+
+    <!-- ACTIVITY HEADINGS-->
+    <string name="heading_add_custom_reminder">Add Custom Reminder</string>
+
+    <!-- INPUT LABELS-->
+    <string name="field_label_title_required">Title*</string>
+    <string name="field_label_notes_not_required">Notes</string>
+    <string name="field_label_when">When</string>
+    <string name="field_label_how_long">How Long</string>
+    <string name="field_label_take_this_action">Take This Action</string>
+    <string name="field_label_name_of_action">Name of Action</string>
+    <string name="field_label_activate_trigger">Activate</string>
+
+
+    <!-- Radio Labels-->
+    <string name="rb_email">Email Me</string>
+    <string name="rb_notify_me">Notify Me</string>
+    <string name="rb_text_me">Text Me</string>
+    <string name="rb_smoke">Smoke Sensor</string>
+    <string name="rb_moisture">Moisture Sensor</string>
+    <string name="rb_flame">Flame Sensor</string>
+    <string name="rb_any_level">senses smoke of any levels</string>
+    <string name="rb_moderate_level">senses smoke of moderate levels</string>
+    <string name="rb_high_level">senses smoke of high levels</string>
+
+    <string name="enter_barcode">Enter Barcode</string>
+    <string name="or">or</string>
+    <string name="barcode_number">Barcode Number</string>
+
+    <string name="add_a_smart_product">Add A Smart Product</string>
+    <string name="add_a_reminder">Add a Reminder</string>
+    <string name="add_triggers">Add Triggers</string>
+
+
+
+    <!-- String Buttons-->
+    <string name="button_next">></string>
+
+
+
+
+</resources>

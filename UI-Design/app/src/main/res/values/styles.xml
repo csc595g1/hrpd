@@ -1,0 +1,205 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat">
+
+        <item name="colorPrimary">@color/lightBlue</item>
+        <item name="colorPrimaryDark">@color/lightBlue</item>
+        <item name="android:windowBackground">@color/lightBlue</item>
+        <item name="android:colorBackground">@color/lightBlue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:buttonStyle">@style/AppTheme.ButtonStyle</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <item name="android:editTextStyle">@style/AppTheme.EditTextStyle</item>
+        <item name="android:actionBarStyle">@style/AppTheme.Toolbar</item>
+        <item name="android:buttonStyleToggle">@style/AppTheme.ToggleButton</item>
+        <item name="android:radioButtonStyle">@style/AppTheme.RadioButton</item>
+    </style>
+
+
+    <style name="AppTheme.Light">
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- No Action Bar-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Radio Button-->
+    <style name="AppTheme.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/apptheme_btn_radio_holo_light</item>
+    </style>
+
+    <style name="AppTheme.RadioButton.Right">
+        <item name="android:drawableRight">@drawable/apptheme_btn_radio_holo_light</item>
+    </style>
+
+
+    <!-- Drawer -->
+    <style name="AppTheme.Drawer">
+
+    </style>
+
+    <!-- Toolbar-->
+    <style name="AppTheme.Toolbar">
+        <item name="android:background">@drawable/toolbar</item>
+    </style>
+
+
+    <style name="AppTheme.ButtonStyle">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <!-- Toggle Button-->
+    <style name="AppTheme.ToggleButton" parent="@android:style/Widget.Holo.Button.Borderless">
+        <item name="android:background">@drawable/toggle_selector</item>
+        <item name="android:textOn"></item>
+        <item name="android:text"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+
+    <style name="AppTheme.TriggersDetail">
+    </style>
+
+
+    <!-- Maintenance & Trigger Box Styles -->
+    <style name="AppTheme.DetailBox">
+        <item name="android:layout_width">@dimen/detail_box_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/offwhite</item>
+    </style>
+
+    <!-- Category Box For Maintenance & Trigger Pages-->
+    <style name="AppTheme.CategoryBox">
+        <item name="android:layout_width">@dimen/category_box_width</item>
+        <item name="android:layout_height">@dimen/category_box_height</item>
+    </style>
+
+    <style name="AppTheme.CategoryBox.Triggers">
+        <item name="android:background">@color/red</item>
+    </style>
+
+    <style name="AppTheme.CategoryBox.Maintenance">
+        <item name="android:background">@color/orange</item>
+    </style>
+    <!-- End Category Box Customizations-->
+
+    <!-- Trigger Details Labels: When, For how Long, -->
+    <style name="AppTheme.TriggersDetail.MiddleBodyLabels">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/lightBlue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Trigger Details Responses For: When, For, How Long -->
+    <style name="AppTheme.TriggersDetail.MiddleBodyText">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+
+    <style name="AppTheme.EditTextStyle" parent="@android:style/Widget.Holo.EditText">
+        <item name="android:ems">10</item>
+        <item name="android:textColorHint">@color/light_gray</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">sans-serif-thin</item>
+    </style>
+
+    <!-- Floating Action Buttons -->
+    <style name="AppTheme.FloatingButton">
+        <item name="colorAccent">@color/darkBlue</item>
+    </style>
+
+    <style name="AppTheme.FloatingButton.Red" >
+        <item name="colorAccent">@color/red</item>
+    </style>
+
+    <style name="AppTheme.FloatingButton.Orange" >
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
+
+    <!-- Text Sizes -->
+
+    <style name="AppTheme.TextHeading">
+        <item name="android:textSize">20dip</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="AppTheme.TextHeading.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="AppTheme.TextHeading.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
+
+
+    <style name="AppTheme.TextHeading.Small">
+        <item name="android:textSize">10dip</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Small.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.NoCaps">
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Gray">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Medium">
+        <item name="android:textSize">15dip</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Medium.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.Medium.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="AppTheme.TextHeading.NoCaps.Medium">
+        <item name="android:textSize">15dip</item>
+    </style>
+
+    <style name="AppTheme.TextHeading.NoCaps.Medium.Blue">
+        <item name="android:textColor">@color/lightBlue</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Medium.Black">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="AppTheme.TextHeading.NoCaps.Medium.Gray">
+        <item name="android:textColor">@color/light_gray</item>
+    </style>
+
+
+
+
+
+
+
+</resources>

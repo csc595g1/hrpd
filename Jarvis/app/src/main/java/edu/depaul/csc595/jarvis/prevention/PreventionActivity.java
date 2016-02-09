@@ -65,6 +65,8 @@ public class PreventionActivity extends AppCompatActivity {
             }
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 

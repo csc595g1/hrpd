@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    >
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        android:gravity="center_vertical" >
+
+        <include layout="@layout/timeline_graphic"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday at 9:15 p.m."
+                android:textStyle="italic"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bought a smoke sensor"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 points"
+                android:textStyle="italic"
+                android:textSize="8dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <include layout="@layout/timeline_graphic"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday at 9:15 p.m."
+                android:textStyle="italic"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bought a smoke sensor"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 points"
+                android:textStyle="italic"
+                android:textSize="8dp"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

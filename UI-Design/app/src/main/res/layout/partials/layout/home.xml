@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+
+        <include layout="@layout/floating_action_button_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_a_smart_product"
+            android:paddingTop="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            style="@style/AppTheme.TextHeading.NoCaps"
+            android:layout_alignStart="@id/fab_blue"
+            android:layout_below="@id/fab_blue"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+
+        <include layout="@layout/floating_action_button_orange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_a_reminder"
+            android:paddingTop="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            style="@style/AppTheme.TextHeading.NoCaps"
+            android:layout_alignStart="@id/fab_orange"
+            android:layout_below="@id/fab_orange"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+
+        <include layout="@layout/floating_action_button_red"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_triggers"
+            android:paddingTop="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            style="@style/AppTheme.TextHeading.NoCaps"
+            android:layout_alignStart="@id/fab_red"
+            android:layout_below="@id/fab_red"
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</LinearLayout>

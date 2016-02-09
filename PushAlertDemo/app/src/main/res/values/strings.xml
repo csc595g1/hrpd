@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PushAlertDemo</string>
+    <string name="gcm_defaultSenderId">1006767494593</string>
+</resources>

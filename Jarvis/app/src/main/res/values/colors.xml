@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">@color/lightBlue</color>
+    <color name="colorPrimaryDark">@color/darkBlue</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="lightBlue">#007ccf</color>
+    <color name="mediumBlue">#1da2b9</color>
+    <color name="darkBlue">#1D68B9</color>
+    <color name="orange">#cf7f00</color>
+    <color name="red">#cf0027</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="offwhite">#F0F0F0</color>
+    <color name="light_gray">#bbbbbb</color>
+
     <!-- For Preventation Page feed's -->
-    <color name="white">#ffffff</color>
     <color name="feed_bg">#d3d6db</color>
     <color name="feed_item_bg">#ffffff</color>
     <color name="feed_item_border">#c2c3c8</color>

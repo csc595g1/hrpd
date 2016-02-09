@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.depaul.csc595.jarvis" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,14 +29,17 @@
         <activity
             android:name=".profile.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".prevention.PreventionActivity"
             android:label="@string/title_activity_prevention"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".inventory.AppliancesActivity"
             android:label="@string/title_activity_appliances"
+            android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".settings.SettingsActivity"
