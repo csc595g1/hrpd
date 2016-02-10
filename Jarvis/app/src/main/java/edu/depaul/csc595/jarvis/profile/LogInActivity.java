@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,11 +28,13 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 public class LogInActivity extends AppCompatActivity {
 
     private UserInfo userInfo;
-    private AutoCompleteTextView email;
+    //private AutoCompleteTextView email;
+    private EditText email;
     private EditText pw;
     private FloatingActionButton fab;
     private ArrayList<User> userList;
-    private android.support.v7.widget.AppCompatButton loginBtn;
+    //private android.support.v7.widget.AppCompatButton loginBtn;
+    private Button loginBtn;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +43,22 @@ public class LogInActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
         //setSupportActionBar(toolbar);
 
-        email = (AutoCompleteTextView) findViewById(R.id.login_username);
-        pw = (EditText) findViewById(R.id.login_pw);
-        fab = (FloatingActionButton) findViewById(R.id.login_fab);
-        loginBtn = (android.support.v7.widget.AppCompatButton) findViewById(R.id.login_login_btn);
+        //email = (AutoCompleteTextView) findViewById(R.id.login_username);
+        email = (EditText) findViewById(R.id.emailField);
+        //pw = (EditText) findViewById(R.id.login_pw);
+        pw = (EditText) findViewById(R.id.passwordField);
+        //fab = (FloatingActionButton) findViewById(R.id.login_fab);
+        //loginBtn = (android.support.v7.widget.AppCompatButton) findViewById(R.id.login_login_btn);
+        loginBtn = (Button) findViewById(R.id.button_login);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       Snackbar.make(v, "Send email to support", Snackbar.LENGTH_LONG)
-                                               .setAction("action",null).show();
-                                   }
-                               }
-        );
+//        fab.setOnClickListener(new View.OnClickListener() {
+//                                   @Override
+//                                   public void onClick(View v) {
+//                                       Snackbar.make(v, "Send email to support", Snackbar.LENGTH_LONG)
+//                                               .setAction("action",null).show();
+//                                   }
+//                               }
+//        );
 
         TextView createAccountLink = (TextView) findViewById(R.id.login_link_signup);
         createAccountLink.setOnClickListener(new View.OnClickListener() {
@@ -72,18 +78,18 @@ public class LogInActivity extends AppCompatActivity {
         userInfo = UserInfo.getInstance();
         userList = UserInfo.getUserList(getApplicationContext());
         LogInAutoCompleteAdapter autoCompleteAdapter = new LogInAutoCompleteAdapter(getApplicationContext(),R.layout.login_auto_fill,userList);
-        email.setAdapter(autoCompleteAdapter);
-        email.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                pw.setText(String.valueOf(userList.get(position).getPw()));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        //email.setAdapter(autoCompleteAdapter);
+//        email.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                pw.setText(String.valueOf(userList.get(position).getPw()));
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
