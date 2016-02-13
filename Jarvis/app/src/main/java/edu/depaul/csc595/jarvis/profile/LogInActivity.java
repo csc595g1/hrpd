@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.profile;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.adapters.LogInAutoCompleteAdapter;
+import edu.depaul.csc595.jarvis.profile.user.HerokuLogin;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
@@ -35,6 +41,7 @@ public class LogInActivity extends AppCompatActivity {
     private ArrayList<User> userList;
     //private android.support.v7.widget.AppCompatButton loginBtn;
     private Button loginBtn;
+    private ProgressDialog mProgDialog;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,34 +81,25 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-
+        final LogInActivity logInActivity = this;
         userInfo = UserInfo.getInstance();
         userList = UserInfo.getUserList(getApplicationContext());
+        //mProgDialog = new ProgressDialog();
         LogInAutoCompleteAdapter autoCompleteAdapter = new LogInAutoCompleteAdapter(getApplicationContext(),R.layout.login_auto_fill,userList);
-        //email.setAdapter(autoCompleteAdapter);
-//        email.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                pw.setText(String.valueOf(userList.get(position).getPw()));
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!email.getText().toString().equals(" ") && !pw.getText().toString().equals(" ")){
-                    if(userInfo.logInUser(email.getText().toString(),pw.getText().toString(),getApplicationContext())){
-                        Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
-                        startActivity(intent);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Login Failed!",Toast.LENGTH_SHORT).show();
-                    }
+                    mProgDialog = new ProgressDialog(LogInActivity.this);
+                    mProgDialog.setTitle("Sign In");
+                    mProgDialog.setMessage("Signing In...");
+                    mProgDialog.show();
+                    //mProgDialog //= ProgressDialog.show(getBaseContext(),"Sign In", "Signing In..,",true);
+                    //boolean authed = userInfo.logInUser(email.getText().toString(),pw.getText().toString(),getApplicationContext(),logInActivity,mProgDialog);
+                    userInfo.setCredentials(email.getText().toString(), pw.getText().toString());
+                    HerokuLogin hlogin = new HerokuLogin();
+                    hlogin.execute(LogInActivity.this,mProgDialog,getBaseContext());
                 }
             }
         });

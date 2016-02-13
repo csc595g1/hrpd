@@ -1,10 +1,15 @@
 package edu.depaul.csc595.jarvis.profile.user;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import java.sql.SQLDataException;
 import java.util.ArrayList;
+
+import edu.depaul.csc595.jarvis.profile.LogInActivity;
 
 /**
  * Created by Ed on 1/29/2016.
@@ -14,6 +19,9 @@ public final class UserInfo {
     private boolean isLoggedIn = false;
     private String userName;
     private String pw;
+    private String email;
+    private User user;
+    private String authMessage;
     //Sess
     //private const
     private UserInfo(){}
@@ -28,6 +36,23 @@ public final class UserInfo {
         else return instance;
     }
 
+    public void setCredentials(String email, String pw){
+        this.email = email;
+        this.pw = pw;
+    }
+
+    public void setAuthMessage(String message){
+        authMessage = message;
+    }
+
+    public String getAuthMessage(){
+        return authMessage;
+    }
+
+    public User getCredentials(){
+        return new User(email,pw);
+    }
+
     public void setLoggedIn(boolean status){
         isLoggedIn = status;
     }
@@ -35,15 +60,32 @@ public final class UserInfo {
     public boolean getIsLoggedIn(){return isLoggedIn;}
 
     public boolean logOutUser(Context context){
-        boolean returnBool = false;
+        isLoggedIn = false;
         UserLoginDataSource db = new UserLoginDataSource(context);
-        return returnBool;
+        try{
+            db.open();
+            db.updateFlagForUser(userName, 0);
+            db.close();
+        }
+        catch(SQLDataException e){
+            return false;
+        }
+        return isLoggedIn;
     }
 
-    public boolean logInUser(String email, String password, Context context){
-        boolean returnBool = false;
+    public boolean logInUser(String email, String password, Context context, LogInActivity logInActivity, ProgressDialog progressDialog){
         UserLoginDataSource db = new UserLoginDataSource(context);
 
+        try{
+            this.email = email;
+            this.pw = password;
+        }
+        catch(Exception e){
+            this.email = " ";
+            this.pw = " ";
+            this.isLoggedIn = false;
+            return false;
+        }
 
         if(userName == null){userName = " ";}
 
@@ -59,28 +101,35 @@ public final class UserInfo {
             userName = " ";
             pw = " ";
         }
-        //if logging into tango succesful, log session on db
 
+            boolean auth = false;
+            HerokuLogin login = new HerokuLogin();
+            login.execute(logInActivity,progressDialog,context);
+
+        return isLoggedIn;
+    }
+
+    protected void insertLocalInformationForLogin(Context context){
+        UserLoginDataSource db = new UserLoginDataSource(context);
+        Log.d("UserLogin", this.email + " " + this.pw + " " + this.isLoggedIn);
         try {
-            //something to do with tango log-in here
-
             db.open();
             db.resetAllLoggedInFlags();
-            db.insertUserNameAndPassword(email, password);
+            db.insertUserNameAndPassword(this.email, this.pw);
+            if (!isLoggedIn) {
+                db.updateFlagForUser(email, 0);
+            }
             db.close();
-            userName = email;
-            pw = password;
-            isLoggedIn = true;
-            returnBool = true;
+            //userName = email;
+            //pw = password;
         }
         catch (SQLDataException e){
-            returnBool = false;
+            //eturnBool = false;
             isLoggedIn = false;
             //do something to ensure that tango is not logged in
             userName = " ";
             pw = " ";
         }
-        return returnBool;
     }
 
     public static ArrayList<User> getUserList(Context context){

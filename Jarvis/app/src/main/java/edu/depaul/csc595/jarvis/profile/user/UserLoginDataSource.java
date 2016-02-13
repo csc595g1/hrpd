@@ -82,6 +82,9 @@ public class UserLoginDataSource {
 
             db.insert(UserLoginDataHelper.TABLE_NAME, null, values);
         }
+        else{
+            updateFlagForUser(email,1);
+        }
     }
 
     protected ArrayList<User> returnAllUsersForAutoComplettion(){
