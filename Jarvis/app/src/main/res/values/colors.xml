@@ -21,4 +21,14 @@
     <color name="link">#0a80d1</color>
     <color name="timestamp">#a0a3a7</color>
     <!-- Ends -->
+	
+	
+<!-- Inventory -->
+    <color name="grey_600">#757575</color>
+    <color name="orange_300">#FFB74D</color>
+    <color name="teal_400">#26A69A</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="orange_A700">#FF6D00</color>
+    <!-- Ends -->
+	
 </resources>

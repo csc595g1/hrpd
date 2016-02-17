@@ -1,42 +1,43 @@
 package edu.depaul.csc595.jarvis.inventory;
 
-import android.support.design.widget.TabLayout;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.Random;
 
 import edu.depaul.csc595.jarvis.R;
 
 public class AppliancesActivity extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private final String TAG_LOG = "AppliancesActivity";
+    private final String TAG_BOTTOM_VIEW = "BottomView";
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
+    private ArrayList<Item> mPersons = new ArrayList<>();
+    private ItemAdapter mAdapterPerson;
+    private ItemListViewOrder mPersonsListView;
+    private JBHorizontalSwipe mJBHorizontalSwipe;
+    private Context mContext;
+    private ViewGroup mSwipedViewGroup;
+
+    private boolean mRemovePrevDeleted;
+    private Item mPrevDeletedPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +46,6 @@ public class AppliancesActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,13 +58,202 @@ public class AppliancesActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mContext = this;
+
+        // The main activity needs a JBHorizontalSwipe object to handle swiping listview items.
+        mJBHorizontalSwipe = new JBHorizontalSwipe(ijbHorizontalSwipe);
+
+        // Add some data to the listview.
+        mPersons.add(new Item(getNewId(), "Test Smoke Alarm", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Smoke Alarm Change Batteries", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Test CO Detector", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "CO Detector Change Batteries", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Check Fire Extinguisher", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Check Sump Pump", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Clean/Inspect Washing Machine", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Clean/Inspect Dryer", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Clean Dryer Vent", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Test Home for Radon", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Pool Pump Filter Maintenance", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Maintain Underground Sprinkler System", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Generator Maintenance", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Change HVAC Filter", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Drain Water Heater", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+        mPersons.add(new Item(getNewId(), "Inspect Water Heater", BitmapFactory.decodeResource(getResources(), R.drawable.doc_lv_tp_2)));
+
+
+        mPersonsListView = (ItemListViewOrder) findViewById(R.id.lvPersons);
+        mPersonsListView.setPersonList(mPersons);
+        mAdapterPerson = new ItemAdapter(this, R.layout.appliances_item, mPersons, mJBHorizontalSwipe, mPersonsListView, new IListItemControls() {
+            @Override
+            public void onUndoClicked(View v) {
+                // When the Undo button on a list item is pressed, we need to reset the state of deletion.
+                mRemovePrevDeleted = false;
+                mPrevDeletedPerson = null;
+            }
+        });
+
+        mPersonsListView.setAdapter(mAdapterPerson);
+
+        mPersonsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // This is where you put your code to handle the user tapping on a list item, i.e.
+                // when the item's top view is being displayed.
+                Item person = (Item) view.getTag();
+                Toast.makeText(mContext, person.name, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Handles  deleted item if the user scrolls the listview.
+        // NOTE: Don't use a ScrollListener on the listview as this will cause bad
+        // side effects. Motion events for the listview must be handled by the
+        // onTouchEvent method in PersonListViewOrder in order for this kind of listview
+        // to function properly.
+        mPersonsListView.setVerticalScrollCallback(new ItemListViewOrder.IVerticalScrollCallback() {
+            @Override
+            public void onVerticalScroll() {
+                // This method gets called when the user scrolls the listview vertically.
+                if (mPrevDeletedPerson != null) {
+                    int pos = mAdapterPerson.getPosition(mPrevDeletedPerson);
+                    View vPrevDeleted = mPersonsListView.getChildAt(pos - mPersonsListView.getFirstVisiblePosition());
+                    mAdapterPerson.animateRemoval(vPrevDeleted);
+                    mRemovePrevDeleted = false;
+                    mPrevDeletedPerson = null;
+                }
+            }
+        });
+
     }
 
+
+    /**
+     * Used to handle callbacks when the user swipes list items.
+     */
+    private JBHorizontalSwipe.IJBHorizontalSwipe ijbHorizontalSwipe = new JBHorizontalSwipe.IJBHorizontalSwipe() {
+        @Override
+        public void onReposition(float x, boolean scrollingRight, float scrollDelta) {
+            // Currently not used. You can use this callback to do something while the user is swiping a list item.
+        }
+
+        @Override
+        public void onTopViewVisibilityChange(View vTop, boolean visible) {
+            // This callback gets called when the list item's top view changes from fully visible to
+            // fully invisible.
+
+            mSwipedViewGroup = (ViewGroup) vTop.getParent();
+            final Item person = (Item) mSwipedViewGroup.getTag();
+            person.deleted = !visible;
+            mRemovePrevDeleted = false;
+
+            // Using setPressed is necessary in various places throughout the app in order
+            // to restore the background color of the top view. This is required because list
+            // items don't receive the ACTION_UP event which would normally restore the background
+            // color. The ACTION_UP is not received because code in PersonListViewOrder as well
+            // JBHorizontalSwipe and CustomListItem intercept the motion events and take over
+            // control when a ACTION_DOWN is received.
+
+            vTop.setPressed(false);
+            mPersonsListView.setPressed(false);
+
+            if ((person == mPrevDeletedPerson) && !person.deleted)
+                mPrevDeletedPerson = null;
+
+            if ((person.deleted) && (mPrevDeletedPerson != null) && (person != mPrevDeletedPerson))
+                mRemovePrevDeleted = true;
+
+            View vBottom = mSwipedViewGroup.findViewWithTag(TAG_BOTTOM_VIEW);
+            PropertyValuesHolder pvhAlphaCurrent;
+
+            ButtonBottomView btnUndo = (ButtonBottomView) vBottom.findViewById(R.id.btnUndo);
+            mAdapterPerson.onItemSwiped(person, btnUndo);
+
+            // If the top view is swiped out of view, we want to animate the bottom view's
+            // visibility to gradually show, which is done by changing its alpha.
+
+            if (person.deleted)
+                pvhAlphaCurrent = PropertyValuesHolder.ofFloat("alpha", 0, 1);
+            else
+                pvhAlphaCurrent = PropertyValuesHolder.ofFloat("alpha", 1, 0);
+
+            ObjectAnimator animatorView = ObjectAnimator.ofPropertyValuesHolder(vBottom, pvhAlphaCurrent);
+            animatorView.setInterpolator(new LinearInterpolator());
+            animatorView.setDuration(300);
+
+            animatorView.addListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    // If a previous item has been deleted but is still visible, we
+                    // need to remove it from the list using some animation.
+
+                    if (mRemovePrevDeleted) {
+                        int pos = mAdapterPerson.getPosition(mPrevDeletedPerson);
+
+                        if ((pos >= mPersonsListView.getFirstVisiblePosition()) && (pos <= mPersonsListView.getLastVisiblePosition())) {
+                            View vPrevDeleted = mPersonsListView.getChildAt(pos - mPersonsListView.getFirstVisiblePosition());
+                            mAdapterPerson.animateRemoval(vPrevDeleted);
+                        } else {
+                            mAdapterPerson.remove(mPrevDeletedPerson);
+                        }
+                    }
+
+                    if (person.deleted)
+                        mPrevDeletedPerson = person;
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animation) {
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animation) {
+                }
+            });
+
+            animatorView.start();
+        }
+    };
+
+
+    /**
+     * Used to intercept touch events.
+     */
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (mJBHorizontalSwipe != null)
+            mJBHorizontalSwipe.onRootDispatchTouchEventListener(ev);
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+
+    /**
+     * Generates a unique ID.
+     *
+     * @return Returns a random number.
+     */
+    private long getNewId() {
+        Random r = new Random();
+        return r.nextLong();
+    }
+
+
+    interface IListItemControls {
+        /**
+         * A callback that gets called when the user taps on the Undo button.
+         *
+         * @param v The view that represents the Undo button.
+         */
+        void onUndoClicked(View v);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_appliances, menu);
+        getMenuInflater().inflate(R.menu.menu_prevention, menu);
         return true;
     }
 
@@ -92,75 +272,4 @@ public class AppliancesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_appliances, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
-        }
-    }
 }
