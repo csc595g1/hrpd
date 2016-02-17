@@ -22,6 +22,24 @@ public final class UserInfo {
     private String email;
     private User user;
     private String authMessage;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    private String firstName,lastName;
     //Sess
     //private const
     private UserInfo(){}
@@ -54,6 +72,7 @@ public final class UserInfo {
     }
 
     public void setLoggedIn(boolean status){
+
         isLoggedIn = status;
     }
 

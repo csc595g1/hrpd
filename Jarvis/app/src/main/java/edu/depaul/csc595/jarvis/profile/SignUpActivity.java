@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.profile;
 
+import android.app.ProgressDialog;
 import android.content.pm.PackageInstaller;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,43 +9,82 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.HerokuCreateAccount;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
 public class SignUpActivity extends AppCompatActivity {
 
     private String firstName, lastName, password, emailAddr;
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     private EditText fNameInput, lNameInput, emailInput, confirmEmailInput, pwInput;
-
+    private Button signup_btn;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.signup);
 
-        fab = (FloatingActionButton) findViewById(R.id.signup_fab);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       Snackbar.make(v, "Send email to support", Snackbar.LENGTH_LONG)
-                                               .setAction("action", null).show();
-                                   }
-                               }
-        );
-
-        fNameInput = (EditText) findViewById(R.id.signup_first_name);
-        lNameInput = (EditText) findViewById(R.id.signup_last_name);
-        emailInput = (EditText) findViewById(R.id.signup_email);
-        confirmEmailInput = (EditText) findViewById(R.id.signup_confirm_email);
-        pwInput = (EditText) findViewById(R.id.signup_confirm_email);
-
+        fNameInput = (EditText) findViewById(R.id.signup_activity_first_name);
+        lNameInput = (EditText) findViewById(R.id.signup_activity_last_name);
+        emailInput = (EditText) findViewById(R.id.signup_activity_email_address);
+        confirmEmailInput = (EditText) findViewById(R.id.signup_activity_confirm_email);
+        pwInput = (EditText) findViewById(R.id.signup_activity_pw);
+        signup_btn = (Button) findViewById(R.id.button_signup);
     }
 
     protected void onStart(){
         super.onStart();
+        signup_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((fNameInput.getText().toString().equals("") || fNameInput.getText().toString().equals(" "))
+                        || (lNameInput.getText().toString().equals("") || lNameInput.getText().toString().equals(" "))){
+                    Toast.makeText(getBaseContext(),"First and last name is required!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(emailInput.getText().toString().equals("") || emailInput.getText().toString().equals(" ")){
+                    Toast.makeText(getBaseContext(),"Email is required!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(confirmEmailInput.getText().toString().equals("") || confirmEmailInput.getText().toString().equals(" ")){
+                    Toast.makeText(getBaseContext(),"Please confirm email!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else if(pwInput.getText().toString().equals("") || pwInput.getText().toString().equals(" ")){
+                    Toast.makeText(getBaseContext(),"Password is required!",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else{
+                    if(emailInput.getText().toString().equals(confirmEmailInput.getText().toString())){
+                        //firstName, lastName, password, emailAddr
+                        //firstName = fNameInput.getText().toString();
+                        //lastName = lNameInput.getText().
+                        UserInfo userInfo = UserInfo.getInstance();
+                        userInfo.setFirstName(fNameInput.getText().toString());
+                        userInfo.setLastName(lNameInput.getText().toString());
+                        userInfo.setCredentials(emailInput.getText().toString(), pwInput.getText().toString());
+
+                        mProgressDialog = new ProgressDialog(SignUpActivity.this);
+                        mProgressDialog.setTitle("Creating Account");
+                        mProgressDialog.setMessage("Please wait...");
+                        mProgressDialog.show();
+
+                        HerokuCreateAccount herokuCreateAccount = new HerokuCreateAccount();
+                        herokuCreateAccount.execute(SignUpActivity.this,mProgressDialog,getBaseContext());
+                    }
+                    else{
+                        Toast.makeText(getBaseContext(),"Email confirmation does not match!",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+            }
+        });
     }
 
     @Override
