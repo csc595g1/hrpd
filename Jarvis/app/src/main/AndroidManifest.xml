@@ -15,6 +15,15 @@
             android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".detection.RegisterProducts"
+            android:label="@string/title_activity_register_products" >
         </activity>
         <activity
             android:name=".rewards.RewardsActivity"
@@ -27,6 +36,11 @@
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".reminders.ReminderActivity"
+            android:label="@string/title_activity_reminder"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".prevention.PreventionActivity"
             android:label="@string/title_activity_prevention"
             android:parentActivityName=".main.MainActivity"
@@ -36,6 +50,7 @@
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -63,27 +78,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
-        <activity
-            android:name=".detection.RegisterProducts"
-            android:label="@string/title_activity_register_products" >
-        </activity>
-        <activity
-            android:name=".detection.AddTriggers"
-            android:label="@string/title_activity_add_triggers" >
-        </activity>
-        <activity
-            android:name=".detection.WhenThisHappens"
-            android:label="@string/title_activity_when_this_happens" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- This for Allstate Reminder -->\
         <activity
-            android:name=".detection.TakeThisAction"
-            android:label="@string/title_activity_take_this_action" >
-        </activity>
+            android:name=".reminders.RemindersAllState"
+            android:label="@string/title_activity_appliances"
+            android:parentActivityName=".reminders.ReminderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
