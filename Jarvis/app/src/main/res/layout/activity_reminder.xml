@@ -1,49 +1,386 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".reminders.ReminderActivity">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:background="@color/white"
+        >
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="12dp">
 
-        </android.support.v7.widget.Toolbar>
+            <TextView
+                android:id="@+id/name_of_action"
+                android:layout_width="match_parent"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Black"
+                android:text="@string/turn_on_off_reminders"/>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+        </LinearLayout>
+
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <!-- Inventory List starts from here -->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
 
-    </android.support.design.widget.AppBarLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/test_smoke_alarms"
+                />
+            <include layout="@layout/toggle_off_button"
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
 
-</android.support.design.widget.CoordinatorLayout>
+        </LinearLayout>
+
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/change_smoke_alarm_batteries"/>
+            <include layout="@layout/toggle_on_button"/>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/test_carbon_monoxide_alarm"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/check_fire_extinguisher"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/insect_sump_pump"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/clean_insect_washing_machine"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/clean_dryer_vent"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/test_home_for_radon"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/pool_pump_filter_maintenance"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/maintain_uground_sprinkler_sys"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/generator_maintenance"
+                />
+            <include layout="@layout/toggle_off_button"
+
+                />
+
+
+        </LinearLayout>
+
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/check_drain_water_heater"/>
+            />
+            <include layout="@layout/toggle_on_button"/>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/hvac_tune_up"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/clean_gutters"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/change_home_air_filters"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/inspect_roof"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.TextHeading.Medium.Blue"
+                android:text="@string/tree_timing"/>
+            />
+
+            <include layout="@layout/toggle_on_button"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/border_thin_gray"/>
+
+    </LinearLayout>
+
+</ScrollView>

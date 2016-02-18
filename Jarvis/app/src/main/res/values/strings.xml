@@ -196,4 +196,27 @@
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_register_products">RegisterProducts</string>
 
+    <!-- This is for Reminder Page -->
+    <string name="turn_on_off_reminders">Turn On/Off Reminders</string>
+
+
+    <string name="test_smoke_alarms">Test Smoke Alarms</string>
+    <string name="change_smoke_alarm_batteries">Change Smoke Alarm Batteries</string>
+    <string name="test_carbon_monoxide_alarm">Test Carbon Monoxide Alarm</string>
+    <string name="check_fire_extinguisher">Check Fire Extinguisher</string>
+    <string name="insect_sump_pump">Inspect Sump Pump</string>
+    <string name="clean_insect_washing_machine">Clean/Inspect Washing Machine</string>
+    <string name="clean_dryer_vent">Clean Dryer Vent</string>
+    <string name="test_home_for_radon">Test Home for Radon</string>
+    <string name="maintain_uground_sprinkler_sys">Maintain Underground Sprinkler System</string>
+    <string name="check_drain_water_heater">Check/Drain Water Heater</string>
+    <string name="hvac_tune_up">HVAC Tune-up</string>
+    <string name="clean_gutters">Clean Gutters</string>
+    <string name="change_home_air_filters">Change Home Air Filter</string>
+    <string name="pool_pump_filter_maintenance">Pool Pump Filter Maintenance</string>
+    <string name="generator_maintenance">Generator Maintenance</string>
+    <string name="inspect_roof">Inspect Roof</string>
+    <string name="tree_timing">Tree Trimming</string>
+    <!-- Ends -->
+
 </resources>
