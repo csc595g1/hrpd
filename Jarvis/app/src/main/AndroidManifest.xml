@@ -50,6 +50,7 @@
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -77,6 +78,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
+
+        <!-- This for Allstate Reminder -->\
+        <activity
+            android:name=".reminders.RemindersAllState"
+            android:label="@string/title_activity_appliances"
+            android:parentActivityName=".reminders.ReminderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 
