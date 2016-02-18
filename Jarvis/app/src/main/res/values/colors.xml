@@ -14,16 +14,7 @@
     <color name="offwhite">#F0F0F0</color>
     <color name="light_gray">#bbbbbb</color>
 
-    <!-- For Preventation Page feed's -->
-    <color name="feed_bg">#d3d6db</color>
-    <color name="feed_item_bg">#ffffff</color>
-    <color name="feed_item_border">#c2c3c8</color>
-    <color name="link">#0a80d1</color>
-    <color name="timestamp">#a0a3a7</color>
-    <!-- Ends -->
-	
-	
-<!-- Inventory -->
+    <!-- Inventory -->
     <color name="grey_600">#757575</color>
     <color name="orange_300">#FFB74D</color>
     <color name="teal_400">#26A69A</color>
