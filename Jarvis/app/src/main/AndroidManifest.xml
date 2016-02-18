@@ -22,6 +22,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".detection.RegisterProducts"
+            android:label="@string/title_activity_register_products" >
+        </activity>
+        <activity
             android:name=".rewards.RewardsActivity"
             android:label="@string/title_activity_rewards"
             android:parentActivityName=".main.MainActivity"
@@ -29,6 +33,11 @@
         <activity
             android:name=".profile.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".reminders.ReminderActivity"
+            android:label="@string/title_activity_reminder"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -68,10 +77,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
-        <activity
-            android:name=".detection.RegisterProducts"
-            android:label="@string/title_activity_register_products" >
-        </activity>
+
     </application>
 
 </manifest>

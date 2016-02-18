@@ -9,6 +9,7 @@
     <string name="action_prevention">Prevention</string>
     <string name="action_appliances">Appliances</string>
     <string name="action_profile">Profile</string>
+    <string name="action_reminder">Reminder</string>
 
     <string name="action_settings">Settings</string>
     <string name="login">Login</string>
@@ -93,6 +94,7 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_rewards">RewardsActivity</string>
     <string name="title_activity_appliances">AppliancesActivity</string>
+    <string name="title_activity_reminder">ReminderActivity</string>
     <string name="section_format">Your home section: %1$d</string>
 
     <string name="nav_group">CSC595 Group1</string>
