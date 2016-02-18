@@ -1,9 +1,14 @@
 package edu.depaul.csc595.jarvis.reminders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
 
@@ -13,11 +18,32 @@ import edu.depaul.csc595.jarvis.R;
 public class ReminderActivity extends AppCompatActivity {
 
 
+    LinearLayout ll_test_smoke_alarms;
+    TextView go_to_allstate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+
+        ll_test_smoke_alarms = (LinearLayout) findViewById(R.id.test_smoke_alarms);
+        ll_test_smoke_alarms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getApplicationContext(),"Testing Smoke Alarms",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        go_to_allstate = (TextView) findViewById(R.id.allstate_reminder);
+        go_to_allstate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), RemindersAllState.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -43,7 +69,4 @@ public class ReminderActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 }
-
