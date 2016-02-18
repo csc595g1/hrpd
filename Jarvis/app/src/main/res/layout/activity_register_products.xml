@@ -6,11 +6,12 @@
     >
 
 
-    <RelativeLayout android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
         tools:context="edu.depaul.csc595.jarvis.detection.RegisterProducts">
         <RadioGroup
             android:id="@+id/rb_sensors"
@@ -23,7 +24,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:paddingLeft="15dp"
+                android:paddingLeft="10dp"
                 android:text="@string/rb_smoke_sensor"
                 android:checked="true"
                 style="@style/AppTheme.TextHeading.NoCaps.Black"/>
@@ -48,7 +49,7 @@
 
         </RadioGroup>
         <EditText
-            android:id="@+id/barcode_number"
+            android:id="@+id/edit_barcode_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -56,7 +57,6 @@
             android:ems="10"
             android:textAlignment="center"
             android:gravity="center"
-            android:textColor="@color/white"
             android:hint="@string/barcode_number"
             android:paddingBottom="15dp"/>
 
@@ -65,12 +65,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/barcode_number"
-            android:text="@string/button_enter"/>
+            android:text="@string/button_enter"
+            android:onClick="addProducts"/>
 
 
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

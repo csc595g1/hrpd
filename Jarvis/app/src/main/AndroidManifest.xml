@@ -15,11 +15,6 @@
             android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".rewards.RewardsActivity"
@@ -71,6 +66,23 @@
         <activity
             android:name=".detection.RegisterProducts"
             android:label="@string/title_activity_register_products" >
+        </activity>
+        <activity
+            android:name=".detection.AddTriggers"
+            android:label="@string/title_activity_add_triggers" >
+        </activity>
+        <activity
+            android:name=".detection.WhenThisHappens"
+            android:label="@string/title_activity_when_this_happens" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".detection.TakeThisAction"
+            android:label="@string/title_activity_take_this_action" >
         </activity>
     </application>
 
