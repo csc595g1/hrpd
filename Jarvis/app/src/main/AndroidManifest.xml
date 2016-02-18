@@ -68,6 +68,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
+        <activity
+            android:name=".detection.RegisterProducts"
+            android:label="@string/title_activity_register_products" >
+        </activity>
     </application>
 
 </manifest>

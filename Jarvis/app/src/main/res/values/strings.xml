@@ -75,7 +75,14 @@
     <string name="add_a_reminder">Add a Reminder</string>
     <string name="add_triggers">Add Triggers</string>
 
+    <!-- BEGIN: Strings related to Register Products -->
+    <string name="rb_smoke_sensor">Smoke</string>
+    <string name="rb_water_sensor">Water</string>
+    <string name="rb_moisture_sensor">Moisture</string>
 
+    <string name="button_enter">Register Product</string>
+
+    <!-- END: Strings related to Register Products -->
 
     <!-- String Buttons-->
     <string name="button_next">></string>
@@ -185,5 +192,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_register_products">RegisterProducts</string>
 
 </resources>
