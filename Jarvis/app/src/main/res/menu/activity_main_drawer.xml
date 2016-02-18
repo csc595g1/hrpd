@@ -22,6 +22,11 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"
             android:title="@string/action_profile" />
+        <item
+            android:id="@+id/nav_reminder"
+            android:icon="@android:drawable/ic_popup_reminder"
+            android:title="@string/action_reminder" />
+
     </group>
 
     <item android:title="Communicate">

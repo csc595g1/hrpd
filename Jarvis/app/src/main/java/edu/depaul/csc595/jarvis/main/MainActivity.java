@@ -1,18 +1,18 @@
 package edu.depaul.csc595.jarvis.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.content.Intent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
@@ -20,6 +20,7 @@ import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
@@ -96,33 +97,38 @@ public class MainActivity extends AppCompatActivity
         UserInfo user = UserInfo.getInstance();
 
         if (id == R.id.nav_home) {
-            Intent home = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(home);
+            Intent goToHome = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(goToHome);
         }
         else if (id == R.id.nav_prevention) {
-            Intent home = new Intent(getApplicationContext(), PreventionActivity.class);
-            startActivity(home);
+            Intent goToPrevention = new Intent(getApplicationContext(), PreventionActivity.class);
+            startActivity(goToPrevention);
         }
         else if (id == R.id.nav_rewards) {
-            Intent home = new Intent(this, RewardsActivity.class);
-            startActivity(home);
+            Intent goToRewards = new Intent(this, RewardsActivity.class);
+            startActivity(goToRewards);
 
         }
         else if (id == R.id.nav_appliances) {
-            Intent home = new Intent(getApplicationContext(), AppliancesActivity.class);
-            startActivity(home);
+            Intent goToAppliances = new Intent(getApplicationContext(), AppliancesActivity.class);
+            startActivity(goToAppliances);
 
         }
         else if (id == R.id.nav_profile) {
-            Intent home = new Intent(getApplicationContext(), ProfileActivity.class);
+            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
             if(user.getIsLoggedIn()) {
-                startActivity(home);
+                startActivity(goToProfile);
             }
             else startActivity(new Intent(getApplicationContext(), LogInActivity.class));
         }
+        else if (id == R.id.nav_reminder) {
+            Intent goToReminder = new Intent(getApplicationContext(), ReminderActivity.class);
+            startActivity(goToReminder);
+
+        }
         else if (id == R.id.nav_settings) {
-            Intent home = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(home);
+            Intent goToSetting = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(goToSetting);
 
         }
 
