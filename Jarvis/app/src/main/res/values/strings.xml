@@ -195,6 +195,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_register_products">RegisterProducts</string>
+    <string name="title_activity_add_triggers">AddTriggers</string>
+    <string name="title_activity_when_this_happens">WhenThisHappens</string>
+    <string name="title_activity_take_this_action">TakeThisAction</string>
 
     <!-- This is for Reminder Page -->
     <string name="turn_on_off_reminders">Turn On/Off Reminders</string>
