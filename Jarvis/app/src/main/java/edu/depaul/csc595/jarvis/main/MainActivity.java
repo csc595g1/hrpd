@@ -24,6 +24,8 @@ import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
