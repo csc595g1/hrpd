@@ -220,6 +220,7 @@
     <string name="generator_maintenance">Generator Maintenance</string>
     <string name="inspect_roof">Inspect Roof</string>
     <string name="tree_timing">Tree Trimming</string>
+    <string name="title_activity_splash">SplashActivity</string>
     <!-- Ends -->
 
 </resources>

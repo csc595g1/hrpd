@@ -27,7 +27,7 @@ public class UserLoginDataHelper extends SQLiteOpenHelper{
                     user_email + " TEXT NOT NULL, " +
                     user_pw + " TEXT NOT NULL, " +
                     last_login_dttm + " DATETIME, " +
-                    is_logged_on + " INTEGER DEFAULT 0);";
+                    is_logged_on + " INTEGER);";
 
     public void onCreate(SQLiteDatabase db){
         db.execSQL(CREATE_TABLE);

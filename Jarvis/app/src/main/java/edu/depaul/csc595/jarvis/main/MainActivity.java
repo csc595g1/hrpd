@@ -13,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
@@ -28,6 +30,10 @@ import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private View headerLayout;
+    private TextView tv_email;
+    private TextView tv_name;
+    private TextView tv_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +52,71 @@ public class MainActivity extends AppCompatActivity
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
+
+        //drawer.
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        //going to inflate the header view at runtime instead of in the layout so that we
+        //can modify it --ed
+        headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        //if user is logged in, set name, email and enable log out
+        if(UserInfo.getInstance().getIsLoggedIn()){
+            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
+            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+
+            tv_logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserInfo.getInstance().logOutUser(MainActivity.this);
+                }
+            });
+        }
+        else{
+            tv_logout.setText(" ");
+        }
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+
+        //if user is logged in, set name, email and enable log out
+        if(UserInfo.getInstance().getIsLoggedIn()){
+            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
+            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+
+            tv_logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserInfo.getInstance().logOutUser(MainActivity.this);
+                }
+            });
+        }
+        else{
+            tv_logout.setText(" ");
+        }
     }
 
     @Override
