@@ -15,7 +15,7 @@ import edu.depaul.csc595.jarvis.profile.LogInActivity;
  * Created by Ed on 1/29/2016.
  */
 public final class UserInfo {
-
+    private final String TAG = "UserInfo";
     private boolean isLoggedIn = false;
     private String userName;
     private String pw;
@@ -76,6 +76,20 @@ public final class UserInfo {
         isLoggedIn = status;
     }
 
+    //will return null if no user logged in
+    public User getUserForSplash(Context context){
+        UserLoginDataSource db = new UserLoginDataSource(context);
+        try{
+            db.open();
+            User user = db.getCurrentUserIfExists();
+            db.close();
+            return user;
+        }
+        catch(SQLDataException e){
+            return null;
+        }
+    }
+
     public boolean getIsLoggedIn(){return isLoggedIn;}
 
     public boolean logOutUser(Context context){
@@ -134,15 +148,33 @@ public final class UserInfo {
         try {
             db.open();
             db.resetAllLoggedInFlags();
+            int count = db.getUserCount(this.email);
+            Log.d(TAG, "insertLocalInformationForLogin count = " + count);
+            if(count > 0){
+                Log.d(TAG, "insertLocalInformationForLogin auth = " + this.isLoggedIn);
+                if(this.isLoggedIn){
+                    db.updateFlagForUser(this.email,1);
+                    return;
+                }
+                else{
+                    db.updateFlagForUser(this.email,0);
+                    return;
+                }
+            }
             db.insertUserNameAndPassword(this.email, this.pw);
             if (!isLoggedIn) {
                 db.updateFlagForUser(email, 0);
+            }
+            else{
+                db.updateFlagForUser(email,1);
             }
             db.close();
             //userName = email;
             //pw = password;
         }
         catch (SQLDataException e){
+            e.getMessage();
+            e.printStackTrace();
             //eturnBool = false;
             isLoggedIn = false;
             //do something to ensure that tango is not logged in

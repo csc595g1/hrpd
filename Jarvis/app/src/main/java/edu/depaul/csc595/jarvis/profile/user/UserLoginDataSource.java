@@ -4,7 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.Date;
 import java.sql.SQLDataException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -32,8 +36,26 @@ public class UserLoginDataSource {
 
     //check if flag=1 exists if so return that row, if more than 1 exists, logged everyone out.
     //will require stringbuilder to accommodate pass by reference
-    protected void getCurrentUserIfExists(StringBuilder email, StringBuilder pw){
+    protected User getCurrentUserIfExists(){
+        User user = null;
 
+        String sql = "select user_email, user_pw from " + UserLoginDataHelper.TABLE_NAME + " where is_logged_on = 1;";
+        Cursor c = db.rawQuery(sql,new String[]{});
+        if(c.moveToFirst()){
+            String email = c.getString(c.getColumnIndexOrThrow("user_email"));
+            String pw = c.getString(c.getColumnIndexOrThrow("user_pw"));
+            user = new User();
+            user.setPw(pw);
+            user.setEmail(email);
+            //return user;
+        }
+        try {
+            Log.d(TAG, "getCurrentUserIfExists " + user.getEmail());
+        }
+        catch(NullPointerException e){
+            Log.d(TAG, "getCurrentUserIfExists user is null");
+        }
+        return user;
     }
 
     protected int getUserCount(String email){
@@ -48,9 +70,14 @@ public class UserLoginDataSource {
     }
 
     protected void updateFlagForUser(String email, int flag){
-        if(!(flag == 0 || flag == 1)){return;}
+        Log.d(TAG, "updateFlagForUser flag is " + flag);
+        if(flag != 0 && flag != 1){
+            Log.d(TAG, "updateFlagForUser bad flag passed " + flag);
+            return;
+        }
         String sql = "update " + UserLoginDataHelper.TABLE_NAME + " set " + UserLoginDataHelper.is_logged_on
                 + " = " + flag + " where " + UserLoginDataHelper.user_email + " = '" + email + "';";
+        db.execSQL(sql);
     }
 
     //check to ensure that logged in flag is only one.
@@ -71,16 +98,17 @@ public class UserLoginDataSource {
     }
 
     protected void insertUserNameAndPassword(String email, String pw){
-
+        Log.d(TAG, "insertUserNameAndPassword in method");
         if(getUserCount(email) < 1) {
             ContentValues values = new ContentValues();
 
             values.put(UserLoginDataHelper.user_email, email);
             values.put(UserLoginDataHelper.user_pw, pw);
-            values.put(UserLoginDataHelper.last_login_dttm, "sysdate");
+            values.put(UserLoginDataHelper.last_login_dttm, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             values.put(UserLoginDataHelper.is_logged_on, 1);
 
-            db.insert(UserLoginDataHelper.TABLE_NAME, null, values);
+            long success = db.insert(UserLoginDataHelper.TABLE_NAME, null, values);
+            Log.d(TAG, "insertUserNameAndPassword Success code: " + success);
         }
         else{
             updateFlagForUser(email,1);
