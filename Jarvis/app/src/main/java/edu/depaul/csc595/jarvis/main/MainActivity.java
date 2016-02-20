@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-
         //drawer.
         toggle.syncState();
 
@@ -67,17 +67,18 @@ public class MainActivity extends AppCompatActivity
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
+        tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-
+        Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
             tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
             tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+            //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
             tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());

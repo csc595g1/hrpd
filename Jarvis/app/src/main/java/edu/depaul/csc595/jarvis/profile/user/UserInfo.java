@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.sql.SQLDataException;
 import java.util.ArrayList;
@@ -22,6 +25,9 @@ public final class UserInfo {
     private String email;
     private User user;
     private String authMessage;
+    private GoogleSignInAccount googleAccount;
+    private boolean isGoogleLoggedIn = false;
+    private ImageView googleImageView;
 
     public String getFirstName() {
         return firstName;
@@ -76,6 +82,34 @@ public final class UserInfo {
         isLoggedIn = status;
     }
 
+    public void signInWithGoogle(GoogleSignInAccount googleAccount,Context context){
+        //check if authed through Jarvis Auth
+        if(this.isLoggedIn){
+            this.logOutUser(context);
+        }
+
+        this.googleAccount = googleAccount;
+        this.isGoogleLoggedIn = true;
+    }
+
+    public void signOutWithGoogle(){
+        this.googleAccount = null;
+        this.googleImageView = null;
+        this.isGoogleLoggedIn = false;
+    }
+
+    public void setGoogleProfileImage(ImageView image){
+        googleImageView = image;
+    }
+
+    public ImageView getGoogleImageView(){
+        return googleImageView;
+    }
+
+    public GoogleSignInAccount getGoogleAccount(){
+        return googleAccount;
+    }
+
     //will return null if no user logged in
     public User getUserForSplash(Context context){
         UserLoginDataSource db = new UserLoginDataSource(context);
@@ -89,6 +123,8 @@ public final class UserInfo {
             return null;
         }
     }
+
+
 
     public boolean getIsLoggedIn(){return isLoggedIn;}
 
