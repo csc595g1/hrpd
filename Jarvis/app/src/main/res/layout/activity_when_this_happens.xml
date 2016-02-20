@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rb_smoke"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
         android:paddingLeft="15dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"/>
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rb_flame"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
         android:paddingLeft="15dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"/>
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/rb_moisture"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
         android:paddingLeft="15dp"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"/>
@@ -44,11 +47,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/light_gray"/>
-<Button
-    android:id="@+id/button_done"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Done"/>
+    <Button
+        android:id="@+id/button_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done"/>
 
 
 
