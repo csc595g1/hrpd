@@ -38,4 +38,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.3.0'
     compile 'com.google.android.gms:play-services-auth:8.3.0'
     compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
+    compile "com.google.android.gms:play-services:8.3.0"
+
 }
