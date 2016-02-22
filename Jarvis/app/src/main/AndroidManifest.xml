@@ -11,6 +11,9 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="edu.depaul.csc595.jarvis.permission.C2D_MESSAGE" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -94,6 +97,25 @@
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".reminders.ReminderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".reminders.CustomReminderActivity"
+            android:label="Custom Reminder"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".reminders.ui.activities.CreateEditActivity"></activity>
+        <activity android:name=".reminders.ui.activities.ViewActivity"></activity>
+        <activity android:name=".reminders.ui.activities.PreferenceActivity"></activity>
+        <receiver android:name=".reminders.receivers.AlarmReceiver" />
+
+        <receiver android:name=".reminders.receivers.BootReceiver" />
+
+        <receiver android:name=".reminders.receivers.SnoozeActionReceiver" />
+
+        <receiver android:name=".reminders.receivers.DismissReceiver" />
+
+        <receiver
+            android:name=".reminders.receivers.BootReceiver" />
+
 
         <!-- [START gcm_receiver] -->
         <receiver

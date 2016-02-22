@@ -1,6 +1,8 @@
 package edu.depaul.csc595.jarvis.reminders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,12 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import android.support.v4.app.Fragment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,8 @@ import edu.depaul.csc595.jarvis.R;
  */
 public class ReminderActivity extends AppCompatActivity
 {
+    Button linkForCustom;
+
     String[] country = new String[] {
             "Advait",
             "A",
@@ -57,6 +62,17 @@ public class ReminderActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder);
+
+        linkForCustom = (Button) findViewById(R.id.go_to_custom_reminder);
+        linkForCustom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent go = new Intent(getApplicationContext(),CustomReminderActivity.class);
+                startActivity(go);
+
+            }
+        });
 
         if(savedInstanceState!=null){
             status = savedInstanceState.getBooleanArray("status");
