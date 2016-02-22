@@ -14,15 +14,15 @@ import java.io.IOException;
 import edu.depaul.csc595.jarvis.R;
 
 /**
- * RegistrationIntentService.java
+ * TokenIntentService.java
  * Jarvis
  */
-public class RegistrationIntentService extends IntentService {
-    private static final String TAG = "RegIntentService";
-    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+public class TokenIntentService extends IntentService {
+    private static final String TAG = "TokenIntentService";
     public static final String GCM_TOKEN = "gcmToken";
+    public static final String GCM_OLD_TOKEN = "gcmOldToken";
 
-    public RegistrationIntentService() {
+    public TokenIntentService() {
         super(TAG);
     }
 
@@ -43,11 +43,7 @@ public class RegistrationIntentService extends IntentService {
             Log.d(TAG, "GCM Registration Token: " + token);
         } catch (IOException e) {
             e.printStackTrace();
-
-            Log.d(TAG, "Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
-            sharedPreferences.edit().putBoolean(SENT_TOKEN_TO_SERVER, false).apply();
+            Log.d(TAG, "Failed to generate token", e);
         }
         // Save token
         sharedPreferences.edit().putString(GCM_TOKEN, token).apply();
