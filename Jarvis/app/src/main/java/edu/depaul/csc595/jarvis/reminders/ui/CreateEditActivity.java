@@ -73,6 +73,15 @@ public class CreateEditActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
+        setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
+        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mColourNames = getResources().getStringArray(R.array.colour_names_array);
+        mColoursArray = getResources().getStringArray(R.array.colours_array);
+
+        mCalendar = Calendar.getInstance();
+        mId = getIntent().getIntExtra("NOTIFICATION_ID", 0);
 
 
 
