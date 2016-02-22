@@ -86,9 +86,9 @@ public class ViewActivity extends AppCompatActivity {
         // Setup the shared element transitions for this activity
         setupTransitions();
 
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
+        //setSupportActionBar(mToolbar);
+        //mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        //if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Add drawable shadow and adjust layout if build version is before lollipop
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {

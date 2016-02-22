@@ -22,6 +22,8 @@ import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -101,9 +103,9 @@ public class CreateEditActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
-        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
+        //setSupportActionBar(mToolbar);
+        //mToolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
+        //if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
 
         mColourNames = getResources().getStringArray(R.array.colour_names_array);
         mColoursArray = getResources().getStringArray(R.array.colours_array);
@@ -120,9 +122,10 @@ public class CreateEditActivity extends AppCompatActivity
 
     }
 
-    public void assignDefaultValues() {
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(getResources().getString(R.string.create_notification));
+    public void assignDefaultValues()
+    {
+        //if (getSupportActionBar() != null)
+            //getSupportActionBar().setTitle(getResources().getString(R.string.create_notification));
         DatabaseHelper database = DatabaseHelper.getInstance(this);
         mId = database.getLastNotificationId() + 1;
         database.close();
@@ -141,8 +144,8 @@ public class CreateEditActivity extends AppCompatActivity
         // Prevent keyboard from opening automatically
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        if (getSupportActionBar() != null)
-            getSupportActionBar().setTitle(getResources().getString(R.string.edit_notification));
+        //if (getSupportActionBar() != null)
+          //  getSupportActionBar().setTitle(getResources().getString(R.string.edit_notification));
         DatabaseHelper database = DatabaseHelper.getInstance(this);
         Reminder reminder = database.getNotification(mId);
         database.close();
@@ -496,5 +499,24 @@ public class CreateEditActivity extends AppCompatActivity
             super.getItemOffsets(outRect, view, parent, state);
             outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_custom_reminder_create, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_save:
+                validateInput();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
