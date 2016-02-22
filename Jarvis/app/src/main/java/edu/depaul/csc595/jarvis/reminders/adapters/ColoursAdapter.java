@@ -13,7 +13,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.reminders.ui.CreateEditActivity;
+import edu.depaul.csc595.jarvis.reminders.ui.activities.CreateEditActivity;
 
 /**
  * Created by Advait on 18-02-2016.

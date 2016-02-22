@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.reminders.ui;
+package edu.depaul.csc595.jarvis.reminders.ui.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+
 import android.os.Bundle;
 import android.support.annotation.DimenRes;
 import android.support.annotation.NonNull;
@@ -39,6 +40,11 @@ import edu.depaul.csc595.jarvis.reminders.adapters.IconsAdapter;
 import edu.depaul.csc595.jarvis.reminders.database.DatabaseHelper;
 import edu.depaul.csc595.jarvis.reminders.models.Reminder;
 import edu.depaul.csc595.jarvis.reminders.receivers.AlarmReceiver;
+import edu.depaul.csc595.jarvis.reminders.utils.AlarmUtil;
+import edu.depaul.csc595.jarvis.reminders.utils.AnimationUtil;
+import edu.depaul.csc595.jarvis.reminders.utils.DateAndTimeUtil;
+import edu.depaul.csc595.jarvis.reminders.models.Icon;
+
 
 /**
  * Created by Advait on 18-02-2016.
@@ -228,7 +234,7 @@ public class CreateEditActivity extends AppCompatActivity
     public void iconSelector(View view) {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.create_coordinator);
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.view_dialog_icons, coordinatorLayout, false);
+        View dialogView = inflater.inflate(R.layout.activity_custom_reminder_view_dialog_icons, coordinatorLayout, false);
 
         RecyclerView recyclerView = (RecyclerView) dialogView.findViewById(R.id.icons_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), getResources().getInteger(R.integer.grid_columns)));
@@ -236,7 +242,7 @@ public class CreateEditActivity extends AppCompatActivity
         recyclerView.addItemDecoration(itemDecoration);
 
         DatabaseHelper database = DatabaseHelper.getInstance(this);
-        recyclerView.setAdapter(new IconsAdapter(this, R.layout.item_icon_grid, database.getIconList()));
+        recyclerView.setAdapter(new IconsAdapter(this, R.layout.activity_custom_reminder_item_icon_grid, database.getIconList()));
         database.close();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Dialog);
@@ -263,12 +269,12 @@ public class CreateEditActivity extends AppCompatActivity
     public void colourSelector(View view) {
         CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.create_coordinator);
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.view_dialog_colour, coordinatorLayout, false);
+        View dialogView = inflater.inflate(R.layout.activity_custom_reminder_view_dialog_color, coordinatorLayout, false);
 
         RecyclerView recyclerView = (RecyclerView) dialogView.findViewById(R.id.colours_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new ColoursAdapter(this, R.layout.item_colour_list, mColoursArray, mColourNames));
+        recyclerView.setAdapter(new ColoursAdapter(this, R.layout.activity_custom_reminder_item_color_list, mColoursArray, mColourNames));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Dialog);
         builder.setTitle(getResources().getString(R.string.select_colour));

@@ -15,7 +15,7 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.reminders.enums.RemindersType;
-import edu.depaul.csc595.jarvis.reminders.utils.TabFragment;
+import edu.depaul.csc595.jarvis.reminders.ui.fragments.TabFragment;
 
 /**
  * Created by Advait on 18-02-2016.
@@ -45,7 +45,7 @@ public class ViewPageAdapter extends FragmentPagerAdapter implements PagerSlidin
 
     @Override
     public View getCustomTabView(ViewGroup parent, int position) {
-        FrameLayout customLayout = (FrameLayout) LayoutInflater.from(mContext).inflate(R.layout.custom_tab, parent, false);
+        FrameLayout customLayout = (FrameLayout) LayoutInflater.from(mContext).inflate(R.layout.activity_custom_reminder_custom_tab, parent, false);
         ((ImageView) customLayout.findViewById(R.id.image)).setImageResource(ICONS[position]);
         return customLayout;
     }

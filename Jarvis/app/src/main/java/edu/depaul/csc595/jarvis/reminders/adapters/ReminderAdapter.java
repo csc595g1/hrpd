@@ -26,7 +26,9 @@ import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.reminders.interfaces.RecyclerCallback;
 import edu.depaul.csc595.jarvis.reminders.models.Reminder;
-import edu.depaul.csc595.jarvis.reminders.ui.ViewActivity;
+import edu.depaul.csc595.jarvis.reminders.ui.activities.ViewActivity;
+import edu.depaul.csc595.jarvis.reminders.utils.DateAndTimeUtil;
+
 
 /**
  * Created by Advait on 18-02-2016.

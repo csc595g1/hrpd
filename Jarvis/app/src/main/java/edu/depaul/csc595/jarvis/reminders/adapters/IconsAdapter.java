@@ -1,7 +1,7 @@
 package edu.depaul.csc595.jarvis.reminders.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Icon;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.reminders.ui.CreateEditActivity;
+import edu.depaul.csc595.jarvis.reminders.ui.activities.CreateEditActivity;
+import edu.depaul.csc595.jarvis.reminders.models.Icon;
 
 /**
  * Created by Advait on 18-02-2016.
