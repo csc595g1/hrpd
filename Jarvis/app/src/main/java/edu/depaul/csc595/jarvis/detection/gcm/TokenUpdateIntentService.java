@@ -20,7 +20,7 @@ import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
  */
 public class TokenUpdateIntentService extends IntentService {
     private static final String TAG = "TokenUpdateIntentService";
-    public static final String SENT_UPDATEDTOKEN_TO_SERVER = "sentTokenToServer";
+    public static final String SENT_UPDATED_TOKEN_TO_SERVER = "sentTokenToServer";
 
     public TokenUpdateIntentService() {
         super(TAG);
@@ -48,13 +48,13 @@ public class TokenUpdateIntentService extends IntentService {
             Log.d(TAG, "Failed to complete token refresh", e);
             // If an exception happens while fetching the new token or updating our registration data
             // on a third-party server, this ensures that we'll attempt the update at a later time.
-            sharedPreferences.edit().putBoolean(SENT_UPDATEDTOKEN_TO_SERVER, false).apply();
+            sharedPreferences.edit().putBoolean(SENT_UPDATED_TOKEN_TO_SERVER, false).apply();
         }
         // Overwrite GCM_TOKEN.
         sharedPreferences.edit().putString(TokenIntentService.GCM_TOKEN, token).apply();
     }
     private void sendUpdatedTokenToServer(String token) {
         String webServiceUrl = "https://detectionservices.herokuapp.com/update_gcm_token";
-        new RegisterDeviceToken(TokenUpdateIntentService.this).execute("", "updatedtoken", webServiceUrl);
+        new RegisterDeviceToken(TokenUpdateIntentService.this).execute("", token, webServiceUrl);
     }
 }
