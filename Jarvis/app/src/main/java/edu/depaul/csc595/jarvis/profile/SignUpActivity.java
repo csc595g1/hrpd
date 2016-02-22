@@ -1,9 +1,8 @@
 package edu.depaul.csc595.jarvis.profile;
 
 import android.app.ProgressDialog;
-import android.content.pm.PackageInstaller;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.profile.user.HerokuCreateAccount;
+import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -76,7 +78,21 @@ public class SignUpActivity extends AppCompatActivity {
                         mProgressDialog.show();
 
                         HerokuCreateAccount herokuCreateAccount = new HerokuCreateAccount();
-                        herokuCreateAccount.execute(SignUpActivity.this,mProgressDialog,getBaseContext());
+                        herokuCreateAccount.execute(SignUpActivity.this, mProgressDialog, getBaseContext());
+
+                        // Fetch the newly created user and his email.
+                        User currentUser = userInfo.getCredentials();
+                        String email_address = currentUser.getEmail();
+
+                        // Fetch the device token.
+                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignUpActivity.this);
+                        String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
+
+                        // Set url for the web service
+                        String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
+
+                        // Register this device(token) on the server.
+                        new RegisterDeviceToken(SignUpActivity.this).execute(email_address, token, webServiceUrl);
                     }
                     else{
                         Toast.makeText(getBaseContext(),"Email confirmation does not match!",Toast.LENGTH_LONG).show();

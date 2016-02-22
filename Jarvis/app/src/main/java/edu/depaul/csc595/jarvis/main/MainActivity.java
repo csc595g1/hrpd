@@ -14,10 +14,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenUpdateIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private TextView tv_email;
     private TextView tv_name;
     private TextView tv_logout;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +75,16 @@ public class MainActivity extends AppCompatActivity
         //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
         tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+
+
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, TokenIntentService.class);
+            startService(intent);
+        }
+        else {
+            Toast.makeText(MainActivity.this, "No compatible GooglePlayServices APK found!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -202,6 +219,27 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
         return true;
     }
 }
