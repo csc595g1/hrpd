@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +21,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.detection.gcm.RegistrationIntentService;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenUpdateIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
+            Intent intent = new Intent(this, TokenIntentService.class);
             startService(intent);
         }
         else {

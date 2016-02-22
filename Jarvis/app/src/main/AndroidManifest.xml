@@ -128,7 +128,12 @@
         <!-- [END instanceId_listener] -->
 
         <service
-            android:name="edu.depaul.csc595.jarvis.detection.gcm.RegistrationIntentService"
+            android:name=".detection.gcm.TokenIntentService"
+            android:exported="false">
+        </service>
+
+        <service
+            android:name=".detection.gcm.TokenUpdateIntentService"
             android:exported="false">
         </service>
 
