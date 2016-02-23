@@ -40,38 +40,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-//        User user;
-//        UserInfo userInfo = UserInfo.getInstance();
-//        UserLoginDataSource userDB;
-//        HerokuLogin hlogin;
         Log.d(TAG, "onCreate: in splash " );
-        //try silent google auth here
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestEmail()
-//                .requestProfile()
-//                .build();
-//        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
-//        OptionalPendingResult<GoogleSignInResult> pendingResult =
-//                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-//        if(pendingResult.isDone()){
-//            GoogleSignInAccount account = pendingResult.get().getSignInAccount();
-//            doGoogleAuth(account);
-//            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//        else{
-//            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-//                @Override
-//                public void onResult(GoogleSignInResult googleSignInResult) {
-//                    GoogleSignInAccount account = googleSignInResult.getSignInAccount();
-//                    doGoogleAuth(account);
-//                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-//            });
-//        }
     }
 
     @Override
