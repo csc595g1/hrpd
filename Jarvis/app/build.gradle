@@ -24,6 +24,8 @@ android {
         main.res.srcDirs += 'src/main/res/drawable/radio'
         main.res.srcDirs += 'src/main/res/layout/menus'
         main.res.srcDirs += 'src/main/res/layout/templates'
+        main.res.srcDirs += 'src/main/res/layout/detection'
+
 
 
     }

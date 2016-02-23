@@ -31,6 +31,8 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
+import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
+
 
 
 
@@ -210,6 +212,7 @@ public class MainActivity extends AppCompatActivity
                 goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
                 break;
             case R.id.nav_detection:
+                goToActivity = new Intent(getApplicationContext(), DetectionBaseActivity.class);
                 break;
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);

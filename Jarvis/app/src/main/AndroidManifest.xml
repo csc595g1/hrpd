@@ -105,6 +105,10 @@
         <activity android:name=".reminders.ui.activities.CreateEditActivity"></activity>
         <activity android:name=".reminders.ui.activities.ViewActivity"></activity>
         <activity android:name=".reminders.ui.activities.PreferenceActivity"></activity>
+        <activity
+            android:name=".detection.DetectionBaseActivity"
+            android:label="@string/title_activity_detection_base" >
+        </activity>
         <receiver android:name=".reminders.receivers.AlarmReceiver" />
 
         <receiver android:name=".reminders.receivers.BootReceiver" />
@@ -158,6 +162,8 @@
             android:name=".detection.gcm.TokenUpdateIntentService"
             android:exported="false">
         </service>
+
+
 
     </application>
 

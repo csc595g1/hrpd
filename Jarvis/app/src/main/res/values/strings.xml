@@ -97,6 +97,7 @@
     <string name="title_activity_rewards">RewardsActivity</string>
     <string name="title_activity_appliances">AppliancesActivity</string>
     <string name="title_activity_reminder">ReminderActivity</string>
+    <string name="title_activity_detection_base">Detection</string>
     <string name="section_format">Your home section: %1$d</string>
 
     <string name="nav_group">CSC595 Group1</string>
