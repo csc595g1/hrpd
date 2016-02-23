@@ -3,7 +3,9 @@ package edu.depaul.csc595.jarvis.detection;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +52,12 @@ public class DetectionBaseActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_detection);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager(), DetectionBaseActivity.this));
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
