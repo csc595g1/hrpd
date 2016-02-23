@@ -78,46 +78,55 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     protected void onStart(){
         super.onStart();
         Log.d(TAG, "onCreate: in onStart ");
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestProfile()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
-        OptionalPendingResult<GoogleSignInResult> pendingResult =
-                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if(pendingResult.isDone()){
-            GoogleSignInAccount account = pendingResult.get().getSignInAccount();
-            if(null == account.getEmail()){
+        //try heroku auth first then google.
+        User user = UserInfo.getInstance().getUserForSplash(this.getBaseContext());
+        //check if null
+        if (user != null) {
+            Log.d(TAG, "onCreate user is not null");
+            //use credentials and send to server for auth
+            HerokuLogin hlogin = new HerokuLogin();
+            hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
+        }
+        else {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .requestProfile()
+                    .build();
+            mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+            OptionalPendingResult<GoogleSignInResult> pendingResult =
+                    Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+            if (pendingResult.isDone()) {
+                GoogleSignInAccount account = pendingResult.get().getSignInAccount();
+                if (null == account.getEmail()) {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                doGoogleAuth(account);
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            }
-            doGoogleAuth(account);
-            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    GoogleSignInAccount account = googleSignInResult.getSignInAccount();
-                    //if(account.getDisplayName() == null){
-                    try{
-                        String testNull = account.getDisplayName();
-                    }
-                    catch(NullPointerException e) {
+            } else {
+                pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                    @Override
+                    public void onResult(GoogleSignInResult googleSignInResult) {
+                        GoogleSignInAccount account = googleSignInResult.getSignInAccount();
+                        //if(account.getDisplayName() == null){
+                        try {
+                            String testNull = account.getDisplayName();
+                        } catch (NullPointerException e) {
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        //}
+                        doGoogleAuth(account);
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
-                    //}
-                    doGoogleAuth(account);
-                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+                });
+            }
         }
     }
 
