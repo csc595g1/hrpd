@@ -112,10 +112,15 @@ public class MainActivity extends AppCompatActivity
             });
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
-            tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
-            tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
-            tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
-
+            //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
+            try {
+                tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+                tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
+            }
+            catch(NullPointerException e){
+                tv_logout.setText(" ");
+            }
         }
         else{
             tv_logout.setText(" ");
