@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
             tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-            iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
+            //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
             tv_logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -218,6 +218,16 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            case R.id.nav_header_main_logout:
+                if(UserInfo.getInstance().getIsLoggedIn()) {
+                    UserInfo.getInstance().logOutUser(MainActivity.this);
+                    this.recreate();
+                }
+                else if(UserInfo.getInstance().isGoogleLoggedIn()){
+                    UserInfo.getInstance().signOutWithGoogle();
+                    this.recreate();
+                }
                 break;
             default:
                 break;
