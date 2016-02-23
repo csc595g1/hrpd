@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
             tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-            iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
+            //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
             tv_logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
