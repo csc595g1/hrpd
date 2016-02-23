@@ -17,6 +17,7 @@ import android.widget.TextView;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
@@ -63,19 +64,17 @@ public class DetectionBaseActivity extends AppCompatActivity
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
         }
+        else if(UserInfo.getInstance().isGoogleLoggedIn()){
+            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+            tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+            tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+        }
     }
 
     @Override
     protected void onRestart(){
         super.onRestart();
-
-        //if user is logged in, set name, email and enable log out
-        if(UserInfo.getInstance().getIsLoggedIn()){
-            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-        }
     }
 
     @Override
@@ -132,7 +131,12 @@ public class DetectionBaseActivity extends AppCompatActivity
                 goToActivity = new Intent(getApplicationContext(), AppliancesActivity.class);
                 break;
             case R.id.nav_profile:
-                goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                if(UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+                    goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                }
+                else {
+                    goToActivity = new Intent(getApplicationContext(), LogInActivity.class);
+                }
                 break;
             case R.id.nav_reminder:
                 goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
