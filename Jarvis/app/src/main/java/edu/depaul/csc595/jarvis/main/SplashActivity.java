@@ -117,6 +117,10 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                         try {
                             String testNull = account.getDisplayName();
                             testNull = account.getEmail();
+                            doGoogleAuth(account);
+                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } catch (NullPointerException e) {
                             UserInfo.getInstance().signOutWithGoogle();
                             UserInfo.getInstance().setLoggedIn(false);
@@ -125,10 +129,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                             finish();
                         }
                         //}
-                        doGoogleAuth(account);
-                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
                     }
                 });
             }

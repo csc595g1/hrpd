@@ -130,9 +130,12 @@ public final class UserInfo {
             db.open();
             User user = db.getCurrentUserIfExists();
             db.close();
-            return user;
+            if(!user.getEmail().equals(" ")) {
+                return user;
+            }
+            else{return null;}
         }
-        catch(SQLDataException e){
+        catch(SQLDataException | NullPointerException e){
             return null;
         }
     }
