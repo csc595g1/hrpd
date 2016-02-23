@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     private TextView tv_email;
     private TextView tv_name;
     private TextView tv_logout;
+    private ImageView iv_image;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 
@@ -75,7 +77,9 @@ public class MainActivity extends AppCompatActivity
         //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
         tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-
+        tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+        tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+        iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
@@ -93,19 +97,25 @@ public class MainActivity extends AppCompatActivity
         Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
-            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+//            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+//            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
             tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-
+            iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
             tv_logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     UserInfo.getInstance().logOutUser(MainActivity.this);
                 }
             });
+        }
+        else if(UserInfo.getInstance().isGoogleLoggedIn()){
+            tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+            tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+            tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
+
         }
         else{
             tv_logout.setText(" ");
@@ -200,7 +210,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_profile) {
             Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
-            if(user.getIsLoggedIn()) {
+            if(user.getIsLoggedIn() || user.isGoogleLoggedIn()) {
                 startActivity(goToProfile);
             }
             else startActivity(new Intent(getApplicationContext(), LogInActivity.class));

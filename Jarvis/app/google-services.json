@@ -14,7 +14,20 @@
           "package_name": "edu.depaul.csc595.jarvis"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "356812464570-hj4h6q8tsd5kefcgn49lu5eb3anbmtho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.depaul.csc595.jarvis",
+            "certificate_hash": "410D06757456DD05D3703E8FAF3936257CA4D4DB"
+          }
+        },
+        {
+          "client_id": "356812464570-af5oh6m0ht3fj8i76qbqd60il0pg6na0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [],
       "services": {
         "analytics_service": {
@@ -29,7 +42,7 @@
           "other_platform_oauth_client": []
         },
         "google_signin_service": {
-          "status": 1
+          "status": 2
         },
         "ads_service": {
           "status": 1

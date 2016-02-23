@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.main;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,14 +11,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.HerokuLogin;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.profile.user.UserLoginDataSource;
 
-public class SplashActivity extends AppCompatActivity {
-final String TAG = "Splash";
+public class SplashActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+    private final String TAG = "Splash";
+    private GoogleApiClient mGoogleApiClient;
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -28,25 +41,61 @@ final String TAG = "Splash";
         UserLoginDataSource userDB;
         HerokuLogin hlogin;
         Log.d(TAG, "onCreate: in splash " );
-        //check if user info exists and flag is 1.
-        //if data exists, attempt to log into server and auth
-        //if not successful, continue to main activity
-        user = userInfo.getUserForSplash(this.getBaseContext());
-        //check if null
-        if(user != null){
-            Log.d(TAG, "onCreate user is not null");
-            //use credentials and send to server for auth
-            hlogin = new HerokuLogin();
-            hlogin.execute(this,this.getBaseContext(),user.getEmail(),user.getPw());
-        }
-        else{
-            Log.d(TAG, "onCreate user is null");
+        //try silent google auth here
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestProfile()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,gso).build();
+        OptionalPendingResult<GoogleSignInResult> pendingResult =
+                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        if(pendingResult.isDone()){
+            GoogleSignInAccount account = pendingResult.get().getSignInAccount();
+            doGoogleAuth(account);
             Intent intent = new Intent(SplashActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
+        else{
+            pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+                    GoogleSignInAccount account = googleSignInResult.getSignInAccount();
+                    doGoogleAuth(account);
+                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+        //check if user info exists and flag is 1.
+        //if data exists, attempt to log into server and auth
+        //if not successful, continue to main activity
+//        user = userInfo.getUserForSplash(this.getBaseContext());
+//        //check if null
+//        if(user != null){
+//            Log.d(TAG, "onCreate user is not null");
+//            //use credentials and send to server for auth
+//            hlogin = new HerokuLogin();
+//            hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
+//        }
+//        else{
+//            Log.d(TAG, "onCreate user is null");
+//            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
     }
 
+    private void doGoogleAuth(GoogleSignInAccount account){
+        UserInfo.getInstance().signInWithGoogle(account, getBaseContext());
+        //dialog = new ProgressDialog(SplashActivity.this);
+        //dialog.setMessage("Loading...");
+        //dialog.setTitle("Loading");
+        //dialog.show();
+        //GoogleImage image = new GoogleImage();
+        //image.execute(dialog);
+    }
 
 //    @Override
 //    protected void onStart(){
@@ -93,6 +142,28 @@ final String TAG = "Splash";
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
+        // be available.
+        Log.d(TAG, "onConnectionFailed:" + connectionResult);
+        //try jarvis auth
+        User user = UserInfo.getInstance().getUserForSplash(this.getBaseContext());
+        //check if null
+        if(user != null){
+            Log.d(TAG, "onCreate user is not null");
+            //use credentials and send to server for auth
+            HerokuLogin hlogin = new HerokuLogin();
+            hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
+        }
+        else{
+            Log.d(TAG, "onCreate user is null");
+            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 }

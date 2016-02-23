@@ -3,7 +3,9 @@ package edu.depaul.csc595.jarvis.profile.user;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -16,6 +18,9 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
+
+import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
+import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.SignUpActivity;
 
@@ -132,6 +137,20 @@ public class HerokuCreateAccount extends AsyncTask<Object, Void, Void> {
         }
         m_ProgressDialog.dismiss();
         if(userInfo.getIsLoggedIn()){
+            // Fetch the newly created user and his email.
+            User currentUser = userInfo.getCredentials();
+            String email_address = currentUser.getEmail();
+
+            // Fetch the device token.
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(signUpActivity);
+            String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
+
+            // Set url for the web service
+            String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
+
+            // Register this device(token) on the server.
+            new RegisterDeviceToken(signUpActivity).execute(email_address, token, webServiceUrl);
+
             Intent intent = new Intent(signUpActivity.getBaseContext(),ProfileActivity.class);
             signUpActivity.startActivity(intent);
         }
