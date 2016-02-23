@@ -192,42 +192,35 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        UserInfo user = UserInfo.getInstance();
+        Intent goToActivity = null;
+        switch (id) {
+            case R.id.nav_home:
+                goToActivity = new Intent(getApplicationContext(), MainActivity.class);
+                break;
+            case R.id.nav_rewards:
+                goToActivity = new Intent(getApplicationContext(), RewardsActivity.class);
+                break;
+            case R.id.nav_appliances:
+                goToActivity = new Intent(getApplicationContext(), AppliancesActivity.class);
+                break;
+            case R.id.nav_profile:
+                goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                break;
+            case R.id.nav_reminder:
+                goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
+                break;
+            case R.id.nav_detection:
+                break;
+            case R.id.nav_settings:
+                goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            default:
+                break;
+        }
 
-        if (id == R.id.nav_home) {
-            Intent goToHome = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(goToHome);
-        }
-        else if (id == R.id.nav_prevention) {
-            Intent goToPrevention = new Intent(getApplicationContext(), PreventionActivity.class);
-            startActivity(goToPrevention);
-        }
-        else if (id == R.id.nav_rewards) {
-            Intent goToRewards = new Intent(this, RewardsActivity.class);
-            startActivity(goToRewards);
-
-        }
-        else if (id == R.id.nav_appliances) {
-            Intent goToAppliances = new Intent(getApplicationContext(), AppliancesActivity.class);
-            startActivity(goToAppliances);
-
-        }
-        else if (id == R.id.nav_profile) {
-            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
-            if(user.getIsLoggedIn() || user.isGoogleLoggedIn()) {
-                startActivity(goToProfile);
-            }
-            else startActivity(new Intent(getApplicationContext(), LogInActivity.class));
-        }
-        else if (id == R.id.nav_reminder) {
-            Intent goToReminder = new Intent(getApplicationContext(), ReminderActivity.class);
-            startActivity(goToReminder);
-
-        }
-        else if (id == R.id.nav_settings) {
-            Intent goToSetting = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(goToSetting);
-
+        if (goToActivity != null){
+            startActivity(goToActivity);
+            overridePendingTransition(0, 0);
         }
 
 
@@ -235,7 +228,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     /**
      * Check the device to make sure it has the Google Play Services APK. If
      * it doesn't, display a dialog that allows users to download the APK from
