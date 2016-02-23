@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v) {
                     UserInfo.getInstance().logOutUser(MainActivity.this);
+                    MainActivity.this.recreate();
                 }
             });
         }
@@ -117,6 +118,13 @@ public class MainActivity extends AppCompatActivity
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
                 tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
+                tv_logout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UserInfo.getInstance().signOutWithGoogle();
+                        MainActivity.this.recreate();
+                    }
+                });
             }
             catch(NullPointerException e){
                 tv_logout.setText(" ");
@@ -131,25 +139,26 @@ public class MainActivity extends AppCompatActivity
     protected void onRestart(){
         super.onRestart();
 
-        //if user is logged in, set name, email and enable log out
-        if(UserInfo.getInstance().getIsLoggedIn()){
-            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
-            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-
-            tv_logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserInfo.getInstance().logOutUser(MainActivity.this);
-                }
-            });
-        }
-        else{
-            tv_logout.setText(" ");
-        }
+//        //if user is logged in, set name, email and enable log out
+//        if(UserInfo.getInstance().getIsLoggedIn()){
+//            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+//            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+//            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+//            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
+//            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+//            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+//
+//            tv_logout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    UserInfo.getInstance().logOutUser(MainActivity.this);
+//                    MainActivity.this.recreate();
+//                }
+//            });
+//        }
+//        else{
+//            tv_logout.setText(" ");
+//        }
     }
 
     @Override

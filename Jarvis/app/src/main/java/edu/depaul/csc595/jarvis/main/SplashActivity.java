@@ -88,6 +88,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
             hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
         }
         else {
+            UserInfo.getInstance().setLoggedIn(false);
             GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
                     .requestProfile()
@@ -110,6 +111,7 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                 pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
                     @Override
                     public void onResult(GoogleSignInResult googleSignInResult) {
+                        UserInfo.getInstance().setLoggedIn(false);
                         GoogleSignInAccount account = googleSignInResult.getSignInAccount();
                         //if(account.getDisplayName() == null){
                         try {
