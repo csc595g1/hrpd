@@ -203,10 +203,12 @@ public final class UserInfo {
                 Log.d(TAG, "insertLocalInformationForLogin auth = " + this.isLoggedIn);
                 if(this.isLoggedIn){
                     db.updateFlagForUser(this.email,1);
+                    db.close();
                     return;
                 }
                 else{
                     db.updateFlagForUser(this.email,0);
+                    db.close();
                     return;
                 }
             }

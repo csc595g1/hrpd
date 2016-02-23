@@ -114,7 +114,10 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                         //if(account.getDisplayName() == null){
                         try {
                             String testNull = account.getDisplayName();
+                            testNull = account.getEmail();
                         } catch (NullPointerException e) {
+                            UserInfo.getInstance().signOutWithGoogle();
+                            UserInfo.getInstance().setLoggedIn(false);
                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
@@ -140,30 +143,6 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
         //image.execute(dialog);
     }
 
-//    @Override
-//    protected void onStart(){
-//        super.onStart();
-//        User user;
-//        UserInfo userInfo = UserInfo.getInstance();
-//        UserLoginDataSource userDB;
-//        HerokuLogin hlogin;
-//
-//        //check if user info exists and flag is 1.
-//        //if data exists, attempt to log into server and auth
-//        //if not successful, continue to main activity
-//        user = userInfo.getUserForSplash(this.getBaseContext());
-//        //check if null
-//        if(user != null){
-//            //use credentials and send to server for auth
-//            hlogin = new HerokuLogin();
-//            hlogin.execute(this,this.getBaseContext(),user.getEmail(),user.getPw());
-//        }
-//        else{
-//            Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

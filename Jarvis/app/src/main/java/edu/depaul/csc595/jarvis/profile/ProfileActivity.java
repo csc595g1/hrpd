@@ -19,7 +19,11 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.User;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -120,8 +124,19 @@ public class ProfileActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView frag_prof_email = (TextView) rootView.findViewById(R.id.frag_prof_email);
+            TextView frag_prof_name = (TextView) rootView.findViewById(R.id.frag_prof_name);
+            TextView frag_prof_points = (TextView) rootView.findViewById(R.id.frag_prof_points);
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            if(UserInfo.getInstance().getIsLoggedIn()){
+                User user = UserInfo.getInstance().getCredentials();
+                frag_prof_email.setText(user.getEmail());
+                frag_prof_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            }
+            else if(UserInfo.getInstance().isGoogleLoggedIn()){
+                frag_prof_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+                frag_prof_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+            }
             return rootView;
         }
     }
@@ -140,24 +155,24 @@ public class ProfileActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position);// + 1);
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
+                    return "MyProfile";
+                //case 1:
+                //    return "SECTION 2";
+                //case 2:
+                //    return "SECTION 3";
             }
             return null;
         }

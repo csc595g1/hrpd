@@ -121,6 +121,9 @@
     <string name="profile_signin">Sign In</string>
     <string name="profile_signup">Sign Up</string>
     <string name="profile_create_account">Create Account</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_reward_points">Points</string>
     <!-- END: Strings related to Profile -->
 
     <!-- BEGIN: Strings related to Prevention -->
