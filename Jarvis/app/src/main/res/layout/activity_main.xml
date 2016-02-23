@@ -14,12 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include layout="@layout/app_name"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        />
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -32,3 +26,10 @@
         android:background="@color/lightBlue" />
 
 </android.support.v4.widget.DrawerLayout>
+
+
+<!--<include layout="@layout/app_name"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="0dp"-->
+<!--android:layout_weight="2"-->
+    <!--/>-->

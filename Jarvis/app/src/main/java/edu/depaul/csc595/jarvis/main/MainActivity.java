@@ -8,6 +8,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -20,10 +22,15 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenUpdateIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
+import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
@@ -81,6 +88,17 @@ public class MainActivity extends AppCompatActivity
         else {
             Toast.makeText(MainActivity.this, "No compatible GooglePlayServices APK found!", Toast.LENGTH_SHORT).show();
         }
+
+        //cardview implementation
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.activity_main_recycler_view);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.
+        LinearLayoutManager llm = new LinearLayoutManager(MainActivity.this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+
+        MainCardViewAdapter adapter = new MainCardViewAdapter(createCardList());
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -206,7 +224,12 @@ public class MainActivity extends AppCompatActivity
                 goToActivity = new Intent(getApplicationContext(), AppliancesActivity.class);
                 break;
             case R.id.nav_profile:
-                goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                if(UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+                    goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                }
+                else {
+                    goToActivity = new Intent(getApplicationContext(), LogInActivity.class);
+                }
                 break;
             case R.id.nav_reminder:
                 goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
@@ -250,5 +273,26 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         return true;
+    }
+
+    private List<CardViewModel> createCardList(){
+        List<CardViewModel> list = new ArrayList<CardViewModel>();
+        CardViewModel cm = new CardViewModel();
+        cm.title = "MyCommunity";
+        cm.content = "Connect with others to solve common homeowner problems.";
+        list.add(cm);
+
+        cm = new CardViewModel();
+        cm.title = "MyReward";
+        cm.content = "Your balance is currently 0 \n";
+        cm.content += "Check out what you can get!";
+        list.add(cm);
+
+        cm = new CardViewModel();
+        cm.title = "MyConnectHome";
+        cm.content = "Take a peek at your appliances to make sure they're working correctly.";
+        list.add(cm);
+
+        return list;
     }
 }
