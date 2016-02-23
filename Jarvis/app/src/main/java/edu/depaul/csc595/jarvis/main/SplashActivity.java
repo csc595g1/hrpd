@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.ResultCallback;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
+import edu.depaul.csc595.jarvis.profile.user.HerokuGoogleAuth;
 import edu.depaul.csc595.jarvis.profile.user.HerokuLogin;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
@@ -73,6 +74,9 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                     finish();
                 }
                 doGoogleAuth(account);
+                //insert call to heroku to give google email
+                HerokuGoogleAuth heroku = new HerokuGoogleAuth();
+                heroku.execute();
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -87,6 +91,9 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
                             String testNull = account.getDisplayName();
                             testNull = account.getEmail();
                             doGoogleAuth(account);
+                            //insert google auth
+                            HerokuGoogleAuth heroku = new HerokuGoogleAuth();
+                            heroku.execute();
                             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();

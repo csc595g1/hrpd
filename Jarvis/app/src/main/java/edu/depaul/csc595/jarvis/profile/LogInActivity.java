@@ -36,6 +36,7 @@ import java.util.concurrent.TimeoutException;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.adapters.LogInAutoCompleteAdapter;
+import edu.depaul.csc595.jarvis.profile.user.HerokuGoogleAuth;
 import edu.depaul.csc595.jarvis.profile.user.HerokuLogin;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
@@ -161,6 +162,9 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
             UserInfo.getInstance().signInWithGoogle(account,getBaseContext());
+            //send heroku info
+            HerokuGoogleAuth heroku = new HerokuGoogleAuth();
+            heroku.execute();
             Intent intent = new Intent(LogInActivity.this,ProfileActivity.class);
             startActivity(intent);
             finish();
