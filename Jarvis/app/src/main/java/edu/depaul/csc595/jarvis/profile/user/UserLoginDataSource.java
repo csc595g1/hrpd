@@ -76,7 +76,7 @@ public class UserLoginDataSource {
             return;
         }
         String sql = "update " + UserLoginDataHelper.TABLE_NAME + " set " + UserLoginDataHelper.is_logged_on
-                + " = " + flag + " where " + UserLoginDataHelper.user_email + " = '" + email + "';";
+                + " = '" + flag + "' where " + UserLoginDataHelper.user_email + " = '" + email.trim() + "';";
         db.execSQL(sql);
     }
 
