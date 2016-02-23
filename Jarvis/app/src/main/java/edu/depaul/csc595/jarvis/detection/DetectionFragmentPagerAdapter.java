@@ -5,8 +5,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import edu.depaul.csc595.jarvis.PageFragment;
-
 /**
  * Created by uchennafokoye on 2/23/16.
  */

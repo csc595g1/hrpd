@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis;
+package edu.depaul.csc595.jarvis.detection;
 
 /**
  * Created by uchennafokoye on 2/23/16.
@@ -6,10 +6,13 @@ package edu.depaul.csc595.jarvis;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import edu.depaul.csc595.jarvis.R;
 
 // In this case, the fragment displays simple text based on the page
 public class PageFragment extends Fragment {
@@ -35,8 +38,26 @@ public class PageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
-        TextView textView = (TextView) view;
-        textView.setText("Fragment #" + mPage);
+        Fragment fragment = null;
+
+        switch (mPage) {
+            case 1:
+                fragment = new DetectionListFragment();
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+
+        if (fragment != null){
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.frame_layout, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+
         return view;
     }
 }
