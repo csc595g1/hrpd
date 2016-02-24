@@ -149,7 +149,7 @@ public final class UserInfo {
         UserLoginDataSource db = new UserLoginDataSource(context);
         try{
             db.open();
-            db.updateFlagForUser(userName, 0);
+            db.updateFlagForUser(email, 0);
             db.close();
         }
         catch(SQLDataException e){

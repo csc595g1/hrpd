@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".prevention.ehelp.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -52,11 +53,19 @@
             android:label="@string/title_activity_reminder"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- For Prevention -->
         <activity
-            android:name=".prevention.PreventionActivity"
+            android:name=".prevention.homescreen.PreventionActivity"
             android:label="@string/title_activity_prevention"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".prevention.ehelp.main.EHelpMainActivity"
+            android:label="E-Help"
+            android:parentActivityName=".prevention.homescreen.PreventionActivity">
+
+        </activity>
+
         <activity
             android:name=".inventory.AppliancesActivity"
             android:label="@string/title_activity_appliances"
@@ -91,12 +100,7 @@
         </activity>
 
         <!-- This for Allstate Reminder -->
-\
-        <activity
-            android:name=".reminders.RemindersAllState"
-            android:label="@string/title_activity_appliances"
-            android:parentActivityName=".reminders.ReminderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        \
 
         <activity android:name=".reminders.CustomReminderActivity"
             android:label="Custom Reminder"

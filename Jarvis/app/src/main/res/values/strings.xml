@@ -92,11 +92,11 @@
 
 
     <string name="title_welcome">Your home rewards program!</string>
-    <string name="title_activity_prevention">PreventionActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_rewards">RewardsActivity</string>
-    <string name="title_activity_appliances">AppliancesActivity</string>
-    <string name="title_activity_reminder">ReminderActivity</string>
+    <string name="title_activity_prevention">Prevention</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_rewards">Rewards</string>
+    <string name="title_activity_appliances">Appliances</string>
+    <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_detection_base">Detection</string>
     <string name="section_format">Your home section: %1$d</string>
 
@@ -318,8 +318,13 @@
         <item>Every year</item>
         <item>Specific days of the week</item>
     </string-array>
+    <!-- ends -->
 
-
+    <!-- For File Uploads-->
+    <string name="btnTakePicture">Capture Image</string>
+    <string name="btnRecordVideo">Record Video</string>
+    <string name="btnUploadToServer">Upload to Server</string>
+    <!-- Ends-->
 
 
 </resources>

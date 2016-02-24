@@ -3,7 +3,6 @@ package edu.depaul.csc595.jarvis.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -26,19 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
-import edu.depaul.csc595.jarvis.detection.gcm.TokenUpdateIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
-import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
+import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
-import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 
 
 
@@ -216,10 +214,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_detection:
                 goToActivity = new Intent(getApplicationContext(), DetectionBaseActivity.class);
                 break;
+            case R.id.nav_prevention:
+                goToActivity = new Intent(getApplicationContext(), PreventionActivity.class);
+                break;
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;
-            case R.id.nav_header_main_logout:
+            case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {
                     UserInfo.getInstance().logOutUser(MainActivity.this);
                     this.recreate();
@@ -264,17 +265,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private List<CardViewModel> createCardList(){
-        List<CardViewModel> list = new ArrayList<CardViewModel>();
+    private List<Object> createCardList(){
+        List<Object> list = new ArrayList<Object>();
+
+        String reward_card = "reward_card";
+        list.add(reward_card);
+
         CardViewModel cm = new CardViewModel();
         cm.title = "MyCommunity";
         cm.content = "Connect with others to solve common homeowner problems.";
         list.add(cm);
 
         cm = new CardViewModel();
-        cm.title = "MyReward";
-        cm.content = "Your balance is currently 0 \n";
-        cm.content += "Check out what you can get!";
+        cm.title = "MyNotifications";
+        //cm.content = "Your balance is currently 0 \n";
+        cm.content = "Check your pending notifications!";
         list.add(cm);
 
         cm = new CardViewModel();

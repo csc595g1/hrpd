@@ -2,9 +2,6 @@ package edu.depaul.csc595.jarvis.profile;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,8 +22,6 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
@@ -289,7 +284,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;
-            case R.id.nav_header_main_logout:
+            case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {
                     UserInfo.getInstance().logOutUser(ProfileActivity.this);
                 }
