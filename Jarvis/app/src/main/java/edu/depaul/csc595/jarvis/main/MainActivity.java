@@ -2,28 +2,35 @@ package edu.depaul.csc595.jarvis.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenUpdateIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
+import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
 import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
@@ -31,6 +38,8 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
+import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
+
 
 
 
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private TextView tv_email;
     private TextView tv_name;
     private TextView tv_logout;
+    private ImageView iv_image;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private static final String TAG = "MainActivity";
 
@@ -49,15 +59,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         //NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
@@ -75,7 +76,9 @@ public class MainActivity extends AppCompatActivity
         //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
         tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-
+        tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+        tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+        iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
@@ -85,6 +88,17 @@ public class MainActivity extends AppCompatActivity
         else {
             Toast.makeText(MainActivity.this, "No compatible GooglePlayServices APK found!", Toast.LENGTH_SHORT).show();
         }
+
+        //cardview implementation
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.activity_main_recycler_view);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.
+        LinearLayoutManager llm = new LinearLayoutManager(MainActivity.this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+
+        MainCardViewAdapter adapter = new MainCardViewAdapter(createCardList());
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -93,19 +107,38 @@ public class MainActivity extends AppCompatActivity
         Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
-            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+//            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+//            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
             tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-
+            //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
             tv_logout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     UserInfo.getInstance().logOutUser(MainActivity.this);
+                    MainActivity.this.recreate();
                 }
             });
+        }
+        else if(UserInfo.getInstance().isGoogleLoggedIn()){
+            //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
+            try {
+                tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+                tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
+                tv_logout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        UserInfo.getInstance().signOutWithGoogle();
+                        MainActivity.this.recreate();
+                    }
+                });
+            }
+            catch(NullPointerException e){
+                tv_logout.setText(" ");
+            }
         }
         else{
             tv_logout.setText(" ");
@@ -115,26 +148,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onRestart(){
         super.onRestart();
-
-        //if user is logged in, set name, email and enable log out
-        if(UserInfo.getInstance().getIsLoggedIn()){
-            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-            tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
-            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-
-            tv_logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserInfo.getInstance().logOutUser(MainActivity.this);
-                }
-            });
-        }
-        else{
-            tv_logout.setText(" ");
-        }
     }
 
     @Override
@@ -178,42 +191,51 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        UserInfo user = UserInfo.getInstance();
+        Intent goToActivity = null;
+        switch (id) {
+            case R.id.nav_home:
+                goToActivity = new Intent(getApplicationContext(), MainActivity.class);
+                break;
+            case R.id.nav_rewards:
+                goToActivity = new Intent(getApplicationContext(), RewardsActivity.class);
+                break;
+            case R.id.nav_appliances:
+                goToActivity = new Intent(getApplicationContext(), AppliancesActivity.class);
+                break;
+            case R.id.nav_profile:
+                if(UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+                    goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                }
+                else {
+                    goToActivity = new Intent(getApplicationContext(), LogInActivity.class);
+                }
+                break;
+            case R.id.nav_reminder:
+                goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
+                break;
+            case R.id.nav_detection:
+                goToActivity = new Intent(getApplicationContext(), DetectionBaseActivity.class);
+                break;
+            case R.id.nav_settings:
+                goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            case R.id.nav_header_main_logout:
+                if(UserInfo.getInstance().getIsLoggedIn()) {
+                    UserInfo.getInstance().logOutUser(MainActivity.this);
+                    this.recreate();
+                }
+                else if(UserInfo.getInstance().isGoogleLoggedIn()){
+                    UserInfo.getInstance().signOutWithGoogle();
+                    this.recreate();
+                }
+                break;
+            default:
+                break;
+        }
 
-        if (id == R.id.nav_home) {
-            Intent goToHome = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(goToHome);
-        }
-        else if (id == R.id.nav_prevention) {
-            Intent goToPrevention = new Intent(getApplicationContext(), PreventionActivity.class);
-            startActivity(goToPrevention);
-        }
-        else if (id == R.id.nav_rewards) {
-            Intent goToRewards = new Intent(this, RewardsActivity.class);
-            startActivity(goToRewards);
-
-        }
-        else if (id == R.id.nav_appliances) {
-            Intent goToAppliances = new Intent(getApplicationContext(), AppliancesActivity.class);
-            startActivity(goToAppliances);
-
-        }
-        else if (id == R.id.nav_profile) {
-            Intent goToProfile = new Intent(getApplicationContext(), ProfileActivity.class);
-            if(user.getIsLoggedIn()) {
-                startActivity(goToProfile);
-            }
-            else startActivity(new Intent(getApplicationContext(), LogInActivity.class));
-        }
-        else if (id == R.id.nav_reminder) {
-            Intent goToReminder = new Intent(getApplicationContext(), ReminderActivity.class);
-            startActivity(goToReminder);
-
-        }
-        else if (id == R.id.nav_settings) {
-            Intent goToSetting = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(goToSetting);
-
+        if (goToActivity != null){
+            startActivity(goToActivity);
+            overridePendingTransition(0, 0);
         }
 
 
@@ -221,7 +243,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
     /**
      * Check the device to make sure it has the Google Play Services APK. If
      * it doesn't, display a dialog that allows users to download the APK from
@@ -241,5 +262,26 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         return true;
+    }
+
+    private List<CardViewModel> createCardList(){
+        List<CardViewModel> list = new ArrayList<CardViewModel>();
+        CardViewModel cm = new CardViewModel();
+        cm.title = "MyCommunity";
+        cm.content = "Connect with others to solve common homeowner problems.";
+        list.add(cm);
+
+        cm = new CardViewModel();
+        cm.title = "MyReward";
+        cm.content = "Your balance is currently 0 \n";
+        cm.content += "Check out what you can get!";
+        list.add(cm);
+
+        cm = new CardViewModel();
+        cm.title = "MyConnectHome";
+        cm.content = "Take a peek at your appliances to make sure they're working correctly.";
+        list.add(cm);
+
+        return list;
     }
 }

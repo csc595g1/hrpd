@@ -3,6 +3,7 @@ package edu.depaul.csc595.jarvis.profile.user;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ public final class UserInfo {
     private GoogleSignInAccount googleAccount;
     private boolean isGoogleLoggedIn = false;
     private ImageView googleImageView;
+    private Bitmap googleProfileBitMap;
 
     public String getFirstName() {
         return firstName;
@@ -82,6 +84,14 @@ public final class UserInfo {
         isLoggedIn = status;
     }
 
+    public void setGoogleProfileBitMap(Bitmap bm){
+        googleProfileBitMap = bm;
+    }
+
+    public Bitmap getGoogleProfileBitMap(){
+        return googleProfileBitMap;
+    }
+
     public void signInWithGoogle(GoogleSignInAccount googleAccount,Context context){
         //check if authed through Jarvis Auth
         if(this.isLoggedIn){
@@ -92,10 +102,13 @@ public final class UserInfo {
         this.isGoogleLoggedIn = true;
     }
 
+    public boolean isGoogleLoggedIn(){return isGoogleLoggedIn;}
+
     public void signOutWithGoogle(){
         this.googleAccount = null;
         this.googleImageView = null;
         this.isGoogleLoggedIn = false;
+        this.googleProfileBitMap = null;
     }
 
     public void setGoogleProfileImage(ImageView image){
@@ -117,9 +130,12 @@ public final class UserInfo {
             db.open();
             User user = db.getCurrentUserIfExists();
             db.close();
-            return user;
+            if(!user.getEmail().equals(" ")) {
+                return user;
+            }
+            else{return null;}
         }
-        catch(SQLDataException e){
+        catch(SQLDataException | NullPointerException e){
             return null;
         }
     }
@@ -190,10 +206,12 @@ public final class UserInfo {
                 Log.d(TAG, "insertLocalInformationForLogin auth = " + this.isLoggedIn);
                 if(this.isLoggedIn){
                     db.updateFlagForUser(this.email,1);
+                    db.close();
                     return;
                 }
                 else{
                     db.updateFlagForUser(this.email,0);
+                    db.close();
                     return;
                 }
             }

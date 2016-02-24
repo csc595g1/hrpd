@@ -3,6 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <Button
+        android:layout_marginTop="25dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to Custom Reminder"
+        android:id="@+id/go_to_custom_reminder"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_alignStart="@id/editTextLayout"
+        android:layout_marginEnd="15dp"
+        android:textStyle="bold"
+        android:background="@drawable/button" />
+
     <ListView
         android:id="@+id/lv_inventory"
         android:layout_width="wrap_content"

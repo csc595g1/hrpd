@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".inventory.AppliancesActivity">
+    tools:context=".rewards.RewardsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -25,6 +25,16 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <include layout="@layout/border_thin_gray"/>
+
+        <ListView
+            android:id="@+id/lv_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            tools:context=".inventory.AppliancesActivity" />
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
@@ -32,8 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -43,21 +51,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
-    <view
-        android:id="@+id/listViewBackground"
-        android:layout_marginTop="10dp"
-        class="edu.depaul.csc595.jarvis.inventory.ListViewItemBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <edu.depaul.csc595.jarvis.inventory.ItemListViewOrder
-            android:id="@+id/lvPersons"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="#c0c0c0"
-            android:dividerHeight="1dp"
-            android:scrollingCache="true"/>
-
-    </view>
-
 </android.support.design.widget.CoordinatorLayout>
+
+
