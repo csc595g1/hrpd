@@ -250,17 +250,5 @@ public class RewardsActivity extends AppCompatActivity {
         }
     }
 
-    //Get data and return JSONObject
-    private void convertDataToJSON() {
-        String response = "";
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("response", response);
-        }
-        catch (Exception e) {e.printStackTrace(); }
-
-
-    }
 
 }
