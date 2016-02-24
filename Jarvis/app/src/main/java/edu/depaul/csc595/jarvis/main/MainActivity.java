@@ -264,17 +264,21 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private List<CardViewModel> createCardList(){
-        List<CardViewModel> list = new ArrayList<CardViewModel>();
+    private List<Object> createCardList(){
+        List<Object> list = new ArrayList<Object>();
+
+        String reward_card = "reward_card";
+        list.add(reward_card);
+
         CardViewModel cm = new CardViewModel();
         cm.title = "MyCommunity";
         cm.content = "Connect with others to solve common homeowner problems.";
         list.add(cm);
 
         cm = new CardViewModel();
-        cm.title = "MyReward";
-        cm.content = "Your balance is currently 0 \n";
-        cm.content += "Check out what you can get!";
+        cm.title = "MyNotifications";
+        //cm.content = "Your balance is currently 0 \n";
+        cm.content = "Check your pending notifications!";
         list.add(cm);
 
         cm = new CardViewModel();
