@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;
-            case R.id.nav_header_main_logout:
+            case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {
                     UserInfo.getInstance().logOutUser(MainActivity.this);
                     this.recreate();
