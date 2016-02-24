@@ -24,6 +24,8 @@ android {
         main.res.srcDirs += 'src/main/res/drawable/radio'
         main.res.srcDirs += 'src/main/res/layout/menus'
         main.res.srcDirs += 'src/main/res/layout/templates'
+        main.res.srcDirs += 'src/main/res/layout/detection'
+
 
 
     }
@@ -43,6 +45,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.jakewharton:butterknife:7.0.1'
-
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
 
 }

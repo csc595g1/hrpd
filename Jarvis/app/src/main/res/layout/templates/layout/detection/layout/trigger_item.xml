@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppTheme.DetailBox" android:layout_gravity="center_horizontal">
+    >
+        <!-- Top Bar -->
+        <LinearLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                style="@style/AppTheme.CategoryBox.Triggers">
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Fire"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="70dp"
+                    android:layout_height="3dp"
+                    android:layout_alignBottom="@+id/tv_category"
+                    android:layout_alignStart="@+id/tv_category"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:padding="10dp"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:text="Notify me on smoke"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <!-- End Top Bar -->
+
+        <!-- Middle Section -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/top_bar"
+            android:id="@+id/middle_section"
+            android:layout_below="@+id/top_bar"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyLabels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triggers_detail_when" />
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smoke sensor" />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyLabels"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/triggers_detail_action" />
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email me" />
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call me" />
+
+                <TextView
+                    style="@style/AppTheme.TriggersDetail.MiddleBodyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send me a notification" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- End Middle Section -->
+
+
+        <!-- Bottom Section -->
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/middle_section"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/light_gray"/>
+
+
+
+            <ToggleButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:checked="true" />
+
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/pencil_selector"
+                />
+
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:layout_centerVertical="true"
+                android:background="@drawable/big_delete_selector"
+                />
+        </RelativeLayout>
+        <!-- End of Bottom Section -->
+</RelativeLayout>

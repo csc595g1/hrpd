@@ -2,7 +2,9 @@
 <resources>
     <color name="colorPrimary">@color/lightBlue</color>
     <color name="colorPrimaryDark">@color/darkBlue</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">@color/darkBlue</color>
+
 
     <color name="lightBlue">#007ccf</color>
     <color name="mediumBlue">#1da2b9</color>

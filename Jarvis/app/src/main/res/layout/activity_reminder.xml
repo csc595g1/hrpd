@@ -1,26 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".reminders.ReminderActivity"
+    android:clickable="false">
+
 
     <Button
-        android:layout_marginTop="25dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Go to Custom Reminder"
+        android:text="Create Custom Reminder"
         android:id="@+id/go_to_custom_reminder"
         android:layout_below="@+id/editTextLayout"
-        android:layout_alignStart="@id/editTextLayout"
-        android:layout_marginEnd="15dp"
         android:textStyle="bold"
+        android:gravity="center"
         android:background="@drawable/button" />
 
-    <ListView
-        android:id="@+id/lv_inventory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        tools:context=".reminders.ReminderActivity" />
+
+
 
 </RelativeLayout>

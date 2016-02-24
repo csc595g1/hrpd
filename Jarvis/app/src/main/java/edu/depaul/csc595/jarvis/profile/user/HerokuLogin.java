@@ -140,7 +140,7 @@ public class HerokuLogin extends AsyncTask<Object, Void, Void> {
                     Log.d("HerokuLogin", "getting user first and last name");
                     //clear url var and reset it
                     url = null;
-                    url = new URL("https://jarvis-services.herokuapp.com/services/login/getNames?email=" + user.getEmail());
+                    url = new URL("https://jarvis-services.herokuapp.com/services/login/getName?email=" + user.getEmail());
                     secureConnection = (HttpsURLConnection) url.openConnection();
                     secureConnection.setDoOutput(false);
                     secureConnection.setDoInput(true);

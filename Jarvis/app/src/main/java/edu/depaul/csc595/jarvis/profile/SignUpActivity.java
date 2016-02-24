@@ -81,18 +81,18 @@ public class SignUpActivity extends AppCompatActivity {
                         herokuCreateAccount.execute(SignUpActivity.this, mProgressDialog, getBaseContext());
 
                         // Fetch the newly created user and his email.
-                        User currentUser = userInfo.getCredentials();
-                        String email_address = currentUser.getEmail();
-
-                        // Fetch the device token.
-                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignUpActivity.this);
-                        String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
-
-                        // Set url for the web service
-                        String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
-
-                        // Register this device(token) on the server.
-                        new RegisterDeviceToken(SignUpActivity.this).execute(email_address, token, webServiceUrl);
+//                        User currentUser = userInfo.getCredentials();
+//                        String email_address = currentUser.getEmail();
+//
+//                        // Fetch the device token.
+//                        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignUpActivity.this);
+//                        String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
+//
+//                        // Set url for the web service
+//                        String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
+//
+//                        // Register this device(token) on the server.
+//                        new RegisterDeviceToken(SignUpActivity.this).execute(email_address, token, webServiceUrl);
                     }
                     else{
                         Toast.makeText(getBaseContext(),"Email confirmation does not match!",Toast.LENGTH_LONG).show();
