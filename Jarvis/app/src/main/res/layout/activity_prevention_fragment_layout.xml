@@ -1,0 +1,50 @@
+<edu.depaul.csc595.jarvis.prevention.homescreen.DashboardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="#f8f9fe" >
+
+    <!--  Upload Blogs Button -->
+    <Button
+        android:id="@+id/preventionBtnUploads"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_1"
+        android:text="Uploads" />
+
+    <!--  Reminder Button -->
+    <Button
+        android:id="@+id/preventionBtnReminder"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_2"
+        android:text="Reminders" />
+
+    <!--  Online Help Button -->
+    <Button
+        android:id="@+id/preventionBtnHelp"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_3"
+        android:text="E-Help" />
+
+    <!--  Emergency Steps Button -->
+    <Button
+        android:id="@+id/preventionBtnESteps"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_4"
+        android:text="E-Steps" />
+
+    <!--  Emergency Contacts Button -->
+    <Button
+        android:id="@+id/preventionBtnEContacts"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_5"
+        android:text="E-Contacts" />
+
+    <!--  Make a Note Button -->
+    <Button
+        android:id="@+id/preventionBtnMakeNotes"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/app_6"
+        android:text="Make a Note" />
+
+</edu.depaul.csc595.jarvis.prevention.homescreen.DashboardLayout>
