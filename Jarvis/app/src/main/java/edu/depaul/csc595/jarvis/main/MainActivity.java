@@ -30,7 +30,7 @@ import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
-import edu.depaul.csc595.jarvis.prevention.PreventionActivity;
+import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;

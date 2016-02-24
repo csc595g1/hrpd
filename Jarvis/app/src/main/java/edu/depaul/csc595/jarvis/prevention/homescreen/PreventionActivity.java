@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.prevention;
+package edu.depaul.csc595.jarvis.prevention.homescreen;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.prevention.ehelp.main.EHelpMainActivity;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 
 public class PreventionActivity extends AppCompatActivity {
@@ -82,7 +83,7 @@ public class PreventionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launching News Feed Screen
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), EHelpMainActivity.class);
                 startActivity(i);
             }
         });
