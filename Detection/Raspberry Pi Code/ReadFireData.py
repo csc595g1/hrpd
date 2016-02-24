@@ -1,6 +1,6 @@
 import serial, requests, time
-
-ser = serial.Serial('/dev/cu.usbmodem1411', 9600, timeout=10)
+readPort = '/dev/cu.usbmodem1411'
+ser = serial.Serial(readPort, 9600, timeout=10)
 webServiceUrl = 'http://requestb.in/um1pa7um'
 if ser.closed:
     ser.open()
