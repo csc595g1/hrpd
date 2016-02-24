@@ -92,11 +92,11 @@
 
 
     <string name="title_welcome">Your home rewards program!</string>
-    <string name="title_activity_prevention">Prevention Activity</string>
-    <string name="title_activity_profile">Profile Activity</string>
-    <string name="title_activity_rewards">Rewards Activity</string>
-    <string name="title_activity_appliances">Appliances Activity</string>
-    <string name="title_activity_reminder">Reminder Activity</string>
+    <string name="title_activity_prevention">Prevention</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_rewards">Rewards</string>
+    <string name="title_activity_appliances">Appliances</string>
+    <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_detection_base">Detection</string>
     <string name="section_format">Your home section: %1$d</string>
 
