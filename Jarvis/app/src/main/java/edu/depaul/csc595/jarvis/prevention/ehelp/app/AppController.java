@@ -13,7 +13,7 @@ import edu.depaul.csc595.jarvis.prevention.ehelp.volley.LruBitmapCache;
 /**
  * Created by Advait on 24-02-2016.
  */
-public class AppController extends Application {
+public class  AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();
 
