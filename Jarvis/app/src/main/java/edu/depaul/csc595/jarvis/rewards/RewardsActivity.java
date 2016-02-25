@@ -36,6 +36,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventAsyncTask;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
 
 public class RewardsActivity extends AppCompatActivity {
 
@@ -93,7 +96,21 @@ public class RewardsActivity extends AppCompatActivity {
 
 //        rewards.sendGET();
 
-
+        //test async
+        CreateRewardEventModel event = new CreateRewardEventModel();
+        event.setEventCategory("test");
+        event.setTitle("testevent25");
+        event.setUnits(6);
+        if(UserInfo.getInstance().isGoogleLoggedIn()) {
+            event.setUserId(UserInfo.getInstance().getGoogleAccount().getEmail());
+            CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
+            task.execute(this,event);
+        }
+        else if(UserInfo.getInstance().getIsLoggedIn()) {
+            event.setUserId(UserInfo.getInstance().getCredentials().getEmail());
+            CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
+            task.execute(this, event);
+        }
     }
 
 
