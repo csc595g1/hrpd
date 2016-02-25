@@ -27,6 +27,14 @@ public class DetectionCustomAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    public void clear() {
+        detections = null;
+    }
+
+    public void addAll(List<Detection> detections){
+        this.detections = detections;
+    }
+
     @Override
     public int getCount() {
         return detections.size();

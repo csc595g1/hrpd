@@ -32,6 +32,11 @@ public class DetectionBaseActivity extends AppCompatActivity
     private View headerLayout;
     private TextView tv_email;
     private TextView tv_name;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +76,18 @@ public class DetectionBaseActivity extends AppCompatActivity
             tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+            email = UserInfo.getInstance().getCredentials().getEmail();
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
             tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
             tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+        } else {
+            email = "test1@test.com";
         }
+
     }
 
     @Override
@@ -179,4 +189,6 @@ public class DetectionBaseActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

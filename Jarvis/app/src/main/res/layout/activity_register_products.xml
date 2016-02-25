@@ -48,6 +48,29 @@
                 />
 
         </RadioGroup>
+
+        <TextView
+            android:id="@+id/scan_format"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textIsSelectable="true"
+            android:text="Scan Format"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:id="@+id/scan_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textIsSelectable="true"
+            android:text="Scan Format"
+            android:textColor="@color/black"
+
+            />
+
         <EditText
             android:id="@+id/edit_barcode_number"
             android:layout_width="match_parent"
@@ -61,12 +84,39 @@
             android:paddingBottom="15dp"/>
 
         <Button
-            android:id="@+id/button_enter"
+            android:id="@+id/scan_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/barcode_number"
-            android:text="@string/button_enter"
+            android:text="Scan Barcode"
+            android:backgroundTint="@color/default_colour_grey"
+            android:textColor="@color/black"
             android:onClick="addProducts"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="@color/offwhite"
+                android:textColor="@color/darkBlue"
+                android:layout_alignParentStart="true"
+                android:onClick="addProducts"/>
+            <Button
+                android:id="@+id/button_enter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_enter"
+                android:layout_alignParentEnd="true"
+                android:onClick="addProducts"/>
+
+        </RelativeLayout>
+
+
 
 
 

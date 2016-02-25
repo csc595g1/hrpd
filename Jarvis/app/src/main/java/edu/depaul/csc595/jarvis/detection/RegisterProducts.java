@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import edu.depaul.csc595.jarvis.R;
 
@@ -20,6 +22,9 @@ public class RegisterProducts extends Activity {
     private RadioGroup rb_sensors;
     private RadioButton radioSensorButton;
 
+    private Button scanBtn;
+    private TextView formatTxt, contentTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,7 @@ public class RegisterProducts extends Activity {
         barcode = (EditText)findViewById(R.id.edit_barcode_number);
         register = (Button)findViewById(R.id.button_enter);
         rb_sensors = (RadioGroup)findViewById(R.id.rb_sensors);
-       register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                int selectedId = rb_sensors.getCheckedRadioButtonId();
@@ -40,6 +45,10 @@ public class RegisterProducts extends Activity {
 
            }
        });
+
+        scanBtn = (Button) findViewById(R.id.scan_button);
+        formatTxt = (TextView) findViewById(R.id.scan_format);
+        contentTxt = (TextView) findViewById(R.id.scan_content);
 
 
     }

@@ -7,8 +7,11 @@ package edu.depaul.csc595.jarvis.detection;
 import java.io.IOException;
 import java.util.List;
 
+import edu.depaul.csc595.jarvis.detection.classes.DetectionContent;
 import edu.depaul.csc595.jarvis.detection.classes.DetectionContent.Detection;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -17,6 +20,10 @@ import retrofit2.http.Path;
 public class DetectionService {
 
     public static final String API_URL = "http://detectionservices.herokuapp.com";
+    public static Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
     public interface DetectionInterface {
         @GET("/users/{email_address}/detections")
@@ -24,11 +31,8 @@ public class DetectionService {
                 @Path("email_address") String email_address);
     }
 
+
     public static void main(String... args) throws IOException {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
 
