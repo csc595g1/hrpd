@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.detection;
 
+import android.app.ProgressDialog;
 import android.support.v4.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class DetectionListFragment extends ListFragment {
     private String email;
     private String LOG_TAG = "DetectionListFragment";
 
+    private ProgressDialog mProgressDialog;
+
     private DetectionCustomAdapter mAdapter;
 
     public DetectionListFragment() {
@@ -57,11 +60,16 @@ public class DetectionListFragment extends ListFragment {
 
         mListView = (ListView) getActivity().findViewById(android.R.id.list);
 
+//        mProgressDialog = new ProgressDialog(getActivity());
+//        mProgressDialog.setTitle("Loading Detections");
+//        mProgressDialog.setMessage("Please wait...");
+//        mProgressDialog.show();
+
 
         Retrofit retrofit = DetectionService.retrofit;
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
 
-        Log.d(LOG_TAG, email);
+        Log.d(LOG_TAG, "email: " + email);
         Call<List<Detection>> call = detectionInterface.detections(email);
 
         List<Detection> mydetections = new ArrayList<Detection>();

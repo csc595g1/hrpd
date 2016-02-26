@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
@@ -50,6 +51,19 @@
         </RadioGroup>
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appliance_name"
+            android:hint="@string/choose_appliance"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@color/grey_100"
+            android:padding="10dp"
+            style="@android:style/Widget.EditText"
+            />
+
 
         <EditText
             android:id="@+id/edit_barcode_number"
@@ -68,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Scan Barcode"
+            android:textStyle="bold"
             android:backgroundTint="@color/default_colour_grey"
             android:textColor="@color/black"
             android:onClick="addProducts"/>
@@ -83,7 +98,8 @@
                 android:layout_height="wrap_content"
                 android:text="Cancel"
                 android:backgroundTint="@color/offwhite"
-                android:textColor="@color/darkBlue"
+                android:textStyle="bold"
+                android:textColor="@color/red"
                 android:layout_alignParentStart="true"
                 android:onClick="addProducts"/>
             <Button
@@ -92,7 +108,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/button_enter"
                 android:layout_alignParentEnd="true"
-                android:onClick="addProducts"/>
+                android:textStyle="bold"
+                style="@style/AppTheme.ButtonStyle.Red"
+                />
 
         </RelativeLayout>
 

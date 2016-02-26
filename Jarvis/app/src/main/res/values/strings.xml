@@ -82,6 +82,7 @@
     <string name="rb_smoke_sensor">Smoke</string>
     <string name="rb_water_sensor">Water</string>
     <string name="rb_moisture_sensor">Moisture</string>
+    <string name="choose_appliance">Choose An Appliance    ></string>
 
     <string name="button_enter">Register Product</string>
 

@@ -11,7 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +34,9 @@ public class SmartProductFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private String email;
+
+    @Bind(R.id.fab)
+    FloatingActionButton fab;
 
 
 
@@ -75,7 +82,9 @@ public class SmartProductFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_smart_product, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        ButterKnife.bind(this, view);
+
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         Log.d(LOG_TAG, "Fab is " + fab);
 
         if (fab != null) {
