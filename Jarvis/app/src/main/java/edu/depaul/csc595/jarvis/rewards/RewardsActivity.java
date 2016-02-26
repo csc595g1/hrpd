@@ -34,6 +34,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.depaul.csc595.jarvis.R;
 
@@ -48,10 +50,7 @@ public class RewardsActivity extends AppCompatActivity {
      * {@link FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private int numOfPages = 4;
 //    private Rewards rewards;
@@ -205,6 +204,90 @@ public class RewardsActivity extends AppCompatActivity {
             return rootView;
         }
     }
+
+    //////////////////////////////////
+    private void setupViewPager(final ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new CreateRewardsFragment(), "CREATE");
+        adapter.addFrag(new RewardEventsFragment(), "EVENTS");
+        adapter.addFrag(new CatalogRewardsFragment(), "Catalog");
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0) {
+//                    fbLeft.show();
+//                    fbCenter.show();
+//                    fbRight.show();
+                }
+                else {
+//                    fbLeft.hide();
+//                    fbCenter.hide();
+//                    fbRight.hide();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                viewPager.getCurrentItem();
+
+                switch (state) {
+                    case ViewPager.SCROLL_STATE_DRAGGING:
+                        if(viewPager.getCurrentItem() != 0) {
+//                            fbLeft.hide();
+//                            fbCenter.hide();
+//                            fbRight.hide();
+                        }
+                        break;
+                    case ViewPager.SCROLL_STATE_IDLE:
+                        if(viewPager.getCurrentItem() == 0) {
+//                            fbLeft.show();
+//                            fbCenter.show();
+//                            fbRight.show();
+                        }
+                }
+            }
+        });
+    }
+
+
+    private class ViewPagerAdapter extends FragmentPagerAdapter{
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) { return null; }
+    }
+
+    //region TAB_VIEW
+    private void setupTabIcons() {
+//        mTabLayout.getTabAt(0).setIcon(R.drawable.ic_timer_profile_24dp);
+//        mTabLayout.getTabAt(1).setIcon(R.mipmap.ic_steering_wheel);
+//        mTabLayout.getTabAt(2).setIcon(R.drawable.ic_directions_car);
+//        mTabLayout.getTabAt(3).setIcon(R.drawable.ic_attach_money_24dp);
+    }
+
+    /////////////////////////////////
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
