@@ -137,11 +137,11 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 //                });
             }
             catch(NullPointerException e){
-                tv_logout.setText(" ");
+                //tv_logout.setText(" ");
             }
         }
         else{
-            tv_logout.setText(" ");
+            //tv_logout.setText(" ");
         }
     }
 
