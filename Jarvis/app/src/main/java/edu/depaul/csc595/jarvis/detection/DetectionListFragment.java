@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -54,9 +55,13 @@ public class DetectionListFragment extends ListFragment {
         mAdapter = new DetectionCustomAdapter(getActivity(), DetectionContent.ITEMS);
         setListAdapter(mAdapter);
 
+        mListView = (ListView) getActivity().findViewById(android.R.id.list);
+
+
         Retrofit retrofit = DetectionService.retrofit;
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
 
+        Log.d(LOG_TAG, email);
         Call<List<Detection>> call = detectionInterface.detections(email);
 
         List<Detection> mydetections = new ArrayList<Detection>();
@@ -65,9 +70,12 @@ public class DetectionListFragment extends ListFragment {
             public void onResponse(Call<List<Detection>> call, Response<List<Detection>> response) {
                 Log.d(LOG_TAG, "Reached this place");
                 if (!response.isSuccess()) {
-                    Log.d(LOG_TAG, "No Success");
+                    Log.d(LOG_TAG, response.errorBody().toString());
                 }
                 List<Detection> detections = response.body();
+                if (detections.isEmpty()){
+                    setEmptyText("No Detections Found");
+                }
                 mAdapter.clear();
                 mAdapter.addAll(detections);
                 mAdapter.notifyDataSetChanged();
@@ -78,6 +86,8 @@ public class DetectionListFragment extends ListFragment {
 
             @Override
             public void onFailure(Call<List<Detection>> call, Throwable t) {
+                Log.d(LOG_TAG, t.getMessage());
+
                 Toast.makeText(getActivity(), "Failed !", Toast.LENGTH_LONG).show();
             }
         });
@@ -85,13 +95,27 @@ public class DetectionListFragment extends ListFragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         DetectionBaseActivity activity = (DetectionBaseActivity) getActivity();
         email = activity.getEmail();
         return inflater.inflate(R.layout.fragment_detection_list, container, false);
+    }
+
+
+    /**
+     * The default content for this Fragment has a TextView that is shown when
+     * the list is empty. If you would like to change the text, call this method
+     * to supply the text it should use.
+     */
+    public void setEmptyText(CharSequence emptyText) {
+        View emptyView = getListView().getEmptyView();
+
+        if (emptyView instanceof TextView) {
+            ((TextView) emptyView).setText(emptyText);
+        }
+
     }
 
 }

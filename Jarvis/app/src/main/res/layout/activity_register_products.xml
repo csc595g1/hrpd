@@ -49,27 +49,7 @@
 
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/scan_format"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textIsSelectable="true"
-            android:text="Scan Format"
-            android:textColor="@color/black"
 
-            />
-
-        <TextView
-            android:id="@+id/scan_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textIsSelectable="true"
-            android:text="Scan Format"
-            android:textColor="@color/black"
-
-            />
 
         <EditText
             android:id="@+id/edit_barcode_number"

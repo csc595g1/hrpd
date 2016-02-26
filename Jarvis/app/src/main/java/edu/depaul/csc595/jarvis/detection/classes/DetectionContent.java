@@ -23,12 +23,12 @@ public class DetectionContent {
      */
     public static Map<String, Detection> ITEM_MAP = new HashMap<String, Detection>();
 
-    static {
-        // Add 3 sample items.
-        addItem(new Detection("1", "Water Leak", "JAN 3", "WATER"));
-        addItem(new Detection("2", "Fire Sensed", "JAN 4", "FIRE"));
-        addItem(new Detection("3", "Flood Warning", "FEB 10", "FLOOD"));
-    }
+//    static {
+//        // Add 3 sample items.
+//        addItem(new Detection("1", "Water Leak", "JAN 3", "WATER"));
+//        addItem(new Detection("2", "Fire Sensed", "JAN 4", "FIRE"));
+//        addItem(new Detection("3", "Flood Warning", "FEB 10", "FLOOD"));
+//    }
 
     private static void addItem(Detection item) {
         ITEMS.add(item);

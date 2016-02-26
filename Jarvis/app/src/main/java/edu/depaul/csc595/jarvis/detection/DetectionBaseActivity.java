@@ -34,6 +34,11 @@ public class DetectionBaseActivity extends AppCompatActivity
     private TextView tv_name;
     private String email;
 
+    public static String EMAIL_EXTRA = "Email Address";
+
+    private String LOG_TAG = "DetectionBaseActivity";
+
+
     public String getEmail() {
         return email;
     }
@@ -59,7 +64,7 @@ public class DetectionBaseActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager(), DetectionBaseActivity.this));
+        viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager()));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -131,6 +136,12 @@ public class DetectionBaseActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void goToRegisterProduct(View v){
+        Log.d(LOG_TAG, "I got here");
+        Intent intent = new Intent(DetectionBaseActivity.this, RegisterProducts.class);
+        intent.putExtra(EMAIL_EXTRA, email);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

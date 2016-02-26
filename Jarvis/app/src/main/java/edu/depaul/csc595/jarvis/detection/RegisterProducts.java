@@ -1,7 +1,9 @@
 package edu.depaul.csc595.jarvis.detection;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,8 @@ public class RegisterProducts extends Activity {
     private RadioGroup rb_sensors;
     private RadioButton radioSensorButton;
 
+    private static String LOG_TAG = "RegisterProducts";
+
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
 
@@ -29,6 +33,10 @@ public class RegisterProducts extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_products);
+
+        Intent intent = getIntent();
+        String email = intent.getStringExtra(DetectionBaseActivity.EMAIL_EXTRA);
+        Log.d(LOG_TAG, "Email" + email);
         barcode = (EditText)findViewById(R.id.edit_barcode_number);
         register = (Button)findViewById(R.id.button_enter);
         rb_sensors = (RadioGroup)findViewById(R.id.rb_sensors);
@@ -47,8 +55,6 @@ public class RegisterProducts extends Activity {
        });
 
         scanBtn = (Button) findViewById(R.id.scan_button);
-        formatTxt = (TextView) findViewById(R.id.scan_format);
-        contentTxt = (TextView) findViewById(R.id.scan_content);
 
 
     }

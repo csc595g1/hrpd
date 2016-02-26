@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.detection.dummy;
+package edu.depaul.csc595.jarvis.detection.classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ public class SmartProductContent {
      * An array of sample (dummy) items.
      */
     public static List<SmartProduct> ITEMS = new ArrayList<SmartProduct>();
+    public static List<String> ITEMS_STRING = new ArrayList<String>();
 
     /**
      * A map of sample (dummy) items, by ID.
@@ -25,14 +26,19 @@ public class SmartProductContent {
 
     static {
         // Add 3 sample items.
-        addItem(new SmartProduct("1", "Item 1"));
-        addItem(new SmartProduct("2", "Item 2"));
-        addItem(new SmartProduct("3", "Item 3"));
+        addItem(new SmartProduct("1", "d00001", "Water", "Sump Pump"));
+        addItem(new SmartProduct("2", "d00002", "Fire", "Living Room"));
     }
 
     private static void addItem(SmartProduct item) {
         ITEMS.add(item);
+        ITEMS_STRING.add(item.toString());
         ITEM_MAP.put(item.id, item);
+
+    }
+
+    public static List<String> getSmartProductAsString() {
+        return ITEMS_STRING;
     }
 
     /**
@@ -41,16 +47,19 @@ public class SmartProductContent {
     public static class SmartProduct {
         public String id;
         public String serial_no;
-        public String content;
+        public String type_of_smart_product;
+        public String appliance_name;
 
-        public SmartProduct(String id, String content) {
+        public SmartProduct(String id, String serial_no, String type_of_smart_product, String appliance_name) {
             this.id = id;
-            this.content = content;
+            this.serial_no = serial_no;
+            this.type_of_smart_product = type_of_smart_product;
+            this.appliance_name = appliance_name;
         }
 
         @Override
         public String toString() {
-            return content;
+            return type_of_smart_product + " sensor";
         }
     }
 }
