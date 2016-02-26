@@ -27,9 +27,9 @@ import edu.depaul.csc595.jarvis.profile.ProfileActivity;
  * Created by Ed on 2/10/2016.
  */
 public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
-
+    final String TAG = "GoogleHerokuLogin";
     LogInActivity logInActivity;
-    SplashActivity splashActivity;
+    //SplashActivity splashActivity;
     UserInfo userInfo;
     private final String URL_STRING = "https://jarvis-services.herokuapp.com/services/login/googlelogin";
     HttpsURLConnection secureConnection;
@@ -41,21 +41,34 @@ public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
     String authMessage;
     private ProgressDialog m_ProgressDialog = null;
     private Context context;
+    private ProgressDialog dialog;
+    private SplashActivity splashActivity;
 
     protected void onPreExecute(){
         super.onPreExecute();
     }
 
     protected Void doInBackground(Object... params) {
+        if(params[0] != null){
+            if(params[0] instanceof ProgressDialog){
+                dialog = (ProgressDialog) params[0];
+            }
+        }
 
-        Log.d("HerokugoogleLogin","Entering async task for log in");
+        if(params[1] != null){
+            if(params[1] instanceof SplashActivity){
+                splashActivity = (SplashActivity) params[1];
+            }
+        }
+
+        Log.d(TAG,"Entering async task for log in");
         try{
-            Log.d("HerokuLogin",UserInfo.getInstance().getGoogleAccount().getEmail() + " " + UserInfo.getInstance().getGoogleAccount().getDisplayName());
+            Log.d(TAG,UserInfo.getInstance().getGoogleAccount().getEmail() + " " + UserInfo.getInstance().getGoogleAccount().getDisplayName());
             outJson = new JSONObject();
             outJson.put("email",UserInfo.getInstance().getGoogleAccount().getEmail());
             outJson.put("name",UserInfo.getInstance().getGoogleAccount().getDisplayName());
 
-            Log.d("HerokuLogin", outJson.toString());
+            Log.d(TAG, outJson.toString());
 
             url = new URL(URL_STRING);
             secureConnection = (HttpsURLConnection) url.openConnection();
@@ -72,33 +85,36 @@ public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
 
             StringBuilder sb = new StringBuilder();
             int httpResult = secureConnection.getResponseCode();
-            Log.d("HerokugoogleLogin",String.valueOf(httpResult));
+            Log.d(TAG,String.valueOf(httpResult));
             if(httpResult == HttpsURLConnection.HTTP_OK){
-                Log.d("HerokugoogleLogin","200 OK");
+                Log.d(TAG,"200 OK");
                 BufferedReader br = new BufferedReader(new InputStreamReader(secureConnection.getInputStream()));//need to put UTF-8?
                 String line = null;
                 while((line = br.readLine()) != null){
                     sb.append(line);
-                    Log.d("HerokugoogleLogin",line);
+                    Log.d(TAG,line);
                 }
                 outJson = new JSONObject(sb.toString());
                 // TODO: 2/11/2016 finish parsing JSON and making sure user is logged in.
                 String tempAuth = outJson.getString("auth");
                 auth = tempAuth.equals("true");
                 authMessage = outJson.getString("message");
-                Log.d("HerokugoogleLogin", "Log in status: " + auth + " message: " + authMessage);
+                Log.d(TAG, "Log in status: " + auth + " message: " + authMessage);
             }
         }
         catch(MalformedURLException e){
             //userInfo.setLoggedIn(false);
+            Log.d(TAG, "doInBackground malformed exception");
             UserInfo.getInstance().signOutWithGoogle();
             return null;
         }
         catch(IOException e){
+            Log.d(TAG, "doInBackground IOexception");
             UserInfo.getInstance().signOutWithGoogle();
             return null;
         }
         catch(JSONException e){
+            Log.d(TAG, "doInBackground JSONException");
             UserInfo.getInstance().signOutWithGoogle();
             return null;
         }
@@ -111,9 +127,23 @@ public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
     protected void onPostExecute(Void result){
         //for some reason, if data pass fails just null everything...may crash app depending when
         //this executes.
+
+//        Intent intent = new Intent(splashActivity, MainActivity.class);
+//        splashActivity.startActivity(intent);
+//        splashActivity.finish();
+
         if(!auth){
-            Log.d("GoogleHeroku", "onPostExecute google auth with heroku failed. see log above for auth message");
+            Log.d(TAG, "onPostExecute google auth with heroku failed. see log above for auth message");
             UserInfo.getInstance().signOutWithGoogle();
+            Intent intent = new Intent(splashActivity, MainActivity.class);
+            splashActivity.startActivity(intent);
+            splashActivity.finish();
+        }
+        if(dialog != null){
+            dialog.dismiss();
+            Intent intent = new Intent(splashActivity, MainActivity.class);
+            splashActivity.startActivity(intent);
+            splashActivity.finish();
         }
         super.onPostExecute(result);
     }

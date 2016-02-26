@@ -7,6 +7,7 @@ package edu.depaul.csc595.jarvis.detection;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import edu.depaul.csc595.jarvis.R;
 // In this case, the fragment displays simple text based on the page
 public class PageFragment extends Fragment {
     public static final String ARG_PAGE = "ARG_PAGE";
+
+    private String LOG_TAG = "PageFragment";
 
     private int mPage;
 
@@ -40,16 +43,19 @@ public class PageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         Fragment fragment = null;
 
+        Log.d(LOG_TAG, "Page: " + mPage);
         switch (mPage) {
             case 1:
                 fragment = new DetectionListFragment();
                 break;
             case 2:
+                fragment = new SmartProductListFragment();
                 break;
             default:
                 break;
         }
 
+        Log.d(LOG_TAG, "fragment: " + fragment);
         if (fragment != null){
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.frame_layout, fragment);

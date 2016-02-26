@@ -130,11 +130,14 @@ public class HerokuLogin extends AsyncTask<Object, Void, Void> {
                 // TODO: 2/11/2016 set auth and message to UserInfo and finish activity.
                 userInfo.setLoggedIn(auth);
                 userInfo.setAuthMessage(authMessage);
-                userInfo.insertLocalInformationForLogin(context);
+                if (!(params[0] instanceof SplashActivity)) {
+                    userInfo.insertLocalInformationForLogin(context);
+                }
                 //if log in successful and this is from splash, set credentials in userinfo
                 if(auth) {
                     if (params[0] instanceof SplashActivity) {
                         userInfo.setCredentials(user.getEmail(), user.getPw());
+                        userInfo.insertLocalInformationForLogin(context);
                     }
                     //now that's a success, let's do one more call to the server get the user name
                     Log.d("HerokuLogin", "getting user first and last name");

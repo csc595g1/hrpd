@@ -32,6 +32,16 @@ public class DetectionBaseActivity extends AppCompatActivity
     private View headerLayout;
     private TextView tv_email;
     private TextView tv_name;
+    private String email;
+
+    public static String EMAIL_EXTRA = "Email Address";
+
+    private String LOG_TAG = "DetectionBaseActivity";
+
+
+    public String getEmail() {
+        return email;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +64,7 @@ public class DetectionBaseActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager(), DetectionBaseActivity.this));
+        viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager()));
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -71,13 +81,18 @@ public class DetectionBaseActivity extends AppCompatActivity
             tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+            email = UserInfo.getInstance().getCredentials().getEmail();
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
             tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
             tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+        } else {
+            email = "test1@test.com";
         }
+
     }
 
     @Override
@@ -122,6 +137,12 @@ public class DetectionBaseActivity extends AppCompatActivity
     }
 
 
+    public void goToRegisterProduct(View v){
+        Log.d(LOG_TAG, "I got here");
+        Intent intent = new Intent(DetectionBaseActivity.this, RegisterProducts.class);
+        intent.putExtra(EMAIL_EXTRA, email);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -155,8 +176,15 @@ public class DetectionBaseActivity extends AppCompatActivity
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;
-            case R.id.nav_header_main_logout:
-                UserInfo.getInstance().logOutUser(DetectionBaseActivity.this);
+            case R.id.nav_logout:
+                if(UserInfo.getInstance().getIsLoggedIn()) {
+                    UserInfo.getInstance().logOutUser(DetectionBaseActivity.this);
+                    this.recreate();
+                }
+                else if(UserInfo.getInstance().isGoogleLoggedIn()){
+                    UserInfo.getInstance().signOutWithGoogle();
+                    this.recreate();
+                }
                 break;
             default:
                 break;
@@ -172,4 +200,6 @@ public class DetectionBaseActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
