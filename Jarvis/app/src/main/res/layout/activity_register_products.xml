@@ -57,6 +57,8 @@
             android:id="@+id/appliance_name"
             android:hint="@string/choose_appliance"
             android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:gravity="center"
             android:textColor="@color/black"
             android:background="@color/grey_100"
@@ -69,7 +71,7 @@
             android:id="@+id/edit_barcode_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="text"
             android:layout_below="@+id/rb_sensors"
             android:ems="10"
             android:textAlignment="center"
@@ -85,7 +87,7 @@
             android:textStyle="bold"
             android:backgroundTint="@color/default_colour_grey"
             android:textColor="@color/black"
-            android:onClick="addProducts"/>
+            android:onClick="submitForm"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -101,7 +103,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/red"
                 android:layout_alignParentStart="true"
-                android:onClick="addProducts"/>
+                android:onClick="submitForm"/>
             <Button
                 android:id="@+id/button_enter"
                 android:layout_width="wrap_content"

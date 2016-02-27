@@ -4,7 +4,7 @@
     android:orientation="vertical"
     tools:context="edu.depaul.csc595.jarvis.detection.SmartProductFragment">
 
-    <fragment android:id="@+id/profile_fragment"
+    <fragment android:id="@+id/list_fragment"
         android:name="edu.depaul.csc595.jarvis.detection.SmartProductListFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -1,6 +1,7 @@
 package edu.depaul.csc595.jarvis.detection;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import edu.depaul.csc595.jarvis.detection.DetectionService.*;
+
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -49,6 +53,9 @@ public class SmartProductListFragment extends ListFragment {
 
     public static String EMAIL_EXTRA = "Email Address";
 
+
+    private ProgressDialog mProgressDialog;
+
     private SPCustomAdapter mAdapter;
 
     public SmartProductListFragment() {
@@ -60,9 +67,11 @@ public class SmartProductListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         mAdapter = new SPCustomAdapter(getActivity(), SmartProductContent.ITEMS);
         setListAdapter(mAdapter);
-
+        updateSmartProducts();
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,10 +82,49 @@ public class SmartProductListFragment extends ListFragment {
         return inflater.inflate(R.layout.fragment_detection_list, container, false);
     }
 
-//    @Override
-//    public void onAttach(Context context){
-//        super.onAttach(context);
-//    }
+
+
+    public void updateSmartProducts() {
+
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle("Loading SmartProducts");
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+
+
+        Retrofit retrofit = DetectionService.retrofit;
+        DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
+
+        Log.d(LOG_TAG, "email: " + email);
+
+        Call<List<SmartProduct>> call = detectionInterface.smart_products("test1@test.com");
+        call.enqueue(new Callback<List<SmartProduct>>() {
+            @Override
+            public void onResponse(Call<List<SmartProduct>> call, Response<List<SmartProduct>> response) {
+                Log.d(LOG_TAG, "Reached this place");
+                if (!response.isSuccess()) {
+                    Log.d(LOG_TAG, response.errorBody().toString());
+                }
+                List<SmartProduct> smart_products = response.body();
+                if (smart_products.isEmpty()) {
+                    setEmptyText("No Smart Products Found");
+                }
+                mAdapter.clear();
+                mAdapter.addAll(smart_products);
+                mAdapter.notifyDataSetChanged();
+                Log.d(LOG_TAG, "Response returned by website is : " + response.body());
+                Log.d(LOG_TAG, "Response returned by website is : " + response.code());
+                mProgressDialog.hide();
+            }
+
+            @Override
+            public void onFailure(Call<List<SmartProduct>> call, Throwable t) {
+                Log.d(LOG_TAG, t.getMessage());
+                mProgressDialog.hide();
+                Toast.makeText(getActivity(), "Failed !", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
 
     /**

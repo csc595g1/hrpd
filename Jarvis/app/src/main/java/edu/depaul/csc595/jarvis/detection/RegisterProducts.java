@@ -2,6 +2,7 @@ package edu.depaul.csc595.jarvis.detection;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,12 +19,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent.SmartProduct;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class RegisterProducts extends AppCompatActivity {
 
@@ -41,7 +50,12 @@ public class RegisterProducts extends AppCompatActivity {
 
     private static String LOG_TAG = "RegisterProducts";
 
+    String email;
+
+
     private TextView formatTxt, contentTxt;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +66,7 @@ public class RegisterProducts extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
-        String email = intent.getStringExtra(DetectionBaseActivity.EMAIL_EXTRA);
+        email = intent.getStringExtra(DetectionBaseActivity.EMAIL_EXTRA);
         Log.d(LOG_TAG, "Email" + email);
     }
 
@@ -63,13 +77,20 @@ public class RegisterProducts extends AppCompatActivity {
         return true;
     }
 
+    @OnClick(R.id.button_cancel)
+    public void cancelForm(View view){
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_CANCELED, returnIntent);
+        finish();
+    }
+
     @OnClick(R.id.button_enter)
-    public void addProducts(View view) {
+    public void submitForm(View view) {
         int selectedId = rb_sensors.getCheckedRadioButtonId();
         RadioButton radioSensorButton = (RadioButton) findViewById(selectedId);
 
-        final String barcode = et_barcode.getText().toString();
-        if (barcode.equals("")){
+        final String serial_no = et_barcode.getText().toString();
+        if (serial_no.equals("")){
             et_barcode.setError("Barcode Required");
         }
 
@@ -78,16 +99,70 @@ public class RegisterProducts extends AppCompatActivity {
             tv_appliance_name.setError("Please select appliance");
         }
 
-        CharSequence text = et_barcode.getText() + " " + radioSensorButton.getText() + " " + appliance_name;
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        final String type_of_smart_product = radioSensorButton.getText().toString();
+        if (serial_no.equals("") || appliance_name.equals(R.string.choose_appliance)){
+            return;
+        }
+
+        SmartProduct smartProduct = new SmartProduct(serial_no, type_of_smart_product, appliance_name);
+        if (email == null){
+            email = "test1@test.com";
+        }
+
+        createSmartProduct(smartProduct, email);
+
+        CharSequence text = serial_no + " " + radioSensorButton.getText() + " " + appliance_name + "" + email;
+        Log.d(LOG_TAG, text.toString());
+
+        Intent returnIntent = new Intent();
+//        returnIntent.putExtra("result", result);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+
+
+    }
+
+    private void createSmartProduct(SmartProduct smartProduct, String email_address){
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setTitle("Creating Smart Product");
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+
+
+        Retrofit retrofit = DetectionService.retrofit;
+        DetectionService.DetectionInterface detectionInterface = retrofit.create(DetectionService.DetectionInterface.class);
+
+        Call<SmartProduct> call = detectionInterface.createSmartProduct(email_address, smartProduct);
+
+        call.enqueue(new Callback<SmartProduct>() {
+            @Override
+            public void onResponse(Call<SmartProduct> call, Response<SmartProduct> response) {
+                Log.d(LOG_TAG, "Reached this place");
+                if (!response.isSuccess()) {
+                    Log.d(LOG_TAG, response.errorBody().toString());
+                    return;
+                }
+                SmartProduct smartProduct = response.body();
+                Log.d(LOG_TAG, "Response returned by website is : " + response.body());
+                Log.d(LOG_TAG, "Response returned by website is : " + response.code());
+                mProgressDialog.hide();
+
+            }
+
+            @Override
+            public void onFailure(Call<SmartProduct> call, Throwable t) {
+                Log.d(LOG_TAG, t.getMessage());
+                mProgressDialog.hide();
+                Toast.makeText(getApplicationContext(), "Failed to save smart product!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
     @OnClick(R.id.appliance_name)
     public void openDialogAppliances(View v) {
-        Log.d(LOG_TAG, "I got out of dialog");
+        Log.d(LOG_TAG, "I am outside dialog");
 
-//        CharSequence[] appliance_names = ApplianceContent.getCharSequence();
         final CharSequence appliance_names[] = new CharSequence[] {"Sump Pump", "Living Room", "Bedroom", "Fridge", "Heater"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

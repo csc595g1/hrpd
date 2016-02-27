@@ -50,6 +50,12 @@ public class SmartProductContent {
         public String type_of_smart_product;
         public String appliance_name;
 
+        public SmartProduct(String serial_no, String type_of_smart_product, String appliance_name) {
+            this.serial_no = serial_no;
+            this.type_of_smart_product = type_of_smart_product;
+            this.appliance_name = appliance_name;
+        }
+
         public SmartProduct(String id, String serial_no, String type_of_smart_product, String appliance_name) {
             this.id = id;
             this.serial_no = serial_no;

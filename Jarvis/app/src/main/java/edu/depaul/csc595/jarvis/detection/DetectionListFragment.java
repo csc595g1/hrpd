@@ -39,13 +39,10 @@ public class DetectionListFragment extends ListFragment {
     /**
      * The fragment's ListView
      */
-    private ListView mListView;
-    private Context mContext;
     private String email;
     private String LOG_TAG = "DetectionListFragment";
 
     private ProgressDialog mProgressDialog;
-
     private DetectionCustomAdapter mAdapter;
 
     public DetectionListFragment() {
@@ -58,12 +55,10 @@ public class DetectionListFragment extends ListFragment {
         mAdapter = new DetectionCustomAdapter(getActivity(), DetectionContent.ITEMS);
         setListAdapter(mAdapter);
 
-        mListView = (ListView) getActivity().findViewById(android.R.id.list);
-
-//        mProgressDialog = new ProgressDialog(getActivity());
-//        mProgressDialog.setTitle("Loading Detections");
-//        mProgressDialog.setMessage("Please wait...");
-//        mProgressDialog.show();
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle("Loading Detections");
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
 
 
         Retrofit retrofit = DetectionService.retrofit;
@@ -89,13 +84,14 @@ public class DetectionListFragment extends ListFragment {
                 mAdapter.notifyDataSetChanged();
                 Log.d(LOG_TAG, "Response returned by website is : " + response.body());
                 Log.d(LOG_TAG, "Response returned by website is : " + response.code());
+                mProgressDialog.hide();
 
             }
 
             @Override
             public void onFailure(Call<List<Detection>> call, Throwable t) {
                 Log.d(LOG_TAG, t.getMessage());
-
+                mProgressDialog.hide();
                 Toast.makeText(getActivity(), "Failed !", Toast.LENGTH_LONG).show();
             }
         });

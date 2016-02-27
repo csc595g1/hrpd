@@ -1,6 +1,7 @@
 package edu.depaul.csc595.jarvis.detection;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -38,6 +39,7 @@ public class SmartProductFragment extends Fragment {
     @Bind(R.id.fab)
     FloatingActionButton fab;
 
+    public final int RESULT_OK = 1;
 
 
 
@@ -73,7 +75,17 @@ public class SmartProductFragment extends Fragment {
 
         DetectionBaseActivity activity = (DetectionBaseActivity) getActivity();
         email = activity.getEmail();
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        Log.d(LOG_TAG, " " + resultCode);
+        if (resultCode == Activity.RESULT_OK) {
+            Log.d(LOG_TAG, "resultCode == Activity.RESULT_OK");
+            SmartProductListFragment fragment = (SmartProductListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
+            fragment.updateSmartProducts();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -81,12 +93,9 @@ public class SmartProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_smart_product, container, false);
-
         ButterKnife.bind(this, view);
 
-//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         Log.d(LOG_TAG, "Fab is " + fab);
-
         if (fab != null) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,13 +104,15 @@ public class SmartProductFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), RegisterProducts.class);
                     intent.putExtra(DetectionBaseActivity.EMAIL_EXTRA, email);
                     Log.d(LOG_TAG, "Email: " + email);
-                    startActivity(intent);
+                    startActivityForResult(intent, RESULT_OK);
                 }
             });
         }
 
         return view;
     }
+
+
 
 
 }
