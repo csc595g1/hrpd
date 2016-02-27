@@ -120,7 +120,10 @@ public class RegisterProducts extends AppCompatActivity {
 
         SmartProduct smartProduct = new SmartProduct(serial_no, type_of_smart_product, appliance_name);
         if (email == null){
+            Log.d(LOG_TAG, "Email is null");
             email = "test1@test.com";
+        } else{
+            Log.d(LOG_TAG, email);
         }
 
         createSmartProduct(smartProduct, email);
@@ -142,6 +145,7 @@ public class RegisterProducts extends AppCompatActivity {
         mProgressDialog.setMessage("Please wait...");
         mProgressDialog.show();
 
+        Log.d(LOG_TAG, "In Create Smart Product, email is: " + email_address);
 
         Retrofit retrofit = DetectionService.retrofit;
         DetectionService.DetectionInterface detectionInterface = retrofit.create(DetectionService.DetectionInterface.class);
