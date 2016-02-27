@@ -27,7 +27,7 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
 import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;

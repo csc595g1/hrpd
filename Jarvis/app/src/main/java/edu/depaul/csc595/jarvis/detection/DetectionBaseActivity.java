@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
