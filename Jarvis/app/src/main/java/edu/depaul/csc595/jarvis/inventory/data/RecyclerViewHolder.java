@@ -12,14 +12,15 @@ import edu.depaul.csc595.jarvis.R;
  */
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView tv1,tv2;
+    public TextView appliancesTitle,appliancesTimeInterval,appliancesNextReminder;
     public ImageView imageView;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
 
-        tv1 = (TextView) itemView.findViewById(R.id.list_title);
-        tv2 = (TextView) itemView.findViewById(R.id.list_desc);
+        appliancesTitle = (TextView) itemView.findViewById(R.id.appliances_card_title);
+        appliancesTimeInterval = (TextView) itemView.findViewById(R.id.appliances_card_reminder_interval);
+        appliancesNextReminder = (TextView) itemView.findViewById(R.id.appliances_card_next_reminder);
         imageView = (ImageView) itemView.findViewById(R.id.list_avatar);
 
     }
