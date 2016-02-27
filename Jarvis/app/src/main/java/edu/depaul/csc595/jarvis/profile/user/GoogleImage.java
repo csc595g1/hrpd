@@ -13,6 +13,7 @@ import java.io.InputStream;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 
 /**
  * Created by Ed on 2/20/2016.
@@ -22,6 +23,7 @@ public class GoogleImage extends AsyncTask<Object,Void,Bitmap> {
     private ProgressDialog progressBar;
     private ImageView iv;
     private MainActivity main;
+    private ProfileActivity profile;
 
     protected void onPreExecute(){
         super.onPreExecute();
@@ -38,11 +40,14 @@ public class GoogleImage extends AsyncTask<Object,Void,Bitmap> {
         //    iv = (ImageView) params[0];
         //}
         if(params.length > 1) {
-            if (params[1] != null && params[1] instanceof ProgressDialog) {
+            if (params[1] instanceof ProgressDialog) {
                 progressBar = (ProgressDialog) params[1];
             }
             else if(params[1] instanceof MainActivity){
                 main = (MainActivity) params[1];
+            }
+            else if(params[1] instanceof ProfileActivity){
+                profile = (ProfileActivity) params[1];
             }
         }
         String url;
@@ -73,10 +78,18 @@ public class GoogleImage extends AsyncTask<Object,Void,Bitmap> {
             UserInfo.getInstance().setGoogleProfileBitMap(result);
         }
         else{
-            bmImage.setImageDrawable(main.getResources().getDrawable(R.drawable.profile));
-            //bmImage.setImageDrawable(main.getResources().getDrawable(R.));
-            main.notify();
-            bmImage.notify();
+            if(main != null) {
+                bmImage.setImageDrawable(main.getResources().getDrawable(R.drawable.profile));
+                //bmImage.setImageDrawable(main.getResources().getDrawable(R.));
+                main.notify();
+                bmImage.notify();
+            }
+            else if (profile != null){
+                bmImage.setImageDrawable(profile.getResources().getDrawable(R.drawable.profile));
+                //bmImage.setImageDrawable(main.getResources().getDrawable(R.));
+                profile.notify();
+                bmImage.notify();
+            }
         }
         //bmImage.notify();
         //notify();
