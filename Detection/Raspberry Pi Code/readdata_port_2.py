@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import serial, requests, time, json, io
-ser = serial.Serial('/dev/cu.usbmodem1411',  9600)
+port1 = '/dev/cu.usbmodem1411'
+port2 = '/dev/cu.usbmodem1421'
+ser = serial.Serial(port2,  9600)
 #url = 'http://detectionservices.herokuapp.com'
 url = 'http://localhost:3000'
 

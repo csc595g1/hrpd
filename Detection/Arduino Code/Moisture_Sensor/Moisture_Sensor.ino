@@ -14,6 +14,7 @@ To test view the output, point a serial monitor such as Putty at your Arduino.
 const int sensorMin = 0;     // sensor minimum
 const int sensorMax = 1024;  // sensor maximum
 const String serialNo = "X000LP8W23"; 
+const String sensorType = "water";
 
 int duration = 0; 
 int old_range = 2; 
@@ -49,7 +50,7 @@ void loop() {
    } 
    old_range = range; 
    
-   String json = "{\"sensor\":\"water\",\"time\":\"" + String(duration) + "\",\"level\":\"" + String(range) + "\",\"serialNo\":\"" + serialNo + "\",\"sensorReading\":\"" + sensorReading + "\",\"notification\":\"" + notification + "\"}";
+   String json = "{\"sensor\":\"" + sensorType + "\",\"time\":\"" + String(duration) + "\",\"level\":\"" + String(range) + "\",\"serialNo\":\"" + serialNo + "\",\"sensorReading\":\"" + sensorReading + "\",\"notification\":\"" + notification + "\"}";
 
     // post to serial port if not posted in last 30 minutes 
    if (to_send) {
