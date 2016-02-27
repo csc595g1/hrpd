@@ -85,7 +85,6 @@ public class SmartProductFragment extends Fragment {
             SmartProductListFragment fragment = (SmartProductListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
             fragment.updateSmartProducts();
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
