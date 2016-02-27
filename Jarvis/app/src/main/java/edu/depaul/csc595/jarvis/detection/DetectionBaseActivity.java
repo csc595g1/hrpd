@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
@@ -185,6 +186,9 @@ public class DetectionBaseActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            case R.id.nav_prevention:
+                goToActivity = new Intent(getApplicationContext(), PreventionActivity.class);
                 break;
             case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {

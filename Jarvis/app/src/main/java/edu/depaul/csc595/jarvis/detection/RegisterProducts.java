@@ -3,11 +3,15 @@ package edu.depaul.csc595.jarvis.detection;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,14 +23,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import butterknife.Bind;
 
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import edu.depaul.csc595.jarvis.Manifest;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent.SmartProduct;
 import retrofit2.Call;
@@ -42,7 +47,7 @@ public class RegisterProducts extends AppCompatActivity {
     @Bind(R.id.rb_sensors)
     RadioGroup rb_sensors;
 
-    @Bind(R.id.scan_button)
+    @Bind(R.id.scanner)
     Button scanBtn;
 
     @Bind(R.id.appliance_name)
@@ -52,6 +57,8 @@ public class RegisterProducts extends AppCompatActivity {
 
     String email;
 
+    static final String ACTION_SCAN = "com.google.zxing.client.android.SCAN";
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 42;
 
     private TextView formatTxt, contentTxt;
 
@@ -68,6 +75,13 @@ public class RegisterProducts extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra(DetectionBaseActivity.EMAIL_EXTRA);
         Log.d(LOG_TAG, "Email" + email);
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != getPackageManager().PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA},
+                    MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            Log.d(LOG_TAG, "Permissions already granted");
+        }
     }
 
     @Override
@@ -176,6 +190,91 @@ public class RegisterProducts extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    @OnClick(R.id.scanner)
+    public void scanBar(View v){
+
+        new IntentIntegrator(this).initiateScan();
+//        try {
+//            Intent intent = new Intent(ACTION_SCAN);
+//            intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+//            startActivityForResult(intent, 0);
+//        } catch (ActivityNotFoundException e){
+//            showDialog(RegisterProducts.this, "No Scanner Found",
+//                    "Download a scanner code activity?", "Yes", "No").show();
+//        }
+
+    }
+
+//    public void scanQR(View v){
+//
+//        try {
+//            Intent intent = new Intent(ACTION_SCAN);
+//            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+//            startActivityForResult(intent, 0);
+//        } catch (ActivityNotFoundException e){
+//            showDialog(RegisterProducts.this, "No Scanner Found",
+//                    "Download a scanner code activity?", "Yes", "No").show();
+//        }
+//
+//    }
+
+    private static AlertDialog showDialog(final AppCompatActivity act, CharSequence title, CharSequence message, CharSequence buttonYes, CharSequence buttonNo){
+
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(buttonYes,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+//                                Uri uri = Uri.parse("market://search?q=pname:" + "com.google.zxing.client.android");
+                                Uri uri = Uri.parse("http://play.google.com/store/apps/details?id=" + "com.google.zxing.client.android");
+//                                Uri uri = Uri.parse("market://details?id=" + "com.google.zxing.client.android");
+
+                                Log.d(LOG_TAG, "URI: " + uri);
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(uri);
+                                try {
+                                    Log.d(LOG_TAG, "About to start activity for market");
+                                    act.startActivity(intent);
+                                } catch (ActivityNotFoundException e) {
+                                    Log.d(LOG_TAG, "Market: Zwing package not found");
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                .setNegativeButton(buttonNo,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }
+
+                );
+
+        return downloadDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent){
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.d(LOG_TAG, "Cancelled scan");
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Log.d(LOG_TAG, "Scanned");
+                et_barcode.setText(result.getContents());
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            // This is important, otherwise the result will not be passed to the fragment
+            super.onActivityResult(requestCode, resultCode, intent);
+        }
     }
 
     @Override
