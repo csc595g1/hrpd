@@ -27,7 +27,7 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
 import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
         tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
         tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-        iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
@@ -125,11 +125,20 @@ public class MainActivity extends AppCompatActivity
             //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
             try {
                 //iv_image.setImageBitmap();
+                boolean photonotnull = false;
+                try{
+                    String testString = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
+                    photonotnull = true;
+                }
+                catch(NullPointerException e){}
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName().trim());
+                if(photonotnull){
                 //test google image
+                iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
                 GoogleImage gi = new GoogleImage();
                 gi.execute(iv_image,MainActivity.this);
+                }
 //                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
 //                tv_logout.setOnClickListener(new View.OnClickListener() {
 //                    @Override

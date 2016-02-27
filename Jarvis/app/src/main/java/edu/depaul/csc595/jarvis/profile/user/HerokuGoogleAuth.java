@@ -53,9 +53,12 @@ public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
             if(params[0] instanceof ProgressDialog){
                 dialog = (ProgressDialog) params[0];
             }
+            else if(params[0] instanceof LogInActivity){
+                logInActivity = (LogInActivity) params[0];
+            }
         }
 
-        if(params[1] != null){
+        if(params.length > 1){
             if(params[1] instanceof SplashActivity){
                 splashActivity = (SplashActivity) params[1];
             }
@@ -144,6 +147,11 @@ public class HerokuGoogleAuth extends AsyncTask<Object, Void, Void> {
             Intent intent = new Intent(splashActivity, MainActivity.class);
             splashActivity.startActivity(intent);
             splashActivity.finish();
+        }
+        else if(logInActivity != null){
+            Intent intent = new Intent(logInActivity,ProfileActivity.class);
+            logInActivity.startActivity(intent);
+            logInActivity.finish();
         }
         super.onPostExecute(result);
     }

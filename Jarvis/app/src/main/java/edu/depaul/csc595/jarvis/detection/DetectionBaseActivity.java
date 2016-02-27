@@ -16,9 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
@@ -26,13 +28,31 @@ import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
+import butterknife.Bind;
+
 
 public class DetectionBaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private View headerLayout;
     private TextView tv_email;
     private TextView tv_name;
     private String email;
+
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+
+    @Bind(R.id.viewpager)
+    ViewPager viewPager;
+
+    @Bind(R.id.tabs)
+    TabLayout tabLayout;
 
     public static String EMAIL_EXTRA = "Email Address";
 
@@ -48,27 +68,25 @@ public class DetectionBaseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         super.setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_detection_base);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ButterKnife.bind(this);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         drawer.setEnabled(true);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_detection);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new DetectionFragmentPagerAdapter(getSupportFragmentManager()));
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override
@@ -136,13 +154,6 @@ public class DetectionBaseActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void goToRegisterProduct(View v){
-        Log.d(LOG_TAG, "I got here");
-        Intent intent = new Intent(DetectionBaseActivity.this, RegisterProducts.class);
-        intent.putExtra(EMAIL_EXTRA, email);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -175,6 +186,9 @@ public class DetectionBaseActivity extends AppCompatActivity
                 break;
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            case R.id.nav_prevention:
+                goToActivity = new Intent(getApplicationContext(), PreventionActivity.class);
                 break;
             case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {

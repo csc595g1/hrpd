@@ -72,7 +72,7 @@
 
     <string name="enter_barcode">Enter Barcode</string>
     <string name="or">or</string>
-    <string name="barcode_number">Barcode Number</string>
+    <string name="barcode_number">Barcode</string>
 
     <string name="add_a_smart_product">Add A Smart Product</string>
     <string name="add_a_reminder">Add a Reminder</string>
@@ -82,6 +82,7 @@
     <string name="rb_smoke_sensor">Smoke</string>
     <string name="rb_water_sensor">Water</string>
     <string name="rb_moisture_sensor">Moisture</string>
+    <string name="choose_appliance">Choose An Appliance    ></string>
 
     <string name="button_enter">Register Product</string>
 
