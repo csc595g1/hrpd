@@ -66,8 +66,9 @@
 
         </activity>
 
+        <!-- This is for Appliances -->
         <activity
-            android:name=".inventory.AppliancesActivity"
+            android:name=".inventory.main.AppliancesActivity"
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
