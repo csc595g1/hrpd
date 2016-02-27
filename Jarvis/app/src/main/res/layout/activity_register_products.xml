@@ -80,14 +80,14 @@
             android:paddingBottom="15dp"/>
 
         <Button
-            android:id="@+id/scan_button"
+            android:id="@+id/scanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Scan Barcode"
             android:textStyle="bold"
             android:backgroundTint="@color/default_colour_grey"
             android:textColor="@color/black"
-            android:onClick="submitForm"/>
+            />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -111,6 +111,7 @@
                 android:text="@string/button_enter"
                 android:layout_alignParentEnd="true"
                 android:textStyle="bold"
+                android:onClick="submitForm"
                 style="@style/AppTheme.ButtonStyle.Red"
                 />
 
@@ -126,5 +127,3 @@
 
 
 </LinearLayout>
-
-
