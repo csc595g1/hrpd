@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:background="#C5CAE9"
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <!-- android:layout_height="80dp" -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,31 +29,46 @@
             android:src="@drawable/app_6" />
 
         <TextView
-            android:id="@+id/list_title"
+            android:id="@+id/appliances_card_title"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/list_avatar"
-            android:text="Android "
+            android:text="This is Title"
             android:textStyle="bold"
             android:textColor="#000000"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/list_desc"
+            android:id="@+id/appliances_card_reminder_interval"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_title"
+            android:layout_below="@+id/appliances_card_title"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/list_avatar"
             android:textColor="#000000"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="Place to dive into android programming"
+            android:text="time interval"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/appliances_card_next_reminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appliances_card_reminder_interval"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/list_avatar"
+            android:textColor="#000000"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="upcoming reminder"
+            android:textStyle="italic"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="12sp" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

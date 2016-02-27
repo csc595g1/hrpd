@@ -36,7 +36,7 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerViewHolder> {
             "Tree Trimming"
     };
 
-    String [] reminder_time = {
+    String [] reminder_interval = {
             "at least once a month",
             "at least twice a year",
             "at least once a month",
@@ -54,6 +54,26 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerViewHolder> {
             "once every three months",
             "at least twice a year",
             "at least once a month"
+    };
+
+    String [] next_reminder_time = {
+            "next reminder would be on March'03 2016",
+            "next reminder would be on June'01 2016",
+            "next reminder would be on March'10 2016",
+            "next reminder would be on May'01 2016",
+            "next reminder would be on March'15 2016",
+            "next reminder would be on March'01 2016",
+            "next reminder would be on May'15 2016",
+            "next reminder would be on August'15 2016",
+            "next reminder would be on March'01 2016",
+            "next reminder would be on March'05 2016",
+            "next reminder would be on July'05 2016",
+            "next reminder would be on June'08 2016",
+            "next reminder would be on July'01 2016",
+            "next reminder would be on August'05 2016",
+            "next reminder would be on April'05 2016",
+            "next reminder would be on June'10 2016",
+            "next reminder would be on March'15 2016"
     };
 
     Context context;
@@ -77,8 +97,9 @@ public class RecyclerAdapter extends  RecyclerView.Adapter<RecyclerViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
 
-        holder.tv1.setText(name[position]);
-        holder.tv2.setText(reminder_time[position]);
+        holder.appliancesTitle.setText(name[position]);
+        holder.appliancesTimeInterval.setText(reminder_interval[position]);
+        holder.appliancesNextReminder.setText(next_reminder_time[position]);
         holder.imageView.setOnClickListener(clickListener);
         holder.imageView.setTag(holder);
 
