@@ -82,8 +82,11 @@ public class SmartProductFragment extends Fragment {
         Log.d(LOG_TAG, " " + resultCode);
         if (resultCode == Activity.RESULT_OK) {
             Log.d(LOG_TAG, "resultCode == Activity.RESULT_OK");
-            SmartProductListFragment fragment = (SmartProductListFragment) getFragmentManager().findFragmentById(R.id.list_fragment);
-            fragment.updateSmartProducts();
+            SmartProductListFragment fragment = (SmartProductListFragment) getChildFragmentManager().findFragmentById(R.id.list_fragment);
+            Log.d(LOG_TAG, "fragment is" + fragment);
+            if (fragment != null){
+                fragment.updateSmartProducts();
+            }
         }
     }
 
