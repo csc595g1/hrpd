@@ -164,10 +164,10 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
             UserInfo.getInstance().signInWithGoogle(account,getBaseContext());
             //send heroku info
             HerokuGoogleAuth heroku = new HerokuGoogleAuth();
-            heroku.execute();
-            Intent intent = new Intent(LogInActivity.this,ProfileActivity.class);
-            startActivity(intent);
-            finish();
+            heroku.execute(LogInActivity.this);
+//            Intent intent = new Intent(LogInActivity.this,ProfileActivity.class);
+//            startActivity(intent);
+//            finish();
         }
     }
 
