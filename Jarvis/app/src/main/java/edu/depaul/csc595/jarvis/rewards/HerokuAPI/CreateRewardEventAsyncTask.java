@@ -32,9 +32,14 @@ final String TAG = "asynctaskcreatereward";
         if(params[0].getClass().getSuperclass() == Activity.class){
             activity = (Activity)params[0];
         }
+        else if (params[0] instanceof CreateRewardEventModel){
+            model = (CreateRewardEventModel)params[0];
+        }
 
-        if(params[1] instanceof CreateRewardEventModel){
-            model = (CreateRewardEventModel)params[1];
+        if(params.length > 1) {
+            if (params[1] instanceof CreateRewardEventModel) {
+                model = (CreateRewardEventModel) params[1];
+            }
         }
         try {
             JSONObject output = new JSONObject();

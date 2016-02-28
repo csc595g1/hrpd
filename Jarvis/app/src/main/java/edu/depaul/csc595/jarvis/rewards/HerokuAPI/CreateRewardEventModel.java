@@ -42,5 +42,12 @@ public class CreateRewardEventModel {
         this.title = title;
     }
 
+    public CreateRewardEventModel(String userId, String eventCategory, int units, String title){
+        this.userId = userId;
+        this.eventCategory = eventCategory;
+        this.units = units;
+        this.title = title;
+    }
 
+    public CreateRewardEventModel(){}
 }
