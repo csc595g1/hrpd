@@ -68,7 +68,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout2"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout3">
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,5 +85,14 @@
             android:text="0"
             android:id="@+id/frag_prof_points" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Register Device"
+        android:id="@+id/register_device_button"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
