@@ -1,29 +1,48 @@
 // Lowest and highest sensor readings:
 const int sensorMin = 0;     // Sensor minimum
 const int sensorMax = 1024;  // Sensor maximum
+const String serialNo = "X000QCX44H"; 
+const String sensorType = "fire";
+
+
+int duration = 0; 
+int old_range = 2; 
 
 void setup() {
   // Initialize serial communication @ 9600 baud:
   Serial.begin(9600);  
 }
 void loop() {
-  // Read the sensor on analog A0:
-	int sensorReading = analogRead(A0);
-  // Map the sensor range (four options):
-  // Ex: 'long int map(long int, long int, long int, long int, long int)'
-	int range = map(sensorReading, sensorMin, sensorMax, 0, 3);
-  
-  // Range value:
-  switch (range) {
-  case 0:    // A fire closer than 1.5 feet away.
-    Serial.println("Fire Alert!");
-    break;
-  case 1:    // A fire between 1-3 feet away.
-    Serial.println("Fire Alert!");
-    break;
-  case 2:    // No fire detected.
-    Serial.println("No Fire!");
-    break;
-  }
-  delay(1000);  // Delay between reads.
+  // read the sensor on analog A0:
+  int sensorReading = analogRead(A0);
+  // map the sensor range (four options):
+  // ex: 'long int map(long int, long int, long int, long int, long int)'
+  int range = map(sensorReading, sensorMin, sensorMax, 0, 3);
+
+   if (range == old_range) {
+      duration = duration + 1; 
+   } else {
+      duration = 0;
+   }
+
+   String notification; 
+   boolean to_send = false; 
+    
+   if (range < 2) {
+      notification = "Fire Alert";
+      to_send = true; 
+   } else if (old_range < 2 && range == 2) {
+      notification = "Good news: Fire Has Died Down";
+      to_send = false; 
+   } 
+   old_range = range; 
+   
+   String json = "{\"sensor\":\"" + sensorType + "\",\"time\":\"" + String(duration) + "\",\"level\":\"" + String(range) + "\",\"serialNo\":\"" + serialNo + "\",\"sensorReading\":\"" + sensorReading + "\",\"notification\":\"" + notification + "\"}";
+
+    // post to serial port if not posted in last 30 minutes 
+   if (to_send) {
+     Serial.println(json); 
+     delay(1000); 
+   }
+  delay(1);  // delay between reads
 }

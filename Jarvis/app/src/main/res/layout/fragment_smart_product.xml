@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightBlue"
+    tools:context="edu.depaul.csc595.jarvis.detection.SmartProductFragment">
+
+    <fragment android:id="@+id/list_fragment"
+        android:name="edu.depaul.csc595.jarvis.detection.SmartProductListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:layout_weight="1"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:theme="@style/AppTheme.FloatingButton.Red"
+        android:src="@drawable/ic_add" >
+
+    </android.support.design.widget.FloatingActionButton>
+
+
+
+</LinearLayout>

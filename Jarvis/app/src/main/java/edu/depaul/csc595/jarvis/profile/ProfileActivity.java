@@ -25,8 +25,9 @@ import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
@@ -39,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     private TextView tv_name;
     private TextView tv_logout;
     private ImageView iv_image;
+    private ImageView iv_image_profile;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -102,7 +104,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
 
     protected void onStart(){
         super.onStart();
-        Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
+        Log.d("Profile", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
             tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
@@ -111,37 +113,41 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
            // tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-            //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
-            //tv_logout.setOnClickListener(new View.OnClickListener() {
-            //    @Override
-            //    public void onClick(View v) {
-            //        UserInfo.getInstance().logOutUser(MainActivity.this);
-             //       ProfileActivity.this.recreate();
-             //   }
-            //});
+
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
             try {
+                //iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+               // iv_image_profile = (ImageView)findViewById(R.id.imageView_profile);
                 tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
                 tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
-//                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
-//                tv_logout.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        UserInfo.getInstance().signOutWithGoogle();
-//                        MainActivity.this.recreate();
-//                    }
-//                });
+
+                boolean photonotnull = false;
+                try{
+                    String test = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
+                    photonotnull = true;
+                }
+                catch (NullPointerException e){}
+                if(photonotnull) {
+                    //google image
+                    iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+                    iv_image_profile = (ImageView)findViewById(R.id.imageView_profile);
+                    GoogleImage img = new GoogleImage();
+                    img.execute(iv_image, ProfileActivity.this);
+                    GoogleImage img2 = new GoogleImage();
+                    img2.execute(iv_image_profile, ProfileActivity.this);
+                }
+
             }
             catch(NullPointerException e){
-                tv_logout.setText(" ");
+                //tv_logout.setText(" ");
             }
         }
         else{
-            tv_logout.setText(" ");
+            //tv_logout.setText(" ");
         }
     }
 

@@ -11,6 +11,7 @@
     <color name="darkBlue">#1D68B9</color>
     <color name="orange">#cf7f00</color>
     <color name="red">#cf0027</color>
+    <color name="lightRed">@android:color/holo_red_light</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="offwhite">#F0F0F0</color>

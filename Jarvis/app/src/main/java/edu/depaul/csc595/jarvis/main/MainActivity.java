@@ -27,12 +27,13 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
-import edu.depaul.csc595.jarvis.inventory.AppliancesActivity;
+import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
 import edu.depaul.csc595.jarvis.prevention.homescreen.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
+import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
@@ -73,10 +74,10 @@ public class MainActivity extends AppCompatActivity
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
         //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
-        tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+        //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
         tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
         tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-        iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+
 
         if (checkPlayServices()) {
             // Start IntentService to register this application with GCM.
@@ -108,38 +109,51 @@ public class MainActivity extends AppCompatActivity
 //            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
 //            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
             //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-            tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
+            //tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
             //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
-            tv_logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    UserInfo.getInstance().logOutUser(MainActivity.this);
-                    MainActivity.this.recreate();
-                }
-            });
+//            tv_logout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    UserInfo.getInstance().logOutUser(MainActivity.this);
+//                    MainActivity.this.recreate();
+//                }
+//            });
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
             try {
+                //iv_image.setImageBitmap();
+                boolean photonotnull = false;
+                try{
+                    String testString = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
+                    photonotnull = true;
+                }
+                catch(NullPointerException e){}
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
-                tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
-                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
-                tv_logout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UserInfo.getInstance().signOutWithGoogle();
-                        MainActivity.this.recreate();
-                    }
-                });
+                tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName().trim());
+                if(photonotnull){
+                //test google image
+                iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+                GoogleImage gi = new GoogleImage();
+                gi.execute(iv_image,MainActivity.this);
+                }
+//                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
+//                tv_logout.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        UserInfo.getInstance().signOutWithGoogle();
+//                        MainActivity.this.recreate();
+//                    }
+//                });
             }
             catch(NullPointerException e){
                 tv_logout.setText(" ");
             }
         }
         else{
-            tv_logout.setText(" ");
+            //tv_logout.setText(" ");
         }
     }
 

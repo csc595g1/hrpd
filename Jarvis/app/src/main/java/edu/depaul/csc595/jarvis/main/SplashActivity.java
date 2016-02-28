@@ -47,71 +47,80 @@ public class SplashActivity extends AppCompatActivity implements GoogleApiClient
     @Override
     protected void onStart(){
         super.onStart();
-        Log.d(TAG, "onCreate: in onStart ");
-        //try heroku auth first then google.
-        User user = UserInfo.getInstance().getUserForSplash(this.getBaseContext());
-        //check if null
-        if (user != null) {
-            Log.d(TAG, "onCreate user is not null");
-            //use credentials and send to server for auth
-            HerokuLogin hlogin = new HerokuLogin();
-            hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
-        }
-        else {
-            UserInfo.getInstance().setLoggedIn(false);
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestEmail()
-                    .requestProfile()
-                    .build();
-            mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
-            OptionalPendingResult<GoogleSignInResult> pendingResult =
-                    Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-            if (pendingResult.isDone()) {
-                GoogleSignInAccount account = pendingResult.get().getSignInAccount();
-                if (null == account.getEmail()) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                doGoogleAuth(account);
-                //insert call to heroku to give google email
-                HerokuGoogleAuth heroku = new HerokuGoogleAuth();
-                heroku.execute();
+
+        /*
+        * workflow for splash:
+        * 1. try to log in with google
+        * 2. if success, set singleton class and send to main
+        * 3. if fail, try to log into heroku auth
+        * 4. if success, set singleton class and send to main
+        * 5. if fail, send to main with login status set to false
+        */
+
+        //reset all flags
+        UserInfo.getInstance().signOutWithGoogle();
+        UserInfo.getInstance().setLoggedIn(false);
+
+        //try google auth
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestProfile()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+        OptionalPendingResult<GoogleSignInResult> pendingResult =
+                Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+        Log.d(TAG, "onStart pending result isdone" + pendingResult.isDone());
+        if (pendingResult.isDone()) {
+            GoogleSignInAccount account = pendingResult.get().getSignInAccount();
+            if (null == account.getEmail()) {
+                Log.d(TAG, "onStart account is null");
+                //something went wrong and sending to main with no auth
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-            } else {
-                pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                    @Override
-                    public void onResult(GoogleSignInResult googleSignInResult) {
-                        UserInfo.getInstance().setLoggedIn(false);
-                        GoogleSignInAccount account = googleSignInResult.getSignInAccount();
-                        //if(account.getDisplayName() == null){
-                        try {
-                            String testNull = account.getDisplayName();
-                            testNull = account.getEmail();
-                            doGoogleAuth(account);
-                            //insert google auth
-                            HerokuGoogleAuth heroku = new HerokuGoogleAuth();
-                            heroku.execute();
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } catch (NullPointerException e) {
-                            UserInfo.getInstance().signOutWithGoogle();
-                            UserInfo.getInstance().setLoggedIn(false);
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        //}
-                    }
-                });
+                //just putting in returns to stop code execution
+                return;
             }
+            else{
+                Log.d(TAG, "onStart setting google auth after successful google login");
+                doGoogleAuth(account);
+                ProgressDialog dialog = new ProgressDialog(SplashActivity.this);
+                dialog.setTitle("Signing in");
+                dialog.setMessage("Signing in");
+                dialog.show();
+                HerokuGoogleAuth heroku = new HerokuGoogleAuth();
+                heroku.execute(dialog,SplashActivity.this);
+//                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                finish();
+                //just putting this in to ensure that code execution stops after finish.
+                return;
+            }
+        }
+        //end google auth
+
+        Log.d(TAG, "onStart googleauth bypassed");
+        //now try heroku auth if google fails
+        //try to get user info from DB
+        User user = UserInfo.getInstance().getUserForSplash(this.getBaseContext());
+
+        //check if null
+        if (user == null || null == user.getEmail()){
+            //send with no auth
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+        else{
+            //do heroku login async task if user info pulled from db
+            HerokuLogin hlogin = new HerokuLogin();
+            hlogin.execute(this, this.getBaseContext(), user.getEmail(), user.getPw());
         }
     }
 
     private void doGoogleAuth(GoogleSignInAccount account){
+        Log.d(TAG, "doGoogleAuth in doGoogleAuth");
         UserInfo.getInstance().signInWithGoogle(account, getBaseContext());
         //dialog = new ProgressDialog(SplashActivity.this);
         //dialog.setMessage("Loading...");

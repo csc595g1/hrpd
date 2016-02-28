@@ -66,6 +66,10 @@
         <item name="android:clickable">true</item>
     </style>
 
+    <style name="AppTheme.ButtonStyle.Red">
+        <item name="android:background">@drawable/button_red</item>
+    </style>
+
     <!-- Toggle Button-->
     <style name="AppTheme.ToggleButton" parent="@android:style/Widget.Holo.Button.Borderless">
         <item name="android:background">@drawable/toggle_selector</item>

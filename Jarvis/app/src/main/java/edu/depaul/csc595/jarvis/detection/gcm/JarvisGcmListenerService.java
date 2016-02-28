@@ -24,6 +24,7 @@ public class JarvisGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
+        Log.d(TAG, "Got message from GCM");
         Log.d(TAG, "Message = " + message);
         createNotification(from, message);
     }
