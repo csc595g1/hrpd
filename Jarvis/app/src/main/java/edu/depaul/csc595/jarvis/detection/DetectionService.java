@@ -82,13 +82,13 @@ public class DetectionService {
         Call<MobileDevice> registerGCMTokenCall = detectionInterface.registerGCMToken("test2@test.com", "my_test_token_from_retrofit");
         MobileDevice mobileDevice = registerGCMTokenCall.execute().body();
         if (mobileDevice != null){
-            System.out.print("GCM Token: " + mobileDevice.gcm_token);
+            //System.out.print("GCM Token: " + mobileDevice.gcm_token);
         }
 
         Call<MobileDevice> updateGCMTokenCall = detectionInterface.updateGCMToken("my_test_token_from_retrofit", "my_updated_test_token_from_retrofit");
         MobileDevice updatedMobileDevice = updateGCMTokenCall.execute().body();
         if (updatedMobileDevice != null){
-            System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
+            //System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
         }
 
 
