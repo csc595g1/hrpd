@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="edu.depaul.csc595.jarvis.detection.AddTriggers">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="12dp">
+
+        <EditText
+            android:id="@+id/name_of_action"
+            android:layout_width="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:hint="@string/field_label_name_of_action"/>
+
+    </LinearLayout>
+
+
+    <include layout="@layout/border_thin_gray"/>
+
+    <LinearLayout
+        android:id="@+id/linear_when"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/text_when"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/field_label_when"
+            />
+        <TextView
+            android:id="@+id/text_next"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/button_next"
+            />
+
+    </LinearLayout>
+
+
+    <include layout="@layout/border_thin_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/field_label_how_long"/>
+        />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/button_next"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/border_thin_gray"/>
+
+    <LinearLayout
+        android:id="@+id/linear_take_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/text_take_action"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/field_label_take_this_action"/>
+        />
+        <TextView
+            android:id="@+id/text_next3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            style="@style/AppTheme.TextHeading.NoCaps.Blue"
+            android:text="@string/button_next"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/border_thin_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="10dp">
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+
+

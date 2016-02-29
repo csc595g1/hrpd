@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <RelativeLayout
+        style="@style/AppTheme.DetailBox">
+
+        <!-- Top Bar -->
+        <LinearLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <RelativeLayout
+                style="@style/AppTheme.CategoryBox.Triggers">
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Fire"
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="70dp"
+                    android:layout_height="3dp"
+                    android:layout_alignBottom="@+id/tv_category"
+                    android:layout_alignStart="@+id/tv_category"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="JAN 3"
+                    android:textAllCaps="true" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/tv_notification"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:padding="10dp"
+                android:layout_marginRight="@dimen/activity_vertical_margin"
+                android:text="Notify me on smoke"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <!-- End Top Bar -->
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

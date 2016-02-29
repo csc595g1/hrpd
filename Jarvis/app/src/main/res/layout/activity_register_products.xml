@@ -1,0 +1,129 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        tools:context="edu.depaul.csc595.jarvis.detection.RegisterProducts">
+        <RadioGroup
+            android:id="@+id/rb_sensors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp">
+
+            <RadioButton
+                android:id="@+id/rb_smoke_sensor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingLeft="10dp"
+                android:text="@string/rb_smoke_sensor"
+                android:checked="true"
+                style="@style/AppTheme.TextHeading.NoCaps.Black"/>
+
+
+            <RadioButton
+                android:id="@+id/rb_water_sensor"
+                android:layout_width="fill_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_water_sensor"
+                style="@style/AppTheme.TextHeading.NoCaps.Black"
+                />
+            <RadioButton
+                android:id="@+id/rb_moisture_sensor"
+                android:layout_width="fill_parent"
+                android:paddingLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_moisture_sensor"
+                style="@style/AppTheme.TextHeading.NoCaps.Black"
+                />
+
+        </RadioGroup>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/appliance_name"
+            android:hint="@string/choose_appliance"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:background="@color/grey_100"
+            android:padding="10dp"
+            style="@android:style/Widget.EditText"
+            />
+
+
+        <EditText
+            android:id="@+id/edit_barcode_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_below="@+id/rb_sensors"
+            android:ems="10"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:hint="@string/barcode_number"
+            android:paddingBottom="15dp"/>
+
+        <Button
+            android:id="@+id/scanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan Barcode"
+            android:textStyle="bold"
+            android:backgroundTint="@color/default_colour_grey"
+            android:textColor="@color/black"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:backgroundTint="@color/offwhite"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:layout_alignParentStart="true"
+                android:onClick="submitForm"/>
+            <Button
+                android:id="@+id/button_enter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_enter"
+                android:layout_alignParentEnd="true"
+                android:textStyle="bold"
+                android:onClick="submitForm"
+                style="@style/AppTheme.ButtonStyle.Red"
+                />
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

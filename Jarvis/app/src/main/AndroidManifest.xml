@@ -5,21 +5,42 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <permission android:name="edu.depaul.csc595.jarvis.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="edu.depaul.csc595.jarvis.permission.C2D_MESSAGE" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
+        android:name=".prevention.ehelp.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
+            android:name=".main.SplashActivity"
+            android:label="@string/title_activity_splash" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".detection.RegisterProducts"
+            android:label="@string/title_activity_register_products" >
         </activity>
         <activity
             android:name=".rewards.RewardsActivity"
@@ -32,12 +53,26 @@
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".prevention.PreventionActivity"
+            android:name=".reminders.ReminderActivity"
+            android:label="@string/title_activity_reminder"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- For Prevention -->
+        <activity
+            android:name=".prevention.homescreen.PreventionActivity"
             android:label="@string/title_activity_prevention"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".prevention.ehelp.main.EHelpMainActivity"
+            android:label="E-Help"
+            android:parentActivityName=".prevention.homescreen.PreventionActivity">
+
+        </activity>
+
+        <!-- This is for Appliances -->
         <activity
-            android:name=".inventory.AppliancesActivity"
+            android:name=".inventory.main.AppliancesActivity"
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -68,6 +103,77 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
+
+        <!-- This for Allstate Reminder -->
+        \
+
+        <activity android:name=".reminders.CustomReminderActivity"
+            android:label="Custom Reminder"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".reminders.ui.activities.CreateEditActivity"></activity>
+        <activity android:name=".reminders.ui.activities.ViewActivity"></activity>
+        <activity android:name=".reminders.ui.activities.PreferenceActivity"></activity>
+        <activity
+            android:name=".detection.DetectionBaseActivity"
+            android:label="@string/title_activity_detection_base" >
+        </activity>
+        <receiver android:name=".reminders.receivers.AlarmReceiver" />
+
+        <receiver android:name=".reminders.receivers.BootReceiver" />
+
+        <receiver android:name=".reminders.receivers.SnoozeActionReceiver" />
+
+        <receiver android:name=".reminders.receivers.DismissReceiver" />
+
+        <receiver
+            android:name=".reminders.receivers.BootReceiver" />
+
+
+        <!-- [START gcm_receiver] -->
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="gcm.play.android.samples.com.gcmquickstart" />
+            </intent-filter>
+        </receiver>
+        <!-- [END gcm_receiver] -->
+
+        <!-- [START gcm_listener] -->
+        <service
+            android:name="edu.depaul.csc595.jarvis.detection.gcm.JarvisGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <!-- [END gcm_listener] -->
+
+        <!-- [START instanceId_listener] -->
+        <service
+            android:name="edu.depaul.csc595.jarvis.detection.gcm.JarvisInstanceIdListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <!-- [END instanceId_listener] -->
+
+        <service
+            android:name=".detection.gcm.TokenIntentService"
+            android:exported="false">
+        </service>
+
+        <service
+            android:name=".detection.gcm.TokenUpdateIntentService"
+            android:exported="false">
+        </service>
+
+
+
     </application>
 
 </manifest>

@@ -1,0 +1,59 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+    <CheckBox
+        android:id="@+id/checkbox_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rb_email"
+        android:paddingLeft="15dp"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"/>
+    <CheckBox
+        android:id="@+id/checkbox_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rb_text_me"
+        android:paddingLeft="15dp"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rb_notify_me"
+        style="@style/AppTheme.TextHeading.NoCaps.Blue"
+        android:paddingLeft="15dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/light_gray"/>
+    <Button
+        android:id="@+id/button_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done"/>
+
+
+
+</LinearLayout>
+

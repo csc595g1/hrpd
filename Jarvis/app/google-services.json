@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "jarvis-68c9e",
+    "project_number": "610693176944",
+    "name": "Jarvis"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610693176944:android:b73239a122288531",
+        "client_id": "android:edu.depaul.csc595.jarvis",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "edu.depaul.csc595.jarvis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356812464570-hj4h6q8tsd5kefcgn49lu5eb3anbmtho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.depaul.csc595.jarvis",
+            "certificate_hash": "410D06757456DD05D3703E8FAF3936257CA4D4DB"
+          }
+        },
+        {
+          "client_id": "356812464570-af5oh6m0ht3fj8i76qbqd60il0pg6na0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

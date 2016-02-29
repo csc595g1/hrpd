@@ -6,30 +6,49 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:title="@string/action_home" />
-        <item
-            android:id="@+id/nav_rewards"
-            android:icon="@drawable/ic_menu_rewards"
-            android:title="@string/action_rewards" />
-        <item
-            android:id="@+id/nav_prevention"
-            android:icon="@drawable/ic_menu_prevention"
-            android:title="@string/action_prevention" />
-        <item
-            android:id="@+id/nav_appliances"
-            android:icon="@drawable/ic_menu_appliances"
-            android:title="@string/action_appliances" />
+
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_profile"
             android:title="@string/action_profile" />
+
+        <item
+            android:id="@+id/nav_detection"
+            android:icon="@drawable/robot_white"
+            android:title="@string/action_detection" />
+
+        <item
+            android:id="@+id/nav_rewards"
+            android:icon="@drawable/ic_menu_rewards"
+            android:title="@string/action_rewards" />
+
+        <item
+            android:id="@+id/nav_appliances"
+            android:icon="@drawable/ic_menu_appliances"
+            android:title="@string/action_appliances" />
+
+        <item
+            android:id="@+id/nav_reminder"
+            android:icon="@android:drawable/ic_popup_reminder"
+            android:title="@string/action_reminder" />
+
+        <item
+            android:id="@+id/nav_prevention"
+            android:icon="@android:drawable/ic_menu_help"
+            android:title="@string/action_prevention" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_menu_settings"
                 android:title="@string/action_settings" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="Logout" />
         </menu>
     </item>
 

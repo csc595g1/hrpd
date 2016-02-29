@@ -36,6 +36,9 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventAsyncTask;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
 
 public class RewardsActivity extends AppCompatActivity {
 
@@ -72,7 +75,7 @@ public class RewardsActivity extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -93,7 +96,21 @@ public class RewardsActivity extends AppCompatActivity {
 
 //        rewards.sendGET();
 
-
+        //test async
+        CreateRewardEventModel event = new CreateRewardEventModel();
+        event.setEventCategory("test");
+        event.setTitle("testevent25");
+        event.setUnits(6);
+        if(UserInfo.getInstance().isGoogleLoggedIn()) {
+            event.setUserId(UserInfo.getInstance().getGoogleAccount().getEmail());
+            CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
+            task.execute(this,event);
+        }
+        else if(UserInfo.getInstance().getIsLoggedIn()) {
+            event.setUserId(UserInfo.getInstance().getCredentials().getEmail());
+            CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
+            task.execute(this, event);
+        }
     }
 
 
@@ -220,8 +237,12 @@ public class RewardsActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-
-            return PlaceholderFragment.newInstance(position + 1);
+            switch(position) {
+                case 1:
+                    return new RewardBalanceFragment();
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
 
