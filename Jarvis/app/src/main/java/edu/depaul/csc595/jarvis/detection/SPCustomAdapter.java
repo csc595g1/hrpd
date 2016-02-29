@@ -50,6 +50,11 @@ public class SPCustomAdapter extends BaseAdapter {
         return position;
     }
 
+
+    public List<SmartProduct> getList(){
+        return this.smart_products;
+    }
+
     public class Holder {
         TextView tv_category;
         TextView tv_date;

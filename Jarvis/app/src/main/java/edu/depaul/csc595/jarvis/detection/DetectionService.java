@@ -80,7 +80,7 @@ public class DetectionService {
         Call<MobileDevice> registerGCMTokenCall = detectionInterface.registerGCMToken("thuxtable@gmail.com", "fuymvlouXLE:APA91bGdJnJhf46aZi4pCQlTy1wFlpneMzsXO_vU9kFY94t8di8CYlLQAVEXqU7YLzWD_05UmXKIUsLla8tQPEwGJrI28uhOQKSCj-IrEAoL9emqA3fg_FIpl5SyT5DKs52OvSj9fx_S");
         MobileDevice mobileDevice = registerGCMTokenCall.execute().body();
         if (mobileDevice != null){
-            System.out.print("GCM Token: " + mobileDevice.gcm_token);
+            //System.out.print("GCM Token: " + mobileDevice.gcm_token);
         }
 
         Call<MobileDevice> registerGCMTokenCall2 = detectionInterface.registerGCMToken("test2@test.com", "my_test_token_from_retrofit");
@@ -92,7 +92,7 @@ public class DetectionService {
         Call<MobileDevice> updateGCMTokenCall = detectionInterface.updateGCMToken("my_test_token_from_retrofit", "my_updated_test_token_from_retrofit");
         MobileDevice updatedMobileDevice = updateGCMTokenCall.execute().body();
         if (updatedMobileDevice != null){
-            System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
+            //System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
         }
 //
 //

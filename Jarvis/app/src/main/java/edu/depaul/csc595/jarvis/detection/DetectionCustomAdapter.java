@@ -47,6 +47,9 @@ public class DetectionCustomAdapter extends BaseAdapter {
         return position;
     }
 
+    public List<Detection> getList(){
+        return detections;
+    }
     @Override
     public long getItemId(int position) {
         return position;
