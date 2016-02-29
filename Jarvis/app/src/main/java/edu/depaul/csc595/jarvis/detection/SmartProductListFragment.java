@@ -1,7 +1,10 @@
 package edu.depaul.csc595.jarvis.detection;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -46,7 +49,7 @@ public class SmartProductListFragment extends ListFragment {
     /**
      * The fragment's ListView
      */
-    private ListView mListView;
+    private ArrayList mListView;
     private Context mContext;
     private String email;
     private String LOG_TAG = "SmartProductListFragment";
@@ -68,6 +71,7 @@ public class SmartProductListFragment extends ListFragment {
         mAdapter = new SPCustomAdapter(getActivity(), SmartProductContent.ITEMS);
         setListAdapter(mAdapter);
         updateSmartProducts();
+        mContext = this.getActivity();
 
     }
 
@@ -96,8 +100,10 @@ public class SmartProductListFragment extends ListFragment {
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
 
         Log.d(LOG_TAG, "email: " + email);
+        String request_email = (email == null) ? "test1@test.com" : email;
+        Toast.makeText(getActivity(), "email is: " + email, Toast.LENGTH_SHORT).show();
 
-        Call<List<SmartProduct>> call = detectionInterface.smart_products("test1@test.com");
+        Call<List<SmartProduct>> call = detectionInterface.smart_products(request_email);
         call.enqueue(new Callback<List<SmartProduct>>() {
             @Override
             public void onResponse(Call<List<SmartProduct>> call, Response<List<SmartProduct>> response) {
@@ -111,6 +117,7 @@ public class SmartProductListFragment extends ListFragment {
                 }
                 mAdapter.clear();
                 mAdapter.addAll(smart_products);
+
                 mAdapter.notifyDataSetChanged();
                 Log.d(LOG_TAG, "Response returned by website is : " + response.body());
                 Log.d(LOG_TAG, "Response returned by website is : " + response.code());
@@ -124,14 +131,74 @@ public class SmartProductListFragment extends ListFragment {
                 Toast.makeText(getActivity(), "Failed !", Toast.LENGTH_LONG).show();
             }
         });
+
+
     }
+    public void onListItemClick(ListView l, View v, final int position, long id) {
+      //  Toast.makeText(getActivity(), "Lavanya",Toast.LENGTH_SHORT).show();
+        //Dialog dialog = new Dialog(this);
+        //dialog.
+//        LayoutInflater li = LayoutInflater.from(mContext);
+//        View view = li.inflate(R.layout.dialog_smart_products, null);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//        builder.setTitle("Formatted");
+//        builder.setView(view).create().show();
 
 
-    /**
-     * The default content for this Fragment has a TextView that is shown when
-     * the list is empty. If you would like to change the text, call this method
-     * to supply the text it should use.
-     */
+        final List<SmartProduct> list =  mAdapter.getList();
+        String smart_product_details =  list.get(position).appliance_name+"\n"+ list.get(position).serial_no +"\n"+list.get(position).id;
+        new AlertDialog.Builder(this.getActivity())
+                .setTitle("Smart Product Details")
+                .setMessage(smart_product_details)
+                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dlg, int sumthin) {
+                                // do whatever you want to do
+                              //  Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                new AlertDialog.Builder(mContext)
+                                        .setTitle("")
+                                        .setMessage("Are you sure, you want to delete it?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dlg, int sumthin) {
+                                                        // do whatever you want to do
+                                                    //    Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                                        list.remove(position);
+                                                        mAdapter.notifyDataSetChanged();
+
+
+                                                    }
+                                                }
+                                        )
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dlg, int sumthin) {
+                                                        // do whatever you want to do
+                                                        // Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                        }
+
+                                                ).
+
+                                        show();
+
+                            }
+                        }
+
+                ).
+
+                    show();
+
+                }
+
+
+                        /**
+                         * The default content for this Fragment has a TextView that is shown when
+                         * the list is empty. If you would like to change the text, call this method
+                         * to supply the text it should use.
+                         */
+
     public void setEmptyText(CharSequence emptyText) {
         View emptyView = getListView().getEmptyView();
 
