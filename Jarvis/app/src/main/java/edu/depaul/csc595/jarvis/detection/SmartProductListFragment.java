@@ -96,8 +96,10 @@ public class SmartProductListFragment extends ListFragment {
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
 
         Log.d(LOG_TAG, "email: " + email);
+        String request_email = (email == null) ? "test1@test.com" : email;
+        Toast.makeText(getActivity(), "email is: " + email, Toast.LENGTH_SHORT).show();
 
-        Call<List<SmartProduct>> call = detectionInterface.smart_products("test1@test.com");
+        Call<List<SmartProduct>> call = detectionInterface.smart_products(request_email);
         call.enqueue(new Callback<List<SmartProduct>>() {
             @Override
             public void onResponse(Call<List<SmartProduct>> call, Response<List<SmartProduct>> response) {

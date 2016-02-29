@@ -9,14 +9,17 @@ import java.util.List;
 
 import edu.depaul.csc595.jarvis.detection.classes.DetectionContent;
 import edu.depaul.csc595.jarvis.detection.classes.DetectionContent.Detection;
+import edu.depaul.csc595.jarvis.detection.classes.MobileDevice;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent.SmartProduct;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -41,6 +44,18 @@ public class DetectionService {
         @POST("/users/{email_address}/smart_products/new")
         Call<SmartProduct> createSmartProduct(
                 @Path("email_address") String email_address, @Body SmartProduct smartProduct);
+
+        @POST("/users/{email_address}/gcm_tokens/{gcm_token}/new")
+        Call<MobileDevice> registerGCMToken(
+                @Path("email_address") String email_address, @Path("gcm_token") String gcm_token);
+
+        @POST("/update_gcm_token/{old_token}/{new_token}")
+        Call<MobileDevice> updateGCMToken(
+                @Path("old_token") String old_token, @Path("new_token") String new_token);
+
+        @DELETE("/users/{email_address}/smart_products/{serial_no}/delete")
+        Call<ResponseBody> deleteSmartProduct(
+                @Path("email_address") String email_address, @Path("serial_no") String serial_no);
     }
 
 
@@ -57,12 +72,6 @@ public class DetectionService {
 
 
 
-        Call<SmartProduct> call2 = detectionInterface.createSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1));
-        SmartProduct smartProduct = call2.execute().body();
-        if (smartProduct != null){
-            System.out.print(smartProduct.serial_no + " " +  smartProduct.appliance_name + " " + smartProduct.type_of_smart_product);
-        }
-
         Call<List<SmartProduct>> call3 = detectionInterface.smart_products("test1@test.com");
         List<SmartProduct> smart_products = call3.execute().body();
         for (SmartProduct smart_product : smart_products ){
@@ -70,7 +79,28 @@ public class DetectionService {
             System.out.println("");
         }
 
+        Call<MobileDevice> registerGCMTokenCall = detectionInterface.registerGCMToken("test2@test.com", "my_test_token_from_retrofit");
+        MobileDevice mobileDevice = registerGCMTokenCall.execute().body();
+        if (mobileDevice != null){
+            System.out.print("GCM Token: " + mobileDevice.gcm_token);
+        }
 
+        Call<MobileDevice> updateGCMTokenCall = detectionInterface.updateGCMToken("my_test_token_from_retrofit", "my_updated_test_token_from_retrofit");
+        MobileDevice updatedMobileDevice = updateGCMTokenCall.execute().body();
+        if (updatedMobileDevice != null){
+            System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
+        }
+
+
+        Call<SmartProduct> call2 = detectionInterface.createSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1));
+        SmartProduct smartProduct = call2.execute().body();
+        if (smartProduct != null){
+            System.out.println(smartProduct.serial_no + " " +  smartProduct.appliance_name + " " + smartProduct.type_of_smart_product);
+        }
+
+        Call<ResponseBody> call4 = detectionInterface.deleteSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1).serial_no);
+        Response response = call4.execute();
+        System.out.println("Response is success: " + Boolean.toString(response.isSuccess()));
 
     }
 
