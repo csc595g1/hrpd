@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,23 +59,32 @@ public class RegisterDeviceToken extends AsyncTask<String, Double, String> {
 
                 urlConnection.getOutputStream().write(jsonObject.toString().getBytes());
 
-            sharedPreferences.edit().putString(TokenIntentService.GCM_OLD_TOKEN, token).apply();
-            urlConnection.getInputStream();
-//                if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-//                    // OK
-//                    //sharedPreferences.edit().putString(TokenIntentService.GCM_OLD_TOKEN, token).apply();
-//                    Log.d(TAG, "Successfully connected to the webservice!");
-//                    result = "Success";
-//                }
-//                else {
-//                    Log.d(TAG, "Error connecting to the webservice!");
-//                    result = "Error";
-//                }
+                sharedPreferences.edit().putString(TokenIntentService.GCM_OLD_TOKEN, token).apply();
+                urlConnection.getInputStream();
+                if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    // OK
+                    Log.d(TAG, "Successfully connected to the webservice!");
+                    result = "Success";
+                }
+                else {
+                    Log.d(TAG, "Error connecting to the webservice!");
+                    result = "Error";
+                }
         }
         catch (Exception e) {
             result = "Exception";
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        if(s.equals("Success")) {
+            Toast.makeText(context, "Device Registered!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(context, "Error Registering Device! Please Try Again.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -137,19 +137,19 @@ public class HerokuCreateAccount extends AsyncTask<Object, Void, Void> {
         }
         m_ProgressDialog.dismiss();
         if(userInfo.getIsLoggedIn()){
-            // Fetch the newly created user and his email.
-            User currentUser = userInfo.getCredentials();
-            String email_address = currentUser.getEmail();
-
-            // Fetch the device token.
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(signUpActivity);
-            String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
-
-            // Set url for the web service
-            String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
-
-            // Register this device(token) on the server.
-            new RegisterDeviceToken(signUpActivity).execute(email_address, token, webServiceUrl);
+//            // Fetch the newly created user and his email.
+//            User currentUser = userInfo.getCredentials();
+//            String email_address = currentUser.getEmail();
+//
+//            // Fetch the device token.
+//            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(signUpActivity);
+//            String token = sharedPreferences.getString(TokenIntentService.GCM_TOKEN, "");
+//
+//            // Set url for the web service
+//            String webServiceUrl = "https://detectionservices.herokuapp.com/register_gcm_token";
+//
+//            // Register this device(token) on the server.
+//            new RegisterDeviceToken(signUpActivity).execute(email_address, token, webServiceUrl);
 
             Intent intent = new Intent(signUpActivity.getBaseContext(),ProfileActivity.class);
             signUpActivity.startActivity(intent);
