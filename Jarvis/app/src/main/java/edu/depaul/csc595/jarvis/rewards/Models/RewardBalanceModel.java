@@ -4,11 +4,11 @@ package edu.depaul.csc595.jarvis.rewards.Models;
  * Created by Ed on 2/26/2016.
  */
 public class RewardBalanceModel {
-    String eventId;
-    String eventCatrgory;
-    String title;
-    int units;
-    String dttm;
+    public String eventId;
+    public String eventCatrgory;
+    public String title;
+    public int units;
+    public String dttm;
 
     public RewardBalanceModel(){}
 }

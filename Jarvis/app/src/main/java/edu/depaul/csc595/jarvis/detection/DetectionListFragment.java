@@ -1,6 +1,8 @@
 package edu.depaul.csc595.jarvis.detection;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import edu.depaul.csc595.jarvis.detection.DetectionService.*;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.classes.DetectionContent;
 import edu.depaul.csc595.jarvis.detection.classes.DetectionContent.*;
+import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +44,7 @@ public class DetectionListFragment extends ListFragment {
      */
     private String email;
     private String LOG_TAG = "DetectionListFragment";
-
+    private Context mContext;
     private ProgressDialog mProgressDialog;
     private DetectionCustomAdapter mAdapter;
 
@@ -59,7 +62,7 @@ public class DetectionListFragment extends ListFragment {
         mProgressDialog.setTitle("Loading Detections");
         mProgressDialog.setMessage("Please wait...");
         mProgressDialog.show();
-
+        mContext = this.getActivity();
 
         Retrofit retrofit = DetectionService.retrofit;
         DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
@@ -96,6 +99,63 @@ public class DetectionListFragment extends ListFragment {
             }
         });
 
+
+    }
+    public void onListItemClick(ListView l, View v, final int position, long id) {
+        //  Toast.makeText(getActivity(), "Lavanya",Toast.LENGTH_SHORT).show();
+        //Dialog dialog = new Dialog(this);
+        //dialog.
+//        LayoutInflater li = LayoutInflater.from(mContext);
+//        View view = li.inflate(R.layout.dialog_smart_products, null);
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+//        builder.setTitle("Formatted");
+//        builder.setView(view).create().show();
+
+
+        final List<Detection> list =  mAdapter.getList();
+        String smart_product_details =  list.get(position).id+"\n"+ list.get(position).category +"\n"+list.get(position).date_occurred+"\n"+list.get(position).notification;
+        new AlertDialog.Builder(this.getActivity())
+                .setTitle("Smart Product Details")
+                .setMessage(smart_product_details)
+                .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dlg, int i) {
+                                // do whatever you want to do
+                                //  Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                new AlertDialog.Builder(mContext)
+                                        .setTitle("")
+                                        .setMessage("Are you sure, you want to delete it?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dlg, int i) {
+                                                        // do whatever you want to do
+                                                        //    Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                                        list.remove(position);
+                                                        mAdapter.notifyDataSetChanged();
+
+
+                                                    }
+                                                }
+                                        )
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                                    public void onClick(DialogInterface dlg, int i) {
+                                                        // do whatever you want to do
+                                                        // Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }
+
+                                        ).
+
+                                        show();
+
+                            }
+                        }
+
+                ).
+
+                show();
 
     }
 
