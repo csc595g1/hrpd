@@ -14,6 +14,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.depaul.csc595.jarvis.R;
+/**
+ * Created by lavanyalatha on 2/23/16.
+ */
 
 public class AddTriggers extends AppCompatActivity {
 
