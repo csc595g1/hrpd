@@ -3,8 +3,8 @@ import serial, requests, time, json, io
 port1 = '/dev/cu.usbmodem1411'
 port2 = '/dev/cu.usbmodem1421'
 ser = serial.Serial(port1,  9600)
-#url = 'http://detectionservices.herokuapp.com'
-url = 'http://localhost:3000'
+url = 'http://detectionservices.herokuapp.com'
+#url = 'http://localhost:3000'
 
 if ser.closed:
     ser.open()

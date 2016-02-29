@@ -70,8 +70,6 @@ public class DetectionService {
             System.out.println("");
         }
 
-
-
         Call<List<SmartProduct>> call3 = detectionInterface.smart_products("test1@test.com");
         List<SmartProduct> smart_products = call3.execute().body();
         for (SmartProduct smart_product : smart_products ){
@@ -79,10 +77,16 @@ public class DetectionService {
             System.out.println("");
         }
 
-        Call<MobileDevice> registerGCMTokenCall = detectionInterface.registerGCMToken("test2@test.com", "my_test_token_from_retrofit");
+        Call<MobileDevice> registerGCMTokenCall = detectionInterface.registerGCMToken("thuxtable@gmail.com", "fuymvlouXLE:APA91bGdJnJhf46aZi4pCQlTy1wFlpneMzsXO_vU9kFY94t8di8CYlLQAVEXqU7YLzWD_05UmXKIUsLla8tQPEwGJrI28uhOQKSCj-IrEAoL9emqA3fg_FIpl5SyT5DKs52OvSj9fx_S");
         MobileDevice mobileDevice = registerGCMTokenCall.execute().body();
         if (mobileDevice != null){
             System.out.print("GCM Token: " + mobileDevice.gcm_token);
+        }
+
+        Call<MobileDevice> registerGCMTokenCall2 = detectionInterface.registerGCMToken("test2@test.com", "my_test_token_from_retrofit");
+        MobileDevice mobileDevice2 = registerGCMTokenCall2.execute().body();
+        if (mobileDevice2 != null){
+            System.out.print("GCM Token: " + mobileDevice2.gcm_token);
         }
 
         Call<MobileDevice> updateGCMTokenCall = detectionInterface.updateGCMToken("my_test_token_from_retrofit", "my_updated_test_token_from_retrofit");
@@ -90,14 +94,14 @@ public class DetectionService {
         if (updatedMobileDevice != null){
             System.out.print("GCM Token: " + updatedMobileDevice.gcm_token);
         }
-
-
-        Call<SmartProduct> call2 = detectionInterface.createSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1));
-        SmartProduct smartProduct = call2.execute().body();
-        if (smartProduct != null){
-            System.out.println(smartProduct.serial_no + " " +  smartProduct.appliance_name + " " + smartProduct.type_of_smart_product);
-        }
-
+//
+//
+//        Call<SmartProduct> call2 = detectionInterface.createSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1));
+//        SmartProduct smartProduct = call2.execute().body();
+//        if (smartProduct != null){
+//            System.out.println(smartProduct.serial_no + " " +  smartProduct.appliance_name + " " + smartProduct.type_of_smart_product);
+//        }
+//
         Call<ResponseBody> call4 = detectionInterface.deleteSmartProduct("test1@test.com", SmartProductContent.ITEMS.get(1).serial_no);
         Response response = call4.execute();
         System.out.println("Response is success: " + Boolean.toString(response.isSuccess()));

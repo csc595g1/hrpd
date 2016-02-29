@@ -111,6 +111,7 @@ public class SmartProductListFragment extends ListFragment {
                 if (smart_products.isEmpty()) {
                     setEmptyText("No Smart Products Found");
                 }
+                SmartProductContent.ITEMS = smart_products;
                 mAdapter.clear();
                 mAdapter.addAll(smart_products);
                 mAdapter.notifyDataSetChanged();
