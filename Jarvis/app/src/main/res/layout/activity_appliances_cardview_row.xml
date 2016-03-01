@@ -1,74 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+    android:layout_height="80dp"
+    android:layout_marginBottom="8dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:background="#C5CAE9"
     android:foreground="?attr/selectableItemBackground"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    <!-- android:layout_height="80dp" -->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:gravity="center"
-        android:paddingTop="16dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/list_avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/app_6" />
+            android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
 
         <TextView
-            android:id="@+id/appliances_card_title"
-            android:layout_alignParentTop="true"
+            android:id="@+id/list_title"
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="-15dp"
+            android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/list_avatar"
-            android:text="This is Title"
-            android:textStyle="bold"
+            android:text="Androidwarriors "
             android:textColor="#000000"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/appliances_card_reminder_interval"
+            android:id="@+id/list_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/appliances_card_title"
+            android:layout_below="@+id/list_title"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@+id/list_avatar"
             android:textColor="#000000"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="time interval"
+            android:text="Place to dive into android programming"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/appliances_card_next_reminder"
-            android:layout_width="match_parent"
+        <Switch
+            android:id="@+id/chkSelected"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/appliances_card_reminder_interval"
-            android:layout_marginLeft="16dp"
-            android:layout_toRightOf="@+id/list_avatar"
-            android:textColor="#000000"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="upcoming reminder"
-            android:textStyle="italic"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="12sp" />
-
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:soundEffectsEnabled="true"
+            android:checked="true"
+            android:textOff="Closed"
+            android:textOn="Opened"
+            />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

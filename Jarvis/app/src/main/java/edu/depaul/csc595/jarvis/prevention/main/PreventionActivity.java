@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.prevention.homescreen;
+package edu.depaul.csc595.jarvis.prevention.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,6 @@ public class PreventionActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
