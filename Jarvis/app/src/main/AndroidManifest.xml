@@ -152,9 +152,6 @@
 
         <receiver android:name=".reminders.receivers.DismissReceiver" />
 
-        <receiver
-            android:name=".reminders.receivers.BootReceiver" />
-
 
         <!-- [START gcm_receiver] -->
         <receiver
