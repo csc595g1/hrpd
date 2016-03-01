@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.prevention.homescreen;
+package edu.depaul.csc595.jarvis.prevention.main;
 
 import android.content.Context;
 import android.util.AttributeSet;

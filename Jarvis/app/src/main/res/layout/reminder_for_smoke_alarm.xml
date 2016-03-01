@@ -46,8 +46,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <!--  Include Fragmented dashboard -->
-        <include layout="@layout/activity_prevention_fragment_layout"/>
+
 
     </LinearLayout>
 

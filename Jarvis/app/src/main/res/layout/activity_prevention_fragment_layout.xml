@@ -1,4 +1,4 @@
-<edu.depaul.csc595.jarvis.prevention.homescreen.DashboardLayout
+<edu.depaul.csc595.jarvis.prevention.main.DashboardLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -47,4 +47,4 @@
         android:drawableTop="@drawable/app_6"
         android:text="Make a Note" />
 
-</edu.depaul.csc595.jarvis.prevention.homescreen.DashboardLayout>
+</edu.depaul.csc595.jarvis.prevention.main.DashboardLayout>
