@@ -25,17 +25,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
-import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.adapters.MainCardViewAdapter;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
-import edu.depaul.csc595.jarvis.prevention.main.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
@@ -204,9 +203,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_detection:
                 goToActivity = new Intent(getApplicationContext(), DetectionBaseActivity.class);
                 break;
+            /*
             case R.id.nav_prevention:
                 goToActivity = new Intent(getApplicationContext(), PreventionActivity.class);
                 break;
+                */
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;

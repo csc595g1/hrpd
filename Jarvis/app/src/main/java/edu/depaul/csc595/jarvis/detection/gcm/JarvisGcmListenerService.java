@@ -4,9 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -14,15 +12,13 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
-import edu.depaul.csc595.jarvis.reminders.CustomReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.CustomReminderActivity;
 import edu.depaul.csc595.jarvis.reminders.builder.ReminderBuilder;
 import edu.depaul.csc595.jarvis.reminders.database.DatabaseHelper;
 import edu.depaul.csc595.jarvis.reminders.models.Reminder;
-import edu.depaul.csc595.jarvis.reminders.ui.activities.CreateEditActivity;
 import edu.depaul.csc595.jarvis.reminders.utils.DateAndTimeUtil;
 
 /**

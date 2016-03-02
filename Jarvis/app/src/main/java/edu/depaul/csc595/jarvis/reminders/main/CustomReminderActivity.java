@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.reminders;
+package edu.depaul.csc595.jarvis.reminders.main;
 
 import android.content.Context;
 import android.content.Intent;

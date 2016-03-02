@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".prevention.main.PreventionActivity">
+    tools:context=".reminders.staticreminders.activities.ReminderFireExtinguisher">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -27,9 +27,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -38,15 +35,176 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/home_root"
-        android:orientation="vertical"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ddd"
         android:layout_marginTop="60dp"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Card for Upcoming Reminder -->
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/card_view1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#C5CAE9"
+            android:foreground="?attr/selectableItemBackground"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/fixed_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/app_2" />
+
+                <TextView
+                    android:id="@+id/fire_extinguisher_date"
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@+id/fixed_image"
+                    android:text="Your Upcoming Reminder for Fire Extinguisher would be on"
+                    android:textColor="#000000"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/appliances_smoke_alarm_reminder_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/fire_extinguisher_date"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/fixed_image"
+                    android:textColor="#000000"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Reminder Date"
+                    android:textStyle="bold"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <!-- Card for Radio Button -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="You can change your reminder preferences"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_marginTop="70dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/reminder_every_day"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me daily"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_one_week"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me weekly"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_fifteen_days"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me after 15 days"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_one_month"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me monthly"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_three_month"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me after 3 months"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_six_month"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me after 6 months"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_nine_month"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me after 9 months"
+                            android:textColor="@color/black"/>
+
+                        <RadioButton
+                            android:id="@+id/reminder_one_year"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Remind me yearly"
+                            android:checked="true"
+                            android:textColor="@color/black"/>
+                    </RadioGroup>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </ScrollView>
 
     </LinearLayout>
 
