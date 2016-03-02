@@ -314,8 +314,8 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
             switch(position) {
                 case 0:
                     return new RewardBalanceFragment();
-                //case 1:
-                    //return new Order
+                case 1:
+                    return new RewardOrderFragment();
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
