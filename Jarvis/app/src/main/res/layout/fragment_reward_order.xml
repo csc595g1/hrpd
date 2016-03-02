@@ -16,12 +16,14 @@
         android:text="customer"
         android:id="@+id/textView_customer"
         android:layout_below="@+id/editTextLayout"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="csc595g1_01"
+        android:textSize="15dp"
         android:id="@+id/editText_customer"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/textView_account_identifier"
@@ -34,12 +36,14 @@
         android:text="account_identifier"
         android:id="@+id/textView_account_identifier"
         android:layout_below="@+id/editText_customer"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="csc595g1_01"
+        android:textSize="15dp"
         android:id="@+id/editText_account_identifier"
         android:layout_below="@+id/editText_customer"
         android:layout_alignStart="@+id/editText_customer"
@@ -52,12 +56,14 @@
         android:text="campaign"
         android:id="@+id/textView_campaign"
         android:layout_below="@+id/editText_account_identifier"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="HomeSafety"
+        android:textSize="15dp"
         android:id="@+id/editText_campaign"
         android:layout_below="@+id/editText_account_identifier"
         android:layout_alignStart="@+id/editText_customer"
@@ -79,8 +85,7 @@
         android:text="Test Group1"
         android:id="@+id/editText_name"
         android:layout_below="@+id/editText_campaign"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
+        android:layout_alignStart="@+id/editText_customer" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -98,7 +103,8 @@
         android:text="csc595g1@gmail.com"
         android:id="@+id/editText_email"
         android:layout_below="@+id/editText_name"
-        android:layout_alignStart="@+id/editText_customer" />
+        android:layout_alignStart="@+id/editText_customer"
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -144,12 +150,14 @@
         android:text="reward_from"
         android:id="@+id/textView_reward_from"
         android:layout_below="@+id/editText_amount"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="CSC595 Group1"
+        android:textSize="15dp"
         android:id="@+id/editText_reward_from"
         android:layout_below="@+id/editText_amount"
         android:layout_alignStart="@+id/editText_customer"
@@ -162,12 +170,14 @@
         android:text="reward_subject"
         android:id="@+id/textView_reward_subject"
         android:layout_below="@+id/editText_reward_from"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Here is your reward!"
+        android:textSize="15dp"
         android:id="@+id/editText_reward_subject"
         android:layout_below="@+id/editText_reward_from"
         android:layout_alignStart="@+id/editText_customer"
@@ -180,12 +190,14 @@
         android:text="reward_message"
         android:id="@+id/textView_reward_message"
         android:layout_below="@+id/editText_reward_subject"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Way to go! Thanks!"
+        android:textSize="15dp"
         android:id="@+id/editText_reward_message"
         android:layout_below="@+id/editText_reward_subject"
         android:layout_alignStart="@+id/editText_customer"
@@ -198,12 +210,14 @@
         android:text="send_reward"
         android:id="@+id/textView_send_reward"
         android:layout_below="@+id/editText_reward_message"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="true"
+        android:textSize="15dp"
         android:id="@+id/editText_send_reward"
         android:layout_below="@+id/editText_reward_message"
         android:layout_alignStart="@+id/editText_customer"
@@ -216,12 +230,14 @@
         android:text="external_id"
         android:id="@+id/textView_external_id"
         android:layout_below="@+id/editText_send_reward"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="123456-XYZ"
+        android:textSize="15dp"
         android:id="@+id/editText_external_id"
         android:layout_below="@+id/editText_send_reward"
         android:layout_alignStart="@+id/editText_customer"
