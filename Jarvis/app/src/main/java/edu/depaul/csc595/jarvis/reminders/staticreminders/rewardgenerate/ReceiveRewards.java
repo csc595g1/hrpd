@@ -18,6 +18,8 @@ import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
  */
 public class ReceiveRewards extends Activity
 {
+    Button generate_reward = (Button) findViewById(R.id.btn_collect_rewards);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,21 +44,41 @@ public class ReceiveRewards extends Activity
 
             }
         }
+        else {
+            TextView tv_name = (TextView) findViewById(R.id.generate_reward_tv_user_name);
+            tv_name.setText("To get Rewards, you need to logged in ");
+            generate_reward.setVisibility(View.INVISIBLE);
+        }
 
         Button generate_reward = (Button) findViewById(R.id.btn_collect_rewards);
         generate_reward.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                CreateRewardEventModel model = new CreateRewardEventModel(UserInfo.getInstance().getCredentials().getEmail(), "Reminder Event", 20, "Attended Reminder");
+            public void onClick(View v) {
 
-                CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
-                task.execute(model);
+                boolean isAuthed = false;
+                String email = "";
+                if (UserInfo.getInstance().isGoogleLoggedIn()) {
+                    isAuthed = true;
+                    email = UserInfo.getInstance().getGoogleAccount().getEmail();
+                } else if (UserInfo.getInstance().getIsLoggedIn()) {
+                    isAuthed = true;
+                    email = UserInfo.getInstance().getCredentials().getEmail();
+                }
 
-                Intent go_to_home = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(go_to_home);
+                //check if logged in, if so, send reward event
+                if (isAuthed) {
+                    //do event sending here, pass email var set above
+                    CreateRewardEventModel model = new CreateRewardEventModel(email, "Reminder Event", 20, "Attended Reminder");
+
+                    CreateRewardEventAsyncTask task = new CreateRewardEventAsyncTask();
+                    task.execute(model);
+
+                    Intent go_to_home = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(go_to_home);
+                } else {
 
 
+                }
             }
         });
 
