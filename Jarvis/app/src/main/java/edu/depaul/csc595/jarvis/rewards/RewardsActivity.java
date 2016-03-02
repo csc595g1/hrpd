@@ -88,6 +88,13 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rewards);
 
+        //if not logged in, send to login page.
+        if(!UserInfo.getInstance().isGoogleLoggedIn() && !UserInfo.getInstance().getIsLoggedIn()){
+            Intent intent = new Intent(RewardsActivity.this,LogInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -321,6 +328,8 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
             switch(position) {
                 case 1:
                     return new RewardBalanceFragment();
+                //case 3:
+                    //return new Order
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
@@ -335,14 +344,14 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
-                    return (CharSequence) getString(R.string.rewards_button_account_create);
+                //case 0:
+                //    return (CharSequence) getString(R.string.rewards_button_account_create);
                 //return "SECTION 1";
                 case 1:
                     return (CharSequence) getString(R.string.rewards_button_account_balance);
                 //return "SECTION 2";
-                case 2:
-                    return (CharSequence) getString(R.string.rewards_button_account_update);
+                //case 2:
+                //    return (CharSequence) getString(R.string.rewards_button_account_update);
                 //return "SECTION 3";
                 case 3:
                     return (CharSequence) getString(R.string.rewards_button_redeem_points);
