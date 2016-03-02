@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
 
 /**
@@ -54,7 +55,8 @@ public class RewardOrderFragment extends Fragment {
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CharSequence orderPlaced = "Order Placed...";
+                String orderPlaced = "Order Placed...";
+
                 Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
@@ -66,18 +68,6 @@ public class RewardOrderFragment extends Fragment {
 
 
         return rootView;
-
-        //////////////////////////////////////////////////////////////////////////////////
-        //Google Auth
-
-//        signInButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-//                startActivityForResult(signInIntent, RC_SIGN_IN);
-//            }
-//        });
-
 
     }
 
@@ -97,6 +87,24 @@ public class RewardOrderFragment extends Fragment {
         editText_external_id = (TextView) rootView.findViewById(R.id.editText_external_id);
 
         buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
+
+        boolean isAuthed = false;
+        String email = "";
+        String fullName = "";
+        if (UserInfo.getInstance().isGoogleLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+        } else if (UserInfo.getInstance().getIsLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getCredentials().getEmail();
+        }
+
+        //check if logged in, if so, send reward event
+        if (isAuthed) {
+            editText_email.setText(email);
+            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+        }
+
 
     }
 
