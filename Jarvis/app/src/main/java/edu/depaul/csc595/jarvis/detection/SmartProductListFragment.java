@@ -28,6 +28,7 @@ import edu.depaul.csc595.jarvis.detection.SPCustomAdapter.*;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent.*;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -136,26 +137,15 @@ public class SmartProductListFragment extends ListFragment {
 
     }
     public void onListItemClick(ListView l, View v, final int position, long id) {
-      //  Toast.makeText(getActivity(), "Lavanya",Toast.LENGTH_SHORT).show();
-        //Dialog dialog = new Dialog(this);
-        //dialog.
-//        LayoutInflater li = LayoutInflater.from(mContext);
-//        View view = li.inflate(R.layout.dialog_smart_products, null);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-//        builder.setTitle("Formatted");
-//        builder.setView(view).create().show();
-
 
         final List<SmartProduct> list =  mAdapter.getList();
-        String smart_product_details =  list.get(position).appliance_name+"\n"+ list.get(position).serial_no +"\n"+list.get(position).id;
+        String smart_product_details =  "Appliance Name:  " +list.get(position).appliance_name+"\n"+"Serial No:  "+ list.get(position).serial_no +"\n"+"ID:  "+list.get(position).id;
         new AlertDialog.Builder(this.getActivity())
                 .setTitle("Smart Product Details")
                 .setMessage(smart_product_details)
                 .setNegativeButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dlg, int sumthin) {
-                                // do whatever you want to do
-                              //  Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
 
                                 new AlertDialog.Builder(mContext)
                                         .setTitle("")
@@ -163,8 +153,9 @@ public class SmartProductListFragment extends ListFragment {
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dlg, int sumthin) {
                                                         // do whatever you want to do
-                                                    //    Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
-
+                                                        //    Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+                                                        SmartProduct smart_product = (SmartProduct) mAdapter.getItem(position);
+                                                        deleteSmartProducts(smart_product);
                                                         list.remove(position);
                                                         mAdapter.notifyDataSetChanged();
 
@@ -175,12 +166,12 @@ public class SmartProductListFragment extends ListFragment {
                                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dlg, int sumthin) {
                                                         // do whatever you want to do
-                                                        // Toast.makeText(getActivity(), "Lavanya", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getActivity(), "Item not deleted", Toast.LENGTH_SHORT).show();
 
                                                     }
-                                                        }
+                                                }
 
-                                                ).
+                                        ).
 
                                         show();
 
@@ -189,10 +180,50 @@ public class SmartProductListFragment extends ListFragment {
 
                 ).
 
-                    show();
+                show();
 
+    }
+    public void deleteSmartProducts(SmartProduct smart_product) {
+
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle("Loading SmartProducts");
+        mProgressDialog.setMessage("Please wait...");
+        mProgressDialog.show();
+
+
+        Retrofit retrofit = DetectionService.retrofit;
+        DetectionInterface detectionInterface = retrofit.create(DetectionInterface.class);
+        final List<SmartProduct> list =  mAdapter.getList();
+        Log.d(LOG_TAG, "email: " + email);
+        String request_email = (email == null) ? "test1@test.com" : email;
+        Toast.makeText(getActivity(), "email is: " + email, Toast.LENGTH_SHORT).show();
+        String serial_no = smart_product.serial_no;
+
+        Call<ResponseBody> call = detectionInterface.deleteSmartProduct(request_email, serial_no);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d(LOG_TAG, "Reached this place");
+                if (!response.isSuccess()) {
+                    Log.d(LOG_TAG, response.errorBody().toString());
+                    Toast.makeText(getContext(), "Server error: Smart Product could not be deleted", Toast.LENGTH_SHORT).show();
                 }
 
+                Log.d(LOG_TAG, "Response returned by website is : " + response.body());
+                Log.d(LOG_TAG, "Response returned by website is : " + response.code());
+                mProgressDialog.hide();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d(LOG_TAG, "Failed to delete smart product");
+                mProgressDialog.hide();
+                Toast.makeText(getActivity(), "Failed to Delete!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
 
                         /**
                          * The default content for this Fragment has a TextView that is shown when

@@ -1,13 +1,18 @@
 package edu.depaul.csc595.jarvis.rewards;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -16,12 +21,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +43,25 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
+import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
+import edu.depaul.csc595.jarvis.main.MainActivity;
+import edu.depaul.csc595.jarvis.profile.LogInActivity;
+import edu.depaul.csc595.jarvis.profile.ProfileActivity;
+import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventAsyncTask;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
+import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
-public class RewardsActivity extends AppCompatActivity {
-
+public class RewardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private View headerLayout;
+    private TextView tv_email;
+    private TextView tv_name;
+    private TextView tv_logout;
+    private ImageView iv_image;
+    private ImageView iv_image_profile;
     /**
      * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -56,7 +76,7 @@ public class RewardsActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private int numOfPages = 4;
+    private int numOfPages = 2;
 //    private Rewards rewards;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -68,8 +88,16 @@ public class RewardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rewards);
 
+        //if not logged in, send to login page.
+        if(!UserInfo.getInstance().isGoogleLoggedIn() && !UserInfo.getInstance().getIsLoggedIn()){
+            Intent intent = new Intent(RewardsActivity.this,LogInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -90,7 +118,17 @@ public class RewardsActivity extends AppCompatActivity {
             }
         });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        drawer.setEnabled(true);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_detection);
+        navigationView.setNavigationItemSelectedListener(this);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        rewards = new Rewards();
 
@@ -113,6 +151,56 @@ public class RewardsActivity extends AppCompatActivity {
 //        }
     }
 
+
+    protected void onStart(){
+        super.onStart();
+
+        Log.d("Rewards", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
+        //if user is logged in, set name, email and enable log out
+        if(UserInfo.getInstance().getIsLoggedIn()){
+            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+            //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
+            // tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
+            tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
+
+        }
+        else if(UserInfo.getInstance().isGoogleLoggedIn()){
+            //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
+            try {
+                //iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+                // iv_image_profile = (ImageView)findViewById(R.id.imageView_profile);
+                tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
+                tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
+                tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
+                tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
+
+                boolean photonotnull = false;
+                try{
+                    String test = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
+                    photonotnull = true;
+                }
+                catch (NullPointerException e){}
+                if(photonotnull) {
+                    //google image
+                    iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
+                    iv_image_profile = (ImageView)findViewById(R.id.imageView_profile);
+                    GoogleImage img = new GoogleImage();
+                    img.execute(iv_image, RewardsActivity.this);
+                    GoogleImage img2 = new GoogleImage();
+                    img2.execute(iv_image_profile, RewardsActivity.this);
+                }
+
+            }
+            catch(NullPointerException e){
+                //tv_logout.setText(" ");
+            }
+        }
+        else{
+            //tv_logout.setText(" ");
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,6 +269,20 @@ public class RewardsActivity extends AppCompatActivity {
 //            textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 0:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+//                case 2:
+//                    try {
+//                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+//                    } catch (Exception e) {
+//                        System.out.println("ERROR: " + e.toString());
+//                    }
+//                    break;
                 case 1:
                     try {
                         textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -188,27 +290,13 @@ public class RewardsActivity extends AppCompatActivity {
                         System.out.println("ERROR: " + e.toString());
                     }
                     break;
-                case 2:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
-                case 3:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
-                case 4:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
+//                case 4:
+//                    try {
+//                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+//                    } catch (Exception e) {
+//                        System.out.println("ERROR: " + e.toString());
+//                    }
+//                    break;
                 default:
                     try {
                         textView.setText(getString(R.string.rewards_section_text, 3));
@@ -238,8 +326,10 @@ public class RewardsActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
-                case 1:
+                case 0:
                     return new RewardBalanceFragment();
+                //case 1:
+                    //return new Order
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }
@@ -254,16 +344,16 @@ public class RewardsActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
-                    return (CharSequence) getString(R.string.rewards_button_account_create);
+                //case 0:
+                //    return (CharSequence) getString(R.string.rewards_button_account_create);
                 //return "SECTION 1";
-                case 1:
+                case 0:
                     return (CharSequence) getString(R.string.rewards_button_account_balance);
                 //return "SECTION 2";
-                case 2:
-                    return (CharSequence) getString(R.string.rewards_button_account_update);
+                //case 2:
+                //    return (CharSequence) getString(R.string.rewards_button_account_update);
                 //return "SECTION 3";
-                case 3:
+                case 1:
                     return (CharSequence) getString(R.string.rewards_button_redeem_points);
                 //return "SECTION 4";
             }
@@ -282,6 +372,62 @@ public class RewardsActivity extends AppCompatActivity {
         catch (Exception e) {e.printStackTrace(); }
 
 
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Intent goToActivity = null;
+        switch (id) {
+            case R.id.nav_home:
+                goToActivity = new Intent(getApplicationContext(), MainActivity.class);
+                break;
+            case R.id.nav_rewards:
+                goToActivity = new Intent(getApplicationContext(), RewardsActivity.class);
+                break;
+            case R.id.nav_appliances:
+                goToActivity = new Intent(getApplicationContext(), AppliancesActivity.class);
+                break;
+            case R.id.nav_profile:
+                if(UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+                    goToActivity = new Intent(getApplicationContext(), ProfileActivity.class);
+                }
+                else {
+                    goToActivity = new Intent(getApplicationContext(), LogInActivity.class);
+                }
+                break;
+            case R.id.nav_reminder:
+                goToActivity = new Intent(getApplicationContext(), ReminderActivity.class);
+                break;
+            case R.id.nav_detection:
+                goToActivity = new Intent(getApplicationContext(), DetectionBaseActivity.class);
+                break;
+            case R.id.nav_settings:
+                goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
+                break;
+            case R.id.nav_logout:
+                if(UserInfo.getInstance().getIsLoggedIn()) {
+                    UserInfo.getInstance().logOutUser(RewardsActivity.this);
+                }
+                else if(UserInfo.getInstance().isGoogleLoggedIn()){
+                    UserInfo.getInstance().signOutWithGoogle();
+                }
+                break;
+            default:
+                break;
+        }
+
+        if (goToActivity != null){
+            startActivity(goToActivity);
+            overridePendingTransition(0, 0);
+        }
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 }

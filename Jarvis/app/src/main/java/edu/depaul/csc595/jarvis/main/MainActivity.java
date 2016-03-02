@@ -72,9 +72,7 @@ public class MainActivity extends AppCompatActivity
         //going to inflate the header view at runtime instead of in the layout so that we
         //can modify it --ed
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
-        //ImageView img = (ImageView)navigationView.findViewById(R.id.imageView);
         navigationView.setNavigationItemSelectedListener(this);
-        //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
         tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
         tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
 
@@ -90,13 +88,11 @@ public class MainActivity extends AppCompatActivity
 
         //cardview implementation
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.activity_main_recycler_view);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.
         LinearLayoutManager llm = new LinearLayoutManager(MainActivity.this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        MainCardViewAdapter adapter = new MainCardViewAdapter(createCardList());
+        MainCardViewAdapter adapter = new MainCardViewAdapter(createCardList(),MainActivity.this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -106,20 +102,8 @@ public class MainActivity extends AppCompatActivity
         Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
-//            tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
-//            tv_name = (TextView)headerLayout.findViewById(R.id.nav_header_main_person_name);
-            //tv_logout = (TextView)headerLayout.findViewById(R.id.nav_header_main_logout);
-            //tv_logout.setText("Not " + UserInfo.getInstance().getFirstName() + "?");
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             tv_email.setText(UserInfo.getInstance().getCredentials().getEmail());
-            //iv_image.setImageBitmap(UserInfo.getInstance().getGoogleProfileBitMap());
-//            tv_logout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    UserInfo.getInstance().logOutUser(MainActivity.this);
-//                    MainActivity.this.recreate();
-//                }
-//            });
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             //if(null != UserInfo.getInstance().getGoogleAccount().getEmail()) {
@@ -139,14 +123,6 @@ public class MainActivity extends AppCompatActivity
                 GoogleImage gi = new GoogleImage();
                 gi.execute(iv_image,MainActivity.this);
                 }
-//                tv_logout.setText("Not " + UserInfo.getInstance().getGoogleAccount().getDisplayName() + "?");
-//                tv_logout.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        UserInfo.getInstance().signOutWithGoogle();
-//                        MainActivity.this.recreate();
-//                    }
-//                });
             }
             catch(NullPointerException e){
                 tv_logout.setText(" ");
