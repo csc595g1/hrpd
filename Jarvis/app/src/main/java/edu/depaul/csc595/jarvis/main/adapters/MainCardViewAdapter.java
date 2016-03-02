@@ -12,6 +12,7 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
+import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.GetTotalPointsAsyncTask;
@@ -112,7 +113,7 @@ public class MainCardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.tv_redeem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mainActivity,ProfileActivity.class);
+                    Intent intent = new Intent(mainActivity,LogInActivity.class);
                     mainActivity.startActivity(intent);
                 }
             });

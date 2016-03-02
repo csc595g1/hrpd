@@ -4,19 +4,24 @@
     android:layout_height="match_parent" >
 
     <View
-        android:layout_width="7dp"
-        android:layout_height="7dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginLeft="7dp"
-        android:background="@drawable/circle" />
+        android:background="@drawable/circle"
+        android:id="@+id/view"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 
     <View
-        android:layout_width="2dp"
+        android:layout_width="4dp"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:id="@+id/view2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
