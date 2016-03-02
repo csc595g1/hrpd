@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.inventory.models;
+package edu.depaul.csc595.jarvis.appliances.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;

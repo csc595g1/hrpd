@@ -52,30 +52,75 @@
             android:label="@string/title_activity_profile"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- This is for Reminder -->
         <activity
-            android:name=".reminders.ReminderActivity"
+            android:name=".reminders.main.ReminderActivity"
             android:label="@string/title_activity_reminder"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderFireExtinguisher"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderDryer"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderCODetector"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderGenerator"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderVent"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderSumpPump"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderSmokeAlarm"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderWashingMachine"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderWaterHeater"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity android:name=".reminders.staticreminders.rewardgenerate.ReceiveRewards"></activity>
+
+        <receiver android:name=".reminders.staticreminders.services.MyReceiver"/>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForCODetector"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForDryer"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForDryerVent"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForFireExting"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForGenerator"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForSmokeAlarm"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForSumpPump"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForWashingMachine"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForWaterHeater"></receiver>
+
         <!-- For Prevention -->
         <activity
-            android:name=".prevention.homescreen.PreventionActivity"
+            android:name=".prevention.main.PreventionActivity"
             android:label="@string/title_activity_prevention"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".prevention.ehelp.main.EHelpMainActivity"
             android:label="E-Help"
-            android:parentActivityName=".prevention.homescreen.PreventionActivity">
+            android:parentActivityName=".prevention.main.PreventionActivity">
 
         </activity>
 
         <!-- This is for Appliances -->
         <activity
-            android:name=".inventory.main.AppliancesActivity"
+            android:name=".appliances.main.AppliancesActivity"
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <!-- This is for Settings -->
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/title_activity_settings" />
@@ -105,9 +150,8 @@
         </activity>
 
         <!-- This for Allstate Reminder -->
-        \
 
-        <activity android:name=".reminders.CustomReminderActivity"
+        <activity android:name=".reminders.main.CustomReminderActivity"
             android:label="Custom Reminder"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -125,9 +169,6 @@
         <receiver android:name=".reminders.receivers.SnoozeActionReceiver" />
 
         <receiver android:name=".reminders.receivers.DismissReceiver" />
-
-        <receiver
-            android:name=".reminders.receivers.BootReceiver" />
 
 
         <!-- [START gcm_receiver] -->

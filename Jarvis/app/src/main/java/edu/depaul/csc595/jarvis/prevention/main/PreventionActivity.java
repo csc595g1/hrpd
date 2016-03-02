@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.prevention.homescreen;
+package edu.depaul.csc595.jarvis.prevention.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
 import edu.depaul.csc595.jarvis.prevention.ehelp.main.EHelpMainActivity;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 
 public class PreventionActivity extends AppCompatActivity {
 
@@ -26,7 +26,6 @@ public class PreventionActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

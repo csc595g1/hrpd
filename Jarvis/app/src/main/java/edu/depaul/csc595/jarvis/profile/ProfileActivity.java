@@ -25,12 +25,12 @@ import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.DetectionBaseActivity;
-import edu.depaul.csc595.jarvis.inventory.main.AppliancesActivity;
+import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
 import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 

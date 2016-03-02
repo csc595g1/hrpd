@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".inventory.main.AppliancesActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".appliances.main.AppliancesActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -26,17 +28,410 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/my_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:layout_marginTop="65dp"
-        android:scrollbars="vertical"
-        />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />
 
-</RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ddd"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Smoke Alarm-->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Test Smoke Alarms"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_smoke_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"
+                        android:textOff="Closed"
+                        android:textOn="Opened"
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check Fire Extinguisher-->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check Fire Extinguisher"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_fire_extinguisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"
+                        android:textOff="Closed"
+                        android:textOn="Opened"
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Inspect Sump Pump -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view3"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Inspect Sump Pump"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_sump_pump"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"
+                        android:textOff="Closed"
+                        android:textOn="Opened"
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Inspect Washing Machine -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view4"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Clean/Inspect Washing Machine"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_washing_machine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"
+                        android:textOff="Closed"
+                        android:textOn="Opened"
+                        />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check/Drain Water Heater -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view5"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check Water Heater"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_water_heater"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check Dryer -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view6"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check Dryer"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_dryer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check CO Detector -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view7"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check CO Detector"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_co_detector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check Dryer Vent -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view8"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check Dryer Vent"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_dryer_vent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Check Generator -->
+            <android.support.v7.widget.CardView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/card_view9"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#C5CAE9"
+                android:foreground="?attr/selectableItemBackground"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="-15dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Check Water Heater"
+                        android:textColor="#000000"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:textSize="16sp" />
+
+                    <Switch
+                        android:id="@+id/switch_generator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:soundEffectsEnabled="true"
+                        android:checked="true"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

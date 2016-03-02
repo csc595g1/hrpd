@@ -6,7 +6,9 @@
 
     <string name="action_home">Home</string>
     <string name="action_rewards">Rewards</string>
+    <!--
     <string name="action_prevention">Prevention</string>
+    -->
     <string name="action_appliances">Appliances</string>
     <string name="action_profile">Profile</string>
     <string name="action_reminder">Reminder</string>

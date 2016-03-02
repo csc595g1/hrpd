@@ -31,12 +31,12 @@
             android:id="@+id/nav_reminder"
             android:icon="@android:drawable/ic_popup_reminder"
             android:title="@string/action_reminder" />
-
+<!--
         <item
             android:id="@+id/nav_prevention"
             android:icon="@android:drawable/ic_menu_help"
             android:title="@string/action_prevention" />
-
+-->
     </group>
 
     <item android:title="">
