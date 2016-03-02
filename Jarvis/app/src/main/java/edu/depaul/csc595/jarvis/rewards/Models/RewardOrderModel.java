@@ -22,27 +22,6 @@ public class RewardOrderModel {
     private String send_reward = "true";
     private String external_id;
 
-//    {
-//        "customer": "csc595g1_01",
-//            "account_identifier": "csc595g1_01",
-//            "campaign": "HomeSafety",
-//            "recipient": {
-//        "name": "Test Order",
-//                "email": "csc595g1@gmail.com"
-//    },
-//        "sku": "TNGO-E-V-STD",
-//            "amount": 1000,
-//            "reward_from": "CSC595 Group1",
-//            "reward_subject": "Here is your reward!",
-//            "reward_message": "Way to go! Thanks!",
-//            "send_reward": true,
-//            "external_id": "123456-XYZ"
-//    }
-
-
-
-
-
 
     public JSONObject toJSON() {
 
