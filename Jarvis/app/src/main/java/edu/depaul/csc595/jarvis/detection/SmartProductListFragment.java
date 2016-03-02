@@ -206,11 +206,9 @@ public class SmartProductListFragment extends ListFragment {
                 Log.d(LOG_TAG, "Reached this place");
                 if (!response.isSuccess()) {
                     Log.d(LOG_TAG, response.errorBody().toString());
+                    Toast.makeText(getContext(), "Server error: Smart Product could not be deleted", Toast.LENGTH_SHORT).show();
                 }
 
-//                mAdapter.clear();
-//                mAdapter.addAll(smart_products);
-//                mAdapter.notifyDataSetChanged();
                 Log.d(LOG_TAG, "Response returned by website is : " + response.body());
                 Log.d(LOG_TAG, "Response returned by website is : " + response.code());
                 mProgressDialog.hide();

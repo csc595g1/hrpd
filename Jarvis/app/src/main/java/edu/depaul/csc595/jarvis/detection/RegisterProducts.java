@@ -64,6 +64,11 @@ public class RegisterProducts extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
 
+    private Boolean isSuccess = false;
+    void setSuccess(Boolean value){
+        isSuccess = value;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,18 +131,22 @@ public class RegisterProducts extends AppCompatActivity {
             Log.d(LOG_TAG, email);
         }
 
-        createSmartProduct(smartProduct, email);
-
         CharSequence text = serial_no + " " + radioSensorButton.getText() + " " + appliance_name + "" + email;
         Log.d(LOG_TAG, text.toString());
 
+        createSmartProduct(smartProduct, email);
+
+    }
+
+    private void completeAndReturn() {
         Intent returnIntent = new Intent();
 //        returnIntent.putExtra("result", result);
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
-
-
     }
+
+
+
 
     private void createSmartProduct(SmartProduct smartProduct, String email_address){
         mProgressDialog = new ProgressDialog(this);
@@ -152,18 +161,25 @@ public class RegisterProducts extends AppCompatActivity {
 
         Call<SmartProduct> call = detectionInterface.createSmartProduct(email_address, smartProduct);
 
+
+
         call.enqueue(new Callback<SmartProduct>() {
             @Override
             public void onResponse(Call<SmartProduct> call, Response<SmartProduct> response) {
                 Log.d(LOG_TAG, "Reached this place");
                 if (!response.isSuccess()) {
                     Log.d(LOG_TAG, response.errorBody().toString());
+                    setSuccess(false);
+                    mProgressDialog.hide();
+                    Toast.makeText(getApplicationContext(), "Failed to save smart product! Please make sure it is a valid serial no", Toast.LENGTH_LONG).show();
                     return;
                 }
                 SmartProduct smartProduct = response.body();
                 Log.d(LOG_TAG, "Response returned by website is : " + response.body());
                 Log.d(LOG_TAG, "Response returned by website is : " + response.code());
                 mProgressDialog.hide();
+                Toast.makeText(getApplicationContext(), "Successfully registered product", Toast.LENGTH_LONG).show();
+                completeAndReturn();
 
             }
 
@@ -171,9 +187,11 @@ public class RegisterProducts extends AppCompatActivity {
             public void onFailure(Call<SmartProduct> call, Throwable t) {
                 Log.d(LOG_TAG, t.getMessage());
                 mProgressDialog.hide();
-                Toast.makeText(getApplicationContext(), "Failed to save smart product!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error occurred!", Toast.LENGTH_LONG).show();
+                setSuccess(false);
             }
         });
+
     }
 
 
