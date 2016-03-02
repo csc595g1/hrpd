@@ -1,6 +1,7 @@
 package edu.depaul.csc595.jarvis.rewards.HerokuAPI;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -81,13 +82,24 @@ public class GetTotalPointsAsyncTask extends AsyncTask<Object, Void, Integer> {
                     sb.append(line);
                 }
                 jobj = new JSONObject(sb.toString());
-                int pointTotal = jobj.getInt("sum");
-                return pointTotal;
+                return jobj.getInt("sum");
             }
         }
-        catch(MalformedURLException e){}
-        catch(IOException e){}
-        catch(JSONException e){}
+        catch(MalformedURLException e){
+            Log.d(TAG, "doInBackground error, returning 0");
+            Log.d(TAG, "doInBackground " + e.getMessage());
+            return 0;
+        }
+        catch(IOException e){
+            Log.d(TAG, "doInBackground error, returning 0");
+            Log.d(TAG, "doInBackground " + e.getMessage());
+            return 0;
+        }
+        catch(JSONException e){
+            Log.d(TAG, "doInBackground error, returning 0");
+            Log.d(TAG, "doInBackground " + e.getMessage());
+            return 0;
+        }
 
         return null;
     }
