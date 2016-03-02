@@ -43,18 +43,18 @@ public class ReminderSumpPump extends Activity
         //For Every 30 Days
         //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
         //For Every 5 Min
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),60000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),180000, pendingIntent);
 
         /* Initialize Radio Group and attach click handler */
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton after_1_day = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_7_days = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_15_days = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_30_days = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_3_months = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_6_months = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_9_months = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_12_months = (RadioButton) findViewById(R.id.reminder_every_day);
+        final RadioButton after_7_days = (RadioButton) findViewById(R.id.reminder_one_week);
+        final RadioButton after_15_days = (RadioButton) findViewById(R.id.reminder_fifteen_days);
+        final RadioButton after_30_days = (RadioButton) findViewById(R.id.reminder_one_month);
+        final RadioButton after_3_months = (RadioButton) findViewById(R.id.reminder_three_month);
+        final RadioButton after_6_months = (RadioButton) findViewById(R.id.reminder_six_month);
+        final RadioButton after_9_months = (RadioButton) findViewById(R.id.reminder_nine_month);
+        final RadioButton after_12_months = (RadioButton) findViewById(R.id.reminder_one_year);
 
         radioGroup.clearCheck();
 

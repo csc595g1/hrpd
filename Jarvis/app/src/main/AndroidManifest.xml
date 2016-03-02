@@ -64,6 +64,18 @@
             android:name=".reminders.staticreminders.activities.ReminderFireExtinguisher"
             android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
         <activity
+            android:name=".reminders.staticreminders.activities.ReminderDryer"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderCODetector"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderGenerator"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
+            android:name=".reminders.staticreminders.activities.ReminderVent"
+            android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
+        <activity
             android:name=".reminders.staticreminders.activities.ReminderSumpPump"
             android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
         <activity
@@ -75,9 +87,18 @@
         <activity
             android:name=".reminders.staticreminders.activities.ReminderWaterHeater"
             android:parentActivityName=".appliances.main.AppliancesActivity"></activity>
-        <activity android:name=".reminders.staticreminders.receiving.ReceiveRewards"></activity>
+        <activity android:name=".reminders.staticreminders.rewardgenerate.ReceiveRewards"></activity>
 
         <receiver android:name=".reminders.staticreminders.services.MyReceiver"/>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForCODetector"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForDryer"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForDryerVent"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForFireExting"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForGenerator"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForSmokeAlarm"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForSumpPump"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForWashingMachine"></receiver>
+        <receiver android:name=".reminders.staticreminders.receivers.ReceiverForWaterHeater"></receiver>
 
         <!-- For Prevention -->
         <activity
@@ -97,10 +118,7 @@
             android:label="@string/title_activity_appliances"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".appliances.indetail.AppliancesInDetail"
-            android:label="Appliances in Detail"
-            android:parentActivityName=".appliances.main.AppliancesActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
 
         <!-- This is for Settings -->
         <activity
