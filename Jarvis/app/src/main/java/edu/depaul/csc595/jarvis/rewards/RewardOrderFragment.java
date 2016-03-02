@@ -1,11 +1,15 @@
 package edu.depaul.csc595.jarvis.rewards;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
@@ -18,6 +22,21 @@ public class RewardOrderFragment extends Fragment {
     Rewards rewards;
     RewardOrderModel rewardOrderModel;
 
+    TextView editText_customer;
+    TextView editText_account_identifier;
+    TextView editText_campaign;
+    TextView editText_name;
+    TextView editText_email;
+    TextView editText_sku;
+    TextView editText_amount;
+    TextView editText_reward_from;
+    TextView editText_reward_subject;
+    TextView editText_reward_message;
+    TextView editText_send_reward;
+    TextView editText_external_id;
+
+    Button buttonOrder;
+
     public RewardOrderFragment() {
         // Required empty public constructor
     }
@@ -28,8 +47,57 @@ public class RewardOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reward_order, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_reward_order, container, false);
+
+        buildUI(rootView);
+
+        buttonOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence orderPlaced = "Order Placed...";
+                Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+            }
+        });
+
+//        pointsTask = new GetTotalPointsAsyncTask();
+
+
+
+        return rootView;
+
+        //////////////////////////////////////////////////////////////////////////////////
+        //Google Auth
+
+//        signInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//                startActivityForResult(signInIntent, RC_SIGN_IN);
+//            }
+//        });
+
+
+    }
+
+    private void buildUI(View rootView) {
+
+        editText_customer = (TextView) rootView.findViewById(R.id.editText_customer);
+        editText_account_identifier = (TextView) rootView.findViewById(R.id.editText_account_identifier);
+        editText_campaign = (TextView) rootView.findViewById(R.id.editText_campaign);
+        editText_name = (TextView) rootView.findViewById(R.id.editText_name);
+        editText_email = (TextView) rootView.findViewById(R.id.editText_email);
+        editText_sku = (TextView) rootView.findViewById(R.id.editText_sku);
+        editText_amount = (TextView) rootView.findViewById(R.id.editText_amount);
+        editText_reward_from = (TextView) rootView.findViewById(R.id.editText_reward_from);
+        editText_reward_subject = (TextView) rootView.findViewById(R.id.editText_reward_subject);
+        editText_reward_message = (TextView) rootView.findViewById(R.id.editText_reward_message);
+        editText_send_reward = (TextView) rootView.findViewById(R.id.editText_send_reward);
+        editText_external_id = (TextView) rootView.findViewById(R.id.editText_external_id);
+
+        buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
+
     }
 
     private RewardOrderModel buildOrder() {
