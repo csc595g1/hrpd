@@ -68,16 +68,6 @@
                     android:gravity="center"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
-
                     <TextView
                         android:id="@+id/appliances_smoke_alarm_title"
                         android:layout_centerVertical="true"
@@ -86,25 +76,10 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toRightOf="@+id/img1"
                         android:text="Test Smoke Alarms"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/appliances_smoke_alarm_reminder_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/appliances_smoke_alarm_title"
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/img1"
-                        android:textColor="#000000"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Reminder Date is : "
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/appliances_smoke_alarm_switch"
@@ -138,16 +113,6 @@
                     android:gravity="center"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
-
                     <TextView
                         android:id="@+id/appliances_fire_extinguisher_title"
                         android:layout_centerVertical="true"
@@ -156,25 +121,10 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toRightOf="@+id/img2"
                         android:text="Check Fire Extinguisher"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/appliances_fire_extinguisher_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/appliances_fire_extinguisher_title"
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/img2"
-                        android:textColor="#000000"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Reminder Date : "
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/appliances_fire_extinguisher_switch"
@@ -208,16 +158,6 @@
                     android:gravity="center"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img3"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
-
                     <TextView
                         android:id="@+id/appliances_sump_pump_title"
                         android:layout_centerVertical="true"
@@ -226,25 +166,10 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toRightOf="@+id/img3"
                         android:text="Inspect Sump Pump"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/appliances_sump_pump_reminder_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/appliances_sump_pump_title"
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/img3"
-                        android:textColor="#000000"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Reminder Date is : "
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/appliances_sump_pump_switch"
@@ -278,16 +203,6 @@
                     android:gravity="center"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img4"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
-
                     <TextView
                         android:id="@+id/appliances_washing_machine_title"
                         android:layout_centerVertical="true"
@@ -296,25 +211,10 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toRightOf="@+id/img4"
                         android:text="Clean/Inspect Washing Machine"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/appliances_washing_machine_reminder_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/appliances_washing_machine_title"
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/img4"
-                        android:textColor="#000000"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Reminder Date :"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/appliances_washing_machine_switch"
@@ -348,16 +248,6 @@
                     android:gravity="center"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/img5"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/common_plus_signin_btn_icon_dark_focused" />
-
                     <TextView
                         android:id="@+id/appliances_water_heater_title"
                         android:layout_centerVertical="true"
@@ -366,25 +256,10 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:layout_toRightOf="@+id/img5"
                         android:text="Check Water Heater"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/appliances_water_heater_reminder_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/appliances_water_heater_title"
-                        android:layout_marginLeft="16dp"
-                        android:layout_toRightOf="@+id/img5"
-                        android:textColor="#000000"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="Reminder Date is : "
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textSize="14sp" />
 
                     <Switch
                         android:id="@+id/appliances_water_heater_switch"

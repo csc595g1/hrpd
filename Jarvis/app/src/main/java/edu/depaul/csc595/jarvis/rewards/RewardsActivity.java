@@ -1,9 +1,6 @@
 package edu.depaul.csc595.jarvis.rewards;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -30,17 +27,8 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
@@ -50,9 +38,7 @@ import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.GoogleImage;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
-import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventAsyncTask;
-import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 
 public class RewardsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{

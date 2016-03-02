@@ -14,7 +14,7 @@ import android.widget.Button;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
 import edu.depaul.csc595.jarvis.prevention.ehelp.main.EHelpMainActivity;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 
 public class PreventionActivity extends AppCompatActivity {
 

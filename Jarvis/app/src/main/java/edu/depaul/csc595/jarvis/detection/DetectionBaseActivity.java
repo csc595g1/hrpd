@@ -16,19 +16,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
 import edu.depaul.csc595.jarvis.main.MainActivity;
-import edu.depaul.csc595.jarvis.prevention.main.PreventionActivity;
 import edu.depaul.csc595.jarvis.profile.LogInActivity;
 import edu.depaul.csc595.jarvis.profile.ProfileActivity;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
-import edu.depaul.csc595.jarvis.reminders.ReminderActivity;
+import edu.depaul.csc595.jarvis.reminders.main.ReminderActivity;
 import edu.depaul.csc595.jarvis.rewards.RewardsActivity;
 import edu.depaul.csc595.jarvis.settings.SettingsActivity;
-
-import butterknife.Bind;
 
 
 public class DetectionBaseActivity extends AppCompatActivity
@@ -193,9 +191,11 @@ public class DetectionBaseActivity extends AppCompatActivity
             case R.id.nav_settings:
                 goToActivity = new Intent(getApplicationContext(), SettingsActivity.class);
                 break;
+            /*
             case R.id.nav_prevention:
                 goToActivity = new Intent(getApplicationContext(), PreventionActivity.class);
                 break;
+                */
             case R.id.nav_logout:
                 if(UserInfo.getInstance().getIsLoggedIn()) {
                     UserInfo.getInstance().logOutUser(DetectionBaseActivity.this);

@@ -55,7 +55,7 @@
 
         <!-- This is for Reminder -->
         <activity
-            android:name=".reminders.ReminderActivity"
+            android:name=".reminders.main.ReminderActivity"
             android:label="@string/title_activity_reminder"
             android:parentActivityName=".main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -133,7 +133,7 @@
 
         <!-- This for Allstate Reminder -->
 
-        <activity android:name=".reminders.CustomReminderActivity"
+        <activity android:name=".reminders.main.CustomReminderActivity"
             android:label="Custom Reminder"
             android:theme="@style/AppTheme.NoActionBar" />
 
