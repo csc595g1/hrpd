@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.reminders.staticreminders.services.MyReceiver;
+import edu.depaul.csc595.jarvis.reminders.staticreminders.receivers.ReceiverForDryerVent;
 
 /**
  * Created by Advait on 02-03-2016.
@@ -37,14 +37,14 @@ public class ReminderVent extends AppCompatActivity
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.AM_PM,Calendar.AM);
 
-        Intent myIntent = new Intent(ReminderVent.this, MyReceiver.class);
+        Intent myIntent = new Intent(ReminderVent.this, ReceiverForDryerVent.class);
         pendingIntent = PendingIntent.getBroadcast(ReminderVent.this, 0, myIntent, 0);
         final AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
         //For Every 30 Days
         //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
         //For Every 5 Min
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),240000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),60000, pendingIntent);
 
         /* Initialize Radio Group and attach click handler */
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
