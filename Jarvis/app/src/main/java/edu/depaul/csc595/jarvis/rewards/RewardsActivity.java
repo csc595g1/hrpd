@@ -76,7 +76,7 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private int numOfPages = 4;
+    private int numOfPages = 2;
 //    private Rewards rewards;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -269,6 +269,20 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
 //            textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
 
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                case 0:
+                    try {
+                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+                    } catch (Exception e) {
+                        System.out.println("ERROR: " + e.toString());
+                    }
+                    break;
+//                case 2:
+//                    try {
+//                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+//                    } catch (Exception e) {
+//                        System.out.println("ERROR: " + e.toString());
+//                    }
+//                    break;
                 case 1:
                     try {
                         textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -276,27 +290,13 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
                         System.out.println("ERROR: " + e.toString());
                     }
                     break;
-                case 2:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
-                case 3:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
-                case 4:
-                    try {
-                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
-                    } catch (Exception e) {
-                        System.out.println("ERROR: " + e.toString());
-                    }
-                    break;
+//                case 4:
+//                    try {
+//                        textView.setText(getString(R.string.rewards_section_text, getArguments().getInt(ARG_SECTION_NUMBER)));
+//                    } catch (Exception e) {
+//                        System.out.println("ERROR: " + e.toString());
+//                    }
+//                    break;
                 default:
                     try {
                         textView.setText(getString(R.string.rewards_section_text, 3));
@@ -326,9 +326,9 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position) {
-                case 1:
+                case 0:
                     return new RewardBalanceFragment();
-                //case 3:
+                //case 1:
                     //return new Order
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
@@ -347,13 +347,13 @@ public class RewardsActivity extends AppCompatActivity implements NavigationView
                 //case 0:
                 //    return (CharSequence) getString(R.string.rewards_button_account_create);
                 //return "SECTION 1";
-                case 1:
+                case 0:
                     return (CharSequence) getString(R.string.rewards_button_account_balance);
                 //return "SECTION 2";
                 //case 2:
                 //    return (CharSequence) getString(R.string.rewards_button_account_update);
                 //return "SECTION 3";
-                case 3:
+                case 1:
                     return (CharSequence) getString(R.string.rewards_button_redeem_points);
                 //return "SECTION 4";
             }

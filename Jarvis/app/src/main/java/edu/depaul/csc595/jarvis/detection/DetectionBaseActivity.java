@@ -70,6 +70,12 @@ public class DetectionBaseActivity extends AppCompatActivity
         setContentView(R.layout.activity_detection_base);
         ButterKnife.bind(this);
 
+        //check login, send to login if not logged in
+        if(!UserInfo.getInstance().isGoogleLoggedIn() && !UserInfo.getInstance().getIsLoggedIn()){
+            Intent intent = new Intent(DetectionBaseActivity.this,LogInActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null){
