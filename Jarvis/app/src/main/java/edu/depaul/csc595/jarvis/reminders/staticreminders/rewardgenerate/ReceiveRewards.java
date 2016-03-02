@@ -1,4 +1,4 @@
-package edu.depaul.csc595.jarvis.reminders.staticreminders.receiving;
+package edu.depaul.csc595.jarvis.reminders.staticreminders.rewardgenerate;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -16,9 +16,13 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderCODetector;
+import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderDryer;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderFireExtinguisher;
+import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderGenerator;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderSmokeAlarm;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderSumpPump;
+import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderVent;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderWashingMachine;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderWaterHeater;
 
@@ -51,90 +55,152 @@ public class AppliancesActivity extends AppCompatActivity
         final CardView car3 = (CardView) findViewById(R.id.card_view3);
         final CardView car4 = (CardView) findViewById(R.id.card_view4);
         final CardView car5 = (CardView) findViewById(R.id.card_view5);
+        final CardView car6 = (CardView) findViewById(R.id.card_view6);
+        final CardView car7 = (CardView) findViewById(R.id.card_view7);
+        final CardView car8 = (CardView) findViewById(R.id.card_view8);
+        final CardView car9 = (CardView) findViewById(R.id.card_view9);
 
-        Switch switch_smoke_alarm = (Switch) findViewById(R.id.appliances_smoke_alarm_switch);
-        Switch switch_fire_exting = (Switch) findViewById(R.id.appliances_fire_extinguisher_switch);
-        Switch switch_sump_pump = (Switch) findViewById(R.id.appliances_sump_pump_switch);
-        Switch switch_washing_machine = (Switch) findViewById(R.id.appliances_washing_machine_switch);
-        Switch switch_water_heater = (Switch) findViewById(R.id.appliances_water_heater_switch);
+        Switch smoke_alarm = (Switch) findViewById(R.id.switch_smoke_alarm);
+        Switch fire_exting = (Switch) findViewById(R.id.switch_fire_extinguisher);
+        Switch sump_pump = (Switch) findViewById(R.id.switch_sump_pump);
+        Switch washing_machine = (Switch) findViewById(R.id.switch_washing_machine);
+        Switch water_heater = (Switch) findViewById(R.id.switch_water_heater);
+        Switch co_detector = (Switch) findViewById(R.id.switch_co_detector);
+        Switch dryer = (Switch) findViewById(R.id.switch_dryer);
+        Switch dryer_vent = (Switch) findViewById(R.id.switch_dryer_vent);
+        Switch generator = (Switch) findViewById(R.id.switch_generator);
 
-        switch_smoke_alarm.setOnClickListener(new View.OnClickListener() {
+        smoke_alarm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (((Switch) v).isChecked())
                 {
-                    //Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
                     car1.setClickable(true);
                 }
                 else
                 {
-                    //car5.setVisibility(View.GONE);
                     car1.setClickable(false);
-                    car5.setBackgroundColor(Color.parseColor("#fafafa"));
+                    car1.setBackgroundColor(Color.parseColor("#fafafa"));
                 }
             }
         });
 
-        switch_fire_exting.setOnClickListener(new View.OnClickListener() {
+        fire_exting.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (((Switch) v).isChecked())
                 {
-                    //Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
                     car2.setClickable(true);
                 }
                 else
                 {
-                    //car5.setVisibility(View.GONE);
                     car2.setClickable(false);
-                    car5.setBackgroundColor(Color.parseColor("#fafafa"));
+                    car2.setBackgroundColor(Color.parseColor("#fafafa"));
                 }
             }
         });
 
-        switch_sump_pump.setOnClickListener(new View.OnClickListener() {
+        sump_pump.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (((Switch) v).isChecked())
                 {
-                    //Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
                     car3.setClickable(true);
                 }
                 else
                 {
-                    //car5.setVisibility(View.GONE);
                     car3.setClickable(false);
-                    car5.setBackgroundColor(Color.parseColor("#fafafa"));
+                    car3.setBackgroundColor(Color.parseColor("#fafafa"));
                 }
             }
         });
 
-        switch_washing_machine.setOnClickListener(new View.OnClickListener() {
+        washing_machine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (((Switch) v).isChecked())
                 {
-                    //Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"ON",Toast.LENGTH_SHORT).show();
                     car4.setClickable(true);
                 }
                 else
                 {
-                    //car5.setVisibility(View.GONE);
                     car4.setClickable(false);
+                    car4.setBackgroundColor(Color.parseColor("#fafafa"));
+                }
+            }
+        });
+
+        water_heater.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (((Switch) v).isChecked())
+                {
+                    Toast.makeText(getApplicationContext(),"ON", Toast.LENGTH_SHORT).show();
+                    car5.setClickable(true);
+                }
+                else
+                {
+                    car5.setClickable(false);
                     car5.setBackgroundColor(Color.parseColor("#fafafa"));
                 }
             }
         });
 
-        switch_water_heater.setOnClickListener(new View.OnClickListener() {
+        co_detector.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (((Switch) v).isChecked())
                 {
                     Toast.makeText(getApplicationContext(),"ON", Toast.LENGTH_SHORT).show();
-                    //car5.setVisibility(View.VISIBLE);
-                    car5.setClickable(true);
+                    car7.setClickable(true);
                 }
                 else
                 {
-                    //car5.setVisibility(View.GONE);
-                    car5.setClickable(false);
-                    car5.setBackgroundColor(Color.parseColor("#fafafa"));
+                    car7.setClickable(false);
+                    car7.setBackgroundColor(Color.parseColor("#fafafa"));
+                }
+            }
+        });
+
+        dryer.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (((Switch) v).isChecked())
+                {
+                    Toast.makeText(getApplicationContext(),"ON", Toast.LENGTH_SHORT).show();
+                    car6.setClickable(true);
+                }
+                else
+                {
+                    car6.setClickable(false);
+                    car6.setBackgroundColor(Color.parseColor("#fafafa"));
+                }
+            }
+        });
+
+        dryer_vent.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (((Switch) v).isChecked())
+                {
+                    Toast.makeText(getApplicationContext(),"ON", Toast.LENGTH_SHORT).show();
+                    car7.setClickable(true);
+                }
+                else
+                {
+                    car7.setClickable(false);
+                    car7.setBackgroundColor(Color.parseColor("#fafafa"));
+                }
+            }
+        });
+
+        generator.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (((Switch) v).isChecked())
+                {
+                    Toast.makeText(getApplicationContext(),"ON", Toast.LENGTH_SHORT).show();
+                    car9.setClickable(true);
+                }
+                else
+                {
+                    car9.setClickable(false);
+                    car9.setBackgroundColor(Color.parseColor("#fafafa"));
                 }
             }
         });
@@ -179,6 +245,42 @@ public class AppliancesActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent go_to_notification = new Intent(getApplicationContext(), ReminderWaterHeater.class);
+                startActivity(go_to_notification);
+
+            }
+        });
+
+        car6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent go_to_notification = new Intent(getApplicationContext(), ReminderDryer.class);
+                startActivity(go_to_notification);
+
+            }
+        });
+
+        car7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent go_to_notification = new Intent(getApplicationContext(), ReminderCODetector.class);
+                startActivity(go_to_notification);
+
+            }
+        });
+
+        car8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent go_to_notification = new Intent(getApplicationContext(), ReminderVent.class);
+                startActivity(go_to_notification);
+
+            }
+        });
+
+        car9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Intent go_to_notification = new Intent(getApplicationContext(), ReminderGenerator.class);
                 startActivity(go_to_notification);
 
             }

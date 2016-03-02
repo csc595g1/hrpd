@@ -1,10 +1,10 @@
 package edu.depaul.csc595.jarvis.reminders.staticreminders.activities;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -15,16 +15,17 @@ import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.services.MyReceiver;
 
 /**
- * Created by Advait on 01-03-2016.
+ * Created by Advait on 02-03-2016.
  */
-public class ReminderWaterHeater extends Activity
+public class ReminderCODetector extends AppCompatActivity
 {
+
     private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reminder_for_water_heater);
+        setContentView(R.layout.reminder_for_co_detector);
 
         final Calendar calendar = Calendar.getInstance();
         //set notification for date --> 1th February 2016 at 09:00:00
@@ -36,14 +37,14 @@ public class ReminderWaterHeater extends Activity
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.AM_PM,Calendar.AM);
 
-        Intent myIntent = new Intent(ReminderWaterHeater.this, MyReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(ReminderWaterHeater.this, 0, myIntent, 0);
+        Intent myIntent = new Intent(ReminderCODetector.this, MyReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(ReminderCODetector.this, 0, myIntent, 0);
         final AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
         //For Every 30 Days
         //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
         //For Every 5 Min
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),240000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),300000, pendingIntent);
 
         /* Initialize Radio Group and attach click handler */
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
@@ -102,7 +103,7 @@ public class ReminderWaterHeater extends Activity
                 else if(checkedId == R.id.reminder_one_year)
                 {
                     Toast.makeText(getApplicationContext(),"365 Days",Toast.LENGTH_SHORT).show();
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY * 365, pendingIntent);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 365, pendingIntent);
                 }
             }
         });
