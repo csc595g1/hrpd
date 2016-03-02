@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.RewardOrderAsyncTask;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
 
 /**
@@ -21,20 +23,20 @@ import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
 public class RewardOrderFragment extends Fragment {
 
     Rewards rewards;
-    RewardOrderModel rewardOrderModel;
+    //RewardOrderModel rewardOrderModel;
 
-    TextView editText_customer;
-    TextView editText_account_identifier;
-    TextView editText_campaign;
-    TextView editText_name;
-    TextView editText_email;
-    TextView editText_sku;
-    TextView editText_amount;
-    TextView editText_reward_from;
-    TextView editText_reward_subject;
-    TextView editText_reward_message;
-    TextView editText_send_reward;
-    TextView editText_external_id;
+    EditText editText_customer;
+    EditText editText_account_identifier;
+    EditText editText_campaign;
+    EditText editText_name;
+    EditText editText_email;
+    EditText editText_sku;
+    EditText editText_amount;
+    EditText editText_reward_from;
+    EditText editText_reward_subject;
+    EditText editText_reward_message;
+    EditText editText_send_reward;
+    EditText editText_external_id;
 
     Button buttonOrder;
 
@@ -55,8 +57,13 @@ public class RewardOrderFragment extends Fragment {
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String orderPlaced = "Order Placed...";
 
+                //need to add async task to place an order.
+                RewardOrderAsyncTask task = new RewardOrderAsyncTask();
+                RewardOrderModel rewardOrderModel = buildOrder();
+                task.execute(rewardOrderModel,null,null);
+
+                String orderPlaced = "Order Placed...";
                 Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
@@ -73,18 +80,18 @@ public class RewardOrderFragment extends Fragment {
 
     private void buildUI(View rootView) {
 
-        editText_customer = (TextView) rootView.findViewById(R.id.editText_customer);
-        editText_account_identifier = (TextView) rootView.findViewById(R.id.editText_account_identifier);
-        editText_campaign = (TextView) rootView.findViewById(R.id.editText_campaign);
-        editText_name = (TextView) rootView.findViewById(R.id.editText_name);
-        editText_email = (TextView) rootView.findViewById(R.id.editText_email);
-        editText_sku = (TextView) rootView.findViewById(R.id.editText_sku);
-        editText_amount = (TextView) rootView.findViewById(R.id.editText_amount);
-        editText_reward_from = (TextView) rootView.findViewById(R.id.editText_reward_from);
-        editText_reward_subject = (TextView) rootView.findViewById(R.id.editText_reward_subject);
-        editText_reward_message = (TextView) rootView.findViewById(R.id.editText_reward_message);
-        editText_send_reward = (TextView) rootView.findViewById(R.id.editText_send_reward);
-        editText_external_id = (TextView) rootView.findViewById(R.id.editText_external_id);
+        editText_customer = (EditText) rootView.findViewById(R.id.editText_customer);
+        editText_account_identifier = (EditText) rootView.findViewById(R.id.editText_account_identifier);
+        editText_campaign = (EditText) rootView.findViewById(R.id.editText_campaign);
+        editText_name = (EditText) rootView.findViewById(R.id.editText_name);
+        editText_email = (EditText) rootView.findViewById(R.id.editText_email);
+        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
+        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
+        editText_reward_from = (EditText) rootView.findViewById(R.id.editText_reward_from);
+        editText_reward_subject = (EditText) rootView.findViewById(R.id.editText_reward_subject);
+        editText_reward_message = (EditText) rootView.findViewById(R.id.editText_reward_message);
+        editText_send_reward = (EditText) rootView.findViewById(R.id.editText_send_reward);
+        editText_external_id = (EditText) rootView.findViewById(R.id.editText_external_id);
 
         buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
 
@@ -110,18 +117,23 @@ public class RewardOrderFragment extends Fragment {
 
     private RewardOrderModel buildOrder() {
 
-        rewardOrderModel.setCustomer("csc595g1_01");
-        rewardOrderModel.setAccount_identifier("csc595g1_01");
-        rewardOrderModel.setCampaign("HomeSafety");
-        rewardOrderModel.setRecipient_name("Test Order");
-        rewardOrderModel.setRecipient_email("csc595g1@gmail.com");
-        rewardOrderModel.setSku("TNGO-E-V-STD");
-        rewardOrderModel.setAmount(1000);
-        rewardOrderModel.setReward_from("CSC595 Group1");
-        rewardOrderModel.setReward_subject("Here is your reward!");
-        rewardOrderModel.setReward_message("Way to go! Thanks!");
-        rewardOrderModel.setSend_reward("true");
-        rewardOrderModel.setExternal_id("123456-XYZ");
+        RewardOrderModel rewardOrderModel = new RewardOrderModel();
+
+        rewardOrderModel.setCustomer(editText_customer.getText().toString());
+        rewardOrderModel.setAccount_identifier(editText_account_identifier.getText().toString());
+        rewardOrderModel.setCampaign(editText_campaign.getText().toString());
+        rewardOrderModel.setRecipient_name(editText_name.getText().toString());
+        rewardOrderModel.setRecipient_email(editText_email.getText().toString());
+        rewardOrderModel.setSku(editText_sku.getText().toString());
+
+        String amount = editText_amount.getText().toString();
+        rewardOrderModel.setAmount(Integer.valueOf(amount));
+
+        rewardOrderModel.setReward_from(editText_reward_from.getText().toString());
+        rewardOrderModel.setReward_subject(editText_reward_subject.getText().toString());
+        rewardOrderModel.setReward_message(editText_reward_message.getText().toString());
+        rewardOrderModel.setSend_reward(editText_send_reward.getText().toString());
+        rewardOrderModel.setExternal_id(editText_external_id.getText().toString());
 
 
         return rewardOrderModel;

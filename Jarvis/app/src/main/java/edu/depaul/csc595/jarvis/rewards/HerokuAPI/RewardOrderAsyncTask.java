@@ -36,55 +36,41 @@ public class RewardOrderAsyncTask  extends AsyncTask<Object,Void,Void> {
         if(params[0].getClass().getSuperclass() == Activity.class){
             activity = (Activity)params[0];
         }
-        else if (params[0] instanceof CreateRewardEventModel){
+        else if (params[0] instanceof RewardOrderModel){
             rewardOrderModel = (RewardOrderModel)params[0];
         }
 
         if(params.length > 1) {
-            if (params[1] instanceof CreateRewardEventModel) {
+            if (params[1] instanceof RewardOrderModel) {
                 rewardOrderModel = (RewardOrderModel) params[1];
             }
         }
         try {
             JSONObject jsonOutput = new JSONObject();
-//    {
-//        "customer": "csc595g1_01",
-//            "account_identifier": "csc595g1_01",
-//            "campaign": "HomeSafety",
-//            "recipient": {
-//        "name": "Test Order",
-//                "email": "csc595g1@gmail.com"
-//    },
-//        "sku": "TNGO-E-V-STD",
-//            "amount": 1000,
-//            "reward_from": "CSC595 Group1",
-//            "reward_subject": "Here is your reward!",
-//            "reward_message": "Way to go! Thanks!",
-//            "send_reward": true,
-//            "external_id": "123456-XYZ"
-//    }
 
             jsonOutput = rewardOrderModel.toJSON();
 
             Log.d(TAG, "doInBackground " + jsonOutput);
 
             URL url = new URL(orderUrl);
-            HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
-            connect.setDoOutput(true);
-            connect.setDoInput(true);
-            connect.setRequestProperty("Content-Type", "application/json");
-            connect.setRequestProperty("Accept", "application/json");
-            connect.setRequestMethod("POST");
-            connect.setChunkedStreamingMode(0);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestProperty("Authorization", "Basic Q29ubmVjdGVkSG9tZVRlc3Q6OVp2a0F0THQyQmt6QUtYdHlidU1sTVh4QjJ3SVpMWmNWQXJIU0d3cTJXWEVoZldmTkNmc0VFaXlv");
 
-            OutputStreamWriter out = new OutputStreamWriter(connect.getOutputStream());
+            conn.setRequestMethod("POST");
+            conn.setChunkedStreamingMode(0);
+
+            OutputStreamWriter out = new OutputStreamWriter(conn.getOutputStream());
             out.write(jsonOutput.toString());
             out.close();
 
             StringBuilder sb = new StringBuilder();
-            int httpResult = connect.getResponseCode();
+            int httpResult = conn.getResponseCode();
             if(httpResult == HttpsURLConnection.HTTP_OK){
-                BufferedReader br = new BufferedReader(new InputStreamReader(connect.getInputStream()));
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String line = null;
                 while((line = br.readLine()) != null){
                     sb.append(line);
@@ -96,8 +82,10 @@ public class RewardOrderAsyncTask  extends AsyncTask<Object,Void,Void> {
                 }
             }
 
+        } catch (JSONException | IOException e) {
+//        } catch (IOException e){
+            e.printStackTrace();
         }
-        catch (JSONException | IOException e){}
 
         return null;
     }
