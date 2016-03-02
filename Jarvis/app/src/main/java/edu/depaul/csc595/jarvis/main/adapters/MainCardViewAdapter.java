@@ -10,6 +10,8 @@ import java.util.List;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.card_view_model.CardViewModel;
+import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.GetTotalPointsAsyncTask;
 
 /**
  * Created by Ed on 2/23/2016.
@@ -86,6 +88,10 @@ public class MainCardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private void configureCardViewRewardsHolder(CardViewRewardsHolder holder, int position){
         //do nothing as view is configured for demo.
         //can update as reward functionality arises
+        if(UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+            GetTotalPointsAsyncTask task = new GetTotalPointsAsyncTask();
+            task.execute(holder);
+        }
     }
 
     private void configureCardViewHolder(CardViewHolder ch, int position){
@@ -111,8 +117,12 @@ public class MainCardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public static class CardViewRewardsHolder extends RecyclerView.ViewHolder{
+        public TextView tv_content;
+        protected TextView tv_redeem;
         public CardViewRewardsHolder(View v){
             super(v);
+            tv_content = (TextView) v.findViewById(R.id.card_view_rewards_content);
+            tv_redeem = (TextView) v.findViewById(R.id.card_view_rewards_redeem);
         }
     }
 

@@ -18,6 +18,7 @@ import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
 import edu.depaul.csc595.jarvis.profile.user.User;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
+import edu.depaul.csc595.jarvis.rewards.HerokuAPI.GetTotalPointsAsyncTask;
 
 /**
  * Created by Ed on 2/23/2016.
@@ -26,6 +27,7 @@ public class ProfileFragment extends Fragment {
 
     private String email_address;
     private final String TAG = "ProfileFragment";
+    private GetTotalPointsAsyncTask pointsTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,18 +38,20 @@ public class ProfileFragment extends Fragment {
         TextView frag_prof_points = (TextView) rootView.findViewById(R.id.frag_prof_points);
         //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         Button registerDeviceBtn = (Button) rootView.findViewById(R.id.button_register_device);
+        pointsTask = new GetTotalPointsAsyncTask();
 
         if(UserInfo.getInstance().getIsLoggedIn()){
             User user = UserInfo.getInstance().getCredentials();
             frag_prof_email.setText(user.getEmail());
             frag_prof_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             email_address = user.getEmail();
-
+            pointsTask.execute(ProfileFragment.this,frag_prof_points);
         }
         else if(UserInfo.getInstance().isGoogleLoggedIn()){
             frag_prof_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
             frag_prof_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
             email_address = UserInfo.getInstance().getGoogleAccount().getEmail();
+            pointsTask.execute(ProfileFragment.this,frag_prof_points);
         }
 
         registerDeviceBtn.setOnClickListener(new View.OnClickListener() {
