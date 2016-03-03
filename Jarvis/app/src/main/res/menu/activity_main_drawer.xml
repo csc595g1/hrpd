@@ -26,11 +26,12 @@
             android:id="@+id/nav_appliances"
             android:icon="@drawable/ic_menu_appliances"
             android:title="@string/action_appliances" />
-
+<!--
         <item
             android:id="@+id/nav_reminder"
             android:icon="@android:drawable/ic_popup_reminder"
             android:title="@string/action_reminder" />
+            -->
 <!--
         <item
             android:id="@+id/nav_prevention"

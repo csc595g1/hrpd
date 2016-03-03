@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.reminders.main.CustomReminderActivity;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.receivers.ReceiverForCODetector;
 
 /**
@@ -25,6 +28,7 @@ public class ReminderCODetector extends AppCompatActivity
     TextView reminderDate;
     int month;
     Calendar cal2;
+    Button go_to_custom_reminder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +126,15 @@ public class ReminderCODetector extends AppCompatActivity
                     Toast.makeText(getApplicationContext(),"365 Days",Toast.LENGTH_SHORT).show();
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 365, pendingIntent);
                 }
+            }
+        });
+
+        go_to_custom_reminder = (Button) findViewById(R.id.link_for_custom_reminder);
+        go_to_custom_reminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent go_activity = new Intent(getApplicationContext(),CustomReminderActivity.class);
+                startActivity(go_activity);
             }
         });
 

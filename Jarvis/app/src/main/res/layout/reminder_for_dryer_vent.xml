@@ -191,6 +191,13 @@
                             android:checked="true"
                             android:textColor="@color/black"/>
                     </RadioGroup>
+                    <Button
+                        android:id="@+id/link_for_custom_reminder"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Create Custom Reminder"/>
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
