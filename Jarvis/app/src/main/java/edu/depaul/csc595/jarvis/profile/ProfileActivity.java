@@ -130,7 +130,9 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                     String test = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
                     photonotnull = true;
                 }
-                catch (NullPointerException e){}
+                catch (NullPointerException e){
+                    Log.d("Profile Activity", "onStart photo is null");
+                }
                 if(photonotnull) {
                     //google image
                     iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
