@@ -30,6 +30,8 @@ public class GoogleImage extends AsyncTask<Object,Void,Bitmap> {
     }
 
     protected Bitmap doInBackground(Object... params) {
+        Log.d("GoogleImage", "doInBackground in google image");
+
         if(params[0] instanceof ImageView){
             bmImage = (ImageView)params[0];
         }

@@ -113,7 +113,9 @@ public class MainActivity extends AppCompatActivity
                     String testString = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
                     photonotnull = true;
                 }
-                catch(NullPointerException e){}
+                catch(NullPointerException e){
+                    Log.d(TAG, "onStart photo url is null");
+                }
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName().trim());
                 if(photonotnull){
