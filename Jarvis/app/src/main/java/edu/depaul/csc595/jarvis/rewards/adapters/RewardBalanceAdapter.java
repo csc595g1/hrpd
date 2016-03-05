@@ -32,7 +32,8 @@ public class RewardBalanceAdapter extends RecyclerView.Adapter<RewardBalanceAdap
         if(model != null){
             holder.points_tv.setText(Integer.toString(model.units) + " points");
             holder.event_tv.setText(model.title);
-            holder.balance_dttm.setText(model.dttm);
+            //holder.balance_dttm.setText(model.dttm);
+            holder.balance_dttm.setText(model.getFormattedDttm());
         }
     }
 
