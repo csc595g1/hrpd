@@ -23,6 +23,27 @@ public class RewardOrderModel {
     private String external_id;
 
 
+    public RewardOrderModel() {
+        //default values, most recipient_name, recipient_email, sku, amount are editable and sent from the client
+        //recipient_name, recipient_email : can be over written, but are taken from user_info singleton
+        //sku, amount are taken from the catalog entry selected
+        //external_id can be sent by the client for linkage if desired
+
+        customer = "";
+        account_identifier = "";
+        campaign = "";
+        recipient_name = "";
+        recipient_email = "";
+        sku = "";
+        amount = 0;
+        reward_from = "";
+        reward_subject = "";
+        reward_message = "";
+        send_reward = Boolean.TRUE;
+        external_id = "";
+
+    }
+
     public JSONObject toJSON() {
 
 

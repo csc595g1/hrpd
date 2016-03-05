@@ -25,18 +25,10 @@ public class RewardOrderFragment extends Fragment {
     Rewards rewards;
     //RewardOrderModel rewardOrderModel;
 
-    EditText editText_customer;
-    EditText editText_account_identifier;
-    EditText editText_campaign;
     EditText editText_name;
     EditText editText_email;
     EditText editText_sku;
     EditText editText_amount;
-    EditText editText_reward_from;
-    EditText editText_reward_subject;
-    EditText editText_reward_message;
-    EditText editText_send_reward;
-    EditText editText_external_id;
 
     Button buttonOrder;
 
@@ -80,18 +72,10 @@ public class RewardOrderFragment extends Fragment {
 
     private void buildUI(View rootView) {
 
-        editText_customer = (EditText) rootView.findViewById(R.id.editText_customer);
-        editText_account_identifier = (EditText) rootView.findViewById(R.id.editText_account_identifier);
-        editText_campaign = (EditText) rootView.findViewById(R.id.editText_campaign);
         editText_name = (EditText) rootView.findViewById(R.id.editText_name);
         editText_email = (EditText) rootView.findViewById(R.id.editText_email);
         editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
         editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
-        editText_reward_from = (EditText) rootView.findViewById(R.id.editText_reward_from);
-        editText_reward_subject = (EditText) rootView.findViewById(R.id.editText_reward_subject);
-        editText_reward_message = (EditText) rootView.findViewById(R.id.editText_reward_message);
-        editText_send_reward = (EditText) rootView.findViewById(R.id.editText_send_reward);
-        editText_external_id = (EditText) rootView.findViewById(R.id.editText_external_id);
 
         buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
 
@@ -119,9 +103,6 @@ public class RewardOrderFragment extends Fragment {
 
         RewardOrderModel rewardOrderModel = new RewardOrderModel();
 
-        rewardOrderModel.setCustomer(editText_customer.getText().toString());
-        rewardOrderModel.setAccount_identifier(editText_account_identifier.getText().toString());
-        rewardOrderModel.setCampaign(editText_campaign.getText().toString());
         rewardOrderModel.setRecipient_name(editText_name.getText().toString());
         rewardOrderModel.setRecipient_email(editText_email.getText().toString());
         rewardOrderModel.setSku(editText_sku.getText().toString());
@@ -129,23 +110,8 @@ public class RewardOrderFragment extends Fragment {
         String amount = editText_amount.getText().toString();
         rewardOrderModel.setAmount(Integer.valueOf(amount));
 
-        rewardOrderModel.setReward_from(editText_reward_from.getText().toString());
-        rewardOrderModel.setReward_subject(editText_reward_subject.getText().toString());
-        rewardOrderModel.setReward_message(editText_reward_message.getText().toString());
-        rewardOrderModel.setSend_reward(Boolean.valueOf(editText_send_reward.getText().toString()));
-        rewardOrderModel.setExternal_id(editText_external_id.getText().toString());
-
-
         return rewardOrderModel;
     }
-
-
-
-
-
-
-
-
 
 
 
