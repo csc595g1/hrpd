@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="5,000"
+        android:text="0"
         android:id="@+id/card_view_rewards_content"
         android:textColor="@color/orange_A700"
         android:textStyle="bold"

@@ -59,7 +59,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black" />
+            android:textColor="@color/orange_A700" />
 
         <TextView
             android:id="@+id/reward_balance_points_tv"
