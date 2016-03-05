@@ -132,7 +132,7 @@ public class RewardOrderFragment extends Fragment {
         rewardOrderModel.setReward_from(editText_reward_from.getText().toString());
         rewardOrderModel.setReward_subject(editText_reward_subject.getText().toString());
         rewardOrderModel.setReward_message(editText_reward_message.getText().toString());
-        rewardOrderModel.setSend_reward(editText_send_reward.getText().toString());
+        rewardOrderModel.setSend_reward(Boolean.valueOf(editText_send_reward.getText().toString()));
         rewardOrderModel.setExternal_id(editText_external_id.getText().toString());
 
 

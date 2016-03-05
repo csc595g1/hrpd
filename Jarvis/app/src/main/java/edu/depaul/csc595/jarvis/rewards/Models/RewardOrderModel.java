@@ -19,30 +19,48 @@ public class RewardOrderModel {
     private String reward_from;
     private String reward_subject;
     private String reward_message;
-    private String send_reward = "true";
+    private Boolean send_reward = Boolean.TRUE;
     private String external_id;
 
 
     public JSONObject toJSON() {
 
-        JSONObject jsonResponse = new JSONObject();
-        JSONObject jsonRecipient = new JSONObject();
-        JSONArray jsonRecipientInfo = new JSONArray();
 
+        JSONObject jsonResponse = new JSONObject();
+        JSONObject jsonRecipientInfo = new JSONObject();
+
+
+        //Should look like this, though many items are optional
+//    	{
+//		  "customer": "csc595g1_01",
+//		  "account_identifier": "csc595g1_01",
+//		  "campaign": "HomeSafety",
+//		  "recipient": {
+//		    "name": "Test Order",
+//		    "email": "csc595g1@gmail.com"
+//		  },
+//		  "sku": "TNGO-E-V-STD",
+//		  "amount": 1000,
+//		  "reward_from": "CSC595 Group1",
+//		  "reward_subject": "Here is your reward!",
+//		  "reward_message": "Way to go! Thanks!",
+//		  "send_reward": true,
+//		  "external_id": "123456-XYZ"
+//		}
+//
 
         try {
             jsonResponse.put("customer", this.customer);
             jsonResponse.put("account_identifier", this.account_identifier);
             jsonResponse.put("campaign", this.campaign);
 
-            jsonRecipient.put("name", this.recipient_name);
-            jsonRecipient.put("email", this.recipient_email);
-            jsonRecipientInfo.put(jsonRecipient);
+            jsonRecipientInfo.put("name", this.recipient_name);
+            jsonRecipientInfo.put("email", this.recipient_email);
             jsonResponse.put("recipient",jsonRecipientInfo);
 
             jsonResponse.put("sku", this.sku);
 
-            jsonResponse.put("amount", Integer.toString(this.amount.intValue()));
+            jsonResponse.put("amount", this.amount.intValue());
 
             jsonResponse.put("reward_from", this.reward_from);
             jsonResponse.put("reward_subject", this.reward_subject);
@@ -137,11 +155,11 @@ public class RewardOrderModel {
         this.reward_message = reward_message;
     }
 
-    public String getSend_reward() {
+    public Boolean getSend_reward() {
         return send_reward;
     }
 
-    public void setSend_reward(String send_reward) {
+    public void setSend_reward(Boolean send_reward) {
         this.send_reward = send_reward;
     }
 
