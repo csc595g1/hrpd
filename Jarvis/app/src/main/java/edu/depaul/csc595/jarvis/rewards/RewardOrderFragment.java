@@ -5,11 +5,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -44,6 +46,9 @@ public class RewardOrderFragment extends Fragment {
 //    EditText editText_amount;
 
     Button buttonOrder;
+//    TextView tv_sku;
+//    TextView tv_description;
+    RelativeLayout catalog_layout;
 
     public RewardOrderFragment() {
         // Required empty public constructor
@@ -58,6 +63,26 @@ public class RewardOrderFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_reward_order, container, false);
 
         buildUI(rootView);
+
+        catalog_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String orderPlaced = "Order Sku Placed...";
+                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+//        tv_sku.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                String orderPlaced = "Order Sku Placed...";
+//                Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +117,9 @@ public class RewardOrderFragment extends Fragment {
 //        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
 //        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
 
+        catalog_layout = (RelativeLayout) rootView.findViewById(R.id.catalog_layout);
+//        tv_description = (TextView) rootView.findViewById(R.id.tv_description);
+//        tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
         buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
 
         boolean isAuthed = false;

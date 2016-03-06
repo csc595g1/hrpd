@@ -263,6 +263,7 @@
         <item name="android:layout_width">@dimen/catalog_box_width</item>
         <item name="android:layout_height">@dimen/catalog_box_height</item>
         <item name="android:background">@color/offwhite</item>
+        <item name="android:clickable">true</item>
     </style>
 
 

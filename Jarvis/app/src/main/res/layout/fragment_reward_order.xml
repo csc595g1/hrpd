@@ -24,10 +24,11 @@
 
                     <RelativeLayout
                         style="@style/AppTheme.CategoryBox.Maintenance"
+                        android:id="@+id/catalog_layout"
                         android:layout_weight=".20">
 
                                     <TextView
-                                        android:id="@+id/tv_category"
+                                        android:id="@+id/tv_sku"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:paddingBottom="5dp"
@@ -41,8 +42,8 @@
                                     <View
                                         android:layout_width="match_parent"
                                         android:layout_height="3dp"
-                                        android:layout_alignBottom="@+id/tv_category"
-                                        android:layout_alignStart="@+id/tv_category"
+                                        android:layout_alignBottom="@+id/tv_sku"
+                                        android:layout_alignStart="@+id/tv_sku"
                                         android:layout_marginLeft="5dp"
                                         android:background="@color/white" />
 
