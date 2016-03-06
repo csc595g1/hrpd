@@ -1,16 +1,27 @@
 package edu.depaul.csc595.jarvis.rewards;
 
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
@@ -22,13 +33,15 @@ import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
  */
 public class RewardOrderFragment extends Fragment {
 
+    private RewardOrderAsyncTask rewardOrderAsyncTask;
+    private TotalPointsAsyncTask totalPointsAsyncTask;
     Rewards rewards;
     //RewardOrderModel rewardOrderModel;
 
-    EditText editText_name;
-    EditText editText_email;
-    EditText editText_sku;
-    EditText editText_amount;
+//    EditText editText_name;
+//    EditText editText_email;
+//    EditText editText_sku;
+//    EditText editText_amount;
 
     Button buttonOrder;
 
@@ -51,9 +64,9 @@ public class RewardOrderFragment extends Fragment {
             public void onClick(View v) {
 
                 //need to add async task to place an order.
-                RewardOrderAsyncTask task = new RewardOrderAsyncTask();
+                rewardOrderAsyncTask = new RewardOrderAsyncTask();
                 RewardOrderModel rewardOrderModel = buildOrder();
-                task.execute(rewardOrderModel,null,null);
+                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
 
                 String orderPlaced = "Order Placed...";
                 Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
@@ -62,9 +75,11 @@ public class RewardOrderFragment extends Fragment {
             }
         });
 
-//        pointsTask = new GetTotalPointsAsyncTask();
+        TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
+        totalPointsAsyncTask = new TotalPointsAsyncTask();
 
+        totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
 
         return rootView;
 
@@ -72,10 +87,10 @@ public class RewardOrderFragment extends Fragment {
 
     private void buildUI(View rootView) {
 
-        editText_name = (EditText) rootView.findViewById(R.id.editText_name);
-        editText_email = (EditText) rootView.findViewById(R.id.editText_email);
-        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
-        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
+//        editText_name = (EditText) rootView.findViewById(R.id.editText_name);
+//        editText_email = (EditText) rootView.findViewById(R.id.editText_email);
+//        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
+//        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
 
         buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
 
@@ -92,28 +107,134 @@ public class RewardOrderFragment extends Fragment {
 
         //check if logged in, if so, send reward event
         if (isAuthed) {
-            editText_email.setText(email);
-            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+//            editText_email.setText(email);
+//            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
         }
 
 
     }
 
     private RewardOrderModel buildOrder() {
+        boolean isAuthed = false;
+        String email = "";
+        String fullName = "";
+        if (UserInfo.getInstance().isGoogleLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+        } else if (UserInfo.getInstance().getIsLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getCredentials().getEmail();
+        }
 
         RewardOrderModel rewardOrderModel = new RewardOrderModel();
 
-        rewardOrderModel.setRecipient_name(editText_name.getText().toString());
-        rewardOrderModel.setRecipient_email(editText_email.getText().toString());
-        rewardOrderModel.setSku(editText_sku.getText().toString());
+        //check if logged in, if so, send reward event
+        if (isAuthed) {
+            rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            rewardOrderModel.setRecipient_email(email);
 
-        String amount = editText_amount.getText().toString();
-        rewardOrderModel.setAmount(Integer.valueOf(amount));
+            String amount = "1000";
+            rewardOrderModel.setAmount(Integer.valueOf(amount));
+
+            rewardOrderModel.setSku("TNGO-E-V-STD");
+
+        } else {
+            //You must first log in...
+        }
+
 
         return rewardOrderModel;
     }
 
 
+    class TotalPointsAsyncTask extends AsyncTask<Object, Void, Integer> {
+        private final String TAG = "TotalPoints";
+        private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/totalpoints?email=";
+        private RewardOrderFragment rewardOrderFragment;
+        private TextView points_tv;
+
+        protected void onPreExecute(){super.onPreExecute();}
+
+        @Override
+        protected Integer doInBackground(Object... params) {
+
+            String email;
+            JSONObject jobj;
+
+            if(UserInfo.getInstance().isGoogleLoggedIn()){
+                email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            }
+            else if(UserInfo.getInstance().getIsLoggedIn()){
+                email = UserInfo.getInstance().getCredentials().getEmail();
+            }
+            else{
+                return null;
+            }
+
+            //do any params setting here....
+            if(params.length > 0){
+                if(params[0] instanceof RewardOrderFragment) {
+                    rewardOrderFragment = (RewardOrderFragment) params[0];
+                }
+                if(params.length > 1){
+                    if(params[1] instanceof TextView){
+                        points_tv = (TextView) params[1];
+                    }
+                }
+            }
+
+            //get points...
+            try{
+                URL url = new URL(baseURL + email);
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestMethod("GET");
+                connection.setChunkedStreamingMode(0);
+
+                StringBuilder sb = new StringBuilder();
+                int response = connection.getResponseCode();
+                if(response == HttpsURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    jobj = new JSONObject(sb.toString());
+                    return jobj.getInt("sum");
+                }
+            }
+            catch(MalformedURLException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+            catch(IOException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+            catch(JSONException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(Integer result){
+//            @+id/card_view_rewards_content
+            if(rewardOrderFragment != null){
+                if(points_tv != null){
+                    points_tv.setText(Integer.toString(result));
+                    //profileFragment.
+                }
+            }
+        }
+
+    }
 
 //    {
 //        "customer": "csc595g1_01",

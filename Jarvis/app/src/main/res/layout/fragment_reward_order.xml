@@ -11,85 +11,73 @@
 
     <include layout="@layout/card_view_row_rewards"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6dp"
-        android:textStyle="bold"
-        android:text="name"
-        android:id="@+id/textView_name"
+    <RelativeLayout
+        style="@style/AppTheme.Catalog_DetailBox"
         android:layout_below="@+id/card_view_rewards"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
+        android:layout_alignStart="@+id/card_view_rewards"
+        >
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Test Group1"
-        android:id="@+id/editText_name"
-        android:layout_below="@+id/card_view_rewards"
-        android:layout_toEndOf="@+id/textView_amount" />
+                <LinearLayout
+                    android:id="@+id/top_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6dp"
-        android:textStyle="bold"
-        android:text="email"
-        android:id="@+id/textView_email"
-        android:layout_below="@+id/editText_name"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
+                    <RelativeLayout
+                        style="@style/AppTheme.CategoryBox.Maintenance"
+                        android:layout_weight=".20">
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="csc595g1@gmail.com"
-        android:id="@+id/editText_email"
-        android:layout_below="@+id/editText_name"
-        android:layout_alignStart="@+id/editText_name"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6dp"
-        android:textStyle="bold"
-        android:text="SKU"
-        android:id="@+id/textView_sku"
-        android:layout_below="@+id/editText_email"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="TNGO-E-V-STD"
-        android:id="@+id/editText_sku"
-        android:layout_below="@+id/editText_email"
-        android:layout_alignStart="@+id/editText_name" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6dp"
-        android:textStyle="bold"
-        android:text="amount"
-        android:id="@+id/textView_amount"
-        android:layout_below="@+id/editText_sku"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="1000"
-        android:id="@+id/editText_amount"
-        android:layout_below="@+id/editText_sku"
-        android:layout_alignStart="@+id/editText_name"
-        android:inputType="number" />
+                                    <TextView
+                                        android:id="@+id/tv_category"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingBottom="5dp"
+                                        android:paddingLeft="5dp"
+                                        android:paddingTop="2dp"
+                                        android:text="TNGO-E-V-STD"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/black" />
 
 
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="3dp"
+                                        android:layout_alignBottom="@+id/tv_category"
+                                        android:layout_alignStart="@+id/tv_category"
+                                        android:layout_marginLeft="5dp"
+                                        android:background="@color/white" />
+
+
+                                    <TextView
+                                        android:id="@+id/tv_amount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:paddingBottom="10dp"
+                                        android:paddingLeft="5dp"
+                                        android:paddingTop="10dp"
+                                        android:text="1000"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/black" />
+
+
+                        </RelativeLayout>
+
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/tv_description"
+                                android:layout_height="wrap_content"
+                                android:gravity="left"
+                                android:padding="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Tango Card E-Custom"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:layout_weight=".80" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
     <Button
         android:layout_width="fill_parent"
