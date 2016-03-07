@@ -35,6 +35,7 @@
     </ListView>
 -->
      <include layout="@layout/card_view_row_orders"
+         android:id="@+id/card_view_row_orders"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_below="@+id/card_view_row_rewards"/>

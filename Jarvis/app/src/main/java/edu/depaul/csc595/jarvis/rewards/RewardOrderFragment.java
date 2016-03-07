@@ -80,6 +80,7 @@ public class RewardOrderFragment extends Fragment {
             }
         });
 
+        alRewardCatalogModel = new ArrayList<RewardCatalogModel>();
         TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
         //Get the total reward points for this user
@@ -139,7 +140,7 @@ public class RewardOrderFragment extends Fragment {
 
 
     class TotalPointsAsyncTask extends AsyncTask<Object, Void, Integer> {
-        private final String TAG = "TotalPoints";
+        private final String TAG = "TotalPointsAsyncTask";
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/totalpoints?email=";
         private RewardOrderFragment rewardOrderFragment;
         private TextView points_tv;
@@ -229,7 +230,7 @@ public class RewardOrderFragment extends Fragment {
 
 
     class RewardsCatalogAsyncTask extends AsyncTask<Object, Void, ArrayList<RewardCatalogModel>> {
-        private final String TAG = "TotalPoints";
+        private final String TAG = "RewardsCatalogAsyncTask";
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
         private RewardOrderFragment rewardOrderFragment;
         private TextView points_tv;
@@ -241,7 +242,7 @@ public class RewardOrderFragment extends Fragment {
         protected ArrayList<RewardCatalogModel> doInBackground(Object... params) {
 
             String email;
-            JSONObject jsonRewardCatalog;
+            JSONObject jsonRewardCatalog = new JSONObject();
 
             if(UserInfo.getInstance().isGoogleLoggedIn()){
                 email = UserInfo.getInstance().getGoogleAccount().getEmail();
@@ -265,7 +266,7 @@ public class RewardOrderFragment extends Fragment {
 
             //get points...
             try{
-                URL url = new URL(baseURL + email);
+                URL url = new URL(baseURL);
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -283,7 +284,7 @@ public class RewardOrderFragment extends Fragment {
                     }
                     jsonRewardCatalog = new JSONObject(sb.toString());
 
-                    return buildRewardCatalogList(jsonRewardCatalog);
+                    //return buildRewardCatalogList(jsonRewardCatalog);
                 }
             }
             catch(MalformedURLException e){
@@ -300,23 +301,25 @@ public class RewardOrderFragment extends Fragment {
                 Log.d(TAG, "doInBackground error, returning null");
                 Log.d(TAG, "doInBackground " + e.getMessage());
                 return null;
+            } catch (Exception e) {
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
             }
 
-            return null;
+            return buildRewardCatalogList(jsonRewardCatalog);
         }
 
-        protected void onPostExecute(Integer result){
+        protected void onPostExecute(ArrayList<RewardCatalogModel> result){
 //            @+id/card_view_rewards_content
             if(rewardOrderFragment != null){
-                if(points_tv != null){
-                    points_tv.setText(Integer.toString(result));
-                }
+                alRewardCatalogModel = result;
             }
         }
 
         private ArrayList<RewardCatalogModel> buildRewardCatalogList(JSONObject jsonRewardCatalog) {
             JSONArray jsonArrayCatalogItems;
-            ArrayList<RewardCatalogModel> alRewardCatalogModel = null;
+            ArrayList<RewardCatalogModel> alRewardCatalogModel = new ArrayList<RewardCatalogModel>();
 
             try {
                 jsonArrayCatalogItems = jsonRewardCatalog.getJSONArray("catalogItems");
