@@ -16,18 +16,21 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.RewardOrderAsyncTask;
+import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
 
 /**
@@ -37,23 +40,17 @@ public class RewardOrderFragment extends Fragment {
 
     private RewardOrderAsyncTask rewardOrderAsyncTask;
     private TotalPointsAsyncTask totalPointsAsyncTask;
-    Rewards rewards;
-    //RewardOrderModel rewardOrderModel;
+    private RewardsCatalogAsyncTask rewardsCatalogAsyncTask;
 
-//    EditText editText_name;
-//    EditText editText_email;
-//    EditText editText_sku;
-//    EditText editText_amount;
+    private ArrayList<RewardCatalogModel> alRewardCatalogModel;
 
-    Button buttonOrder;
-//    TextView tv_sku;
-//    TextView tv_description;
-    RelativeLayout catalog_layout;
+    private RelativeLayout catalog_layout;
+    private TextView tv_amount;
+    private TextView tv_sku;
 
     public RewardOrderFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,35 +65,14 @@ public class RewardOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String orderPlaced = "Order Sku Placed...";
-                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-//        tv_sku.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String orderPlaced = "Order Sku Placed...";
-//                Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        buttonOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
                 //need to add async task to place an order.
                 rewardOrderAsyncTask = new RewardOrderAsyncTask();
                 RewardOrderModel rewardOrderModel = buildOrder();
                 rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
 
                 String orderPlaced = "Order Placed...";
-                Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
+                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
 
@@ -106,21 +82,18 @@ public class RewardOrderFragment extends Fragment {
 
         totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
 
+        rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
+        rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
+
         return rootView;
 
     }
 
     private void buildUI(View rootView) {
 
-//        editText_name = (EditText) rootView.findViewById(R.id.editText_name);
-//        editText_email = (EditText) rootView.findViewById(R.id.editText_email);
-//        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
-//        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
-
         catalog_layout = (RelativeLayout) rootView.findViewById(R.id.catalog_layout);
-//        tv_description = (TextView) rootView.findViewById(R.id.tv_description);
-//        tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
-        buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
+        tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
+        tv_amount = (TextView) rootView.findViewById(R.id.tv_amount);
 
         boolean isAuthed = false;
         String email = "";
@@ -260,6 +233,133 @@ public class RewardOrderFragment extends Fragment {
                     //profileFragment.
                 }
             }
+        }
+
+    }
+
+
+    class RewardsCatalogAsyncTask extends AsyncTask<Object, Void, ArrayList<RewardCatalogModel>> {
+        private final String TAG = "TotalPoints";
+        private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
+        private RewardOrderFragment rewardOrderFragment;
+        private TextView points_tv;
+        ArrayList<RewardCatalogModel> alRewardCatalogModel;
+
+        protected void onPreExecute(){super.onPreExecute();}
+
+        @Override
+        protected ArrayList<RewardCatalogModel> doInBackground(Object... params) {
+
+            String email;
+            JSONObject jsonRewardCatalog;
+
+            if(UserInfo.getInstance().isGoogleLoggedIn()){
+                email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            }
+            else if(UserInfo.getInstance().getIsLoggedIn()){
+                email = UserInfo.getInstance().getCredentials().getEmail();
+            }
+            else{
+                return null;
+            }
+
+            //do any params setting here....
+            if(params.length > 0){
+                if(params[0] instanceof RewardOrderFragment) {
+                    rewardOrderFragment = (RewardOrderFragment) params[0];
+                }
+                if(params.length > 1){
+                    alRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
+                }
+            }
+
+            //get points...
+            try{
+                URL url = new URL(baseURL + email);
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestMethod("GET");
+                connection.setChunkedStreamingMode(0);
+
+                StringBuilder sb = new StringBuilder();
+                int response = connection.getResponseCode();
+                if(response == HttpsURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    jsonRewardCatalog = new JSONObject(sb.toString());
+
+                    return buildRewardCatalogList(jsonRewardCatalog);
+                }
+            }
+            catch(MalformedURLException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+            catch(IOException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+            catch(JSONException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(Integer result){
+//            @+id/card_view_rewards_content
+            if(rewardOrderFragment != null){
+                if(points_tv != null){
+                    points_tv.setText(Integer.toString(result));
+                }
+            }
+        }
+
+        private ArrayList<RewardCatalogModel> buildRewardCatalogList(JSONObject jsonRewardCatalog) {
+            JSONArray jsonArrayCatalogItems;
+            ArrayList<RewardCatalogModel> alRewardCatalogModel = null;
+
+            try {
+                jsonArrayCatalogItems = jsonRewardCatalog.getJSONArray("catalogItems");
+                for (int i = 0; i < jsonArrayCatalogItems.length(); i++) {
+                    RewardCatalogModel rewardCatalogModel = new RewardCatalogModel();
+                    JSONObject jsonRewardCatalogItem = jsonArrayCatalogItems.getJSONObject(i);
+                    rewardCatalogModel.setCatalogId(jsonRewardCatalogItem.getString("catalogId"));
+                    rewardCatalogModel.setBrand(jsonRewardCatalogItem.getString("brand"));
+                    rewardCatalogModel.setImage_url(jsonRewardCatalogItem.getString("image_url"));
+                    rewardCatalogModel.setType(jsonRewardCatalogItem.getString("type"));
+                    rewardCatalogModel.setDescription(jsonRewardCatalogItem.getString("description"));
+                    rewardCatalogModel.setSku(jsonRewardCatalogItem.getString("sku"));
+                    rewardCatalogModel.setIs_variable(jsonRewardCatalogItem.getBoolean("is_variable"));
+
+                    rewardCatalogModel.setDenomination(jsonRewardCatalogItem.getInt("denomination"));
+                    rewardCatalogModel.setMin_price(jsonRewardCatalogItem.getInt("min_price"));
+                    rewardCatalogModel.setMax_price(jsonRewardCatalogItem.getInt("max_price"));
+
+                    rewardCatalogModel.setCurrency_code(jsonRewardCatalogItem.getString("currency_code"));
+                    rewardCatalogModel.setAvailable(jsonRewardCatalogItem.getBoolean("available"));
+                    rewardCatalogModel.setCountry_code(jsonRewardCatalogItem.getString("country_code"));
+                    rewardCatalogModel.setTstamp(jsonRewardCatalogItem.getString("dttm"));
+
+                    alRewardCatalogModel.add(rewardCatalogModel);
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return alRewardCatalogModel;
         }
 
     }
