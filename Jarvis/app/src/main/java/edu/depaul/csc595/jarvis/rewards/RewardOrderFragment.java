@@ -1,16 +1,14 @@
 package edu.depaul.csc595.jarvis.rewards;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,6 +30,7 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.RewardOrderAsyncTask;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
+import edu.depaul.csc595.jarvis.rewards.adapters.RewardOrderAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +59,9 @@ public class RewardOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.fragment_reward_order, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
+
+//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_reward_order_recycler_view);
 
         buildUI(rootView);
 
@@ -88,6 +89,10 @@ public class RewardOrderFragment extends Fragment {
         //Get the full catalog for orders
         rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
         rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
+
+        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
+//        recyclerView.setAdapter(adapter);
+
 
         return rootView;
 
