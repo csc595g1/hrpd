@@ -48,6 +48,9 @@ public class RewardOrderFragment extends Fragment {
     private TextView tv_amount;
     private TextView tv_sku;
 
+    private String recipient_email = "";
+
+
     public RewardOrderFragment() {
         // Required empty public constructor
     }
@@ -78,10 +81,11 @@ public class RewardOrderFragment extends Fragment {
 
         TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
+        //Get the total reward points for this user
         totalPointsAsyncTask = new TotalPointsAsyncTask();
-
         totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
 
+        //Get the full catalog for orders
         rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
         rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
 
@@ -95,36 +99,17 @@ public class RewardOrderFragment extends Fragment {
         tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
         tv_amount = (TextView) rootView.findViewById(R.id.tv_amount);
 
-        boolean isAuthed = false;
-        String email = "";
-        String fullName = "";
-        if (UserInfo.getInstance().isGoogleLoggedIn()) {
-            isAuthed = true;
-            email = UserInfo.getInstance().getGoogleAccount().getEmail();
-        } else if (UserInfo.getInstance().getIsLoggedIn()) {
-            isAuthed = true;
-            email = UserInfo.getInstance().getCredentials().getEmail();
-        }
-
-        //check if logged in, if so, send reward event
-        if (isAuthed) {
-//            editText_email.setText(email);
-//            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-        }
-
-
     }
 
     private RewardOrderModel buildOrder() {
         boolean isAuthed = false;
-        String email = "";
-        String fullName = "";
+
         if (UserInfo.getInstance().isGoogleLoggedIn()) {
             isAuthed = true;
-            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            recipient_email = UserInfo.getInstance().getGoogleAccount().getEmail();
         } else if (UserInfo.getInstance().getIsLoggedIn()) {
             isAuthed = true;
-            email = UserInfo.getInstance().getCredentials().getEmail();
+            recipient_email = UserInfo.getInstance().getCredentials().getEmail();
         }
 
         RewardOrderModel rewardOrderModel = new RewardOrderModel();
@@ -132,7 +117,7 @@ public class RewardOrderFragment extends Fragment {
         //check if logged in, if so, send reward event
         if (isAuthed) {
             rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-            rewardOrderModel.setRecipient_email(email);
+            rewardOrderModel.setRecipient_email(recipient_email);
 
             String amount = "1000";
             rewardOrderModel.setAmount(Integer.valueOf(amount));

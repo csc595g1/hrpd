@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style="@style/AppTheme.Catalog_DetailBox"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_below="@+id/card_view_rewards"
+    android:layout_alignStart="@+id/card_view_rewards"
+    >
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            style="@style/AppTheme.CategoryBox.Maintenance"
+            android:id="@+id/catalog_layout"
+            android:layout_weight=".20">
+
+            <TextView
+                android:id="@+id/tv_sku"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="2dp"
+                android:text="TNGO-E-V-STD"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_alignBottom="@+id/tv_sku"
+                android:layout_alignStart="@+id/tv_sku"
+                android:layout_marginLeft="5dp"
+                android:background="@color/white" />
+
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:text="1000"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tv_description"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:padding="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Tango Card E-Custom"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_weight=".80" />
+
+    </LinearLayout>
+
+</RelativeLayout>

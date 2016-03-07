@@ -11,6 +11,9 @@
 
     <include layout="@layout/card_view_row_rewards"/>
 
+    <include layout="@layout/card_view_row_orders"/>
+
+<!--
     <RelativeLayout
         style="@style/AppTheme.Catalog_DetailBox"
         android:layout_below="@+id/card_view_rewards"
@@ -79,5 +82,5 @@
                 </LinearLayout>
 
             </RelativeLayout>
-
+-->
 </RelativeLayout>
