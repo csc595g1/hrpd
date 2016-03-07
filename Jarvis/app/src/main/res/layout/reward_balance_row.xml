@@ -17,7 +17,7 @@
             android:id="@+id/view"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/colorPrimaryDark" />
+            android:backgroundTint="@color/colorPrimary" />
 
 
 
@@ -25,7 +25,7 @@
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             android:id="@+id/view2"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
@@ -59,7 +59,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black" />
+            android:textColor="@color/orange_A700" />
 
         <TextView
             android:id="@+id/reward_balance_points_tv"

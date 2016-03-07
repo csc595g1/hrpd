@@ -44,6 +44,19 @@ public class SmartProductContent {
     /**
      * A dummy item representing a piece of content.
      */
+
+    public static class SmartProductInfo {
+        public int total_smart_products;
+
+        public void setTotalSmartProducts(int total_smart_products){
+            this.total_smart_products = total_smart_products;
+        }
+
+        public int getTotalSmartProducts(){
+            return total_smart_products;
+        }
+    }
+
     public static class SmartProduct {
         public String id;
         public String serial_no;

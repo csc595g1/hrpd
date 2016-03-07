@@ -6,23 +6,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    card_view:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@color/lightBlue">
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="73dp"
+            android:layout_height="73dp"
             android:src="@drawable/ic_menu_rewards"
-            android:tint="@color/lightBlue"
+            android:tint="@color/orange_A700"
             android:layout_marginTop="15dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Your Rewards Points Total"
         android:id="@+id/card_view_rewards_title"
-        android:textColor="@color/lightBlue"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
     <include layout="@layout/border_thin_gray"/>
@@ -38,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="5,000"
+        android:text="0"
         android:id="@+id/card_view_rewards_content"
-        android:textColor="@color/red"
+        android:textColor="@color/orange_A700"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp" />
@@ -50,7 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Go Redeem Your Rewards!"
             android:id="@+id/card_view_rewards_redeem"
-            android:textColor="@color/lightBlue"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp" />
