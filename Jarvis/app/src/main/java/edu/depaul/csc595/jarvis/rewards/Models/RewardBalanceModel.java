@@ -67,8 +67,14 @@ public class RewardBalanceModel {
         if((LocalDate.now().getYear() - dt.getYear()) == 0){
             if((LocalDate.now().getMonthOfYear() - dt.getMonthOfYear() == 0)){
                 if((LocalDate.now().getDayOfMonth() - dt.getDayOfMonth()) <= 0){
-                    formattedDttm = "Yesterday at " + hr+":"+min;
-                    return formattedDttm;
+                    if(LocalDate.now().getDayOfMonth() == dt.getDayOfMonth()){
+                        formattedDttm = "Today at " + hr + ":" + min;
+                        return formattedDttm;
+                    }
+                    else {
+                        formattedDttm = "Yesterday at " + hr + ":" + min;
+                        return formattedDttm;
+                    }
                 }
                 else{
                     formattedDttm = day;
