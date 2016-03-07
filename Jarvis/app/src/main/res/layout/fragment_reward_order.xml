@@ -6,275 +6,78 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.depaul.csc595.jarvis.rewards.RewardOrderFragment">
+    tools:context="edu.depaul.csc595.jarvis.rewards.RewardOrderFragment"
+    android:background="@color/white">
+
+    <include layout="@layout/card_view_row_rewards"/>
+
+    <RelativeLayout
+        style="@style/AppTheme.Catalog_DetailBox"
+        android:layout_below="@+id/card_view_rewards"
+        android:layout_alignStart="@+id/card_view_rewards"
+        >
+
+                <LinearLayout
+                    android:id="@+id/top_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        style="@style/AppTheme.CategoryBox.Maintenance"
+                        android:id="@+id/catalog_layout"
+                        android:layout_weight=".20">
+
+                                    <TextView
+                                        android:id="@+id/tv_sku"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingBottom="5dp"
+                                        android:paddingLeft="5dp"
+                                        android:paddingTop="2dp"
+                                        android:text="TNGO-E-V-STD"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/black" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="customer"
-        android:id="@+id/textView_customer"
-        android:layout_below="@+id/editTextLayout"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="csc595g1_01"
-        android:textSize="15dp"
-        android:id="@+id/editText_customer"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView_account_identifier"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="account_identifier"
-        android:id="@+id/textView_account_identifier"
-        android:layout_below="@+id/editText_customer"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="csc595g1_01"
-        android:textSize="15dp"
-        android:id="@+id/editText_account_identifier"
-        android:layout_below="@+id/editText_customer"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="campaign"
-        android:id="@+id/textView_campaign"
-        android:layout_below="@+id/editText_account_identifier"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="HomeSafety"
-        android:textSize="15dp"
-        android:id="@+id/editText_campaign"
-        android:layout_below="@+id/editText_account_identifier"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:textStyle="bold"
-        android:text="name"
-        android:id="@+id/textView_name"
-        android:layout_below="@+id/editText_campaign"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Test Group1"
-        android:id="@+id/editText_name"
-        android:layout_below="@+id/editText_campaign"
-        android:layout_alignStart="@+id/editText_customer" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:textStyle="bold"
-        android:text="email"
-        android:id="@+id/textView_email"
-        android:layout_below="@+id/editText_name"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="csc595g1@gmail.com"
-        android:id="@+id/editText_email"
-        android:layout_below="@+id/editText_name"
-        android:layout_alignStart="@+id/editText_customer"
-        android:inputType="textEmailAddress" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:textStyle="bold"
-        android:text="SKU"
-        android:id="@+id/textView_sku"
-        android:layout_below="@+id/editText_email"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="TNGO-E-V-STD"
-        android:id="@+id/editText_sku"
-        android:layout_below="@+id/editText_email"
-        android:layout_alignStart="@+id/editText_customer" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:textStyle="bold"
-        android:text="amount"
-        android:id="@+id/textView_amount"
-        android:layout_below="@+id/editText_sku"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="1000"
-        android:id="@+id/editText_amount"
-        android:layout_below="@+id/editText_sku"
-        android:layout_alignStart="@+id/editText_customer"
-        android:inputType="number" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="reward_from"
-        android:id="@+id/textView_reward_from"
-        android:layout_below="@+id/editText_amount"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="CSC595 Group1"
-        android:textSize="15dp"
-        android:id="@+id/editText_reward_from"
-        android:layout_below="@+id/editText_amount"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="reward_subject"
-        android:id="@+id/textView_reward_subject"
-        android:layout_below="@+id/editText_reward_from"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Here is your reward!"
-        android:textSize="15dp"
-        android:id="@+id/editText_reward_subject"
-        android:layout_below="@+id/editText_reward_from"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="reward_message"
-        android:id="@+id/textView_reward_message"
-        android:layout_below="@+id/editText_reward_subject"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Way to go! Thanks!"
-        android:textSize="15dp"
-        android:id="@+id/editText_reward_message"
-        android:layout_below="@+id/editText_reward_subject"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="send_reward"
-        android:id="@+id/textView_send_reward"
-        android:layout_below="@+id/editText_reward_message"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="true"
-        android:textSize="15dp"
-        android:id="@+id/editText_send_reward"
-        android:layout_below="@+id/editText_reward_message"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="22dp"
-        android:text="external_id"
-        android:id="@+id/textView_external_id"
-        android:layout_below="@+id/editText_send_reward"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black" />
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="123456-XYZ"
-        android:textSize="15dp"
-        android:id="@+id/editText_external_id"
-        android:layout_below="@+id/editText_send_reward"
-        android:layout_alignStart="@+id/editText_customer"
-        android:editable="false" />
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="3dp"
+                                        android:layout_alignBottom="@+id/tv_sku"
+                                        android:layout_alignStart="@+id/tv_sku"
+                                        android:layout_marginLeft="5dp"
+                                        android:background="@color/white" />
 
 
+                                    <TextView
+                                        android:id="@+id/tv_amount"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:paddingBottom="10dp"
+                                        android:paddingLeft="5dp"
+                                        android:paddingTop="10dp"
+                                        android:text="1000"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/black" />
 
 
+                        </RelativeLayout>
 
 
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:id="@+id/tv_description"
+                                android:layout_height="wrap_content"
+                                android:gravity="left"
+                                android:padding="10dp"
+                                android:layout_marginRight="10dp"
+                                android:text="Tango Card E-Custom"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"
+                                android:layout_weight=".80" />
 
+                </LinearLayout>
 
-
-
-
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Order"
-        android:id="@+id/buttonOrder"
-        android:textStyle="bold"
-        android:background="@drawable/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <!--
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:id="@+id/button_login"
-            android:layout_below="@+id/editTextLayout"
-            android:layout_alignStart="@id/editTextLayout"
-            android:layout_marginEnd="15dp"
-            android:textStyle="bold"
-            android:background="@drawable/button" />
-    -->
+            </RelativeLayout>
 
 </RelativeLayout>

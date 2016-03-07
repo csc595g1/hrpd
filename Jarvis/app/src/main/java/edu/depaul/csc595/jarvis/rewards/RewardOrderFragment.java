@@ -1,20 +1,36 @@
 package edu.depaul.csc595.jarvis.rewards;
 
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.RewardOrderAsyncTask;
+import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
 
 /**
@@ -22,28 +38,19 @@ import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
  */
 public class RewardOrderFragment extends Fragment {
 
-    Rewards rewards;
-    //RewardOrderModel rewardOrderModel;
+    private RewardOrderAsyncTask rewardOrderAsyncTask;
+    private TotalPointsAsyncTask totalPointsAsyncTask;
+    private RewardsCatalogAsyncTask rewardsCatalogAsyncTask;
 
-    EditText editText_customer;
-    EditText editText_account_identifier;
-    EditText editText_campaign;
-    EditText editText_name;
-    EditText editText_email;
-    EditText editText_sku;
-    EditText editText_amount;
-    EditText editText_reward_from;
-    EditText editText_reward_subject;
-    EditText editText_reward_message;
-    EditText editText_send_reward;
-    EditText editText_external_id;
+    private ArrayList<RewardCatalogModel> alRewardCatalogModel;
 
-    Button buttonOrder;
+    private RelativeLayout catalog_layout;
+    private TextView tv_amount;
+    private TextView tv_sku;
 
     public RewardOrderFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,25 +61,29 @@ public class RewardOrderFragment extends Fragment {
 
         buildUI(rootView);
 
-        buttonOrder.setOnClickListener(new View.OnClickListener() {
+        catalog_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //need to add async task to place an order.
-                RewardOrderAsyncTask task = new RewardOrderAsyncTask();
+                rewardOrderAsyncTask = new RewardOrderAsyncTask();
                 RewardOrderModel rewardOrderModel = buildOrder();
-                task.execute(rewardOrderModel,null,null);
+                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
 
                 String orderPlaced = "Order Placed...";
-                Snackbar.make(v,orderPlaced, Snackbar.LENGTH_LONG)
+                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
             }
         });
 
-//        pointsTask = new GetTotalPointsAsyncTask();
+        TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
+        totalPointsAsyncTask = new TotalPointsAsyncTask();
 
+        totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
+
+        rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
+        rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
 
         return rootView;
 
@@ -80,20 +91,9 @@ public class RewardOrderFragment extends Fragment {
 
     private void buildUI(View rootView) {
 
-        editText_customer = (EditText) rootView.findViewById(R.id.editText_customer);
-        editText_account_identifier = (EditText) rootView.findViewById(R.id.editText_account_identifier);
-        editText_campaign = (EditText) rootView.findViewById(R.id.editText_campaign);
-        editText_name = (EditText) rootView.findViewById(R.id.editText_name);
-        editText_email = (EditText) rootView.findViewById(R.id.editText_email);
-        editText_sku = (EditText) rootView.findViewById(R.id.editText_sku);
-        editText_amount = (EditText) rootView.findViewById(R.id.editText_amount);
-        editText_reward_from = (EditText) rootView.findViewById(R.id.editText_reward_from);
-        editText_reward_subject = (EditText) rootView.findViewById(R.id.editText_reward_subject);
-        editText_reward_message = (EditText) rootView.findViewById(R.id.editText_reward_message);
-        editText_send_reward = (EditText) rootView.findViewById(R.id.editText_send_reward);
-        editText_external_id = (EditText) rootView.findViewById(R.id.editText_external_id);
-
-        buttonOrder = (Button) rootView.findViewById(R.id.buttonOrder);
+        catalog_layout = (RelativeLayout) rootView.findViewById(R.id.catalog_layout);
+        tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
+        tv_amount = (TextView) rootView.findViewById(R.id.tv_amount);
 
         boolean isAuthed = false;
         String email = "";
@@ -108,46 +108,261 @@ public class RewardOrderFragment extends Fragment {
 
         //check if logged in, if so, send reward event
         if (isAuthed) {
-            editText_email.setText(email);
-            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+//            editText_email.setText(email);
+//            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
         }
 
 
     }
 
     private RewardOrderModel buildOrder() {
+        boolean isAuthed = false;
+        String email = "";
+        String fullName = "";
+        if (UserInfo.getInstance().isGoogleLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+        } else if (UserInfo.getInstance().getIsLoggedIn()) {
+            isAuthed = true;
+            email = UserInfo.getInstance().getCredentials().getEmail();
+        }
 
         RewardOrderModel rewardOrderModel = new RewardOrderModel();
 
-        rewardOrderModel.setCustomer(editText_customer.getText().toString());
-        rewardOrderModel.setAccount_identifier(editText_account_identifier.getText().toString());
-        rewardOrderModel.setCampaign(editText_campaign.getText().toString());
-        rewardOrderModel.setRecipient_name(editText_name.getText().toString());
-        rewardOrderModel.setRecipient_email(editText_email.getText().toString());
-        rewardOrderModel.setSku(editText_sku.getText().toString());
+        //check if logged in, if so, send reward event
+        if (isAuthed) {
+            rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
+            rewardOrderModel.setRecipient_email(email);
 
-        String amount = editText_amount.getText().toString();
-        rewardOrderModel.setAmount(Integer.valueOf(amount));
+            String amount = "1000";
+            rewardOrderModel.setAmount(Integer.valueOf(amount));
 
-        rewardOrderModel.setReward_from(editText_reward_from.getText().toString());
-        rewardOrderModel.setReward_subject(editText_reward_subject.getText().toString());
-        rewardOrderModel.setReward_message(editText_reward_message.getText().toString());
-        rewardOrderModel.setSend_reward(editText_send_reward.getText().toString());
-        rewardOrderModel.setExternal_id(editText_external_id.getText().toString());
+            rewardOrderModel.setSku("TNGO-E-V-STD");
+
+        } else {
+            //You must first log in...
+        }
 
 
         return rewardOrderModel;
     }
 
 
+    class TotalPointsAsyncTask extends AsyncTask<Object, Void, Integer> {
+        private final String TAG = "TotalPoints";
+        private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/totalpoints?email=";
+        private RewardOrderFragment rewardOrderFragment;
+        private TextView points_tv;
+
+        protected void onPreExecute(){super.onPreExecute();}
+
+        @Override
+        protected Integer doInBackground(Object... params) {
+
+            String email;
+            JSONObject jobj;
+
+            if(UserInfo.getInstance().isGoogleLoggedIn()){
+                email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            }
+            else if(UserInfo.getInstance().getIsLoggedIn()){
+                email = UserInfo.getInstance().getCredentials().getEmail();
+            }
+            else{
+                return null;
+            }
+
+            //do any params setting here....
+            if(params.length > 0){
+                if(params[0] instanceof RewardOrderFragment) {
+                    rewardOrderFragment = (RewardOrderFragment) params[0];
+                }
+                if(params.length > 1){
+                    if(params[1] instanceof TextView){
+                        points_tv = (TextView) params[1];
+                    }
+                }
+            }
+
+            //get points...
+            try{
+                URL url = new URL(baseURL + email);
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestMethod("GET");
+                connection.setChunkedStreamingMode(0);
+
+                StringBuilder sb = new StringBuilder();
+                int response = connection.getResponseCode();
+                if(response == HttpsURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    jobj = new JSONObject(sb.toString());
+                    return jobj.getInt("sum");
+                }
+            }
+            catch(MalformedURLException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+            catch(IOException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+            catch(JSONException e){
+                Log.d(TAG, "doInBackground error, returning 0");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return 0;
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(Integer result){
+//            @+id/card_view_rewards_content
+            if(rewardOrderFragment != null){
+                if(points_tv != null){
+                    points_tv.setText(Integer.toString(result));
+                    //profileFragment.
+                }
+            }
+        }
+
+    }
 
 
+    class RewardsCatalogAsyncTask extends AsyncTask<Object, Void, ArrayList<RewardCatalogModel>> {
+        private final String TAG = "TotalPoints";
+        private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
+        private RewardOrderFragment rewardOrderFragment;
+        private TextView points_tv;
+        ArrayList<RewardCatalogModel> alRewardCatalogModel;
+
+        protected void onPreExecute(){super.onPreExecute();}
+
+        @Override
+        protected ArrayList<RewardCatalogModel> doInBackground(Object... params) {
+
+            String email;
+            JSONObject jsonRewardCatalog;
+
+            if(UserInfo.getInstance().isGoogleLoggedIn()){
+                email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            }
+            else if(UserInfo.getInstance().getIsLoggedIn()){
+                email = UserInfo.getInstance().getCredentials().getEmail();
+            }
+            else{
+                return null;
+            }
+
+            //do any params setting here....
+            if(params.length > 0){
+                if(params[0] instanceof RewardOrderFragment) {
+                    rewardOrderFragment = (RewardOrderFragment) params[0];
+                }
+                if(params.length > 1){
+                    alRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
+                }
+            }
+
+            //get points...
+            try{
+                URL url = new URL(baseURL + email);
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestMethod("GET");
+                connection.setChunkedStreamingMode(0);
+
+                StringBuilder sb = new StringBuilder();
+                int response = connection.getResponseCode();
+                if(response == HttpsURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    jsonRewardCatalog = new JSONObject(sb.toString());
+
+                    return buildRewardCatalogList(jsonRewardCatalog);
+                }
+            }
+            catch(MalformedURLException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+            catch(IOException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+            catch(JSONException e){
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
+            }
+
+            return null;
+        }
+
+        protected void onPostExecute(Integer result){
+//            @+id/card_view_rewards_content
+            if(rewardOrderFragment != null){
+                if(points_tv != null){
+                    points_tv.setText(Integer.toString(result));
+                }
+            }
+        }
+
+        private ArrayList<RewardCatalogModel> buildRewardCatalogList(JSONObject jsonRewardCatalog) {
+            JSONArray jsonArrayCatalogItems;
+            ArrayList<RewardCatalogModel> alRewardCatalogModel = null;
+
+            try {
+                jsonArrayCatalogItems = jsonRewardCatalog.getJSONArray("catalogItems");
+                for (int i = 0; i < jsonArrayCatalogItems.length(); i++) {
+                    RewardCatalogModel rewardCatalogModel = new RewardCatalogModel();
+                    JSONObject jsonRewardCatalogItem = jsonArrayCatalogItems.getJSONObject(i);
+                    rewardCatalogModel.setCatalogId(jsonRewardCatalogItem.getString("catalogId"));
+                    rewardCatalogModel.setBrand(jsonRewardCatalogItem.getString("brand"));
+                    rewardCatalogModel.setImage_url(jsonRewardCatalogItem.getString("image_url"));
+                    rewardCatalogModel.setType(jsonRewardCatalogItem.getString("type"));
+                    rewardCatalogModel.setDescription(jsonRewardCatalogItem.getString("description"));
+                    rewardCatalogModel.setSku(jsonRewardCatalogItem.getString("sku"));
+                    rewardCatalogModel.setIs_variable(jsonRewardCatalogItem.getBoolean("is_variable"));
+
+                    rewardCatalogModel.setDenomination(jsonRewardCatalogItem.getInt("denomination"));
+                    rewardCatalogModel.setMin_price(jsonRewardCatalogItem.getInt("min_price"));
+                    rewardCatalogModel.setMax_price(jsonRewardCatalogItem.getInt("max_price"));
+
+                    rewardCatalogModel.setCurrency_code(jsonRewardCatalogItem.getString("currency_code"));
+                    rewardCatalogModel.setAvailable(jsonRewardCatalogItem.getBoolean("available"));
+                    rewardCatalogModel.setCountry_code(jsonRewardCatalogItem.getString("country_code"));
+                    rewardCatalogModel.setTstamp(jsonRewardCatalogItem.getString("dttm"));
+
+                    alRewardCatalogModel.add(rewardCatalogModel);
+
+                }
 
 
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+            return alRewardCatalogModel;
+        }
 
-
-
+    }
 
 //    {
 //        "customer": "csc595g1_01",
