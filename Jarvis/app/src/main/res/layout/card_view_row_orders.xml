@@ -7,7 +7,8 @@
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/default_colour_grey">
 
         <RelativeLayout
             style="@style/AppTheme.CategoryBox.Maintenance"
@@ -23,7 +24,8 @@
                 android:paddingTop="2dp"
                 android:text="TNGO-E-V-STD"
                 android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="8dp" />
 
 
             <View
@@ -40,12 +42,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:paddingBottom="10dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="10dp"
                 android:text="1000"
                 android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="8dp" />
 
 
         </RelativeLayout>
