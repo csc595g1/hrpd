@@ -31,16 +31,18 @@
         android:supportsRtl="true"
         android:theme="@style/FullscreenTheme">
         <activity
-            android:name=".appintro.main.animations.DepthAnimation"
+            android:name=".main.SplashActivity"
             android:label="Introdution" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--
         <activity android:name=".main.SplashActivity"
             android:label="Splash Activity"
             android:theme="@style/FullscreenTheme"></activity>
+            -->
         <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
@@ -222,14 +224,9 @@
         </service>
 
         <!-- This is for App Intro -->
-        <!--
-        <activity android:name=".appintro.main.activities.AppIntroMainActivity"></activity>
 
-        <activity android:name=".appintro.main.animations.DepthAnimation" />
-        -->
-        <activity android:name=".appintro.main.indicators.CustomColorIndicator" />
-        <activity android:name=".appintro.main.indicators.ProgressIndicator" />
-        <activity android:name=".appintro.main.indicators.CustomIndicator" />
+        <activity android:name=".appintro.main.animations.DepthAnimation"></activity>
+
         <!-- Ends -->
 
     </application>
