@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +15,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.appintro.main.activities.AppIntroMainActivity;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderCODetector;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderDryer;
 import edu.depaul.csc595.jarvis.reminders.staticreminders.activities.ReminderFireExtinguisher;
@@ -43,8 +43,11 @@ public class AppliancesActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                        */
+                Intent go = new Intent(getApplicationContext(), AppIntroMainActivity.class);
+                startActivity(go);
             }
         });
 

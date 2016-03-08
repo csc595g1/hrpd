@@ -265,10 +265,15 @@
         <item name="android:background">@color/offwhite</item>
         <item name="android:clickable">true</item>
     </style>
-
-
     <!-- ends -->
 
+    <!-- For App Intro -->
+    <!-- Fullscreen application theme. -->
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+    <!-- ends -->
 
 
 
