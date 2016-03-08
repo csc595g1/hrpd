@@ -252,6 +252,28 @@
 
     <!-- ends -->
 
+    <!-- For Rewards Page -->
+    <style name="AppTheme.Catalog_DetailBox">
+        <item name="android:layout_width">@dimen/catalog_detail_box_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/offwhite</item>
+    </style>
+
+    <style name="AppTheme.CatalogBox">
+        <item name="android:layout_width">@dimen/catalog_box_width</item>
+        <item name="android:layout_height">@dimen/catalog_box_height</item>
+        <item name="android:background">@color/offwhite</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <!-- ends -->
+
+    <!-- For App Intro -->
+    <!-- Fullscreen application theme. -->
+    <style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+    <!-- ends -->
 
 
 
