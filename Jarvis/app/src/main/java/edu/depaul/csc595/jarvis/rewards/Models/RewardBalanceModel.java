@@ -29,8 +29,8 @@ public class RewardBalanceModel {
         String yr = tempdttm.substring(0,4);
         String dy= tempdttm.substring(8, 10);
         String tm = dttm.substring(11).trim();
-        String hr = tm.substring(0, 1);
-        String min = tm.substring(3,4);
+        String hr = tm.substring(0, 2);
+        String min = tm.substring(3,5);
         if(Integer.parseInt(hr) > 12){
             hr = String.valueOf(Integer.parseInt(hr) / 2);
         }
@@ -67,8 +67,14 @@ public class RewardBalanceModel {
         if((LocalDate.now().getYear() - dt.getYear()) == 0){
             if((LocalDate.now().getMonthOfYear() - dt.getMonthOfYear() == 0)){
                 if((LocalDate.now().getDayOfMonth() - dt.getDayOfMonth()) <= 0){
-                    formattedDttm = "Yesterday at " + hr+":"+min;
-                    return formattedDttm;
+                    if(LocalDate.now().getDayOfMonth() == dt.getDayOfMonth()){
+                        formattedDttm = "Today at " + hr + ":" + min;
+                        return formattedDttm;
+                    }
+                    else {
+                        formattedDttm = "Yesterday at " + hr + ":" + min;
+                        return formattedDttm;
+                    }
                 }
                 else{
                     formattedDttm = day;
