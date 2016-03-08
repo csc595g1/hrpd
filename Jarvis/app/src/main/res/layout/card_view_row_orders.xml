@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     style="@style/AppTheme.Catalog_DetailBox"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_below="@+id/card_view_rewards"
-    android:layout_alignStart="@+id/card_view_rewards"
     >
 
     <LinearLayout
@@ -67,4 +65,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

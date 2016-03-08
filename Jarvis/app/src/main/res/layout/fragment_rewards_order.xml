@@ -12,6 +12,15 @@
     <include layout="@layout/card_view_row_rewards"
         android:id="@+id/card_view_row_rewards" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_order_rewards"
+        android:layout_below="@id/card_view_row_rewards"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+
+
     <!--
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/reward_list"
@@ -28,18 +37,19 @@
         android:scrollbars="none"
         android:drawSelectorOnTop="true" />
 -->
-    <!--
+<!--
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
 -->
+<!--
      <include layout="@layout/card_view_row_orders"
          android:id="@+id/card_view_row_orders"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:layout_below="@+id/card_view_row_rewards"/>
-
+-->
     <!--
         <RelativeLayout
             style="@style/AppTheme.Catalog_DetailBox"
