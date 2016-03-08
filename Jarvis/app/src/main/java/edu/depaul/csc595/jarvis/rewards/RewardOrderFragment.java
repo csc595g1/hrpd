@@ -2,8 +2,8 @@ package edu.depaul.csc595.jarvis.rewards;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,11 +36,15 @@ import edu.depaul.csc595.jarvis.rewards.adapters.RewardOrderAdapter;
  * A simple {@link Fragment} subclass.
  */
 public class RewardOrderFragment extends Fragment {
+    final String TAG = "RewardOrderFragment";
 
     private RewardOrderAsyncTask rewardOrderAsyncTask;
     private TotalPointsAsyncTask totalPointsAsyncTask;
     private RewardsCatalogAsyncTask rewardsCatalogAsyncTask;
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
     private ArrayList<RewardCatalogModel> alRewardCatalogModel;
 
     private RelativeLayout catalog_layout;
@@ -65,33 +69,47 @@ public class RewardOrderFragment extends Fragment {
 
         buildUI(rootView);
 
-        catalog_layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //need to add async task to place an order.
-                rewardOrderAsyncTask = new RewardOrderAsyncTask();
-                RewardOrderModel rewardOrderModel = buildOrder();
-                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
-
-                String orderPlaced = "Order Placed...";
-                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+//        catalog_layout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //need to add async task to place an order.
+//                rewardOrderAsyncTask = new RewardOrderAsyncTask();
+//                RewardOrderModel rewardOrderModel = buildOrder();
+//                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
+//
+//                String orderPlaced = "Order Placed...";
+//                Snackbar.make(v, orderPlaced, Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+//
         alRewardCatalogModel = new ArrayList<RewardCatalogModel>();
         TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
         //Get the total reward points for this user
         totalPointsAsyncTask = new TotalPointsAsyncTask();
         totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
+        Log.d(TAG, "totalPointsAsyncTask ");
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_order_rewards);
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         //Get the full catalog for orders
         rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
-        rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
+        rewardsCatalogAsyncTask.execute(mRecyclerView, alRewardCatalogModel);
+        Log.d(TAG, "rewardsCatalogAsyncTask ");
 
-        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
+        Log.d(TAG, "Setting the RewardOrderAdapter size: " + Integer.toString(alRewardCatalogModel.size()));
+        mAdapter = new RewardOrderAdapter(alRewardCatalogModel);
+        mRecyclerView.setAdapter(mAdapter);
+
+//        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
 //        recyclerView.setAdapter(adapter);
 
 
@@ -232,7 +250,7 @@ public class RewardOrderFragment extends Fragment {
     class RewardsCatalogAsyncTask extends AsyncTask<Object, Void, ArrayList<RewardCatalogModel>> {
         private final String TAG = "RewardsCatalogAsyncTask";
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
-        private RewardOrderFragment rewardOrderFragment;
+        private RecyclerView recycleViewOrders;
         private TextView points_tv;
         ArrayList<RewardCatalogModel> alRewardCatalogModel;
 
@@ -244,20 +262,18 @@ public class RewardOrderFragment extends Fragment {
             String email;
             JSONObject jsonRewardCatalog = new JSONObject();
 
-            if(UserInfo.getInstance().isGoogleLoggedIn()){
+            if (UserInfo.getInstance().isGoogleLoggedIn()) {
                 email = UserInfo.getInstance().getGoogleAccount().getEmail();
-            }
-            else if(UserInfo.getInstance().getIsLoggedIn()){
+            } else if(UserInfo.getInstance().getIsLoggedIn()) {
                 email = UserInfo.getInstance().getCredentials().getEmail();
-            }
-            else{
+            } else {
                 return null;
             }
 
             //do any params setting here....
             if(params.length > 0){
-                if(params[0] instanceof RewardOrderFragment) {
-                    rewardOrderFragment = (RewardOrderFragment) params[0];
+                if(params[0] instanceof RecyclerView) {
+                    recycleViewOrders = (RecyclerView) params[0];
                 }
                 if(params.length > 1){
                     alRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
@@ -312,9 +328,11 @@ public class RewardOrderFragment extends Fragment {
 
         protected void onPostExecute(ArrayList<RewardCatalogModel> result){
 //            @+id/card_view_rewards_content
-            if(rewardOrderFragment != null){
-                alRewardCatalogModel = result;
+            if(recycleViewOrders != null){
+                RewardOrderAdapter adapter = new RewardOrderAdapter(result);
+                recycleViewOrders.setAdapter(adapter);
             }
+
         }
 
         private ArrayList<RewardCatalogModel> buildRewardCatalogList(JSONObject jsonRewardCatalog) {
@@ -325,7 +343,9 @@ public class RewardOrderFragment extends Fragment {
                 jsonArrayCatalogItems = jsonRewardCatalog.getJSONArray("catalogItems");
                 for (int i = 0; i < jsonArrayCatalogItems.length(); i++) {
                     RewardCatalogModel rewardCatalogModel = new RewardCatalogModel();
+
                     JSONObject jsonRewardCatalogItem = jsonArrayCatalogItems.getJSONObject(i);
+                    Log.d(TAG, "jsonRewardCatalogItem = " + jsonRewardCatalogItem.getString("description"));
                     rewardCatalogModel.setCatalogId(jsonRewardCatalogItem.getString("catalogId"));
                     rewardCatalogModel.setBrand(jsonRewardCatalogItem.getString("brand"));
                     rewardCatalogModel.setImage_url(jsonRewardCatalogItem.getString("image_url"));
@@ -352,27 +372,9 @@ public class RewardOrderFragment extends Fragment {
                 e.printStackTrace();
             }
 
+            Log.d(TAG, "alRewardCatalogModel size = " + Integer.toString(alRewardCatalogModel.size()));
             return alRewardCatalogModel;
         }
 
     }
-
-//    {
-//        "customer": "csc595g1_01",
-//        "account_identifier": "csc595g1_01",
-//        "campaign": "HomeSafety",
-//        "recipient": {
-//            "name": "Test Order",
-//            "email": "csc595g1@gmail.com"
-//        },
-//        "sku": "TNGO-E-V-STD",
-//            "amount": 1000,
-//            "reward_from": "CSC595 Group1",
-//            "reward_subject": "Here is your reward!",
-//            "reward_message": "Way to go! Thanks!",
-//            "send_reward": true,
-//            "external_id": "123456-XYZ"
-//    }
-
-
 }
