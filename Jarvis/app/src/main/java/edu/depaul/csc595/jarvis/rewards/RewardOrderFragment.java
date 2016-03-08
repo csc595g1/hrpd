@@ -1,16 +1,14 @@
 package edu.depaul.csc595.jarvis.rewards;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,6 +30,7 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 import edu.depaul.csc595.jarvis.rewards.HerokuAPI.RewardOrderAsyncTask;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardOrderModel;
+import edu.depaul.csc595.jarvis.rewards.adapters.RewardOrderAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +47,9 @@ public class RewardOrderFragment extends Fragment {
     private TextView tv_amount;
     private TextView tv_sku;
 
+    private String recipient_email = "";
+
+
     public RewardOrderFragment() {
         // Required empty public constructor
     }
@@ -57,7 +59,9 @@ public class RewardOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.fragment_reward_order, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
+
+//        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_reward_order_recycler_view);
 
         buildUI(rootView);
 
@@ -76,14 +80,20 @@ public class RewardOrderFragment extends Fragment {
             }
         });
 
+        alRewardCatalogModel = new ArrayList<RewardCatalogModel>();
         TextView card_view_rewards_content = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
 
+        //Get the total reward points for this user
         totalPointsAsyncTask = new TotalPointsAsyncTask();
-
         totalPointsAsyncTask.execute(RewardOrderFragment.this, card_view_rewards_content);
 
+        //Get the full catalog for orders
         rewardsCatalogAsyncTask = new RewardsCatalogAsyncTask();
         rewardsCatalogAsyncTask.execute(RewardOrderFragment.this, alRewardCatalogModel);
+
+        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
+//        recyclerView.setAdapter(adapter);
+
 
         return rootView;
 
@@ -95,36 +105,17 @@ public class RewardOrderFragment extends Fragment {
         tv_sku = (TextView) rootView.findViewById(R.id.tv_sku);
         tv_amount = (TextView) rootView.findViewById(R.id.tv_amount);
 
-        boolean isAuthed = false;
-        String email = "";
-        String fullName = "";
-        if (UserInfo.getInstance().isGoogleLoggedIn()) {
-            isAuthed = true;
-            email = UserInfo.getInstance().getGoogleAccount().getEmail();
-        } else if (UserInfo.getInstance().getIsLoggedIn()) {
-            isAuthed = true;
-            email = UserInfo.getInstance().getCredentials().getEmail();
-        }
-
-        //check if logged in, if so, send reward event
-        if (isAuthed) {
-//            editText_email.setText(email);
-//            editText_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-        }
-
-
     }
 
     private RewardOrderModel buildOrder() {
         boolean isAuthed = false;
-        String email = "";
-        String fullName = "";
+
         if (UserInfo.getInstance().isGoogleLoggedIn()) {
             isAuthed = true;
-            email = UserInfo.getInstance().getGoogleAccount().getEmail();
+            recipient_email = UserInfo.getInstance().getGoogleAccount().getEmail();
         } else if (UserInfo.getInstance().getIsLoggedIn()) {
             isAuthed = true;
-            email = UserInfo.getInstance().getCredentials().getEmail();
+            recipient_email = UserInfo.getInstance().getCredentials().getEmail();
         }
 
         RewardOrderModel rewardOrderModel = new RewardOrderModel();
@@ -132,7 +123,7 @@ public class RewardOrderFragment extends Fragment {
         //check if logged in, if so, send reward event
         if (isAuthed) {
             rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
-            rewardOrderModel.setRecipient_email(email);
+            rewardOrderModel.setRecipient_email(recipient_email);
 
             String amount = "1000";
             rewardOrderModel.setAmount(Integer.valueOf(amount));
@@ -149,7 +140,7 @@ public class RewardOrderFragment extends Fragment {
 
 
     class TotalPointsAsyncTask extends AsyncTask<Object, Void, Integer> {
-        private final String TAG = "TotalPoints";
+        private final String TAG = "TotalPointsAsyncTask";
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/totalpoints?email=";
         private RewardOrderFragment rewardOrderFragment;
         private TextView points_tv;
@@ -239,7 +230,7 @@ public class RewardOrderFragment extends Fragment {
 
 
     class RewardsCatalogAsyncTask extends AsyncTask<Object, Void, ArrayList<RewardCatalogModel>> {
-        private final String TAG = "TotalPoints";
+        private final String TAG = "RewardsCatalogAsyncTask";
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
         private RewardOrderFragment rewardOrderFragment;
         private TextView points_tv;
@@ -251,7 +242,7 @@ public class RewardOrderFragment extends Fragment {
         protected ArrayList<RewardCatalogModel> doInBackground(Object... params) {
 
             String email;
-            JSONObject jsonRewardCatalog;
+            JSONObject jsonRewardCatalog = new JSONObject();
 
             if(UserInfo.getInstance().isGoogleLoggedIn()){
                 email = UserInfo.getInstance().getGoogleAccount().getEmail();
@@ -275,7 +266,7 @@ public class RewardOrderFragment extends Fragment {
 
             //get points...
             try{
-                URL url = new URL(baseURL + email);
+                URL url = new URL(baseURL);
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -293,7 +284,7 @@ public class RewardOrderFragment extends Fragment {
                     }
                     jsonRewardCatalog = new JSONObject(sb.toString());
 
-                    return buildRewardCatalogList(jsonRewardCatalog);
+                    //return buildRewardCatalogList(jsonRewardCatalog);
                 }
             }
             catch(MalformedURLException e){
@@ -310,23 +301,25 @@ public class RewardOrderFragment extends Fragment {
                 Log.d(TAG, "doInBackground error, returning null");
                 Log.d(TAG, "doInBackground " + e.getMessage());
                 return null;
+            } catch (Exception e) {
+                Log.d(TAG, "doInBackground error, returning null");
+                Log.d(TAG, "doInBackground " + e.getMessage());
+                return null;
             }
 
-            return null;
+            return buildRewardCatalogList(jsonRewardCatalog);
         }
 
-        protected void onPostExecute(Integer result){
+        protected void onPostExecute(ArrayList<RewardCatalogModel> result){
 //            @+id/card_view_rewards_content
             if(rewardOrderFragment != null){
-                if(points_tv != null){
-                    points_tv.setText(Integer.toString(result));
-                }
+                alRewardCatalogModel = result;
             }
         }
 
         private ArrayList<RewardCatalogModel> buildRewardCatalogList(JSONObject jsonRewardCatalog) {
             JSONArray jsonArrayCatalogItems;
-            ArrayList<RewardCatalogModel> alRewardCatalogModel = null;
+            ArrayList<RewardCatalogModel> alRewardCatalogModel = new ArrayList<RewardCatalogModel>();
 
             try {
                 jsonArrayCatalogItems = jsonRewardCatalog.getJSONArray("catalogItems");
