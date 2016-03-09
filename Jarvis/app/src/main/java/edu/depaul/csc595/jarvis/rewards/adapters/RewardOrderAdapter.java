@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.rewards.adapters;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.rewards.ItemClickSupport;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 
 /**
@@ -78,6 +80,10 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
 
     public int getItemCount(){
         return alRewardCatalogModel.size();
+    }
+
+    public  RewardCatalogModel getRewardCatalogModel(int position) {
+        return alRewardCatalogModel.get(position);
     }
 
 
