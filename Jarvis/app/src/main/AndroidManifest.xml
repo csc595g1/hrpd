@@ -18,21 +18,31 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".prevention.ehelp.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/FullscreenTheme">
         <activity
             android:name=".main.SplashActivity"
-            android:label="@string/title_activity_splash" >
+            android:label="Introdution" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--
+        <activity android:name=".main.SplashActivity"
+            android:label="Splash Activity"
+            android:theme="@style/FullscreenTheme"></activity>
+            -->
         <activity
             android:name=".main.MainActivity"
             android:label="@string/app_name"
@@ -213,7 +223,11 @@
             android:exported="false">
         </service>
 
+        <!-- This is for App Intro -->
 
+        <activity android:name=".appintro.main.animations.DepthAnimation"></activity>
+
+        <!-- Ends -->
 
     </application>
 

@@ -1,6 +1,7 @@
 package edu.depaul.csc595.jarvis.main.adapters;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +111,7 @@ public class MainCardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         else{
             holder.tv_content.setText("0");
             holder.tv_redeem.setText("Log In or Sign Up to Get Rewards!");
+            holder.tv_redeem.setTextColor(Color.WHITE);
             holder.tv_redeem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

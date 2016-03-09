@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
-    <include layout="@layout/timeline_graphic"/>
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <View
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/circle"
+            android:id="@+id/view"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/colorPrimary" />
+
+
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorPrimary"
+            android:id="@+id/view2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +47,7 @@
             android:textSize="17dp"
             android:layout_marginLeft="10dp"
             android:paddingLeft="20dp"
-            />
+            android:textColor="@color/black" />
         <TextView
             android:id="@+id/reward_balance_event_tv"
             android:layout_width="wrap_content"
@@ -31,7 +58,8 @@
             android:layout_marginLeft="10dp"
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/orange_A700" />
 
         <TextView
             android:id="@+id/reward_balance_points_tv"
@@ -44,8 +72,12 @@
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:paddingBottom="10dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        </LinearLayout>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <include layout="@layout/border_thin_gray"/>
+    </LinearLayout>
 
 </LinearLayout>
 
+<!--<include layout="@layout/timeline_graphic"/>-->

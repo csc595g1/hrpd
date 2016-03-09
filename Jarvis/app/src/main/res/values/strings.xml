@@ -323,11 +323,27 @@
     </string-array>
     <!-- ends -->
 
-    <!-- For File Uploads-->
-    <string name="btnTakePicture">Capture Image</string>
-    <string name="btnRecordVideo">Record Video</string>
-    <string name="btnUploadToServer">Upload to Server</string>
-    <!-- Ends-->
+    <!-- For App Intro -->
+    <string name="skip_button">SKIP</string>
+    <string name="done_button">DONE</string>
+
+    <string name="skip">Never Mind. You can see the App Intro into the App.</string>
+    <string name="header_animations">Animations</string>
+    <string name="header_indicators">Indicators</string>
+    <string name="depth_animation">App Introduction</string>
+    <string name="disable_swiping_slide_text">The first button disables swiping to the next slide, but you can still swipe back to previous slides. Swiping is re-enabled after moving to a previous slide \n\n The second button disables swiping completely. \n\n The third button disables the Next/Done button, independent of locking swiping.</string>
+    <string name="content_profile">Content By Profile/Rewards Team</string>
+    <string name="title_profile">Profile/Rewards</string>
+    <string name="content_detection">Content By Detection Team</string>
+    <string name="title_detection">Detection</string>
+    <string name="content_maintenance">Content By Maisntenance Team</string>
+    <string name="title_maintenance">Maintenance</string>
+    <string name="content_rewards">Content By Rewards Team</string>
+    <string name="title_rewards">Rewards</string>
+
+
+
+    <!-- Ends -->
 
 
 </resources>
