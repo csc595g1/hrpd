@@ -92,6 +92,8 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
                 }
             }
             catch(NullPointerException e){}
+
+
         }
     }
 
