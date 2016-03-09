@@ -34,7 +34,10 @@
             android:layout_height="match_parent"
             android:layout_weight=".2"
             android:paddingLeft="5dp"
-            android:paddingTop="15dp">
+            android:paddingTop="15dp"
+            android:id="@+id/comm_post_ll"
+            android:paddingRight="0dp"
+            android:transitionName="@string/transition_comm_post_to_details">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -53,7 +56,17 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></LinearLayout>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View/Post Comments"
+                    android:id="@+id/comm_frag_view_post_comment"
+                    android:textColor="@color/lightBlue"
+                    android:textStyle="bold"
+                    android:layout_gravity="bottom" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
