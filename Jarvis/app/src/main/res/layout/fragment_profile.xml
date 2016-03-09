@@ -44,7 +44,8 @@
             android:layout_marginRight="73dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
-            android:paddingLeft="25dp" />
+            android:paddingLeft="25dp"
+            android:fontFamily="sans-serif-light"/>
 
 
         <TextView
@@ -52,7 +53,9 @@
             android:layout_height="wrap_content"
             android:text="John Doe"
             android:id="@+id/frag_prof_name"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
     <LinearLayout
@@ -72,14 +75,18 @@
             android:layout_marginRight="75dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
-            android:paddingLeft="25dp" />
+            android:paddingLeft="25dp"
+            android:fontFamily="sans-serif-light"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="csc595g1@gmail.com"
             android:id="@+id/frag_prof_email"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:textStyle="italic"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
     <LinearLayout
@@ -100,14 +107,18 @@
             android:layout_marginRight="68dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
-            android:paddingLeft="25dp" />
+            android:paddingLeft="25dp"
+            android:fontFamily="sans-serif-light"
+        />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:id="@+id/frag_prof_points"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
     </LinearLayout>
 
     <LinearLayout
@@ -129,7 +140,9 @@
             android:layout_marginRight="7dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
-            android:paddingLeft="25dp" />
+            android:paddingLeft="25dp"
+            android:fontFamily="sans-serif-light"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -137,7 +150,9 @@
             android:text="0"
             android:id="@+id/frag_prof_reg_devices"
             android:layout_gravity="bottom"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"/>
 
     </LinearLayout>
 
@@ -151,6 +166,7 @@
         android:layout_below="@+id/linearLayout4"
         android:background="@color/orange_A700"
         android:textStyle="bold"
+        android:textSize="16sp"
         android:layout_marginLeft="25dp" />
 
 </RelativeLayout>
