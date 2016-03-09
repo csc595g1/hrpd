@@ -1,0 +1,9 @@
+package edu.depaul.csc595.jarvis.community.models;
+
+/**
+ * Created by Ed on 3/8/2016.
+ */
+public class CommunityPostMainModel {
+    public String name;
+    public String content;
+}

@@ -1,0 +1,7 @@
+Type in:
+sudo crontab -e
+This will brings up a crontab window.
+
+Now, enter the line:
+@reboot sh /home/pi/bbt/launcher.sh >/home/pi/logs/cronlog 2>&1
+What this does is rather than executing the launcher script at a specific time, it will execute it once upon startup.

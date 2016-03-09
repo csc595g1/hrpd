@@ -264,10 +264,13 @@ public class MainActivity extends AppCompatActivity
         String reward_card = "reward_card";
         list.add(reward_card);
 
+        String community_card = "community_card";
+        list.add(community_card);
+
         CardViewModel cm = new CardViewModel();
-        cm.title = "MyCommunity";
-        cm.content = "Connect with others to solve common homeowner problems.";
-        list.add(cm);
+//        cm.title = "MyCommunity";
+//        cm.content = "Connect with others to solve common homeowner problems.";
+//        list.add(cm);
 
         cm = new CardViewModel();
         cm.title = "MyNotifications";

@@ -137,6 +137,10 @@
 
     <!-- END: Strings related to Prevention -->
 
+    <!-- BEGIN: Community -->
+        <string name="transition_comm_post_to_details">postToDetails</string>
+    <!-- End: Community -->
+
     <!-- BEGIN: Strings related to Inventory -->
 
 
