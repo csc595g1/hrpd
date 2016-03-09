@@ -39,8 +39,10 @@
         android:layout_below="@+id/editTextLayout"
         android:layout_alignStart="@id/editTextLayout"
         android:layout_marginEnd="15dp"
-        android:background="@color/orange_A700"
-        android:elevation="5dp" />
+        android:background="@drawable/button"
+        android:elevation="5dp"
+        android:backgroundTint="@color/orange_A700"
+        android:textColor="@color/black" />
 
     <TextView android:id="@+id/login_forgot_pw"
     android:layout_width="fill_parent"
