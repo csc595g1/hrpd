@@ -2,6 +2,7 @@ package edu.depaul.csc595.jarvis.rewards;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -93,6 +94,14 @@ public class RewardOrderFragment extends Fragment {
         Log.d(TAG, "totalPointsAsyncTask ");
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_order_rewards);
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Snackbar.make(recyclerView, "Replace with your own action: " + Integer.toString(position), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
 
         mRecyclerView.setHasFixedSize(true);
 
