@@ -94,14 +94,6 @@ public class RewardOrderFragment extends Fragment {
         Log.d(TAG, "totalPointsAsyncTask ");
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_order_rewards);
-        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Snackbar.make(recyclerView, "Replace with your own action: " + Integer.toString(position), Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
 
         mRecyclerView.setHasFixedSize(true);
 
@@ -118,9 +110,23 @@ public class RewardOrderFragment extends Fragment {
         mAdapter = new RewardOrderAdapter(alRewardCatalogModel);
         mRecyclerView.setAdapter(mAdapter);
 
-//        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
-//        recyclerView.setAdapter(adapter);
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
+                RewardCatalogModel x = (RewardCatalogModel)alRewardCatalogModel.get(position);
+                String sku = x.getSku();
+
+//                //need to add async task to place an order.
+//                rewardOrderAsyncTask = new RewardOrderAsyncTask();
+//                RewardOrderModel rewardOrderModel = buildOrder();
+//                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
+//
+
+                Snackbar.make(recyclerView, "Recycler value sku : " + sku + Integer.toString(position), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         return rootView;
 
@@ -261,7 +267,7 @@ public class RewardOrderFragment extends Fragment {
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
         private RecyclerView recycleViewOrders;
         private TextView points_tv;
-        ArrayList<RewardCatalogModel> alRewardCatalogModel;
+        ArrayList<RewardCatalogModel> localRewardCatalogModel;
 
         protected void onPreExecute(){super.onPreExecute();}
 
@@ -285,7 +291,7 @@ public class RewardOrderFragment extends Fragment {
                     recycleViewOrders = (RecyclerView) params[0];
                 }
                 if(params.length > 1){
-                    alRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
+                    localRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
                 }
             }
 
@@ -341,6 +347,8 @@ public class RewardOrderFragment extends Fragment {
                 RewardOrderAdapter adapter = new RewardOrderAdapter(result);
                 recycleViewOrders.setAdapter(adapter);
             }
+
+            alRewardCatalogModel = result;
 
         }
 
