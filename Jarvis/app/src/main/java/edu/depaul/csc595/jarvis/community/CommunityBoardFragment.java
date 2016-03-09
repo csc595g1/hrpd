@@ -32,7 +32,7 @@ public class CommunityBoardFragment extends Fragment {
 
         List<CommunityPostMainModel> list = generateFakeList();
 
-        MainCommunityPostAdapter adapter = new MainCommunityPostAdapter(list,getContext());
+        MainCommunityPostAdapter adapter = new MainCommunityPostAdapter(list,getContext(),CommunityBoardActivity.activity);
         recyclerView.setAdapter(adapter);
 
         return rootView;

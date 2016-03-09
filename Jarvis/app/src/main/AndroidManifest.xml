@@ -161,6 +161,13 @@
         </activity>
         <activity android:name=".community.CommunityBoardActivity"
             android:label="Community"/>
+        <activity android:name=".community.CommunityPostDetailsActivity"
+            android:label="Post Details"
+            android:parentActivityName=".community.CommunityBoardActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.depaul.csc595.jarvis.community.CommunityBoardActivity" />
+        </activity>
 
         <!-- This for Allstate Reminder -->
 

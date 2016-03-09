@@ -2,6 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionName="transition_comm_post_to_details">
+    android:transitionName="transition_comm_post_to_details"
+    android:background="@color/white">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:src="@drawable/profile"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="large text"
+            android:id="@+id/comm_details_name"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/orange_A700"
+            android:textStyle="bold"
+            android:textSize="40dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/comm_details_content"
+            android:textColor="@color/black" />
+
+    </LinearLayout>
 </LinearLayout>
+
+<!--<android.support.v7.widget.RecyclerView-->
+<!--android:id="@+id/activity_community_comments_recycler_view"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:scrollbars="vertical"-->
+<!--android:background="@color/white" />-->
+
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Post a reply:"-->
+<!--android:id="@+id/textView5"-->
+<!--android:textColor="@color/lightBlue" />-->
