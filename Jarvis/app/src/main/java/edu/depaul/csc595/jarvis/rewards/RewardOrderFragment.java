@@ -114,16 +114,15 @@ public class RewardOrderFragment extends Fragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
-                RewardCatalogModel x = (RewardCatalogModel)alRewardCatalogModel.get(position);
-                String sku = x.getSku();
+                RewardCatalogModel catalog = (RewardCatalogModel)alRewardCatalogModel.get(position);
 
-//                //need to add async task to place an order.
-//                rewardOrderAsyncTask = new RewardOrderAsyncTask();
-//                RewardOrderModel rewardOrderModel = buildOrder();
-//                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
-//
+                //using an AsyncTask to place an order.
+                rewardOrderAsyncTask = new RewardOrderAsyncTask();
+                RewardOrderModel rewardOrderModel = buildOrder(catalog);
+                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
 
-                Snackbar.make(recyclerView, "Recycler value sku : " + sku + Integer.toString(position), Snackbar.LENGTH_LONG)
+
+                Snackbar.make(recyclerView, "Order Placed...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -140,7 +139,7 @@ public class RewardOrderFragment extends Fragment {
 
     }
 
-    private RewardOrderModel buildOrder() {
+    private RewardOrderModel buildOrder(RewardCatalogModel order) {
         boolean isAuthed = false;
 
         if (UserInfo.getInstance().isGoogleLoggedIn()) {
@@ -158,10 +157,8 @@ public class RewardOrderFragment extends Fragment {
             rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             rewardOrderModel.setRecipient_email(recipient_email);
 
-            String amount = "1000";
-            rewardOrderModel.setAmount(Integer.valueOf(amount));
-
-            rewardOrderModel.setSku("TNGO-E-V-STD");
+            rewardOrderModel.setAmount(order.getDenomination());
+            rewardOrderModel.setSku(order.getSku());
 
         } else {
             //You must first log in...
