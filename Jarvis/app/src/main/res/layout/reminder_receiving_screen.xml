@@ -50,4 +50,11 @@
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
+    <edu.depaul.csc595.jarvis.reminders.staticreminders.rewardgenerate.circularimage.CircleDisplay
+        android:id="@+id/circleDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
 </android.support.design.widget.CoordinatorLayout>
