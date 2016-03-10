@@ -59,18 +59,18 @@
         android:layout_height="match_parent">
 <include layout="@layout/border_black"
     android:layout_width="match_parent"
-    android:layout_height="2dp" />
+    android:layout_height="1dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/comm_details_content"
             android:textColor="@color/black"
-            android:background="#e3eef2"
+            android:background="#e7f2f6"
             android:textSize="20dp" />
         <include layout="@layout/border_black"
             android:layout_width="match_parent"
-            android:layout_height="2dp" />
+            android:layout_height="1dp" />
 
     </LinearLayout>
 </LinearLayout>

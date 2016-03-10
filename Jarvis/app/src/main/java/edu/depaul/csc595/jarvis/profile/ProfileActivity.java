@@ -105,6 +105,16 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
     protected void onStart(){
         super.onStart();
         Log.d("Profile", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
+        boolean hasCustomPic = false;
+        //check if custom pic is available
+        if(UserInfo.getInstance().isHasCustomProfilePicture()){
+            iv_image_profile = (ImageView) findViewById(R.id.imageView_profile);
+            iv_image = (ImageView) headerLayout.findViewById(R.id.imageView);
+            iv_image_profile.setImageBitmap(UserInfo.getInstance().getCustomProfilePicture());
+            iv_image.setImageBitmap(UserInfo.getInstance().getCustomProfilePicture());
+            hasCustomPic = true;
+        }
+
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
             tv_email = (TextView)headerLayout.findViewById(R.id.nav_header_main_email);
@@ -125,6 +135,7 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName());
 
+
                 boolean photonotnull = false;
                 try{
                     String test = UserInfo.getInstance().getGoogleAccount().getPhotoUrl().toString();
@@ -133,15 +144,16 @@ public class ProfileActivity extends AppCompatActivity implements NavigationView
                 catch (NullPointerException e){
                     Log.d("Profile Activity", "onStart photo is null");
                 }
-                if(photonotnull) {
-                    //google image
-                    iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
-                    iv_image_profile = (ImageView)findViewById(R.id.imageView_profile);
-                    GoogleImage img = new GoogleImage();
-                    img.execute(iv_image, ProfileActivity.this);
-                    GoogleImage img2 = new GoogleImage();
-                    img2.execute(iv_image_profile, ProfileActivity.this);
-                }
+                if(photonotnull && !hasCustomPic) {
+                        //google image
+                        iv_image = (ImageView) headerLayout.findViewById(R.id.imageView);
+                        iv_image_profile = (ImageView) findViewById(R.id.imageView_profile);
+                        GoogleImage img = new GoogleImage();
+                        img.execute(iv_image, ProfileActivity.this);
+                        GoogleImage img2 = new GoogleImage();
+                        img2.execute(iv_image_profile, ProfileActivity.this);
+                    }
+
 
             }
             catch(NullPointerException e){

@@ -7,8 +7,7 @@
     android:background="@color/white">
 
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout6"
@@ -22,8 +21,20 @@
             android:id="@+id/imageView_profile"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@drawable/profile" />
-    </LinearLayout>
+            android:src="@drawable/profile"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Change Profile Picture"
+            android:id="@+id/prof_change_pic"
+            android:textColor="@color/lightBlue"
+            android:layout_alignBottom="@+id/imageView_profile"
+            android:layout_toEndOf="@+id/imageView_profile" />
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"

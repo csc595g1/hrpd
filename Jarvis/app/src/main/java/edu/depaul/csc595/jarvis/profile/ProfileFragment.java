@@ -1,17 +1,24 @@
 package edu.depaul.csc595.jarvis.profile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
@@ -28,6 +35,8 @@ import retrofit2.Response;
  * Created by Ed on 2/23/2016.
  */
 public class ProfileFragment extends Fragment {
+
+    public static final int GET_FROM_GALLERY = 3;
 
     private String email_address;
     private final String TAG = "ProfileFragment";
@@ -98,7 +107,34 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        TextView change_pic = (TextView) rootView.findViewById(R.id.prof_change_pic);
+        change_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI),GET_FROM_GALLERY);
+            }
+        });
+
 
         return rootView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK){
+            Uri imageSelected = data.getData();
+            Bitmap bitmap = null;
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),imageSelected);
+                de.hdodenhof.circleimageview.CircleImageView iv = (de.hdodenhof.circleimageview.CircleImageView) this.getView().findViewById(R.id.imageView_profile);
+                iv.setImageBitmap(bitmap);
+                UserInfo.getInstance().setCustomProfilePicture(bitmap);
+                UserInfo.getInstance().setHasCustomProfilePicture(true);
+                iv.refreshDrawableState();
+            }
+            catch(IOException e){}
+        }
     }
 }
