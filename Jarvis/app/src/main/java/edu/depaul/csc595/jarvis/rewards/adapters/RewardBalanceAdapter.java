@@ -1,5 +1,6 @@
 package edu.depaul.csc595.jarvis.rewards.adapters;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,13 @@ public class RewardBalanceAdapter extends RecyclerView.Adapter<RewardBalanceAdap
         RewardBalanceViewHolder holder = (RewardBalanceViewHolder) viewHolder;
         RewardBalanceModel model = (RewardBalanceModel)balanceList.get(position);
         if(model != null){
-            holder.points_tv.setText(Integer.toString(model.units) + " points");
+            holder.points_tv.setText(Integer.toString(model.units));
+            if(model.units < 0){
+                holder.points_tv.setTextColor(Color.RED);
+            }
+            else if(model.units > 0){
+                holder.points_tv.setTextColor(Color.GREEN);
+            }
             holder.event_tv.setText(model.title);
             //holder.balance_dttm.setText(model.dttm);
             holder.balance_dttm.setText(model.getFormattedDttm());
