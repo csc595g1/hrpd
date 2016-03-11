@@ -6,4 +6,7 @@ package edu.depaul.csc595.jarvis.community.models;
 public class CommunityPostMainModel {
     public String name;
     public String content;
+    public String email;
+    public String post_id;
+    public String dttm;
 }
