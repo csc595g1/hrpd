@@ -65,6 +65,12 @@
             android:textColor="@color/black"
             android:textStyle="bold" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clean_water_fund_donation_gift_card"
+            android:id="@+id/iv_catalog_icon" />
+
 
 
     </LinearLayout>

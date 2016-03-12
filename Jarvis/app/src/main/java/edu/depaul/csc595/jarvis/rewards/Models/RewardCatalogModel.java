@@ -1,5 +1,7 @@
 package edu.depaul.csc595.jarvis.rewards.Models;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by markwilhelm on 3/6/16.
  */
@@ -7,6 +9,7 @@ public class RewardCatalogModel {
     private String catalogId;
     private String brand;
     private String image_url;
+    private Bitmap catalog_bitmap;
     private String type;
     private String description;
     private String sku;
@@ -39,6 +42,8 @@ public class RewardCatalogModel {
         this.country_code = country_code;
         this.tstamp = tstamp;
 
+        this.catalog_bitmap = null;
+
     }
 
     public String getCatalogId() {
@@ -61,6 +66,13 @@ public class RewardCatalogModel {
     }
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public Bitmap getCatalog_bitmap() {
+        return catalog_bitmap;
+    }
+    public void setCatalog_bitmap(Bitmap catalog_bitmap) {
+        this.catalog_bitmap = catalog_bitmap;
     }
 
     public String getType() {
