@@ -65,7 +65,7 @@ public class RewardOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
 
 //        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_reward_order_recycler_view);
 
@@ -122,6 +122,11 @@ public class RewardOrderFragment extends Fragment {
                     rewardOrderAsyncTask = new RewardOrderAsyncTask();
                     RewardOrderModel rewardOrderModel = buildOrder(catalog);
                     rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
+
+                    //Get the total reward points for this user
+                    TextView pointsRefresh = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
+                    totalPointsAsyncTask = new TotalPointsAsyncTask();
+                    totalPointsAsyncTask.execute(RewardOrderFragment.this, pointsRefresh);
 
                     Snackbar.make(recyclerView, "Order Placed...", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
