@@ -85,7 +85,7 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
                 Log.d(TAG, "onBindViewHolder->model.getCatalog_bitmap() " );
 
                 RewardsUrlPngAsyncTask rewardsUrlPngAsyncTask = new RewardsUrlPngAsyncTask();
-                rewardsUrlPngAsyncTask.execute(model.getImage_url(), bm_catalog_icon, position);
+                rewardsUrlPngAsyncTask.execute(model.getImage_url(), bm_catalog_icon, position, viewHolder);
 //                model.setCatalog_bitmap(bm_catalog_icon);
             }
 
@@ -95,6 +95,7 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
             holder.tv_amount.setText(Integer.toString(model.getDenomination()));
             holder.iv_catalog_icon.setImageBitmap(model.getCatalog_bitmap());
             holder.tv_description.setText(model.getDescription());
+
         }
     }
 
@@ -128,6 +129,7 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
         private ImageView catalogIconImageView;
         private Bitmap m_catalog_icon;
         private int mPosition;
+        RewardOrderAdapter.RewardOrderViewHolder viewHolder;
 
         protected void onPreExecute(){super.onPreExecute();}
 
@@ -150,6 +152,10 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
 
             if(params.length > 2) {
                 mPosition = (int) params[2];
+            }
+
+            if (params.length > 3) {
+                viewHolder = (RewardOrderAdapter.RewardOrderViewHolder) params[3];
             }
 
             Bitmap catalogIconBitmap = null;
@@ -176,6 +182,7 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
 //                bm_catalog_icon = result;
                 RewardCatalogModel rewardCatalogModel = alRewardCatalogModel.get(mPosition);
                 rewardCatalogModel.setCatalog_bitmap(result);
+                viewHolder.iv_catalog_icon.setImageBitmap(result);
                 alRewardCatalogModel.set(mPosition,rewardCatalogModel);
 
             } else {
