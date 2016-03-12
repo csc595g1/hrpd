@@ -54,6 +54,7 @@ public class RewardOrderFragment extends Fragment {
 
     private String recipient_email = "";
 
+    private Integer userTotalPoints;
 
     public RewardOrderFragment() {
         // Required empty public constructor
@@ -116,14 +117,18 @@ public class RewardOrderFragment extends Fragment {
 
                 RewardCatalogModel catalog = (RewardCatalogModel)alRewardCatalogModel.get(position);
 
-                //using an AsyncTask to place an order.
-                rewardOrderAsyncTask = new RewardOrderAsyncTask();
-                RewardOrderModel rewardOrderModel = buildOrder(catalog);
-                rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
+                if (userTotalPoints >= catalog.getDenomination()) {
+                    //using an AsyncTask to place an order.
+                    rewardOrderAsyncTask = new RewardOrderAsyncTask();
+                    RewardOrderModel rewardOrderModel = buildOrder(catalog);
+                    rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
 
-
-                Snackbar.make(recyclerView, "Order Placed...", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                    Snackbar.make(recyclerView, "Order Placed...", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(recyclerView, "Sorry, but you don't have enough points for this reward...", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
 
@@ -253,6 +258,7 @@ public class RewardOrderFragment extends Fragment {
                     points_tv.setText(Integer.toString(result));
                     //profileFragment.
                 }
+                userTotalPoints = result;
             }
         }
 

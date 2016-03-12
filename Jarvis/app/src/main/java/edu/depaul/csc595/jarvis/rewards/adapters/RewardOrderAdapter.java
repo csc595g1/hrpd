@@ -1,36 +1,20 @@
 package edu.depaul.csc595.jarvis.rewards.adapters;
 
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
 import edu.depaul.csc595.jarvis.R;
-import edu.depaul.csc595.jarvis.profile.user.UserInfo;
-import edu.depaul.csc595.jarvis.rewards.ItemClickSupport;
 import edu.depaul.csc595.jarvis.rewards.Models.RewardCatalogModel;
 
 /**
@@ -42,21 +26,6 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
     private ArrayList<RewardCatalogModel> alRewardCatalogModel;
     private ImageView iv_catalog_icon;
     private Bitmap bm_catalog_icon;
-
-
-//    public static class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        public TextView mtv_sku;
-//        public TextView mtv_amount;
-//        public TextView mtv_description;
-//        public ViewHolder(View v) {
-//            super(v);
-//            mtv_sku = (TextView) v.findViewById(R.id.tv_sku);
-//            mtv_amount = (TextView) v.findViewById(R.id.tv_amount);
-//            mtv_description = (TextView) v.findViewById(R.id.tv_description);
-//        }
-//
-//    }
 
     public RewardOrderAdapter(ArrayList<RewardCatalogModel> catalogList){
         Log.d(TAG, "RewardOrderAdapter " );
@@ -76,9 +45,9 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
     }
 
     public void onBindViewHolder(RewardOrderAdapter.RewardOrderViewHolder viewHolder, int position) {
-        RewardOrderViewHolder holder = (RewardOrderViewHolder) viewHolder;
+        RewardOrderViewHolder holder = viewHolder;
 
-        RewardCatalogModel model = (RewardCatalogModel) alRewardCatalogModel.get(position);
+        RewardCatalogModel model = alRewardCatalogModel.get(position);
         if (model != null) {
 
             if (model.getCatalog_bitmap() == null) {
@@ -86,7 +55,6 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
 
                 RewardsUrlPngAsyncTask rewardsUrlPngAsyncTask = new RewardsUrlPngAsyncTask();
                 rewardsUrlPngAsyncTask.execute(model.getImage_url(), bm_catalog_icon, position, viewHolder);
-//                model.setCatalog_bitmap(bm_catalog_icon);
             }
 
             Log.d(TAG, model.getSku() + " -> " + model.getImage_url());
@@ -179,7 +147,6 @@ public class RewardOrderAdapter extends RecyclerView.Adapter<RewardOrderAdapter.
 //            @+id/card_view_rewards_content
             if (result != null) {
                 Log.d(TAG, "result is not null");
-//                bm_catalog_icon = result;
                 RewardCatalogModel rewardCatalogModel = alRewardCatalogModel.get(mPosition);
                 rewardCatalogModel.setCatalog_bitmap(result);
                 viewHolder.iv_catalog_icon.setImageBitmap(result);
