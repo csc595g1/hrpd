@@ -2,21 +2,25 @@
 <LinearLayout
     style="@style/AppTheme.Catalog_DetailBox"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_bar"
+    android:background="@color/material_grey_300"
     >
 
-    <LinearLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_grey_300">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/top_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/material_grey_300">-->
 
         <RelativeLayout
             style="@style/AppTheme.CategoryBox.Maintenance"
-            android:id="@+id/catalog_layout">
+            android:id="@+id/catalog_layout"
+            android:padding="2dp"
+            android:background="@android:color/holo_blue_light">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/clean_water_fund_donation_gift_card"
                 android:id="@+id/iv_catalog_icon" />
 
@@ -64,7 +68,7 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/tv_description"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -76,7 +80,7 @@
 
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
 </LinearLayout>
