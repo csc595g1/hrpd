@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignLeft="@id/card_view_row_rewards"
-        android:layout_alignRight="@id/card_view_row_rewards">
+        android:layout_alignRight="@id/card_view_row_rewards"
+        android:paddingBottom="5dp">
     </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
