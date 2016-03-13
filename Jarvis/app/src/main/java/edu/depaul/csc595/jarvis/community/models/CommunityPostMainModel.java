@@ -19,6 +19,7 @@ public class CommunityPostMainModel {
     public String email;
     public String post_id;
     public String dttm;
+    public String repliesCount;
 
     public static List<CommunityPostMainModel> parseGetCommunityPostList(String json){
         List<CommunityPostMainModel> returnList = new ArrayList<>();
@@ -31,6 +32,8 @@ public class CommunityPostMainModel {
             //post_id, email, name, content, dttm
             CommunityPostMainModel model = new CommunityPostMainModel();
             model.post_id = String.valueOf(obj.get("post_id").getAsInt());
+            //add count of replies
+            model.repliesCount = String.valueOf(obj.get("countOfReplies").getAsInt());
             model.email = obj.get("email").getAsString();
             model.name = obj.get("name").getAsString();
             model.content = obj.get("content").getAsString();

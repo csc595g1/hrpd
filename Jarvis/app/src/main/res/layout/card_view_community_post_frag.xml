@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#e7f2f6">
 
         <!--Icon made by Hanan from www.flaticon.com-->
         <ImageView
@@ -66,6 +67,15 @@
                     android:textColor="@color/lightBlue"
                     android:textStyle="bold"
                     android:layout_gravity="bottom" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(0 replies)"
+                    android:id="@+id/comm_frag_view_reply_count"
+                    android:textColor="@color/lightBlue"
+                    android:textStyle="bold"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="3dp" />
             </LinearLayout>
         </LinearLayout>
 

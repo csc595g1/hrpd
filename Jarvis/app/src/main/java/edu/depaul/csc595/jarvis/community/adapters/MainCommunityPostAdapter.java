@@ -45,20 +45,28 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
             holder.postName.setText(model.name + " says:");
             holder.postContent.setSingleLine(false);
             holder.postContent.setText(model.content);
+            if(Integer.valueOf(model.repliesCount) > 0){
+                if(Integer.valueOf(model.repliesCount) == 1) {
+                    holder.countOfReplies.setText("(" + model.repliesCount + " reply)");
+                }
+                else{
+                    holder.countOfReplies.setText("(" + model.repliesCount + " replies)");
+                }
+            }
             holder.vieweditcomments.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //if (UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
-                        Intent intent = new Intent(CommunityBoardActivity.activity, CommunityPostDetailsActivity.class);
-                    intent.putExtra("name",String.valueOf(holder.postName.getText()));
-                    intent.putExtra("content",String.valueOf(holder.postContent.getText()));
+                    Intent intent = new Intent(CommunityBoardActivity.activity, CommunityPostDetailsActivity.class);
+                    intent.putExtra("name", String.valueOf(holder.postName.getText()));
+                    intent.putExtra("content", String.valueOf(holder.postContent.getText()));
                     //put somebackground info in
-                    intent.putExtra("post_id",model.post_id);
-                        String transitionName = context.getString(R.string.transition_comm_post_to_details);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CommunityBoardActivity.activity, holder.compostll, transitionName);
-                        ActivityCompat.startActivity(CommunityBoardActivity.activity, intent, options.toBundle());
+                    intent.putExtra("post_id", model.post_id);
+                    String transitionName = context.getString(R.string.transition_comm_post_to_details);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CommunityBoardActivity.activity, holder.compostll, transitionName);
+                    ActivityCompat.startActivity(CommunityBoardActivity.activity, intent, options.toBundle());
                     //} else {
-                        //Toast.makeText(context, "Log in to view or post comments", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, "Log in to view or post comments", Toast.LENGTH_LONG).show();
                     //}
                 }
             });
@@ -92,6 +100,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
         protected  TextView postContent;
         protected ImageView upvote;
         protected TextView vieweditcomments;
+        protected TextView countOfReplies;
         protected LinearLayout compostll;
 
         public CommunityPostViewHolder(View v){
@@ -101,6 +110,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
             upvote = (ImageView) v.findViewById(R.id.post_frag_up_vote);
             vieweditcomments = (TextView) v.findViewById(R.id.comm_frag_view_post_comment);
             compostll = (LinearLayout)v.findViewById(R.id.comm_post_ll);
+            countOfReplies = (TextView)v.findViewById(R.id.comm_frag_view_reply_count);
         }
     }
 }
