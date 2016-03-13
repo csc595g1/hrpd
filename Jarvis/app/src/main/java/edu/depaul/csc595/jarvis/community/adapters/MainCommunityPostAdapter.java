@@ -40,7 +40,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
 
     public void onBindViewHolder(MainCommunityPostAdapter.CommunityPostViewHolder viewHolder, int position){
         final CommunityPostViewHolder holder = viewHolder;
-        CommunityPostMainModel model = modelList.get(position);
+        final CommunityPostMainModel model = modelList.get(position);
         if(model != null){
             holder.postName.setText(model.name + " says:");
             holder.postContent.setSingleLine(false);
@@ -52,6 +52,8 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
                         Intent intent = new Intent(CommunityBoardActivity.activity, CommunityPostDetailsActivity.class);
                     intent.putExtra("name",String.valueOf(holder.postName.getText()));
                     intent.putExtra("content",String.valueOf(holder.postContent.getText()));
+                    //put somebackground info in
+                    intent.putExtra("post_id",model.post_id);
                         String transitionName = context.getString(R.string.transition_comm_post_to_details);
                         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CommunityBoardActivity.activity, holder.compostll, transitionName);
                         ActivityCompat.startActivity(CommunityBoardActivity.activity, intent, options.toBundle());

@@ -13,6 +13,7 @@ import java.util.List;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.community.adapters.MainCommunityPostAdapter;
+import edu.depaul.csc595.jarvis.community.asynctasks.CommunityPostsAsync;
 import edu.depaul.csc595.jarvis.community.models.CommunityPostMainModel;
 
 /**
@@ -30,10 +31,16 @@ public class CommunityBoardFragment extends Fragment {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
 
-        List<CommunityPostMainModel> list = generateFakeList();
+        //List<CommunityPostMainModel> list = generateFakeList();
+
+        List<CommunityPostMainModel> list = new ArrayList<>();
 
         MainCommunityPostAdapter adapter = new MainCommunityPostAdapter(list,getContext(),CommunityBoardActivity.activity);
         recyclerView.setAdapter(adapter);
+
+        CommunityPostsAsync async = new CommunityPostsAsync();
+        //needs: 1. Context, 2. CommunityBoardActivity, 3. recyclerview
+        async.execute(this.getContext(),CommunityBoardActivity.activity,recyclerView);
 
         return rootView;
     }

@@ -73,6 +73,29 @@
             android:layout_width="match_parent"
             android:layout_height="1dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post a Reply"
+            android:id="@+id/postReply"
+            android:textColor="@color/lightBlue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_community_comments_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:background="@color/white" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Replies Posted"
+        android:id="@+id/emptyRecycler"
+            android:visibility="invisible"
+        android:textColor="@color/lightBlue" />
     </LinearLayout>
 </LinearLayout>
 

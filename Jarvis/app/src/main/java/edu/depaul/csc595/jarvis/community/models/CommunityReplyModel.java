@@ -10,26 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ed on 3/8/2016.
+ * Created by Ed on 3/12/2016.
  */
-public class CommunityPostMainModel {
+public class CommunityReplyModel {
     private final static String TAG = "CommPostModel";
     public String name;
     public String content;
     public String email;
     public String post_id;
     public String dttm;
+    public String reply_id;
 
-    public static List<CommunityPostMainModel> parseGetCommunityPostList(String json){
-        List<CommunityPostMainModel> returnList = new ArrayList<>();
+    public static List<CommunityReplyModel> parseGetCommunityReplyList(String json){
+        List<CommunityReplyModel> returnList = new ArrayList<>();
 
         JsonParser parser = new JsonParser();
-        JsonArray jarray = parser.parse(json).getAsJsonObject().getAsJsonArray("posts");
+        JsonArray jarray = parser.parse(json).getAsJsonObject().getAsJsonArray("replies");
         for(int i = 0; i < jarray.size();i++){
             JsonObject obj = jarray.get(i).getAsJsonObject();
             Log.d(TAG, "parseGetCommunityPostList " + obj);
             //post_id, email, name, content, dttm
-            CommunityPostMainModel model = new CommunityPostMainModel();
+            CommunityReplyModel model = new CommunityReplyModel();
+            model.reply_id = String.valueOf(obj.get("reply_id").getAsInt());
             model.post_id = String.valueOf(obj.get("post_id").getAsInt());
             model.email = obj.get("email").getAsString();
             model.name = obj.get("name").getAsString();
