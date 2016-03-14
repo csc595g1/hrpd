@@ -119,7 +119,7 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
         if(modelList == null){
             Log.d("getCommReplyAsync", "doInBackground modellistisnull");
             no_content.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.INVISIBLE);
         }
         else{
             //...

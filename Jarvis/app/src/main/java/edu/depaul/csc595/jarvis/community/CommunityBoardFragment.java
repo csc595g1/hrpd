@@ -20,6 +20,7 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.community.adapters.MainCommunityPostAdapter;
 import edu.depaul.csc595.jarvis.community.asynctasks.CommunityPostsAsync;
+import edu.depaul.csc595.jarvis.community.asynctasks.SendPostAsync;
 import edu.depaul.csc595.jarvis.community.models.CommunityPostMainModel;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
@@ -91,8 +92,9 @@ public class CommunityBoardFragment extends Fragment implements PostDialogFragme
             this.list.add(model);
             adapter = new MainCommunityPostAdapter(list,getContext(),CommunityBoardActivity.activity);
             recyclerView.setAdapter(adapter);
-
             //kick off async task to send to server...
+            SendPostAsync async = new SendPostAsync();
+            async.execute(model);
         }
         else{
             Toast.makeText(getContext(),"Please log in to post",Toast.LENGTH_LONG).show();
@@ -103,46 +105,46 @@ public class CommunityBoardFragment extends Fragment implements PostDialogFragme
         this.list = list;
     }
 
-    private List<CommunityPostMainModel> generateFakeList(){
-        List<CommunityPostMainModel> modelList = new ArrayList<>();
-
-        CommunityPostMainModel model;
-
-        model = new CommunityPostMainModel();
-        model.name = "Ed";
-        model.content = "How do I fix my sump pump? It keeps flooding...";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Mark";
-        model.content = "My house is on fire. Do I call 911?";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Advait";
-        model.content = "Help. I've fallen and I can't get up.";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Dhaval";
-        model.content = "Is it lefty loosey, righty tighty? Or the other way around?";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Clayton";
-        model.content = "How many people does it take to fix a light bulb?";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Sarica";
-        model.content = "How do you unclog a sink?";
-        modelList.add(model);
-
-        model = new CommunityPostMainModel();
-        model.name = "Lavanya";
-        model.content = "How do I register a smart device with Jarvis?";
-        modelList.add(model);
-
-        return modelList;
-    }
+//    private List<CommunityPostMainModel> generateFakeList(){
+//        List<CommunityPostMainModel> modelList = new ArrayList<>();
+//
+//        CommunityPostMainModel model;
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Ed";
+//        model.content = "How do I fix my sump pump? It keeps flooding...";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Mark";
+//        model.content = "My house is on fire. Do I call 911?";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Advait";
+//        model.content = "Help. I've fallen and I can't get up.";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Dhaval";
+//        model.content = "Is it lefty loosey, righty tighty? Or the other way around?";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Clayton";
+//        model.content = "How many people does it take to fix a light bulb?";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Sarica";
+//        model.content = "How do you unclog a sink?";
+//        modelList.add(model);
+//
+//        model = new CommunityPostMainModel();
+//        model.name = "Lavanya";
+//        model.content = "How do I register a smart device with Jarvis?";
+//        modelList.add(model);
+//
+//        return modelList;
+//    }
 }

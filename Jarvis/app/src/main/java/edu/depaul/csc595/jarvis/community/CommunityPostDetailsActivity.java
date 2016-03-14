@@ -112,6 +112,10 @@ public class CommunityPostDetailsActivity extends AppCompatActivity implements R
             adapter = new CommunityRepliesAdapter(list,getBaseContext(),CommunityPostDetailsActivity.this);
             recyclerView.setAdapter(adapter);
             recyclerView.refreshDrawableState();
+            if(recyclerView.getVisibility() == View.INVISIBLE){
+                recyclerView.setVisibility(View.VISIBLE);
+                no_content.setVisibility(View.INVISIBLE);
+            }
             //no kick off the async task
             SendReplyAsync async = new SendReplyAsync();
             async.execute(model);
