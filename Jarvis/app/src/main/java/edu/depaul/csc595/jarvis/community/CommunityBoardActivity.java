@@ -31,7 +31,7 @@ import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 /**
  * Created by Ed on 3/7/2016.
  */
-public class CommunityBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CommunityBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,PostDialogFragment.OnPostDialogResultListener{
 
     private View headerLayout;
     private TextView tv_email;
@@ -160,5 +160,9 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onPost(String result){
+        Log.d("commboardact", "onPost in activity");
     }
 }

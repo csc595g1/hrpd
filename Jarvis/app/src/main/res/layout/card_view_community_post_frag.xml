@@ -15,12 +15,29 @@
         android:background="#e7f2f6">
 
         <!--Icon made by Hanan from www.flaticon.com-->
-        <ImageView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/post_frag_up_vote"
-            android:src="@drawable/up_arrow"
-            android:layout_gravity="center_vertical" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_frag_up_vote"
+                android:src="@drawable/up_arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="45dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="0"
+                android:id="@+id/upvotecount"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
 
         <ImageView
             android:layout_width="wrap_content"

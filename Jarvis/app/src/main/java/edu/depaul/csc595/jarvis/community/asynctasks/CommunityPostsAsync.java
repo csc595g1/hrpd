@@ -16,6 +16,7 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import edu.depaul.csc595.jarvis.community.CommunityBoardActivity;
+import edu.depaul.csc595.jarvis.community.CommunityBoardFragment;
 import edu.depaul.csc595.jarvis.community.adapters.MainCommunityPostAdapter;
 import edu.depaul.csc595.jarvis.community.models.CommunityPostMainModel;
 
@@ -29,6 +30,13 @@ public class CommunityPostsAsync extends AsyncTask<Object,Void,List<CommunityPos
     //private MainCommunityPostAdapter adapter;
     private RecyclerView recyclerView;
     private final String baseURL = "https://jarvis-services.herokuapp.com/services/community/getPosts";
+    private CommunityBoardFragment frag;
+
+    public interface ListListener{
+        public abstract void getList(List<CommunityPostMainModel> list);
+    }
+
+    private  ListListener listener;
 
     protected void onPreExecute(){
         super.onPreExecute();
@@ -49,6 +57,16 @@ public class CommunityPostsAsync extends AsyncTask<Object,Void,List<CommunityPos
 
         if(params[2] instanceof RecyclerView){
             recyclerView = (RecyclerView)params[2];
+        }
+
+        if(params[3] instanceof CommunityBoardFragment){
+            frag = (CommunityBoardFragment)params[3];
+        }
+
+        try {
+            this.listener = (ListListener) frag;
+        } catch (final ClassCastException e) {
+            // throw new ClassCastException(activity.toString() + " must implement OnCompleteListener");
         }
 
         try{
@@ -86,6 +104,10 @@ public class CommunityPostsAsync extends AsyncTask<Object,Void,List<CommunityPos
         if(recyclerView != null){
             MainCommunityPostAdapter adapter = new MainCommunityPostAdapter(modelList,context,activity);
             recyclerView.setAdapter(adapter);
+            if(listener != null) {
+                Log.d("postsasync", "onPostExecute listener is null");
+                listener.getList(modelList);
+            }
         }
     }
 }

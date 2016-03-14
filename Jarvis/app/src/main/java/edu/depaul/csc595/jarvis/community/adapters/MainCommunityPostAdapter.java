@@ -19,6 +19,9 @@ import java.util.List;
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.community.CommunityBoardActivity;
 import edu.depaul.csc595.jarvis.community.CommunityPostDetailsActivity;
+import edu.depaul.csc595.jarvis.community.asynctasks.CheckUserUpvotedPostAsync;
+import edu.depaul.csc595.jarvis.community.asynctasks.GetUpvoteCountAsync;
+import edu.depaul.csc595.jarvis.community.asynctasks.SendUpvoteForPost;
 import edu.depaul.csc595.jarvis.community.models.CommunityPostMainModel;
 import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 
@@ -45,6 +48,15 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
             holder.postName.setText(model.name + " says:");
             holder.postContent.setSingleLine(false);
             holder.postContent.setText(model.content);
+
+            //getupvotescount
+            GetUpvoteCountAsync task = new GetUpvoteCountAsync();
+            task.execute(holder.upvotecount,model.post_id);
+
+            //check if user upvoted
+            CheckUserUpvotedPostAsync async2 = new CheckUserUpvotedPostAsync();
+            async2.execute(holder.upvote,model.email,model.post_id);
+
             if(Integer.valueOf(model.repliesCount) > 0){
                 if(Integer.valueOf(model.repliesCount) == 1) {
                     holder.countOfReplies.setText("(" + model.repliesCount + " reply)");
@@ -73,13 +85,20 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
             holder.upvote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
-                        //todo make green
-                        holder.upvote.setColorFilter(Color.GREEN);
-                        Toast.makeText(context, "Upvoted", Toast.LENGTH_LONG).show();
-                        //todo send rewards
-                    } else {
-                        Toast.makeText(context, "Sign in to upvote!", Toast.LENGTH_LONG).show();
+                    if (holder.upvote.isClickable()) {
+                        if (UserInfo.getInstance().getIsLoggedIn() || UserInfo.getInstance().isGoogleLoggedIn()) {
+                            //todo make green
+                            holder.upvote.setColorFilter(Color.GREEN);
+                            Toast.makeText(context, "Upvoted", Toast.LENGTH_LONG).show();
+                            //todo send rewards
+                            SendUpvoteForPost task1 = new SendUpvoteForPost();
+                            task1.execute(model.email,model.post_id);
+                            holder.upvote.setClickable(false);
+                        } else {
+                            Toast.makeText(context, "Sign in to upvote!", Toast.LENGTH_LONG).show();
+                        }
+                    }else{
+                        Toast.makeText(context, "Already Upvoted", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -102,6 +121,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
         protected TextView vieweditcomments;
         protected TextView countOfReplies;
         protected LinearLayout compostll;
+        protected TextView upvotecount;
 
         public CommunityPostViewHolder(View v){
             super(v);
@@ -111,6 +131,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
             vieweditcomments = (TextView) v.findViewById(R.id.comm_frag_view_post_comment);
             compostll = (LinearLayout)v.findViewById(R.id.comm_post_ll);
             countOfReplies = (TextView)v.findViewById(R.id.comm_frag_view_reply_count);
+            upvotecount = (TextView)v.findViewById(R.id.upvotecount);
         }
     }
 }
