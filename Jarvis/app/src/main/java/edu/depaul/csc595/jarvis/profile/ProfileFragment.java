@@ -17,10 +17,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import retrofit2.Retrofit;
 import java.io.IOException;
 
 import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.detection.DetectionService;
 import edu.depaul.csc595.jarvis.detection.RegisterDeviceToken;
 import edu.depaul.csc595.jarvis.detection.classes.SmartProductContent;
 import edu.depaul.csc595.jarvis.detection.gcm.TokenIntentService;
@@ -50,6 +51,28 @@ public class ProfileFragment extends Fragment {
         TextView frag_prof_name = (TextView) rootView.findViewById(R.id.frag_prof_name);
         TextView frag_prof_points = (TextView) rootView.findViewById(R.id.frag_prof_points);
         final TextView frag_prof_reg_dev = (TextView)rootView.findViewById(R.id.frag_prof_reg_devices);
+        Retrofit retrofit = DetectionService.retrofit;
+        DetectionService.DetectionInterface detectionInterface = retrofit.create(DetectionService.DetectionInterface.class);
+        Call<SmartProductContent.SmartProductInfo> call = detectionInterface.get_total_registered_smart_products(email_address);
+        call.enqueue(new Callback<SmartProductContent.SmartProductInfo>() {
+            @Override
+            public void onResponse(Call<SmartProductContent.SmartProductInfo> call, Response<SmartProductContent.SmartProductInfo> response) {
+                if (!response.isSuccess()) {
+                    Log.d("getnumregdecives", "Unable to complete request to get smart product count");
+                    return;
+                }
+                SmartProductContent.SmartProductInfo smart_products_info = response.body();
+                System.out.println("From loop: " + smart_products_info.total_smart_products);
+                // Do whatever you want in here
+                // For example: tv_total.setText(smart_products_info.total_smart_products);
+                frag_prof_reg_dev.setText(String.valueOf(smart_products_info.total_smart_products) + " devices");
+            }
+
+            @Override
+            public void onFailure(Call<SmartProductContent.SmartProductInfo> call, Throwable t) {
+                Log.d("getnumregdecives", t.getMessage());
+            }
+        });
         //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         Button registerDeviceBtn = (Button) rootView.findViewById(R.id.button_register_device);
         pointsTask = new GetTotalPointsAsyncTask();

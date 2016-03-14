@@ -89,6 +89,7 @@ public class CommunityBoardFragment extends Fragment implements PostDialogFragme
             }
             model.post_id = " ";
             model.content = result;
+            model.repliesCount = "0";
             this.list.add(model);
             adapter = new MainCommunityPostAdapter(list,getContext(),CommunityBoardActivity.activity);
             recyclerView.setAdapter(adapter);
