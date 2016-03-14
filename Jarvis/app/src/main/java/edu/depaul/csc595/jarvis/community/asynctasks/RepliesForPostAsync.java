@@ -32,8 +32,15 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
     private RecyclerView recyclerView;
     private String post_id;
     private TextView no_content;
+    private List<CommunityReplyModel> inlist;
     private final String baseUrl = "https://jarvis-services.herokuapp.com/services/community/replies?post_id=";
 
+
+    public interface ListListener{
+        public abstract void getList(List<CommunityReplyModel> list);
+    }
+
+    private  ListListener listener;
 
     protected void onPreExecute(){
         super.onPreExecute();
@@ -64,6 +71,17 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
             no_content = (TextView) params[4];
         }
 
+        if(params[5] instanceof List){
+            inlist = (List<CommunityReplyModel>)params[5];
+        }
+
+        //attach listener
+        try {
+            this.listener = (ListListener) activity;
+        } catch (final ClassCastException e) {
+           // throw new ClassCastException(activity.toString() + " must implement OnCompleteListener");
+        }
+
         try{
             URL url = new URL(baseUrl + post_id);
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -82,7 +100,8 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
                     sb.append(line);
                 }
                 Log.d("getcommreplyasync", "doInBackground " + sb.toString());
-                list = CommunityReplyModel.parseGetCommunityReplyList(sb.toString());
+                inlist = CommunityReplyModel.parseGetCommunityReplyList(sb.toString());
+                //inlist = list;
             }
             else return null;
         }catch(MalformedURLException e){
@@ -93,7 +112,7 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
             Log.d("getCommReplyAsync", "doInBackground IO Exception caught.");
             return null;
         }
-        return list;
+        return inlist;
     }
 
     protected void onPostExecute(List<CommunityReplyModel> modelList){
@@ -105,9 +124,16 @@ public class RepliesForPostAsync extends AsyncTask<Object,Void,List<CommunityRep
         else{
             //...
             if(recyclerView != null){
-                CommunityRepliesAdapter adapter = new CommunityRepliesAdapter(modelList,context,activity);
+                //inlist = modelList;
+                Log.d("repliesasync", "onPostExecute list size: " + inlist.size());
+                Log.d("repliesasync", "onPostExecute list reference: " + inlist.toString());
+                CommunityRepliesAdapter adapter = new CommunityRepliesAdapter(inlist,context,activity);
                 recyclerView.setAdapter(adapter);
                 recyclerView.refreshDrawableState();
+                if(listener != null) {
+                    Log.d("repliesasync", "onPostExecute listener is null");
+                    listener.getList(inlist);
+                }
             }
         }
     }

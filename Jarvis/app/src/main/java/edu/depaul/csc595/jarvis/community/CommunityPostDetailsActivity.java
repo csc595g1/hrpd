@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -25,7 +26,8 @@ import edu.depaul.csc595.jarvis.profile.user.UserInfo;
 /**
  * Created by Ed on 3/8/2016.
  */
-public class CommunityPostDetailsActivity extends AppCompatActivity implements ReplyDialogFragment.OnReplyDialogResultListener{
+//, RepliesForPostAsync.ListListener
+public class CommunityPostDetailsActivity extends AppCompatActivity implements ReplyDialogFragment.OnReplyDialogResultListener, RepliesForPostAsync.ListListener{
     private String name;
     private String content;
     private TextView tv_name;
@@ -80,7 +82,9 @@ public class CommunityPostDetailsActivity extends AppCompatActivity implements R
         recyclerView.setAdapter(adapter);
         //needs context, CommunityPostDetailsActivity, recyclerView,string(post_id) ,textview
         RepliesForPostAsync async = new RepliesForPostAsync();
-        async.execute(getBaseContext(),CommunityPostDetailsActivity.this,recyclerView,post_id,no_content);
+        //async.s
+
+        async.execute(getBaseContext(),CommunityPostDetailsActivity.this,recyclerView,post_id,no_content,list);
     }
 
     public void enterReply(){
@@ -101,6 +105,8 @@ public class CommunityPostDetailsActivity extends AppCompatActivity implements R
                 model.name = UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName();
             }
             model.post_id = post_id;
+            Log.d("replyactivity", "onPostExecute list size: " + list.size());
+            Log.d("replyactivity", "onPostExecute list reference: " + list.toString());
             //immediately add to list to show. then kick off async to send to server
             list.add(model);
             adapter = new CommunityRepliesAdapter(list,getBaseContext(),CommunityPostDetailsActivity.this);
@@ -109,9 +115,19 @@ public class CommunityPostDetailsActivity extends AppCompatActivity implements R
             //no kick off the async task
             SendReplyAsync async = new SendReplyAsync();
             async.execute(model);
+
+            //RepliesForPostAsync async1 = new RepliesForPostAsync();
+            //async1.execute(getBaseContext(),CommunityPostDetailsActivity.this,recyclerView,post_id,no_content,list);
         }
         else{
             Toast.makeText(getBaseContext(),"Need to login to post!",Toast.LENGTH_LONG).show();
         }
     }
+
+    public void getList(List<CommunityReplyModel> list){
+        //make sure activity has updated list
+        Log.d("postdetailsactivity", "getList setting list...");
+        this.list = list;
+    }
+
 }

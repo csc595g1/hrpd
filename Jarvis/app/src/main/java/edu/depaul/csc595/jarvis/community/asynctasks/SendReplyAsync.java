@@ -1,6 +1,7 @@
 package edu.depaul.csc595.jarvis.community.asynctasks;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +19,7 @@ import edu.depaul.csc595.jarvis.community.models.CommunityReplyModel;
  * Created by Ed on 3/13/2016.
  */
 public class SendReplyAsync extends AsyncTask<Object,Void,Void>{
+    private final String TAG = "SendReplyAsync";
     private CommunityReplyModel model;
     private JSONObject outjson;
     private final String urlString = "https://jarvis-services.herokuapp.com/services/community/reply";
@@ -34,9 +36,11 @@ public class SendReplyAsync extends AsyncTask<Object,Void,Void>{
 
         try {
             outjson = new JSONObject();
-            outjson.put("post_id",model.post_id);
+            outjson.put("post_id", Integer.parseInt(model.post_id));
             outjson.put("email",model.email);
             outjson.put("content",model.content);
+
+            Log.d(TAG, "doInBackground " + outjson.toString());
 
             URL url = new URL(urlString);
             HttpsURLConnection secureConnection = (HttpsURLConnection) url.openConnection();
@@ -49,6 +53,8 @@ public class SendReplyAsync extends AsyncTask<Object,Void,Void>{
             OutputStreamWriter out = new OutputStreamWriter(secureConnection.getOutputStream());
             out.write(outjson.toString());
             out.close();
+
+            Log.d(TAG, "doInBackground response Code: " + secureConnection.getResponseCode());
         }
         catch(MalformedURLException e){
             return null;
