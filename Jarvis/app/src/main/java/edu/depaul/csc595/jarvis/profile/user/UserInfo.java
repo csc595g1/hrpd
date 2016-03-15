@@ -118,6 +118,23 @@ public final class UserInfo {
         this.isGoogleLoggedIn = true;
     }
 
+    public String getEmail(){
+        if(this.isGoogleLoggedIn()){
+            return this.getGoogleAccount().getEmail();
+        }
+        else if(this.isLoggedIn){
+            return this.getCredentials().getEmail();
+        }
+        else{return null;}
+    }
+
+    public boolean checkTotalLoginIn(){
+        if(this.isGoogleLoggedIn() || this.isLoggedIn){
+            return true;
+        }
+        else return false;
+    }
+
     public boolean isGoogleLoggedIn(){return isGoogleLoggedIn;}
 
     public void signOutWithGoogle(){
