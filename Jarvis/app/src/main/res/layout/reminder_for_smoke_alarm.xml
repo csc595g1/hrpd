@@ -15,16 +15,6 @@
         android:paddingTop="@dimen/appbar_padding_top"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-        </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -39,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ddd"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="0dp"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -148,28 +138,14 @@
                             android:id="@+id/reminder_every_day"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="Remind me daily"
-                            android:textColor="@color/black"/>
-
-                        <RadioButton
-                            android:id="@+id/reminder_one_week"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Remind me weekly"
-                            android:textColor="@color/black"/>
-
-                        <RadioButton
-                            android:id="@+id/reminder_fifteen_days"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Remind me after 15 days"
+                            android:text="Remind ma Daily"
                             android:textColor="@color/black"/>
 
                         <RadioButton
                             android:id="@+id/reminder_one_month"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="Remind me monthly"
+                            android:text="Remind me after 1 month"
                             android:textColor="@color/black"/>
 
                         <RadioButton
@@ -187,17 +163,10 @@
                             android:textColor="@color/black"/>
 
                         <RadioButton
-                            android:id="@+id/reminder_nine_month"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Remind me after 9 months"
-                            android:textColor="@color/black"/>
-
-                        <RadioButton
                             android:id="@+id/reminder_one_year"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:text="Remind me yearly"
+                            android:text="Remind me after 1 year"
                             android:checked="true"
                             android:textColor="@color/black"/>
                     </RadioGroup>

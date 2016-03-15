@@ -415,7 +415,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="-15dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Check Water Heater"
+                        android:text="Check Genearator"
                         android:textColor="#000000"
                         android:textAppearance="?attr/textAppearanceListItem"
                         android:textSize="16sp" />
