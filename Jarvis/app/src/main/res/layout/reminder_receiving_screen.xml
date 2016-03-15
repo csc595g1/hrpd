@@ -28,7 +28,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
-
     <TextView
         android:id="@+id/generate_reward_tv_user_name"
         android:layout_width="match_parent"
@@ -52,6 +51,7 @@
 
     <edu.depaul.csc595.jarvis.reminders.staticreminders.rewardgenerate.circularimage.CircleDisplay
         android:id="@+id/circleDisplay"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
