@@ -16,6 +16,9 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import edu.depaul.csc595.jarvis.R;
+import edu.depaul.csc595.jarvis.community.CommunityBoardActivity;
+
 /**
  * Created by Ed on 3/13/2016.
  */
@@ -25,6 +28,7 @@ public class CheckUserUpvotedPostAsync extends AsyncTask<Object,Void,Boolean> {
     private ImageView img;
     private String email;
     private String post_id;
+    private CommunityBoardActivity activity;
 
     //others..
     private final String baseUrl = "https://jarvis-services.herokuapp.com/services/community/userupvoted";
@@ -41,6 +45,10 @@ public class CheckUserUpvotedPostAsync extends AsyncTask<Object,Void,Boolean> {
         }
         if(params[2] instanceof String){
             post_id = (String) params[2];
+        }
+
+        if(params[3] instanceof CommunityBoardActivity){
+            activity = (CommunityBoardActivity)params[3];
         }
 
         try{
@@ -60,10 +68,13 @@ public class CheckUserUpvotedPostAsync extends AsyncTask<Object,Void,Boolean> {
                 String line = null;
                 while((line = br.readLine()) != null){
                     sb.append(line);
+                    Log.d("getcommreplyasync", "doInBackground " + sb.toString());
                 }
                 JSONObject obj = new JSONObject(sb.toString());
-                hasUpvoted = Boolean.getBoolean(obj.getString("hasUserUpvoted"));
-                return hasUpvoted;
+                hasUpvoted = obj.getBoolean("hasUserUpvoted");
+                Log.d("getcommreplyasync", "doInBackground hasupvoted " + hasUpvoted);
+                return Boolean.valueOf(hasUpvoted);
+                //Log.d("getcommreplyasync", "doInBackgroundshould have returned ");
             }
         }catch(MalformedURLException e){
             Log.d("getCommReplyAsync", "doInBackground Malformed URL Exception caught.");
@@ -74,13 +85,18 @@ public class CheckUserUpvotedPostAsync extends AsyncTask<Object,Void,Boolean> {
             return false;
         }
         catch (JSONException e){return false;}
+        Log.d("getcommreplyasync", "doInBackground Line 80 got here somehow");
         return false;
     }
 
-    protected void onPostExecute(boolean condition){
+    protected void onPostExecute(Boolean condition){
+        Log.d("getCommReplyAsync", "onPostExecute " + condition);
         if(condition){
+            //img =(ImageView) activity.getSupportFragmentManager().findFragmentById(R.id.community_board_fragment).getView().findViewById(R.id.post_frag_up_vote);
             img.setColorFilter(Color.GREEN);
             img.setClickable(false);
+            //img.refreshDrawableState();
+            //img.notifyAll();
         }
     }
 }

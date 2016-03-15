@@ -73,7 +73,7 @@ public class ProfileFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<SmartProductContent.SmartProductInfo> call, Throwable t) {
-                    Log.d("getnumregdecives", t.getMessage());
+                    //Log.d("getnumregdecives", t.getMessage());
                 }
             });
         }
