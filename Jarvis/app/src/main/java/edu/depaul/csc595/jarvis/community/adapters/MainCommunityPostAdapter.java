@@ -55,7 +55,7 @@ public class MainCommunityPostAdapter extends RecyclerView.Adapter<MainCommunity
 
             //check if user upvoted
             CheckUserUpvotedPostAsync async2 = new CheckUserUpvotedPostAsync();
-            async2.execute(holder.upvote,model.email,model.post_id);
+            async2.execute(holder.upvote,model.email,model.post_id,activity);
 
             if(Integer.valueOf(model.repliesCount) > 0){
                 if(Integer.valueOf(model.repliesCount) == 1) {

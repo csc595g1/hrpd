@@ -56,7 +56,8 @@ public class GetUpvoteCountAsync extends AsyncTask<Object,Void,Integer>{
                 }
                 JSONObject obj = new JSONObject(sb.toString());
                 count = obj.getInt("count");
-                return count;
+                Log.d("upvotecount", "doInBackground " + count);
+                return Integer.valueOf(count);
             }
         }catch(MalformedURLException e){
             Log.d("getCommReplyAsync", "doInBackground Malformed URL Exception caught.");
@@ -70,7 +71,8 @@ public class GetUpvoteCountAsync extends AsyncTask<Object,Void,Integer>{
         return 0;
     }
 
-    protected void onPostExecute(int count){
-        upvotecounttv.setText(String.valueOf(count));
+    protected void onPostExecute(Integer count){
+        Integer converted = Integer.valueOf(count);
+        upvotecounttv.setText(String.valueOf(converted));
     }
 }
