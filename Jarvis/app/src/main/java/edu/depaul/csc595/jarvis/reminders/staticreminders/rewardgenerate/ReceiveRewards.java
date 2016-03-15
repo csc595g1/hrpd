@@ -54,8 +54,7 @@ public class ReceiveRewards extends AppCompatActivity implements CircleDisplay.S
             {
 
                 CreateRewardEventModel model =
-                        new CreateRewardEventModel(UserInfo.getInstance().
-                                getCredentials().getEmail(),
+                        new CreateRewardEventModel(UserInfo.getInstance().getCredentials().getEmail(),
                                 "Reminder Event",
                                 20,
                                 "Attended Reminder");

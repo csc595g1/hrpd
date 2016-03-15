@@ -25,6 +25,9 @@ public class ReminderSmokeAlarm extends AppCompatActivity
 {
     private PendingIntent pendingIntent;
     Button go_to_custom_reminder;
+    TextView reminderDate;
+    int month, day, year;
+    Calendar cal2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,29 +56,30 @@ public class ReminderSmokeAlarm extends AppCompatActivity
         /*
         Code for Next Alarm Date
          */
-        Calendar cal2;
         cal2 = Calendar.getInstance();
-        int month = cal2.MONTH;
-        TextView reminderDate = (TextView) findViewById(R.id.appliances_smoke_alarm_reminder_date);
+        month = cal2.MONTH;
+        day = cal2.DAY_OF_MONTH;
+        year = cal2.YEAR;
+
+        cal2.set(Calendar.YEAR,2016);
+
+        reminderDate = (TextView) findViewById(R.id.appliances_smoke_alarm_reminder_date);
 
         if(month < 8)
         {
-            reminderDate.setText("Next Reminder is : 01 / 0" + (month + 1) + " / 2016");
+            reminderDate.setText("Next Reminder is : 01 / 0" + (month+2) + " / 2016");
         }
         else
         {
-            reminderDate.setText("Next Reminder is : 01 / " + (month + 1) + " / 2016");
+            reminderDate.setText("Next Reminder is : 01 / " + (month+2) + " / 2016");
         }
 
         /* Initialize Radio Group and attach click handler */
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         final RadioButton after_1_day = (RadioButton) findViewById(R.id.reminder_every_day);
-        final RadioButton after_7_days = (RadioButton) findViewById(R.id.reminder_one_week);
-        final RadioButton after_15_days = (RadioButton) findViewById(R.id.reminder_fifteen_days);
         final RadioButton after_30_days = (RadioButton) findViewById(R.id.reminder_one_month);
         final RadioButton after_3_months = (RadioButton) findViewById(R.id.reminder_three_month);
         final RadioButton after_6_months = (RadioButton) findViewById(R.id.reminder_six_month);
-        final RadioButton after_9_months = (RadioButton) findViewById(R.id.reminder_nine_month);
         final RadioButton after_12_months = (RadioButton) findViewById(R.id.reminder_one_year);
 
         radioGroup.clearCheck();
@@ -90,41 +94,57 @@ public class ReminderSmokeAlarm extends AppCompatActivity
                 {
                     Toast.makeText(getApplicationContext(), "Daily", Toast.LENGTH_SHORT).show();
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 1, pendingIntent);
-                }
-                else if(checkedId == R.id.reminder_one_week)
-                {
-                    Toast.makeText(getApplicationContext(),"07 Days",Toast.LENGTH_SHORT).show();
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 07, pendingIntent);
-                }
-                else if(checkedId == R.id.reminder_fifteen_days)
-                {
-                    Toast.makeText(getApplicationContext(),"15 Days",Toast.LENGTH_SHORT).show();
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 15, pendingIntent);
+
+                    reminderDate.setText("Next Reminder is : 03 /" + (day + 1) + "/ 2016");
                 }
                 else if(checkedId == R.id.reminder_one_month)
                 {
                     Toast.makeText(getApplicationContext(),"30 Days",Toast.LENGTH_SHORT).show();
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 30, pendingIntent);
+
+                    if(month < 8)
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 2) + "/ 01 /" + "2016");
+                    }
+                    else
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 2) + "/ 01 /" + "2016");
+                    }
                 }
                 else if(checkedId == R.id.reminder_three_month)
                 {
-                    Toast.makeText(getApplicationContext(),"90 Days",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"After 3 Months",Toast.LENGTH_SHORT).show();
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 90, pendingIntent);
+
+                    if(month < 8)
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 4) + "/ 01 /" + "2016");
+                    }
+                    else
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 4) + "/ 01 /" + "2016");
+                    }
                 }
                 else if(checkedId == R.id.reminder_six_month)
                 {
                     Toast.makeText(getApplicationContext(),"180 Days",Toast.LENGTH_SHORT).show();
                     alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 180, pendingIntent);
-                }
-                else if(checkedId == R.id.reminder_nine_month)
-                {
-                    Toast.makeText(getApplicationContext(),"270 Days",Toast.LENGTH_SHORT).show();
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 270, pendingIntent);
+
+                    if(month < 8)
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 7) + "/ 01 /" + "2016");
+                    }
+                    else
+                    {
+                        reminderDate.setText("Next Reminder is : " + (month + 7) + "/ 01 /" + "2016");
+                    }
                 }
                 else if(checkedId == R.id.reminder_one_year)
                 {
                     Toast.makeText(getApplicationContext(),"365 Days",Toast.LENGTH_SHORT).show();
-                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY * 365, pendingIntent);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 365, pendingIntent);
+
+                    reminderDate.setText("Next Reminder is : " + "03" + "/ 01 /" + "2017");
                 }
             }
         });
@@ -139,4 +159,5 @@ public class ReminderSmokeAlarm extends AppCompatActivity
         });
 
     }
+
 }
