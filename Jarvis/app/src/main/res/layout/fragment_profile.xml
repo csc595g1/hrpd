@@ -55,6 +55,7 @@
             android:layout_marginRight="73dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:paddingLeft="25dp"
             android:fontFamily="sans-serif-light"/>
 
@@ -86,6 +87,7 @@
             android:layout_marginRight="75dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:paddingLeft="25dp"
             android:fontFamily="sans-serif-light"/>
 
@@ -118,6 +120,7 @@
             android:layout_marginRight="68dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:paddingLeft="25dp"
             android:fontFamily="sans-serif-light"
         />
@@ -145,12 +148,13 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Registered Devices"
+            android:text="Smart Products"
             android:id="@+id/textView2"
             android:lines="2"
             android:layout_marginRight="7dp"
             android:textColor="@color/orange_A700"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:paddingLeft="25dp"
             android:fontFamily="sans-serif-light"/>
 
@@ -171,7 +175,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
-        android:text="REGISTER DEVICE"
+        android:text="REGISTER THIS DEVICE"
         android:id="@+id/button_register_device"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout4"

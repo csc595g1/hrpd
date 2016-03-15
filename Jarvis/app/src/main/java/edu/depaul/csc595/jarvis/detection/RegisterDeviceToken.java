@@ -81,7 +81,7 @@ public class RegisterDeviceToken extends AsyncTask<String, Double, String> {
     @Override
     protected void onPostExecute(String s) {
         if(s.equals("Success")) {
-            Toast.makeText(context, "Device Registered!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "This device has been registered to receive alerts from your smart products!", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(context, "Error Registering Device! Please Try Again.", Toast.LENGTH_SHORT).show();

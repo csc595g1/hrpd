@@ -68,7 +68,7 @@ public class ProfileFragment extends Fragment {
                     System.out.println("From loop: " + smart_products_info.total_smart_products);
                     // Do whatever you want in here
                     // For example: tv_total.setText(smart_products_info.total_smart_products);
-                    frag_prof_reg_dev.setText(String.valueOf(smart_products_info.total_smart_products) + " devices");
+                    frag_prof_reg_dev.setText(String.valueOf(smart_products_info.total_smart_products));
                 }
 
                 @Override
