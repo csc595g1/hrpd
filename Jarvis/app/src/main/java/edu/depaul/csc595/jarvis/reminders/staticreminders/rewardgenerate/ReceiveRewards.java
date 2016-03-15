@@ -1,14 +1,14 @@
 package edu.depaul.csc595.jarvis.reminders.staticreminders.rewardgenerate;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Handler;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.main.MainActivity;
@@ -20,7 +20,7 @@ import edu.depaul.csc595.jarvis.rewards.HerokuAPI.CreateRewardEventModel;
 /**
  * Created by Advait on 01-03-2016.
  */
-public class ReceiveRewards extends Activity implements CircleDisplay.SelectionListener
+public class ReceiveRewards extends AppCompatActivity implements CircleDisplay.SelectionListener
 {
 
     private CircleDisplay mCircleDisplay;
@@ -103,5 +103,15 @@ public class ReceiveRewards extends Activity implements CircleDisplay.SelectionL
     @Override
     public void onValueSelected(float val, float maxval) {
         Log.i("Main", "Selection complete: " + val + ", max: " + maxval);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Write your code here
+
+        Intent go = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(go);
+
+        super.onBackPressed();
     }
 }

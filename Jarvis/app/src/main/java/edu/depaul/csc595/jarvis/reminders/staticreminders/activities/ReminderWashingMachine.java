@@ -1,10 +1,10 @@
 package edu.depaul.csc595.jarvis.reminders.staticreminders.activities;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -21,7 +21,7 @@ import edu.depaul.csc595.jarvis.reminders.staticreminders.receivers.ReceiverForW
 /**
  * Created by Advait on 01-03-2016.
  */
-public class ReminderWashingMachine extends Activity
+public class ReminderWashingMachine extends AppCompatActivity
 {
     private PendingIntent pendingIntent;
     Button go_to_custom_reminder;
