@@ -8,9 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ import edu.depaul.csc595.jarvis.settings.SettingsActivity;
 /**
  * Created by Ed on 3/7/2016.
  */
-public class CommunityBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CommunityBoardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,PostDialogFragment.OnPostDialogResultListener{
 
     private View headerLayout;
     private TextView tv_email;
@@ -37,8 +39,12 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
     private TextView tv_logout;
     private ImageView iv_image;
     private ImageView iv_image_profile;
+    public static CommunityBoardActivity activity;
 
     protected void onCreate(Bundle savedInstance){
+        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        getWindow().setExitTransition(new Slide());
+        getWindow().setEnterTransition(new Slide());
         super.onCreate(savedInstance);
         super.setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_community_board);
@@ -56,6 +62,8 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_detection);
         navigationView.setNavigationItemSelectedListener(this);
+
+        activity = CommunityBoardActivity.this;
     }
 
 
@@ -92,6 +100,8 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
                 }
             }
             catch(NullPointerException e){}
+
+
         }
     }
 
@@ -150,5 +160,9 @@ public class CommunityBoardActivity extends AppCompatActivity implements Navigat
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onPost(String result){
+        Log.d("commboardact", "onPost in activity");
     }
 }

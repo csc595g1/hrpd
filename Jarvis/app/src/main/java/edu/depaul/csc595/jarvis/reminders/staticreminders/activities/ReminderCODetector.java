@@ -54,6 +54,9 @@ public class ReminderCODetector extends AppCompatActivity
         //For Every 5 Min
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),60000, pendingIntent);
 
+        /*
+        Code for Next Alarm Date
+         */
         cal2 = Calendar.getInstance();
         month = cal2.MONTH;
         reminderDate = (TextView) findViewById(R.id.reminder_date_co);

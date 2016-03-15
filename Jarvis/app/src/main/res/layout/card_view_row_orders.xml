@@ -2,29 +2,30 @@
 <LinearLayout
     style="@style/AppTheme.Catalog_DetailBox"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_bar"
+    android:paddingBottom="1dp"
+    android:background="@color/white"
     >
-
-    <LinearLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/material_grey_300">
 
         <RelativeLayout
             style="@style/AppTheme.CategoryBox.Maintenance"
-            android:id="@+id/catalog_layout">
+            android:id="@+id/catalog_layout"
+            android:padding="1dp"
+            android:background="@android:color/holo_blue_light"
+            android:paddingRight="2dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/clean_water_fund_donation_gift_card"
+                android:id="@+id/iv_catalog_icon" />
 
             <TextView
                 android:id="@+id/tv_sku"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="2dp"
                 android:text="TNGO-E-V-STD"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="8dp" />
+                android:visibility="gone"/>
 
 
             <View
@@ -34,37 +35,33 @@
                 android:layout_alignStart="@+id/tv_sku"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@color/white" />
-
+                android:background="@color/white"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:paddingBottom="15dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="10dp"
                 android:text="1000"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:textSize="8dp" />
-
+                android:visibility="gone"/>
 
         </RelativeLayout>
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/black"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
+    <TextView
+            android:layout_width="match_parent"
             android:id="@+id/tv_description"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="left"
-            android:padding="10dp"
-            android:layout_marginRight="10dp"
+            android:padding="1dp"
             android:text="Tango Card E-Custom"
             android:textColor="@color/black"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+            android:textStyle="bold"
+            android:background="@color/material_grey_300" />
 
 </LinearLayout>

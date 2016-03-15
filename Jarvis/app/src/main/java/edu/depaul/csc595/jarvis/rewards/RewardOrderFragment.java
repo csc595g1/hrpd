@@ -2,6 +2,7 @@ package edu.depaul.csc595.jarvis.rewards;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +54,7 @@ public class RewardOrderFragment extends Fragment {
 
     private String recipient_email = "";
 
+    private Integer userTotalPoints;
 
     public RewardOrderFragment() {
         // Required empty public constructor
@@ -63,7 +65,7 @@ public class RewardOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_rewards_order, container, false);
 
 //        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.fragment_reward_order_recycler_view);
 
@@ -109,9 +111,31 @@ public class RewardOrderFragment extends Fragment {
         mAdapter = new RewardOrderAdapter(alRewardCatalogModel);
         mRecyclerView.setAdapter(mAdapter);
 
-//        RewardOrderAdapter adapter = new RewardOrderAdapter(alRewardCatalogModel);
-//        recyclerView.setAdapter(adapter);
+        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
+                RewardCatalogModel catalog = (RewardCatalogModel)alRewardCatalogModel.get(position);
+
+                if (userTotalPoints >= catalog.getDenomination()) {
+                    //using an AsyncTask to place an order.
+                    rewardOrderAsyncTask = new RewardOrderAsyncTask();
+                    RewardOrderModel rewardOrderModel = buildOrder(catalog);
+                    rewardOrderAsyncTask.execute(rewardOrderModel, null, null);
+
+                    //Get the total reward points for this user
+                    TextView pointsRefresh = (TextView) rootView.findViewById(R.id.card_view_rewards_content);
+                    totalPointsAsyncTask = new TotalPointsAsyncTask();
+                    totalPointsAsyncTask.execute(RewardOrderFragment.this, pointsRefresh);
+
+                    Snackbar.make(recyclerView, "Order Placed...", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } else {
+                    Snackbar.make(recyclerView, "Sorry, but you don't have enough points for this reward...", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
 
         return rootView;
 
@@ -125,7 +149,7 @@ public class RewardOrderFragment extends Fragment {
 
     }
 
-    private RewardOrderModel buildOrder() {
+    private RewardOrderModel buildOrder(RewardCatalogModel order) {
         boolean isAuthed = false;
 
         if (UserInfo.getInstance().isGoogleLoggedIn()) {
@@ -143,10 +167,8 @@ public class RewardOrderFragment extends Fragment {
             rewardOrderModel.setRecipient_name(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
             rewardOrderModel.setRecipient_email(recipient_email);
 
-            String amount = "1000";
-            rewardOrderModel.setAmount(Integer.valueOf(amount));
-
-            rewardOrderModel.setSku("TNGO-E-V-STD");
+            rewardOrderModel.setAmount(order.getDenomination());
+            rewardOrderModel.setSku(order.getSku());
 
         } else {
             //You must first log in...
@@ -241,6 +263,7 @@ public class RewardOrderFragment extends Fragment {
                     points_tv.setText(Integer.toString(result));
                     //profileFragment.
                 }
+                userTotalPoints = result;
             }
         }
 
@@ -252,7 +275,7 @@ public class RewardOrderFragment extends Fragment {
         private final String baseURL = "https://jarvis-services.herokuapp.com/services/rewards/catalog";
         private RecyclerView recycleViewOrders;
         private TextView points_tv;
-        ArrayList<RewardCatalogModel> alRewardCatalogModel;
+        ArrayList<RewardCatalogModel> localRewardCatalogModel;
 
         protected void onPreExecute(){super.onPreExecute();}
 
@@ -276,7 +299,7 @@ public class RewardOrderFragment extends Fragment {
                     recycleViewOrders = (RecyclerView) params[0];
                 }
                 if(params.length > 1){
-                    alRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
+                    localRewardCatalogModel = (ArrayList<RewardCatalogModel>) params[1];
                 }
             }
 
@@ -332,6 +355,8 @@ public class RewardOrderFragment extends Fragment {
                 RewardOrderAdapter adapter = new RewardOrderAdapter(result);
                 recycleViewOrders.setAdapter(adapter);
             }
+
+            alRewardCatalogModel = result;
 
         }
 

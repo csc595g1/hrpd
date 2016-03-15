@@ -62,7 +62,7 @@
                     android:src="@drawable/app_2" />
 
                 <TextView
-                    android:id="@+id/fire_extinguisher_date"
+                    android:id="@+id/tempo"
                     android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,10 +76,10 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/appliances_smoke_alarm_reminder_date"
+                    android:id="@+id/appliances_dryer_reminder_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/fire_extinguisher_date"
+                    android:layout_below="@+id/tempo"
                     android:layout_marginLeft="16dp"
                     android:layout_toRightOf="@+id/fixed_image"
                     android:textColor="#000000"

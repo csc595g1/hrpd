@@ -86,7 +86,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/appliances_smoke_alarm_reminder_date"
+                    android:id="@+id/appliances_fire_extinguisher_reminder_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fire_extinguisher_date"

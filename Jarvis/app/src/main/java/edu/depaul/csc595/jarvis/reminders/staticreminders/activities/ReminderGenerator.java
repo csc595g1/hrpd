@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -49,6 +50,23 @@ public class ReminderGenerator extends AppCompatActivity
         //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
         //For Every 5 Min
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),60000, pendingIntent);
+
+        /*
+        Code for Next Alarm Date
+         */
+        Calendar cal2;
+        cal2 = Calendar.getInstance();
+        int month = cal2.MONTH;
+        TextView reminderDate = (TextView) findViewById(R.id.appliances_generator_reminder_date);
+
+        if(month < 8)
+        {
+            reminderDate.setText("Next Reminder is : 01 / 0" + (month + 3) + " / 2016");
+        }
+        else
+        {
+            reminderDate.setText("Next Reminder is : 01 / " + (month + 3) + " / 2016");
+        }
 
         /* Initialize Radio Group and attach click handler */
         final RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);

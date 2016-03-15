@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="transition_comm_post_to_details"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:src="@drawable/community_pic"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="fitXY"
+            android:layout_alignBottom="@+id/linearLayout5"
+            android:alpha=".2" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:id="@+id/linearLayout5">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView4"
+                android:src="@drawable/profile"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:alpha=".99" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="large text"
+                android:id="@+id/comm_details_name"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/orange_A700"
+                android:textStyle="bold"
+                android:textSize="40dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<include layout="@layout/border_gray"
+    android:layout_width="match_parent"
+    android:layout_height="1dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/comm_details_content"
+            android:textColor="@color/black"
+            android:background="#e7f2f6"
+            android:textSize="20dp"
+            android:padding="5dp" />
+        <include layout="@layout/border_gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post a Reply"
+            android:id="@+id/postReply"
+            android:textColor="@color/lightBlue"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_community_comments_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:background="@color/white" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Replies Posted"
+        android:id="@+id/emptyRecycler"
+            android:visibility="invisible"
+        android:textColor="@color/lightBlue" />
+    </LinearLayout>
+</LinearLayout>
+
+<!--<android.support.v7.widget.RecyclerView-->
+<!--android:id="@+id/activity_community_comments_recycler_view"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:scrollbars="vertical"-->
+<!--android:background="@color/white" />-->
+
+<!--<TextView-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:text="Post a reply:"-->
+<!--android:id="@+id/textView5"-->
+<!--android:textColor="@color/lightBlue" />-->

@@ -18,9 +18,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -29,10 +27,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/FullscreenTheme">
+        android:theme="@style/AppTheme" >
+        >
         <activity
             android:name=".main.SplashActivity"
-            android:label="Introdution" >
+            android:label="Introduction" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -158,6 +157,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.depaul.csc595.jarvis.main.MainActivity" />
         </activity>
+        <activity android:name=".community.CommunityBoardActivity"
+            android:label="Community"/>
+        <activity android:name=".community.CommunityPostDetailsActivity"
+            android:label="Post Details"
+            android:parentActivityName=".community.CommunityBoardActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="edu.depaul.csc595.jarvis.community.CommunityBoardActivity" />
+        </activity>
 
         <!-- This for Allstate Reminder -->
 
@@ -232,3 +240,6 @@
     </application>
 
 </manifest>
+
+
+    <!--android:theme="@style/FullscreenTheme"-->

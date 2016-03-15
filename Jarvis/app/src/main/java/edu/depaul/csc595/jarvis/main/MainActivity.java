@@ -99,6 +99,15 @@ public class MainActivity extends AppCompatActivity
     protected void onStart(){
         super.onStart();
         Log.d("Main", "Logged in :" + UserInfo.getInstance().getIsLoggedIn());
+
+        boolean hasCustomPic = false;
+        //check if custom pic is available
+        if(UserInfo.getInstance().isHasCustomProfilePicture()){
+            iv_image = (ImageView) headerLayout.findViewById(R.id.imageView);
+            iv_image.setImageBitmap(UserInfo.getInstance().getCustomProfilePicture());
+            hasCustomPic = true;
+        }
+
         //if user is logged in, set name, email and enable log out
         if(UserInfo.getInstance().getIsLoggedIn()){
             tv_name.setText(UserInfo.getInstance().getFirstName() + " " + UserInfo.getInstance().getLastName());
@@ -118,7 +127,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 tv_email.setText(UserInfo.getInstance().getGoogleAccount().getEmail());
                 tv_name.setText(UserInfo.getInstance().getGoogleAccount().getDisplayName().trim());
-                if(photonotnull){
+                if(photonotnull && !hasCustomPic){
                 //test google image
                 iv_image = (ImageView)headerLayout.findViewById(R.id.imageView);
                 GoogleImage gi = new GoogleImage();
@@ -264,10 +273,13 @@ public class MainActivity extends AppCompatActivity
         String reward_card = "reward_card";
         list.add(reward_card);
 
+        String community_card = "community_card";
+        list.add(community_card);
+
         CardViewModel cm = new CardViewModel();
-        cm.title = "MyCommunity";
-        cm.content = "Connect with others to solve common homeowner problems.";
-        list.add(cm);
+//        cm.title = "MyCommunity";
+//        cm.content = "Connect with others to solve common homeowner problems.";
+//        list.add(cm);
 
         cm = new CardViewModel();
         cm.title = "MyNotifications";

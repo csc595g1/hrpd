@@ -30,6 +30,8 @@ public final class UserInfo {
     private boolean isGoogleLoggedIn = false;
     private ImageView googleImageView;
     private Bitmap googleProfileBitMap;
+    private boolean hasCustomProfilePicture = false;
+    private Bitmap customProfilePicture;
 
     public String getFirstName() {
         return firstName;
@@ -45,6 +47,20 @@ public final class UserInfo {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setHasCustomProfilePicture(boolean hasCustomProfilePicture){
+        this.hasCustomProfilePicture = hasCustomProfilePicture;
+    }
+
+    public boolean isHasCustomProfilePicture(){return hasCustomProfilePicture;}
+
+    public Bitmap getCustomProfilePicture() {
+        return customProfilePicture;
+    }
+
+    public void setCustomProfilePicture(Bitmap customProfilePicture) {
+        this.customProfilePicture = customProfilePicture;
     }
 
     private String firstName,lastName;
