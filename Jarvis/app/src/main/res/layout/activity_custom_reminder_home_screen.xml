@@ -50,6 +50,12 @@
             android:background="@drawable/toolbar_shadow"
             android:layout_marginTop="?attr/actionBarSize"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/white"
+            android:text="Click on FAB Button to create a custom notification"/>
+
     </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton

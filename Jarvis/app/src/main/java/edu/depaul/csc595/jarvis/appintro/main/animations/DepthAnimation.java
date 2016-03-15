@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import edu.depaul.csc595.jarvis.R;
 import edu.depaul.csc595.jarvis.appintro.main.activities.SampleSlide;
-import edu.depaul.csc595.jarvis.main.SplashActivity;
+import edu.depaul.csc595.jarvis.appliances.main.AppliancesActivity;
 
 /**
  * Created by rohit on 22/7/15.
@@ -25,7 +25,7 @@ public class DepthAnimation extends BaseAppIntro {
     }
 
     private void loadMainActivity(){
-        Intent intent = new Intent(this, SplashActivity.class);
+        Intent intent = new Intent(this, AppliancesActivity.class);
         startActivity(intent);
     }
 
