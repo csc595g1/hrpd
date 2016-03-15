@@ -159,9 +159,12 @@ public class LogInActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void handleSignInResult(GoogleSignInResult result){
         Log.d(TAG, "handleSignInResult in method");
+        Log.d(TAG, "handleSignInResult success: " + result.isSuccess());
         if(result.isSuccess()){
+            Log.d(TAG, "handleSignInResult in if statement for success");
             GoogleSignInAccount account = result.getSignInAccount();
             UserInfo.getInstance().signInWithGoogle(account,getBaseContext());
+            Log.d(TAG, "handleSignInResult print out some account stuff: " + account.getEmail() + " " + account.getDisplayName());
             //send heroku info
             HerokuGoogleAuth heroku = new HerokuGoogleAuth();
             heroku.execute(LogInActivity.this);
