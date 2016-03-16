@@ -207,7 +207,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_sign_up">SignUp</string>
-    <string name="title_activity_register_products">RegisterProducts</string>
+    <string name="title_activity_register_products">Register Products</string>
     <string name="title_activity_add_triggers">AddTriggers</string>
     <string name="title_activity_when_this_happens">WhenThisHappens</string>
     <string name="title_activity_take_this_action">TakeThisAction</string>
