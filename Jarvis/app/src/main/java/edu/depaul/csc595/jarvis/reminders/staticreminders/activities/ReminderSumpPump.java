@@ -51,8 +51,8 @@ public class ReminderSumpPump extends AppCompatActivity
         //set notification for date --> 1th February 2016 at 09:00:00
         calendar.set(Calendar.MONTH, 2);
         calendar.set(Calendar.YEAR, 2016);
-        calendar.set(Calendar.DAY_OF_MONTH, 02);
-        calendar.set(Calendar.HOUR_OF_DAY, 04);
+        calendar.set(Calendar.DAY_OF_MONTH, 16);
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
         calendar.set(Calendar.MINUTE, 20);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.AM_PM,Calendar.AM);
@@ -62,16 +62,17 @@ public class ReminderSumpPump extends AppCompatActivity
         final AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
         //For Every 30 Days
-        //alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY*30, pendingIntent);
         //For Every 5 Min
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),90000, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),600000, pendingIntent);
 
         /*
         Code for Next Alarm Date
          */
         cal2 = Calendar.getInstance();
         month = cal2.MONTH;
-        day = cal2.DAY_OF_MONTH;
+        //day = cal2.DAY_OF_MONTH;
+        day = cal2.get(Calendar.DATE);
         year = cal2.YEAR;
 
         cal2.set(Calendar.YEAR,2016);
